@@ -16,7 +16,7 @@ export const sourceArchive = 'head-neck-2016-09.zip';
 export const sourceUrl = 'https://www.openanatomy.org/atlases/nac/head-neck-2016-09.zip';
 export const archiveSha256 = 'C224F054569B284C9A948F6F96B0299EAEE13D3AC661A3386657A743FA8552C4';
 export const sourceSha256 = '0648D7493750FFD03DDAA38D61F4879322E856FE26A0EBAC7406FE8B451206B2';
-export const licenseUrl = 'https://raw.githubusercontent.com/Slicer/Slicer/master/License.txt';
+export const licenseUrl = 'https://raw.githubusercontent.com/Slicer/Slicer/68ff0ae7114e4378322740f117643d7513a71110/License.txt';
 export const licenseSha256 = '03FC5CD907E5C2004CE199D66318D32A08FA2DE2B5B28BEE184EDDA6307D0B86';
 
 export function sha256(bytes) { return createHash('sha256').update(bytes).digest('hex').toUpperCase(); }

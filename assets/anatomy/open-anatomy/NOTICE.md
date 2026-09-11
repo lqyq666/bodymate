@@ -1,6 +1,6 @@
 # BodyMate public anatomy asset notice
 
-All or portions of this licensed product (such portions are the “Software”) have been obtained under license from The Brigham and Women’s Hospital, Inc. and are subject to the following terms and conditions:
+All or portions of this licensed product (such portions are the "Software") have been obtained under license from The Brigham and Women's Hospital, Inc. and are subject to the following terms and conditions:
 
 ## Source and modification
 
