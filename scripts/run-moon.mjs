@@ -1,7 +1,11 @@
-import { existsSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { runMoon, verifyMoonVersion } from './moon-toolchain.mjs';
 
-const moon = process.env.MOON ?? `${process.env.USERPROFILE ?? ''}\\.moon\\bin\\moon.exe`;
-if (!existsSync(moon)) throw new Error(`MoonBit compiler not found: ${moon}`);
-const result = spawnSync(moon, process.argv.slice(2), { stdio: 'inherit' });
-process.exit(result.status ?? 1);
+const root = fileURLToPath(new URL('..', import.meta.url));
+try {
+  verifyMoonVersion({ cwd: root });
+  runMoon(process.argv.slice(2), { cwd: root });
+} catch (error) {
+  console.error(error.message);
+  process.exitCode = 1;
+}

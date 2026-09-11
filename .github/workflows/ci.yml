@@ -1,0 +1,25 @@
+name: verify
+
+on:
+  push:
+    branches: [main, feat/moonbit-interaction-core]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v24
+        with:
+          node-version: 24
+      - name: Install verified MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.cn/install/unix.sh | bash -s -- 0.1.20260904
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Build and verify committed artifact
+        run: |
+          npm run build
+          git diff --exit-code -- index.html
+          npm run check

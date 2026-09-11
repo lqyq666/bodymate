@@ -117,6 +117,18 @@ pub fn select_region(region : String) -> String {
   }
 }
 
+///| Select a region in a requested layer without exposing an intermediate state.
+#export_name("bodymate_core_select_region_layer")
+pub fn select_region_layer(region : String, layer : String) -> String {
+  if layer != "muscle" && layer != "fascia" {
+    return fail("unknown_layer")
+  }
+  match first_in(region, layer) {
+    Some(entry) => select(entry)
+    None => fail("uncovered_region_or_layer")
+  }
+}
+
 ///|
 #export_name("bodymate_core_select_structure")
 pub fn select_structure(id : String) -> String {

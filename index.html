@@ -420,6 +420,24 @@ function buildAnatomy(){
     }
     return _M0FP37lqyq6668bodymate4core6select(entry);
   }
+  function _M0FP37lqyq6668bodymate4core21select__region__layer(region, layer) {
+    if (_M0IP016_24default__implPB2Eq10not__equalGsE(layer, "muscle") && _M0IP016_24default__implPB2Eq10not__equalGsE(layer, "fascia")) {
+      return _M0FP37lqyq6668bodymate4core4fail("unknown_layer");
+    }
+    let entry;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate4core9first__in(region, layer);
+      if (_bind === undefined) {
+        return _M0FP37lqyq6668bodymate4core4fail("uncovered_region_or_layer");
+      } else {
+        const _Some = _bind;
+        const _entry = _Some;
+        entry = _entry;
+        break _L;
+      }
+    }
+    return _M0FP37lqyq6668bodymate4core6select(entry);
+  }
   function _M0FP37lqyq6668bodymate4core17select__structure(id) {
     let entry;
     _L: {
@@ -484,6 +502,7 @@ function buildAnatomy(){
   globalThis.bodymate_core_clear = _M0FP37lqyq6668bodymate4core5clear;
   globalThis.bodymate_core_register = _M0FP37lqyq6668bodymate4core8register;
   globalThis.bodymate_core_select_region = _M0FP37lqyq6668bodymate4core14select__region;
+  globalThis.bodymate_core_select_region_layer = _M0FP37lqyq6668bodymate4core21select__region__layer;
   globalThis.bodymate_core_select_structure = _M0FP37lqyq6668bodymate4core17select__structure;
   globalThis.bodymate_core_set_layer = _M0FP37lqyq6668bodymate4core10set__layer;
   globalThis.bodymate_core_isolate_selected = _M0FP37lqyq6668bodymate4core17isolate__selected;
@@ -505,9 +524,9 @@ let NAV=[],DETAIL=[],coachItems=[],guideMesh=null,guideGeo=null,guideLast=-1,coa
 const current=()=>DATA[state.selected];
 const chatHistory=[];
 let chatSequence=0;
-function applyCore(reply){const p=String(reply).split('|');if(p[0]!=='ok'){toast('核心拒绝此操作：'+(p[1]||'unknown'));return false;}state.region=p[1];state.selected=p[2];state.layer=p[3];state.isolated=p[4]==='true';state.whole=p[5]==='true';state.selectionRevision=Number(p[6]);return true;}
+function applyCore(reply){const p=String(reply).split('|');if(p[0]!=='ok'){toast('核心拒绝此操作：'+(p[1]||'unknown'));return false;}const revision=Number(p[6]),valid=p.length===7&&p[1]&&p[2]&&['muscle','fascia'].includes(p[3])&&['true','false'].includes(p[4])&&['true','false'].includes(p[5])&&Number.isSafeInteger(revision)&&revision>=0;if(!valid){toast('核心返回损坏的状态，页面未更新。');return false;}Object.assign(state,{region:p[1],selected:p[2],layer:p[3],isolated:p[4]==='true',whole:p[5]==='true',selectionRevision:revision});return true;}
 function callCore(name,...args){const fn=globalThis[name];if(typeof fn!=='function')throw Error('MoonBit 核心未加载：'+name);return applyCore(fn(...args));}
-function registerCore(){callCore('bodymate_core_clear');for(const d of Object.values(DATA)){const ok=globalThis.bodymate_core_register(d.id,d.label,d.region,d.type,d.id===REGIONS[d.region].default);if(!String(ok).startsWith('ok|'))throw Error('MoonBit 注册失败：'+ok);}callCore('bodymate_core_select_region','neck');}
+function registerCore(){const clear=globalThis.bodymate_core_clear;if(typeof clear!=='function')throw Error('MoonBit 核心未加载：bodymate_core_clear');if(!String(clear()).startsWith('ok|'))throw Error('MoonBit 清空失败');for(const d of Object.values(DATA)){const ok=globalThis.bodymate_core_register(d.id,d.label,d.region,d.type,d.id===REGIONS[d.region].default);if(!String(ok).startsWith('ok|'))throw Error('MoonBit 注册失败：'+ok);}if(!callCore('bodymate_core_select_region','neck'))throw Error('MoonBit 初始选择失败');}
 function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),3100);}
 function namesForRegion(reg,layer=state.layer){return Object.values(DATA).filter(d=>d.region===reg&&(layer==='fascia'?d.type==='fascia':d.type==='muscle'));}
 function primaryList(reg,layer=state.layer){let arr=namesForRegion(reg,layer);if(layer==='fascia')return arr;let preferred=arr.filter(d=>!d.id.includes('_clav_'));return preferred;}
@@ -546,10 +565,11 @@ function updateUI(){
  $('#toggle-pulse').classList.toggle('off',!state.pulse);$('#toggle-pulse').setAttribute('aria-pressed',String(state.pulse));$('#toggle-labels').classList.toggle('off',!state.labels);$('#anatomy-labels').hidden=!state.labels||state.whole;$('#label-lines').style.display=state.labels&&!state.whole?'block':'none';
  buildLabels();navParts();
 }
-function gotoRegion(reg,id=null){if(!REGIONS[reg]||!callCore(id?'bodymate_core_select_structure':'bodymate_core_select_region',id||reg))return;state.bubble=true;
- const r=REGIONS[reg];detailCamera.desired=[...r.center];detailCamera.wantDist=r.dist;detailCamera.wantTheta=r.theta;detailCamera.wantPhi=r.phi;state.selectionRevision++;updateUI();showChat('已切到'+r.name+'。点一条肌肉或它的名称，我们就看那一块。');
+function focusDetail(reg){const r=REGIONS[reg];detailCamera.desired=[...r.center];detailCamera.wantDist=r.dist;detailCamera.wantTheta=r.theta;detailCamera.wantPhi=r.phi;}
+function gotoRegion(reg,id=null,layer=null){if(!REGIONS[reg])return;const operation=id?'bodymate_core_select_structure':layer?'bodymate_core_select_region_layer':'bodymate_core_select_region';const args=id?[id]:layer?[reg,layer]:[reg];if(!callCore(operation,...args))return;state.bubble=true;
+ const r=REGIONS[state.region];focusDetail(state.region);updateUI();showChat('已切到'+r.name+'。点一条肌肉或它的名称，我们就看那一块。');
 }
-function selectMuscle(id,{refocus=false}={}){const d=DATA[id];if(!d||!callCore('bodymate_core_select_structure',id))return;state.bubble=true;updateUI();showChat('已选中这块。可以单独看轮廓，也可以继续问。当前外形仍是交互占位。');if(refocus){detailCamera.desired=V.mix(REGIONS[d.region].center,d.center,.30);}}
+function selectMuscle(id,{refocus=false}={}){const d=DATA[id],wasWhole=state.whole,wasRegion=state.region;if(!d||!callCore('bodymate_core_select_structure',id))return;state.bubble=true;if(refocus||wasWhole||wasRegion!==state.region)focusDetail(state.region);updateUI();showChat('已选中这块。可以单独看轮廓，也可以继续问。当前外形仍是交互占位。');}
 function setLayer(layer){if(!callCore('bodymate_core_set_layer',layer))return;state.bubble=true;updateUI();showChat(layer==='fascia'?'已切换到筋膜占位层。当前只验证分层交互，不代表真实筋膜外形。':'肌肉细节已显示。点击任何可选肌肉或标签进行高亮。');}
 function resetAll(){if(!callCore('bodymate_core_reset_overview'))return;state.bubble=false;detailCamera.desired=[0,3.80,0];detailCamera.wantDist=13.5;detailCamera.wantTheta=.13;detailCamera.wantPhi=.025;updateUI();showChat('已恢复中央全身总览。左侧导航始终保持全身；点击任何部位，中央会再次进入局部细节。');toast('已恢复全身；继续从左侧选一个部位。');}
 function toggleIsolate(){if(state.whole)return;const action=state.isolated?'bodymate_core_restore_context':'bodymate_core_isolate_selected';if(!callCore(action))return;updateUI();toast(state.isolated?'只显示当前结构；左侧完整人体不变。':'已恢复当前区域的其他结构。');}
@@ -608,13 +628,13 @@ function command(q){
  const found=Object.values(DATA).find(d=>d.type==='muscle'&&(q.includes(d.label)||q.includes(shortName(d))));
  if(found){gotoRegion(found.region,found.id);showChat('已经找到这块，可以点右侧按钮单独查看。',q,found.id);return;}
  const map=[['颈|脖','neck'],['肩','shoulder'],['上臂|二头|三头|手臂','arm'],['胸','chest'],['腹','abdomen'],['背','back'],['大腿|股四','thigh'],['小腿','calf']];
- for(const [re,reg]of map){if(new RegExp(re).test(q)){state.layer='muscle';gotoRegion(reg);showChat('已切换到'+REGIONS[reg].name+'。继续点击模型或标签。',q,current().id);return;}}
+ for(const [re,reg]of map){if(new RegExp(re).test(q)){gotoRegion(reg,null,'muscle');showChat('已切换到'+REGIONS[state.region].name+'。继续点击模型或标签。',q,current().id);return;}}
  showChat('收到。目前是本地指令演示，可以试试“这块叫什么”“只看这块”“显示周围”或“停止闪烁”。',q,captured);
 }
 function fireConfetti(){if(reduced)return;const c=$('#confetti'),r=c.getBoundingClientRect();c.width=r.width*devicePixelRatio;c.height=r.height*devicePixelRatio;let button=$('#demo-complete').getBoundingClientRect();for(let i=0;i<75;i++)particles.push({x:button.x+button.width/2,y:button.y,vx:(Math.random()-.5)*300,vy:-60-Math.random()*260,life:1.5+Math.random()*.6,spin:Math.random()*6,color:['#69aafd','#b4caff','#fff','#91d7ea'][i%4]});}
 function paintConfetti(dt){const c=$('#confetti'),g=c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,c.width,c.height);g.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);particles=particles.filter(p=>p.life>0);for(let p of particles){p.life-=dt;p.vy+=300*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.spin+=dt*4;g.save();g.globalAlpha=clamp(p.life,0,1);g.fillStyle=p.color;g.translate(p.x,p.y);g.rotate(p.spin);g.fillRect(-2,-4,4,8);g.restore();}}
 function bindUI(){
- for(const [key,r]of Object.entries(REGIONS)){const b=document.createElement('button');b.textContent=r.name;b.dataset.region=key;b.onclick=()=>{if(state.layer==='fascia')state.layer='muscle';gotoRegion(key);};$('#region-choices').append(b);}
+ for(const [key,r]of Object.entries(REGIONS)){const b=document.createElement('button');b.textContent=r.name;b.dataset.region=key;b.onclick=()=>gotoRegion(key,null,'muscle');$('#region-choices').append(b);}
  $$('[data-nav]').forEach(b=>b.onclick=()=>{navCamera.wantTheta=b.dataset.nav==='front'?0:b.dataset.nav==='back'?Math.PI:Math.PI/2;navCamera.wantPhi=.025;$$('[data-nav]').forEach(x=>x.classList.toggle('active',x===b));});
  $$('[data-layer]').forEach(b=>b.onclick=()=>setLayer(b.dataset.layer));
  $('#isolate').onclick=toggleIsolate;$('#breadcrumb-all').onclick=resetAll;$('#reset-angle').onclick=resetAngle;
@@ -632,10 +652,10 @@ function bindUI(){
  $('#progress-close').onclick=()=>$('#progress-dialog').close();
  $('#progress-dialog').addEventListener('close',()=>{$('#orb-dock').append(crystal);requestAnimationFrame(resize);});
  for(const selector of ['#history-dialog','#progress-dialog'])$(selector).addEventListener('click',e=>{if(e.target===$(selector)){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
- $$('[data-panel]').forEach(b=>b.onclick=()=>{if(b.dataset.panel==='body'){state.layer='muscle';gotoRegion('neck');}else if(b.dataset.panel==='scene'){document.body.classList.toggle('calm-scene');$('#detail-panel').style.background=document.body.classList.contains('calm-scene')?'radial-gradient(ellipse at 45% 25%,#fff,#deebfa)':'';toast('已切换背景氛围；当前结构保持不变。');}else toast('器材暂未接入；本版只验证人体点选与讲解。');});
+ $$('[data-panel]').forEach(b=>b.onclick=()=>{if(b.dataset.panel==='body'){gotoRegion('neck',null,'muscle');}else if(b.dataset.panel==='scene'){document.body.classList.toggle('calm-scene');$('#detail-panel').style.background=document.body.classList.contains('calm-scene')?'radial-gradient(ellipse at 45% 25%,#fff,#deebfa)':'';toast('已切换背景氛围；当前结构保持不变。');}else toast('器材暂未接入；本版只验证人体点选与讲解。');});
  $('#demo-complete').onclick=()=>{if(state.completed===4){toast('这条示例已完成，不会重复计数。');return;}state.completed=4;for(const m of orbItems)if(orb.cache.has(m.geo)){orb.gl.deleteBuffer(orb.cache.get(m.geo).buf);orb.cache.delete(m.geo);}buildOrb(1);$('#percent').innerHTML='100<span>%</span>';$('#sessions').textContent='4 / 4';$('#sessions-large').textContent='已完成 4 / 4 场示例训练';$('#demo-complete').textContent='示例已完成';fireConfetti();toast('示例进度更新为 4 / 4；人体外形没有改变。');};
  $('#help').onclick=()=>$('#help-dialog').showModal();$('#close-help').onclick=()=>$('#help-dialog').close();
- document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='Escape'){if($('dialog[open]'))return;$('#coach-bubble').style.display='none';state.bubble=false;}if(/^[1-8]$/.test(e.key)&&!$('dialog[open]'))gotoRegion(Object.keys(REGIONS)[Number(e.key)-1]);});
+ document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='Escape'){if($('dialog[open]'))return;$('#coach-bubble').style.display='none';state.bubble=false;}if(/^[1-8]$/.test(e.key)&&!$('dialog[open]'))gotoRegion(Object.keys(REGIONS)[Number(e.key)-1],null,'muscle');});
 }
 function resize(){nav.resize();detail.resize();orb.resize();navCamera.halfHeight=Math.max(4.25,1.75/navCamera.aspect);navCamera.update(1);detailCamera.update(.01);orbCamera.update(1);const c=$('#confetti');c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;}
 function tick(now){const dt=Math.min(.14,(now-lastTime)/1000||.016);lastTime=now;if(!document.hidden){navCamera.update(reduced?1:dt);detailCamera.update(reduced?1:dt);orbCamera.update(.02);const t=now/1000;updateDetailItems(t);for(const item of NAV){if(item.type==='muscle'){const sel=!state.whole&&item.region===state.region;item.color=sel?[.57,.76,.99]:[.91,.94,.98];item.glow=sel?.025:0;}}

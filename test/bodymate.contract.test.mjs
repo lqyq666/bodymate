@@ -29,3 +29,11 @@ test('does not add external runtime dependencies or medical claims', () => {
   assert.match(source, /非真实解剖资产/);
   assert.match(source, /不提供医学或拉伸建议/);
 });
+
+test('delegates selection revision and explicit muscle entry to the embedded core', () => {
+  const controller = source.slice(source.indexOf('/* Interaction controller.'));
+  assert.doesNotMatch(controller, /selectionRevision\+\+/);
+  assert.doesNotMatch(controller, /state\.(region|selected|layer|isolated|whole)\s*=(?!=)/);
+  assert.match(controller, /bodymate_core_select_region_layer/);
+  assert.match(controller, /Number\.isSafeInteger\(revision\)/);
+});
