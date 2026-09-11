@@ -4,8 +4,8 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
 import { NodeIO } from '@gltf-transform/core';
-import { canonicalScmId, entryForPresentationId, legacyPresentationIdForCoreId } from '../src/root-scm/registry.mjs';
-import { focusPlanFromBounds, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
+import { canonicalScmId, entryForPresentationId, legacyPresentationIdForCoreId, rootScmRegistry } from '../src/root-scm/registry.mjs';
+import { focusPlanFromBounds, parseCoreSnapshot, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
 
 const root = new URL('../', import.meta.url);
 const html = await readFile(new URL('index.html', root), 'utf8');
@@ -44,6 +44,36 @@ test('root domain adapter registers the canonical SCM once without registering t
   const before = snapshot(runtime);
   assert.equal(selectPresentationStructure(runtime, 'unknown-legacy-node'), null);
   assert.equal(snapshot(runtime), before);
+});
+
+test('each Human Atlas muscle selects its canonical ID through MoonBit with one active selection', () => {
+  const runtime = core();
+  runtime.bodymate_core_clear();
+  registerRootEntries(runtime, rootScmRegistry);
+  const ids = humanAtlasManifest.entries.map((entry) => entry.structureId);
+  for (const id of ids) assert.equal(selectPresentationStructure(runtime, id)?.selected, id);
+  assert.equal(selectPresentationStructure(runtime, ids[0])?.selected, ids[0]);
+  assert.equal(selectPresentationStructure(runtime, ids[1])?.selected, ids[1]);
+  assert.equal(parseCoreSnapshot(snapshot(runtime)).selected, ids[1], 'switching SCM → trapezius must clear SCM selection');
+});
+
+test('Human Atlas pick bridge forwards the picked canonical mesh ID to MoonBit', async () => {
+  const adapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
+  const selectors = ['#detail-view', '#detail-canvas', '.current-summary', '#label-lines', '#anatomy-labels', '#coach-bubble', '.detail-instruction', '.fiber-note', '.data-tag', '#selection-meta', '#selection-name'];
+  const nodes = new Map(selectors.map((selector) => [selector, node()]));
+  const selected = [];
+  let onPick;
+  const context = vm.createContext({
+    document: { querySelector: (selector) => nodes.get(selector) ?? null, createElement: () => node() },
+    location: { search: '' }, URLSearchParams,
+    console: { error() {} },
+    __bodymate: { state: { selected: canonicalScmId, whole: false }, select: (id) => selected.push(id) },
+    BodyMateRootScmRuntime: { mount: (options) => { onPick = options.onPick; return { show() {}, applySnapshot() {}, focusSelected() {} }; } },
+  });
+  context.globalThis = context;
+  new vm.Script(adapter).runInContext(context);
+  for (const entry of humanAtlasManifest.entries) onPick(entry.structureId);
+  assert.deepEqual(selected, humanAtlasManifest.entries.map((entry) => entry.structureId));
 });
 
 test('root legacy rendering comparisons resolve through the canonical ID adapter', () => {

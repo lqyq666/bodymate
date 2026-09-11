@@ -29,7 +29,7 @@
   };
   try {
     if (new URLSearchParams(globalThis.location?.search || '').has('root-scm-fail')) throw Error('Test-only Human Atlas viewer failure.');
-    viewer = globalThis.BodyMateRootScmRuntime.mount({ canvas, onPick: () => globalThis.__bodymate?.select('scm_r'), onError: restoreLegacy });
+    viewer = globalThis.BodyMateRootScmRuntime.mount({ canvas, onPick: (structureId) => globalThis.__bodymate?.select(structureId), onError: restoreLegacy });
   } catch (error) { restoreLegacy(error); }
   globalThis.__rootScmApply = (snapshot) => {
     const active = !failed && realNeck.has(snapshot.selected) && !snapshot.whole;
