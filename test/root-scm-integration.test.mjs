@@ -145,6 +145,7 @@ test('Human Atlas neck package pins fourteen independently named real meshes wit
   assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.structureId), rootScmRegistry.map((entry) => entry.structureId));
   assert.equal(humanAtlasManifest.entries.length, 14);
   assert.match(html, /BodyMateAnatomyRegistryFilter/);
+  assert.match(html, /data-neck-group="shoulder"/);
 });
 
 test('committed Human Atlas neck GLB preserves all fourteen mapped meshes and their documented topology', async () => {
