@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { rootScmRegistry } from './registry.mjs';
+import { neckRegistry } from '../anatomy/neck-registry.mjs';
 import { focusPlanFromBounds } from './domain-adapter.mjs';
 import { humanAtlasNeckGlbBase64 } from 'virtual:bodymate-human-atlas-neck';
 
 const bytes = Uint8Array.from(atob(humanAtlasNeckGlbBase64), (char) => char.charCodeAt(0));
-const realNeckIds = new Set(rootScmRegistry.map((entry) => entry.structureId));
+const realNeckIds = new Set(neckRegistry.map((entry) => entry.structureId));
 
 export function mount({ canvas, onPick, onError = () => {} }) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
