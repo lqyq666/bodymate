@@ -19,6 +19,7 @@ await build({
   globalName: 'BodyMateRootScmRuntime',
   platform: 'browser',
   target: ['es2020'],
+  minify: true,
   legalComments: 'none',
   banner: { js: `/* GENERATED DERIVED RUNTIME REPRESENTATION. Canonical source: assets/anatomy/open-anatomy/scm-right.glb. SHA-256: ${hash}. Do not edit; run npm run root-scm:build-runtime. */` },
   plugins: [{ name: 'canonical-scm-inline', setup(buildContext) { buildContext.onResolve({ filter: /^virtual:bodymate-scm$/ }, () => ({ path: 'virtual:bodymate-scm', namespace: 'canonical-scm' })); buildContext.onLoad({ filter: /.*/, namespace: 'canonical-scm' }, () => ({ contents: `export const canonicalGlbBase64 = ${JSON.stringify(glb.toString('base64'))};`, loader: 'js' })); } }],
