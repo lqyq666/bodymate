@@ -9,7 +9,7 @@ const glbPath = resolve(root, 'assets/anatomy/human-atlas/neck-muscles.glb');
 const output = resolve(root, 'assets/runtime/root-scm-runtime.js');
 const glb = await readFile(glbPath);
 const hash = createHash('sha256').update(glb).digest('hex').toUpperCase();
-if (hash !== '83A0247F199ECA4D3B32B16506C61075E23EEB6A1C20501B8EFFD46AFE9D95A7') throw Error(`Human Atlas neck GLB hash mismatch: ${hash}`);
+if (hash !== 'FA6A0CFDDF1DA59367EA8EB72DB77770A08A2F53D01097C2873ECFFD692F7065') throw Error(`Human Atlas neck GLB hash mismatch: ${hash}`);
 
 await build({
   entryPoints: [resolve(root, 'src/root-scm/runtime-entry.mjs')],

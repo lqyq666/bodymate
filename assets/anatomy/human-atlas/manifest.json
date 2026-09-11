@@ -13,7 +13,7 @@
     "body-5.bin": "32A967198FFED45839968228898F3D246C67F86FB26892C3AE270BE30E2F1149"
   },
   "outputFile": "assets/anatomy/human-atlas/neck-muscles.glb",
-  "outputSha256": "83A0247F199ECA4D3B32B16506C61075E23EEB6A1C20501B8EFFD46AFE9D95A7",
+  "outputSha256": "FA6A0CFDDF1DA59367EA8EB72DB77770A08A2F53D01097C2873ECFFD692F7065",
   "conversion": "deterministic extraction from pinned Human Atlas browser chunks; no geometry centering, simplification, compression, or coordinate transform by BodyMate",
   "entries": [
     {
@@ -23,6 +23,8 @@
       "canonicalName": "right sternocleidomastoid",
       "region": "neck",
       "layer": "muscle",
+      "side": "right",
+      "uiGroup": "neck",
       "sourceProvider": "Human Atlas / BodyParts3D 4.0",
       "sourceMeshId": "FJ1595",
       "sourceConceptId": "FMA13408",
@@ -44,12 +46,43 @@
       }
     },
     {
+      "presentationId": "scm_l",
+      "structureId": "bodymate.neck.sternocleidomastoid.left",
+      "displayNameZh": "左侧胸锁乳突肌",
+      "canonicalName": "left sternocleidomastoid",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "left",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1573",
+      "sourceConceptId": "FMA13409",
+      "sourceChunk": "body-5.bin",
+      "isDefault": false,
+      "vertexCount": 1825,
+      "triangleCount": 2248,
+      "bounds": {
+        "min": [
+          0.0005796630284748971,
+          1.3801112174987793,
+          -0.06253620237112045
+        ],
+        "max": [
+          0.061665501445531845,
+          1.5811312198638916,
+          0.05680600181221962
+        ]
+      }
+    },
+    {
       "presentationId": "trapezius_r",
       "structureId": "bodymate.neck.trapezius.upper.right",
       "displayNameZh": "右侧斜方肌上部",
       "canonicalName": "descending part of right trapezius",
       "region": "neck",
       "layer": "muscle",
+      "side": "right",
+      "uiGroup": "shoulder",
       "sourceProvider": "Human Atlas / BodyParts3D 4.0",
       "sourceMeshId": "FJ1521",
       "sourceConceptId": "FMA33586",
@@ -71,12 +104,43 @@
       }
     },
     {
+      "presentationId": "trapezius_l",
+      "structureId": "bodymate.neck.trapezius.upper.left",
+      "displayNameZh": "左侧斜方肌上部",
+      "canonicalName": "descending part of left trapezius",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "left",
+      "uiGroup": "shoulder",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1521M",
+      "sourceConceptId": "FMA33587",
+      "sourceChunk": "body-4.bin",
+      "isDefault": false,
+      "vertexCount": 2380,
+      "triangleCount": 2622,
+      "bounds": {
+        "min": [
+          -0.00348842004314065,
+          1.418701171875,
+          -0.09238652139902115
+        ],
+        "max": [
+          0.130840003490448,
+          1.5843511819839478,
+          0.0006600000197067857
+        ]
+      }
+    },
+    {
       "presentationId": "levator_r",
       "structureId": "bodymate.neck.levator-scapulae.right",
       "displayNameZh": "右侧肩胛提肌",
       "canonicalName": "right levator scapulae",
       "region": "neck",
       "layer": "muscle",
+      "side": "right",
+      "uiGroup": "shoulder",
       "sourceProvider": "Human Atlas / BodyParts3D 4.0",
       "sourceMeshId": "FJ1532",
       "sourceConceptId": "FMA32540",
@@ -94,6 +158,267 @@
           -0.021074799820780754,
           1.5466711521148682,
           -0.017606500536203384
+        ]
+      }
+    },
+    {
+      "presentationId": "levator_l",
+      "structureId": "bodymate.neck.levator-scapulae.left",
+      "displayNameZh": "左侧肩胛提肌",
+      "canonicalName": "left levator scapulae",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "left",
+      "uiGroup": "shoulder",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1532M",
+      "sourceConceptId": "FMA32541",
+      "sourceChunk": "body-4.bin",
+      "isDefault": false,
+      "vertexCount": 1285,
+      "triangleCount": 1316,
+      "bounds": {
+        "min": [
+          0.021074799820780754,
+          1.387451171875,
+          -0.08791270107030869
+        ],
+        "max": [
+          0.08101010322570801,
+          1.5466711521148682,
+          -0.017606500536203384
+        ]
+      }
+    },
+    {
+      "presentationId": "scalene_anterior_r",
+      "structureId": "bodymate.neck.scalene.anterior.right",
+      "displayNameZh": "右侧前斜角肌",
+      "canonicalName": "right scalenus anterior",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "right",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1592",
+      "sourceConceptId": "FMA13392",
+      "sourceChunk": "body-5.bin",
+      "isDefault": false,
+      "vertexCount": 665,
+      "triangleCount": 792,
+      "bounds": {
+        "min": [
+          -0.05631909891963005,
+          1.4124412536621094,
+          -0.021195799112319946
+        ],
+        "max": [
+          -0.022326499223709106,
+          1.499101161956787,
+          -0.0031942001078277826
+        ]
+      }
+    },
+    {
+      "presentationId": "scalene_anterior_l",
+      "structureId": "bodymate.neck.scalene.anterior.left",
+      "displayNameZh": "左侧前斜角肌",
+      "canonicalName": "left scalenus anterior",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "left",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1570",
+      "sourceConceptId": "FMA13393",
+      "sourceChunk": "body-5.bin",
+      "isDefault": false,
+      "vertexCount": 663,
+      "triangleCount": 784,
+      "bounds": {
+        "min": [
+          0.021012499928474426,
+          1.412391185760498,
+          -0.02111390046775341
+        ],
+        "max": [
+          0.05489899963140488,
+          1.4990712404251099,
+          -0.0031703999266028404
+        ]
+      }
+    },
+    {
+      "presentationId": "scalene_medius_r",
+      "structureId": "bodymate.neck.scalene.medius.right",
+      "displayNameZh": "右侧中斜角肌",
+      "canonicalName": "right scalenus medius",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "right",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1593",
+      "sourceConceptId": "FMA13390",
+      "sourceChunk": "body-5.bin",
+      "isDefault": false,
+      "vertexCount": 1376,
+      "triangleCount": 1332,
+      "bounds": {
+        "min": [
+          -0.055591098964214325,
+          1.4212912321090698,
+          -0.028658999130129814
+        ],
+        "max": [
+          -0.02214770019054413,
+          1.5267212390899658,
+          -0.01402289979159832
+        ]
+      }
+    },
+    {
+      "presentationId": "scalene_medius_l",
+      "structureId": "bodymate.neck.scalene.medius.left",
+      "displayNameZh": "左侧中斜角肌",
+      "canonicalName": "left scalenus medius",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "left",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1571",
+      "sourceConceptId": "FMA13391",
+      "sourceChunk": "body-5.bin",
+      "isDefault": false,
+      "vertexCount": 1288,
+      "triangleCount": 1266,
+      "bounds": {
+        "min": [
+          0.020902099087834358,
+          1.4213311672210693,
+          -0.028635699301958084
+        ],
+        "max": [
+          0.054277900606393814,
+          1.5267212390899658,
+          -0.013992199674248695
+        ]
+      }
+    },
+    {
+      "presentationId": "scalene_posterior_r",
+      "structureId": "bodymate.neck.scalene.posterior.right",
+      "displayNameZh": "右侧后斜角肌",
+      "canonicalName": "right scalenus posterior",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "right",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1594",
+      "sourceConceptId": "FMA13388",
+      "sourceChunk": "body-5.bin",
+      "isDefault": false,
+      "vertexCount": 1056,
+      "triangleCount": 1204,
+      "bounds": {
+        "min": [
+          -0.07407210022211075,
+          1.4194512367248535,
+          -0.043922699987888336
+        ],
+        "max": [
+          -0.02489279955625534,
+          1.4810512065887451,
+          -0.018580399453639984
+        ]
+      }
+    },
+    {
+      "presentationId": "scalene_posterior_l",
+      "structureId": "bodymate.neck.scalene.posterior.left",
+      "displayNameZh": "左侧后斜角肌",
+      "canonicalName": "left scalenus posterior",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "left",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1572",
+      "sourceConceptId": "FMA13389",
+      "sourceChunk": "body-5.bin",
+      "isDefault": false,
+      "vertexCount": 985,
+      "triangleCount": 1170,
+      "bounds": {
+        "min": [
+          0.023622099310159683,
+          1.4194811582565308,
+          -0.043924398720264435
+        ],
+        "max": [
+          0.07275430113077164,
+          1.4810712337493896,
+          -0.01856759935617447
+        ]
+      }
+    },
+    {
+      "presentationId": "splenius_capitis_r",
+      "structureId": "bodymate.neck.splenius.capitis.right",
+      "displayNameZh": "右侧头夹肌",
+      "canonicalName": "right splenius capitis",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "right",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1545",
+      "sourceConceptId": "FMA22728",
+      "sourceChunk": "body-4.bin",
+      "isDefault": false,
+      "vertexCount": 1448,
+      "triangleCount": 1716,
+      "bounds": {
+        "min": [
+          -0.06083890050649643,
+          1.3634612560272217,
+          -0.10206776857376099
+        ],
+        "max": [
+          0.002587829949334264,
+          1.577161192893982,
+          -0.0280774999409914
+        ]
+      }
+    },
+    {
+      "presentationId": "splenius_capitis_l",
+      "structureId": "bodymate.neck.splenius.capitis.left",
+      "displayNameZh": "左侧头夹肌",
+      "canonicalName": "left splenius capitis",
+      "region": "neck",
+      "layer": "muscle",
+      "side": "left",
+      "uiGroup": "neck",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1545M",
+      "sourceConceptId": "FMA22729",
+      "sourceChunk": "body-4.bin",
+      "isDefault": false,
+      "vertexCount": 1432,
+      "triangleCount": 1716,
+      "bounds": {
+        "min": [
+          -0.002587829949334264,
+          1.3634612560272217,
+          -0.10206778347492218
+        ],
+        "max": [
+          0.06083890050649643,
+          1.577161192893982,
+          -0.027988800778985023
         ]
       }
     }

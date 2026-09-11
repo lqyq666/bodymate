@@ -138,15 +138,17 @@ test('generated classic runtime is derived from the pinned Human Atlas neck GLB 
   assert.doesNotMatch(source, /loadAsync\s*\(/);
 });
 
-test('Human Atlas neck package pins three independently named real meshes with CC BY attribution', () => {
+test('Human Atlas neck package pins fourteen independently named real meshes with CC BY attribution', () => {
   assert.equal(humanAtlasManifest.sourceCommit, '1c38bf35c254a891200d3cedecfd57abebe83d8d');
   assert.equal(humanAtlasManifest.license, 'CC BY 4.0');
   assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.sourceMeshId), rootScmRegistry.map((entry) => entry.sourceMeshId));
   assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.structureId), rootScmRegistry.map((entry) => entry.structureId));
-  assert.match(html, /\['scm_r','trapezius_r','levator_r'\]\.map\(id=>DATA\[id\]\)/);
+  assert.equal(humanAtlasManifest.entries.length, 14);
+  assert.match(html, /BodyMateAnatomyRegistryFilter/);
+  assert.match(html, /data-neck-group="shoulder"/);
 });
 
-test('committed Human Atlas neck GLB preserves all three mapped meshes and their documented topology', async () => {
+test('committed Human Atlas neck GLB preserves all fourteen mapped meshes and their documented topology', async () => {
   const document = await new NodeIO().readBinary(humanAtlasGlb);
   const nodes = document.getRoot().listNodes();
   for (const entry of humanAtlasManifest.entries) {
