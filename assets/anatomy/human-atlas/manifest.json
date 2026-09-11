@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "provider": "Human Atlas / BodyParts3D 4.0",
+  "sourceRepository": "https://github.com/ashemag/human-atlas",
+  "sourceCommit": "1c38bf35c254a891200d3cedecfd57abebe83d8d",
+  "rawBaseUrl": "https://raw.githubusercontent.com/ashemag/human-atlas/1c38bf35c254a891200d3cedecfd57abebe83d8d/public/models",
+  "attributionUrl": "https://github.com/ashemag/human-atlas/blob/1c38bf35c254a891200d3cedecfd57abebe83d8d/public/ATTRIBUTION.md",
+  "license": "CC BY 4.0",
+  "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+  "sourceFiles": {
+    "atlas.json": "C359F4BCD2CBA90B7411D66D5E9FC04DC81294D46CD5C1E8B212C824F2E5BBEE",
+    "body-4.bin": "0509E6C996FE5B935ACE770A5DBF2D83A474330B7E541A844052A080BBF814BB",
+    "body-5.bin": "32A967198FFED45839968228898F3D246C67F86FB26892C3AE270BE30E2F1149"
+  },
+  "outputFile": "assets/anatomy/human-atlas/neck-muscles.glb",
+  "outputSha256": "83A0247F199ECA4D3B32B16506C61075E23EEB6A1C20501B8EFFD46AFE9D95A7",
+  "conversion": "deterministic extraction from pinned Human Atlas browser chunks; no geometry centering, simplification, compression, or coordinate transform by BodyMate",
+  "entries": [
+    {
+      "sourceMeshId": "FJ1595",
+      "structureId": "bodymate.neck.sternocleidomastoid.right",
+      "canonicalName": "right sternocleidomastoid",
+      "displayNameZh": "右侧胸锁乳突肌",
+      "sourceConceptId": "FMA13408",
+      "sourceChunk": "body-5.bin",
+      "vertexCount": 2166,
+      "triangleCount": 2274,
+      "bounds": {
+        "min": [
+          -0.06304000318050385,
+          1.3800811767578125,
+          -0.06274610012769699
+        ],
+        "max": [
+          0.061404999345541,
+          1.581301212310791,
+          0.05690699815750122
+        ]
+      }
+    },
+    {
+      "sourceMeshId": "FJ1521",
+      "structureId": "bodymate.neck.trapezius.upper.right",
+      "canonicalName": "descending part of right trapezius",
+      "displayNameZh": "右侧斜方肌上部",
+      "sourceConceptId": "FMA33586",
+      "sourceChunk": "body-4.bin",
+      "vertexCount": 2394,
+      "triangleCount": 2618,
+      "bounds": {
+        "min": [
+          -0.130840003490448,
+          1.418701171875,
+          -0.09238652139902115
+        ],
+        "max": [
+          0.00348842004314065,
+          1.5843511819839478,
+          0.0006600000197067857
+        ]
+      }
+    },
+    {
+      "sourceMeshId": "FJ1532",
+      "structureId": "bodymate.neck.levator-scapulae.right",
+      "canonicalName": "right levator scapulae",
+      "displayNameZh": "右侧肩胛提肌",
+      "sourceConceptId": "FMA32540",
+      "sourceChunk": "body-4.bin",
+      "vertexCount": 1262,
+      "triangleCount": 1314,
+      "bounds": {
+        "min": [
+          -0.08101010322570801,
+          1.387451171875,
+          -0.08791270107030869
+        ],
+        "max": [
+          -0.021074799820780754,
+          1.5466711521148682,
+          -0.017606500536203384
+        ]
+      }
+    }
+  ]
+}

@@ -36,7 +36,7 @@ All source IDs, sizes, topology counts, licenses, provenance, and hashes are in 
 
 ## Rejected candidates
 
-- **BodyParts3D 4.0**: its current archive declares CC BY 4.0 but inspected `FJ1595.obj` and `FJ1521.obj` headers declare CC BY-SA 2.1 Japan. It remains a technical-only candidate until DBCLS gives written clarification.
+- **BodyParts3D direct OBJ archive**: its historical OBJ headers retain CC BY-SA 2.1 Japan wording. BodyMate does not redistribute those OBJ files. The later Human Atlas derivative uses the official BodyParts3D license page updated 2025-02-27, its pinned source commit, and its documented CC BY 4.0 attribution; see `HUMAN_ATLAS_NECK_ASSET.md`.
 - **Z-Anatomy**: its `Startup.blend` contains the named neck objects, but its own provenance and attribution explicitly inherit BodyParts3D. The unresolved upstream chain prevents approval.
 - **Kevin-Mattheus-Moerman BodyParts3D STL conversion**: transparent CC BY-SA 2.1 Japan provenance, but still BodyParts3D-derived and therefore governed by the same Stage 2B restriction.
 - **Visible Human / Segmented Internal Organs**: the reviewed open derivative release does not supply an independent neck SCM mesh.
