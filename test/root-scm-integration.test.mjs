@@ -19,6 +19,7 @@ const hash = (bytes) => createHash('sha256').update(bytes).digest('hex').toUpper
 
 function core() { const context = vm.createContext({}); context.globalThis = context; new vm.Script(bundle).runInContext(context); return context; }
 function snapshot(runtime) { return runtime.bodymate_core_snapshot(); }
+function node() { return { hidden: false, style: {}, textContent: '', children: [], setAttribute() {}, append(child) { this.children.push(child); } }; }
 
 test('all SCM presentation entrances resolve to one canonical domain ID', () => {
   assert.equal(canonicalScmId, 'bodymate.neck.sternocleidomastoid.right');
@@ -27,19 +28,26 @@ test('all SCM presentation entrances resolve to one canonical domain ID', () => 
   assert.equal(entryForPresentationId('unknown-legacy-node'), null);
 });
 
-test('root domain adapter registers the canonical SCM once and leaves unknown input inert', () => {
+test('root domain adapter registers the canonical SCM once without registering the scm_r presentation ID', () => {
   const runtime = core();
   runtime.bodymate_core_clear();
   registerRootEntries(runtime, [
     { presentationId: 'scm_r', structureId: canonicalScmId, displayNameZh: '右侧胸锁乳突肌', region: 'neck', layer: 'muscle', isDefault: true },
     { presentationId: 'pec_r', structureId: 'pec_r', displayNameZh: '右侧胸大肌', region: 'chest', layer: 'muscle', isDefault: true },
   ]);
-  assert.equal(runtime.bodymate_core_register('scm_r', '重复 ID', 'neck', 'muscle', false), 'ok|registered');
+  assert.equal(runtime.bodymate_core_select_structure('scm_r'), 'error|unknown_structure');
   const selected = selectPresentationStructure(runtime, 'scm_r');
   assert.equal(selected?.selected, canonicalScmId);
   const before = snapshot(runtime);
   assert.equal(selectPresentationStructure(runtime, 'unknown-legacy-node'), null);
   assert.equal(snapshot(runtime), before);
+});
+
+test('root legacy rendering comparisons resolve through the canonical ID adapter', () => {
+  const controller = html;
+  assert.match(controller, /coreIdFor\(m\.id\)===state\.selected/);
+  assert.match(controller, /coreIdFor\(f\.id\)===state\.selected/);
+  assert.doesNotMatch(controller, /\b[mdf]\.id===state\.selected/);
 });
 
 test('bounds focus uses real SCM bounds rather than a hard-coded camera target', () => {
@@ -50,15 +58,41 @@ test('bounds focus uses real SCM bounds rather than a hard-coded camera target',
   assert.equal(plan.direction.length, 3);
 });
 
-test('root retains legacy views but has an explicit real-SCM detail path and attribution entry', async () => {
+test('root retains legacy views and restores the legacy presentation on real-viewer failure', async () => {
   const adapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
   for (const id of ['nav-canvas', 'detail-canvas', 'orb-canvas']) assert.match(html, new RegExp(`id=["']${id}["']`));
   assert.match(html, /assets\/runtime\/root-scm-runtime\.js/);
   assert.match(html, /root-scm-root-adapter\.js/);
   assert.match(adapter, /root-scm-canvas/);
   assert.match(adapter, /真实 SCM 资源未能初始化/);
+  assert.match(adapter, /root-scm-fail/);
+  assert.match(adapter, /legacy\.hidden = false/);
+  assert.match(adapter, /canvas\.hidden = true/);
+  assert.match(adapter, /tag\.textContent = legacyTag/);
+  assert.match(adapter, /overlays\.forEach\(\(node\) => \{ node\.style\.visibility = ''; \}\)/);
   assert.match(adapter, /Open Anatomy \/ SPL Head and Neck Atlas/);
   assert.match(adapter, /assets\/anatomy\/open-anatomy\/NOTICE\.md/);
+});
+
+test('forced real-viewer failure keeps isolate and restore snapshots on the legacy canvas with the placeholder tag', async () => {
+  const adapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
+  const selectors = ['#detail-view', '#detail-canvas', '.current-summary', '#label-lines', '#anatomy-labels', '#coach-bubble', '.detail-instruction', '.fiber-note', '.data-tag', '#selection-meta', '#selection-name'];
+  const nodes = new Map(selectors.map((selector) => [selector, node()]));
+  const context = vm.createContext({
+    document: { querySelector: (selector) => nodes.get(selector) ?? null, createElement: () => node() },
+    location: { search: '?root-scm-fail=1' }, URLSearchParams,
+    console: { error() {} },
+    __bodymate: { state: { selected: canonicalScmId, whole: false } },
+  });
+  context.globalThis = context;
+  new vm.Script(adapter).runInContext(context);
+  const canvas = nodes.get('#detail-view').children[0];
+  const tag = nodes.get('.data-tag');
+  for (const isolated of [true, false]) context.__rootScmApply({ selected: canonicalScmId, whole: false, isolated });
+  assert.equal(canvas.hidden, true);
+  assert.equal(nodes.get('#detail-canvas').hidden, false);
+  assert.equal(tag.textContent, '交互占位 · 非解剖教材');
+  assert.equal(nodes.get('#label-lines').style.visibility, '');
 });
 
 test('generated classic runtime is derived from the canonical GLB and has no external anatomy request', async () => {

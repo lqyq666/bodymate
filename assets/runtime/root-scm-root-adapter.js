@@ -14,17 +14,27 @@
   attribution.onclick = () => alert('Open Anatomy / SPL Head and Neck Atlas\nMarianna Jakab · Ron Kikinis\n许可证与通知：assets/anatomy/open-anatomy/NOTICE.md、assets/anatomy/open-anatomy/LICENSE.md');
   const overlays = ['#label-lines', '#anatomy-labels', '#coach-bubble', '.detail-instruction', '.fiber-note'].map((selector) => document.querySelector(selector)).filter(Boolean);
   let viewer; let failed = false;
+  const legacyTag = '交互占位 · 非解剖教材';
+  const tag = document.querySelector('.data-tag');
+  const restoreLegacy = (error) => {
+    failed = true; canvas.hidden = true; legacy.hidden = false;
+    overlays.forEach((node) => { node.style.visibility = ''; });
+    if (tag) tag.textContent = legacyTag;
+    document.querySelector('#selection-meta').textContent = '真实 SCM 资源未能初始化，当前显示交互白模。';
+    if (error) console.error(error);
+  };
   try {
-    viewer = globalThis.BodyMateRootScmRuntime.mount({ canvas, onPick: () => globalThis.__bodymate?.select('scm_r'), onError: (error) => { failed = true; canvas.hidden = true; legacy.hidden = false; console.error(error); document.querySelector('#selection-meta').textContent = '真实 SCM 资源未能初始化，当前显示交互白模。'; } });
-  } catch (error) { failed = true; console.error(error); document.querySelector('#selection-meta').textContent = '真实 SCM 资源未能初始化，当前显示交互白模。'; }
+    if (new URLSearchParams(globalThis.location?.search || '').has('root-scm-fail')) throw Error('Test-only real SCM viewer failure.');
+    viewer = globalThis.BodyMateRootScmRuntime.mount({ canvas, onPick: () => globalThis.__bodymate?.select('scm_r'), onError: restoreLegacy });
+  } catch (error) { restoreLegacy(error); }
   globalThis.__rootScmApply = (snapshot) => {
     const active = !failed && snapshot.selected === canonicalId && !snapshot.whole;
     legacy.hidden = active; canvas.hidden = !active; overlays.forEach((node) => { node.style.visibility = active ? 'hidden' : ''; });
-    if (!active) return;
+    if (!active) { if (tag) tag.textContent = legacyTag; return; }
     viewer.show(); viewer.applySnapshot(snapshot); viewer.focusSelected();
     document.querySelector('#selection-name').textContent = '右侧胸锁乳突肌';
     document.querySelector('#selection-meta').textContent = '颈肩 · 真实公开解剖网格 · Open Anatomy / SPL Head and Neck Atlas';
-    const tag = document.querySelector('.data-tag'); if (tag) tag.textContent = '真实公开解剖资产 · 非医学诊断';
+    if (tag) tag.textContent = '真实公开解剖资产 · 非医学诊断';
   };
   globalThis.__rootScmApply(globalThis.__bodymate?.state || {});
 })();
