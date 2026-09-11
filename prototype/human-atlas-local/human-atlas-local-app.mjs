@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { humanAtlasLocalRegistry, entryForHumanAtlasPart } from './human-atlas-registry.mjs';
+import { reassembledPartIds } from './human-atlas-source.mjs';
 import { focusPlanFromBounds, parseCoreSnapshot, visibilityForHumanAtlasSnapshot } from './human-atlas-domain.mjs';
 
 const canvas = document.querySelector('#scene');
@@ -59,8 +60,9 @@ function selectScm() { coreCall('bodymate_core_select_structure', humanAtlasLoca
 async function loadLocalAtlas() {
   const manifest = await fetch('./local-assets/manifest.json', { cache: 'no-store' }).then((response) => { if (!response.ok) throw Error('本地 Human Atlas 组件尚未下载。先运行 npm run human-atlas:fetch-local。'); return response.json(); });
   const buffers = new Map(await Promise.all(manifest.chunks.map(async (chunk) => [chunk.index, await fetch(`./local-assets/${chunk.file}`, { cache: 'no-store' }).then((response) => { if (!response.ok) throw Error(`缺少本地分块 ${chunk.file}`); return response.arrayBuffer(); })])));
-  for (const part of manifest.parts) { const mesh = new THREE.Mesh(makeGeometry(buffers.get(part.chunk), part), materialFor(part)); mesh.name = part.id; mesh.userData.partId = part.id; (part.id === 'FJ1595' ? scmGroup : contextGroup).add(mesh); }
-  const scm = manifest.parts.find((part) => part.id === 'FJ1595'); topology.textContent = `${scm.vertexCount.toLocaleString()} vertices · ${(scm.indexCount / 3).toLocaleString()} triangles`;
+  const detailParts = manifest.parts.filter((part) => reassembledPartIds.includes(part.id));
+  for (const part of detailParts) { const mesh = new THREE.Mesh(makeGeometry(buffers.get(part.chunk), part), materialFor(part)); mesh.name = part.id; mesh.userData.partId = part.id; (part.id === 'FJ1595' ? scmGroup : contextGroup).add(mesh); }
+  const scm = detailParts.find((part) => part.id === 'FJ1595'); topology.textContent = `${scm.vertexCount.toLocaleString()} vertices · ${(scm.indexCount / 3).toLocaleString()} triangles`;
 }
 function resize() { const box = canvas.getBoundingClientRect(); renderer.setSize(box.width, box.height, false); camera.aspect = box.width / box.height; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(canvas); resize();

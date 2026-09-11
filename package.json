@@ -5,12 +5,13 @@
   "description": "Offline anatomy exploration whitebox",
   "scripts": {
     "build": "node scripts/build-moonbit.mjs",
-    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/original-scm-visual-spike.test.mjs test/human-atlas-local-spike.test.mjs",
+    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/original-scm-visual-spike.test.mjs test/human-atlas-local-spike.test.mjs test/human-atlas-download.test.mjs",
     "check": "npm run verify && node scripts/check-generated.mjs",
     "spike:verify-local": "node scripts/verify-local-neck-asset.mjs",
     "spike:serve": "node scripts/serve-spike.mjs",
     "original-scm:serve": "node scripts/serve-original-scm.mjs",
     "human-atlas:fetch-local": "node scripts/fetch-human-atlas-local.mjs",
+    "human-atlas:fetch-full-local": "node scripts/fetch-human-atlas-local.mjs --full",
     "human-atlas:serve": "node scripts/serve-human-atlas-local.mjs"
   },
   "dependencies": {

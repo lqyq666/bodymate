@@ -1,8 +1,7 @@
 # Brief: Human Atlas local SCM reassembly
 
 **Date:** 2026-09-11
-**Status:** Locked
-**Implemented:** 2026-09-11
+**Status:** Superseded by full-atlas local navigation extension
 **Branch:** feat/original-neck-visual-spike
 **Research question:** Can the Human Atlas browser components be reassembled locally into a substantially more credible right-SCM inspection view while preserving BodyMate's MoonBit domain boundary and keeping unapproved geometry out of Git?
 
@@ -38,7 +37,7 @@ Use the pinned Human Atlas browser package only for a local, ignored visual veri
 ## Implementation checklist
 
 - [x] Pin the source, parse the component manifest, and document the local-only boundary.
-- [x] Add an ignored, reproducible local downloader for the four required chunks.
+- [x] Add an ignored, reproducible local downloader for the five required chunks.
 - [x] Reassemble real components and connect SCM selection through Registry → MoonBit → renderer.
 - [x] Test mapping, unknown inputs, isolate/restore, focus, and root regressions.
 - [x] Verify the local browser page after the assets are downloaded.
