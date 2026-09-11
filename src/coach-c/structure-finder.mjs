@@ -47,7 +47,7 @@ const action = (name, fields = {}) => Object.freeze({ schemaVersion: 1, action: 
 const result = ({ classification, resolution, action: nextAction = null, candidates = [], confidence = 0, message }) => Object.freeze({ classification, resolution, action: nextAction, candidates: Object.freeze(candidates), confidence, message });
 
 export function isValidCoachActionContract(next) {
-  if (!next || next.schemaVersion !== 1 || next.source !== 'local-resolver' || !actionNames.has(next.action) || !Number.isFinite(next.confidence) || next.confidence < 0 || next.confidence > 1) return false;
+  if (!next || next.schemaVersion !== 1 || !['local-resolver', 'ai-resolver'].includes(next.source) || !actionNames.has(next.action) || !Number.isFinite(next.confidence) || next.confidence < 0 || next.confidence > 1) return false;
   if (next.action === 'SELECT_STRUCTURE') return typeof next.structureId === 'string' && neckRegistry.some((entry) => entry.structureId === next.structureId);
   if (next.action === 'SHOW_REGION') return typeof next.region === 'string';
   return true;

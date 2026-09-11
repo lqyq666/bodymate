@@ -76,7 +76,7 @@ test('generated browser registry is an offline projection of the canonical neck 
   assert.deepEqual(JSON.parse(JSON.stringify(context.BodyMateAnatomyRegistry)), neckRegistry);
   assert.deepEqual(JSON.parse(JSON.stringify(context.BodyMateAnatomyRegistryFilter({ side: 'left', query: 'scalenus' }).map((entry) => entry.sourceMeshId))), ['FJ1570', 'FJ1571', 'FJ1572']);
   assert.doesNotMatch(generatedRuntime, /\bfetch\s*\(/);
-  assert.match(html, /<script src="assets\/runtime\/anatomy-registry\.js"><\/script><script src="assets\/runtime\/coach-query-runtime\.js"><\/script><script>\/\* Interaction controller/);
+  assert.match(html, /<script src="assets\/runtime\/anatomy-registry\.js"><\/script><script src="assets\/runtime\/coach-query-runtime\.js"><\/script><script src="assets\/runtime\/coach-ai-runtime\.js"><\/script><script>\/\* Interaction controller/);
   assert.doesNotMatch(html, /ROOT_REAL_NECK_IDS/);
   assert.match(rootAdapter, /BodyMateAnatomyRegistry/);
   assert.doesNotMatch(rootAdapter, /new Map\(\[/);

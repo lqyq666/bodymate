@@ -511,7 +511,7 @@ function buildAnatomy(){
 })();
 //# sourceMappingURL=core.js.map
 </script>
-<!-- MOONBIT_CORE_END --><script src="assets/runtime/anatomy-registry.js"></script><script src="assets/runtime/coach-query-runtime.js"></script><script>/* Interaction controller. Renderer and geometry are bundled locally; no CDN,
+<!-- MOONBIT_CORE_END --><script src="assets/runtime/anatomy-registry.js"></script><script src="assets/runtime/coach-query-runtime.js"></script><script src="assets/runtime/coach-ai-runtime.js"></script><script>/* Interaction controller. Renderer and geometry are bundled locally; no CDN,
    network model, API key or medically authoritative asset is used. */
 (function(){
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
@@ -672,4 +672,4 @@ try{buildAnatomy();installRealNeckRegistry();registerCore();nav=new View($('#nav
  window.__bodymate={get state(){return{...state};},data:DATA,regions:REGIONS,select:selectMuscle,region:gotoRegion,reset:resetAll,setLayer,command,executeCoachAction,recordCoachQuery,get history(){return chatHistory.map(x=>({...x}));},get ready(){return ready;},get views(){return{nav,detail,orb};},project(id,which='nav'){const v=which==='nav'?nav:detail,d=DATA[id];const p=v.camera.project(d.center,v.w,v.h),r=v.canvas.getBoundingClientRect();return{x:r.left+p.x,y:r.top+p.y,visible:p.visible};},projectPoint(p,which='nav'){const v=which==='nav'?nav:detail,r=v.canvas.getBoundingClientRect(),q=v.camera.project(p,v.w,v.h);return{x:r.left+q.x,y:r.top+q.y};},stats(){return{frames:renderFrame,navCalls:nav.drawCalls,detailCalls:detail.drawCalls,cache:detail.cache.size,drawnMuscles:DETAIL.filter(x=>x.visible!==false&&x.type==='muscle').map(x=>x.id),drawnFascia:DETAIL.filter(x=>x.visible!==false&&x.type==='fascia').map(x=>x.id),drawnSupport:DETAIL.filter(x=>x.visible!==false&&x.type==='support').length,leftTarget:[...navCamera.target],leftHeight:navCamera.halfHeight};}};
 }catch(e){console.error(e);$('#fatal').hidden=false;$('#fatal').textContent='3D 白模未启动：'+e.message+'。请使用支持 WebGL 的 Edge / Chrome。页面内已包含所有代码，无需加载 CDN。';$('#engine-status').textContent='3D 初始化失败';}
 })();
-</script><script src="assets/runtime/root-scm-runtime.js"></script><script src="assets/runtime/root-scm-root-adapter.js"></script><script src="assets/runtime/coach-query-root-adapter.js"></script></body></html>
+</script><script src="assets/runtime/root-scm-runtime.js"></script><script src="assets/runtime/root-scm-root-adapter.js"></script><script src="assets/runtime/coach-query-root-adapter.js"></script><script src="assets/runtime/coach-ai-root-adapter.js"></script></body></html>

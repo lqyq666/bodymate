@@ -6,3 +6,7 @@ _build/
 .moon/
 prototype/real-neck/local-assets/
 *.log
+.env
+.env.local
+.env.*.local
+*.key
