@@ -40,5 +40,5 @@ jobs:
       - name: Build and verify committed artifact
         run: |
           npm run build
-          git diff --exit-code -- index.html
+          git diff --exit-code -- index.html assets/runtime/anatomy-registry.js assets/runtime/root-scm-runtime.js
           npm run check

@@ -1,0 +1,29 @@
+export const FROZEN_HUMAN_ATLAS_NECK_SHA = 'FA6A0CFDDF1DA59367EA8EB72DB77770A08A2F53D01097C2873ECFFD692F7065';
+
+export const selectedMaterial = Object.freeze({ color: '#83B9F4', emissive: '#163D6D', emissiveIntensity: 0.09, opacity: 1, roughness: 0.68, metalness: 0.01 });
+export const contextMaterial = Object.freeze({ color: '#E7EDF1', emissive: '#000000', emissiveIntensity: 0, opacity: 1, roughness: 0.76, metalness: 0.01 });
+
+export function materialPlanForSnapshot(snapshot, structureId) {
+  const selected = snapshot?.selected === structureId && !snapshot?.overview;
+  return Object.freeze({ ...(selected ? selectedMaterial : contextMaterial), selected, visible: !snapshot?.isolated || selected });
+}
+
+export function boundsCenter(bounds) {
+  return { x: (bounds.min.x + bounds.max.x) / 2, y: (bounds.min.y + bounds.max.y) / 2, z: (bounds.min.z + bounds.max.z) / 2 };
+}
+
+export function boundsRadius(bounds) {
+  return Math.max(Math.hypot(bounds.max.x - bounds.min.x, bounds.max.y - bounds.min.y, bounds.max.z - bounds.min.z) / 2, 0.001);
+}
+
+export function combinedBounds(boundsList) {
+  if (!boundsList.length) return null;
+  return boundsList.reduce((combined, bounds) => ({
+    min: { x: Math.min(combined.min.x, bounds.min.x), y: Math.min(combined.min.y, bounds.min.y), z: Math.min(combined.min.z, bounds.min.z) },
+    max: { x: Math.max(combined.max.x, bounds.max.x), y: Math.max(combined.max.y, bounds.max.y), z: Math.max(combined.max.z, bounds.max.z) },
+  }));
+}
+
+export function selectedFocusPlan(bounds, direction = [1, 0.48, 1], { context = false } = {}) {
+  return Object.freeze({ target: boundsCenter(bounds), distance: boundsRadius(bounds) * (context ? 4.15 : 3.1), direction: [...direction] });
+}
