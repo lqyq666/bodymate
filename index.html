@@ -85,7 +85,7 @@ function rayIntersect(ray,item){if(!rayBox(ray,item))return Infinity;let best=In
 </script><script>/* Procedural WHITEBOX geometry. Named parts are interface placeholders,
    not anatomically validated assets, insertion sites, or fiber directions. */
 const REGIONS={
- neck:{name:'颈肩',en:'NECK & SHOULDERS',center:[0,6.09,.08],dist:3.65,theta:.38,phi:.04,default:'scm_r'},
+ neck:{name:'颈肩',en:'NECK & SHOULDERS',center:[0,6.09,.08],dist:3.65,theta:.38,phi:.04,default:'bodymate.neck.sternocleidomastoid.right'},
  shoulder:{name:'肩部',en:'SHOULDER',center:[-.92,5.47,.03],dist:3.65,theta:-.3,phi:.09,default:'deltoid_r'},
  chest:{name:'胸部',en:'CHEST',center:[0,5.12,.17],dist:4.7,theta:.13,phi:.04,default:'pec_r'},
  arm:{name:'上臂',en:'UPPER ARM',center:[-1.26,4.75,.10],dist:3.7,theta:-.35,phi:.03,default:'biceps_r'},
@@ -516,17 +516,18 @@ function buildAnatomy(){
 (function(){
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const state={region:'neck',selected:'scm_r',layer:'muscle',isolated:false,labels:true,pulse:!reduced,whole:false,bubble:true,completed:3,selectionRevision:0,showSupport:true};
+const ROOT_SCM_ID='bodymate.neck.sternocleidomastoid.right';const coreIdFor=id=>id==='scm_r'?ROOT_SCM_ID:id;const presentationIdFor=id=>id===ROOT_SCM_ID?'scm_r':id;
+const state={region:'neck',selected:ROOT_SCM_ID,layer:'muscle',isolated:false,labels:true,pulse:!reduced,whole:false,bubble:true,completed:3,selectionRevision:0,showSupport:true};
 let nav,detail,orb,ready=false,lastTime=0,toastTimer=0,particles=[],orbItems=[],renderFrame=0;
 const navCamera=new Camera([0,3.76,.02],13,0,.025,true), detailCamera=new Camera(REGIONS.neck.center,REGIONS.neck.dist,REGIONS.neck.theta,.04),orbCamera=new Camera([0,-.09,0],4.45,.14,.18);
 navCamera.halfHeight=4.25;orbCamera.fov=.61;
 let NAV=[],DETAIL=[],coachItems=[],guideMesh=null,guideGeo=null,guideLast=-1,coachPos=[0,0,0],coachScale=.50,navFloor=[],lastCoachModel=identity();
-const current=()=>DATA[state.selected];
+const current=()=>DATA[presentationIdFor(state.selected)];
 const chatHistory=[];
 let chatSequence=0;
 function applyCore(reply){const p=String(reply).split('|');if(p[0]!=='ok'){toast('核心拒绝此操作：'+(p[1]||'unknown'));return false;}const revision=Number(p[6]),valid=p.length===7&&p[1]&&p[2]&&['muscle','fascia'].includes(p[3])&&['true','false'].includes(p[4])&&['true','false'].includes(p[5])&&Number.isSafeInteger(revision)&&revision>=0;if(!valid){toast('核心返回损坏的状态，页面未更新。');return false;}Object.assign(state,{region:p[1],selected:p[2],layer:p[3],isolated:p[4]==='true',whole:p[5]==='true',selectionRevision:revision});return true;}
 function callCore(name,...args){const fn=globalThis[name];if(typeof fn!=='function')throw Error('MoonBit 核心未加载：'+name);return applyCore(fn(...args));}
-function registerCore(){const clear=globalThis.bodymate_core_clear;if(typeof clear!=='function')throw Error('MoonBit 核心未加载：bodymate_core_clear');if(!String(clear()).startsWith('ok|'))throw Error('MoonBit 清空失败');for(const d of Object.values(DATA)){const ok=globalThis.bodymate_core_register(d.id,d.label,d.region,d.type,d.id===REGIONS[d.region].default);if(!String(ok).startsWith('ok|'))throw Error('MoonBit 注册失败：'+ok);}if(!callCore('bodymate_core_select_region','neck'))throw Error('MoonBit 初始选择失败');}
+function registerCore(){const clear=globalThis.bodymate_core_clear;if(typeof clear!=='function')throw Error('MoonBit 核心未加载：bodymate_core_clear');if(!String(clear()).startsWith('ok|'))throw Error('MoonBit 清空失败');for(const d of Object.values(DATA)){const id=coreIdFor(d.id),ok=globalThis.bodymate_core_register(id,d.label,d.region,d.type,id===REGIONS[d.region].default);if(!String(ok).startsWith('ok|'))throw Error('MoonBit 注册失败：'+ok);}if(!callCore('bodymate_core_select_region','neck'))throw Error('MoonBit 初始选择失败');}
 function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),3100);}
 function namesForRegion(reg,layer=state.layer){return Object.values(DATA).filter(d=>d.region===reg&&(layer==='fascia'?d.type==='fascia':d.type==='muscle'));}
 function primaryList(reg,layer=state.layer){let arr=namesForRegion(reg,layer);if(layer==='fascia')return arr;let preferred=arr.filter(d=>!d.id.includes('_clav_'));return preferred;}
@@ -559,17 +560,17 @@ function updateUI(){
  $$('.region-choices button').forEach(b=>{b.classList.toggle('active',!state.whole&&b.dataset.region===state.region);b.setAttribute('aria-pressed',String(!state.whole&&b.dataset.region===state.region));});
  $$('[data-layer]').forEach(b=>{const active=b.dataset.layer===state.layer;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
  const entries=primaryList(state.region);$('#list-title').textContent=REGIONS[state.region].name+' · '+(state.layer==='fascia'?'筋膜示意':'可选结构');$('#structure-count').textContent=entries.length+' 项';
- $('#structure-list').replaceChildren();for(const d of entries){const b=document.createElement('button');b.dataset.structure=d.id;b.className=d.id===state.selected?'active':'';b.setAttribute('aria-pressed',String(d.id===state.selected));let dot=document.createElement('span');dot.className='item-dot';let label=document.createElement('span');label.textContent=d.label;let code=document.createElement('small');code.textContent=d.code;b.append(dot,label,code);b.onclick=()=>selectMuscle(d.id);$('#structure-list').append(b);}
+ $('#structure-list').replaceChildren();for(const d of entries){const b=document.createElement('button');b.dataset.structure=d.id;b.className=coreIdFor(d.id)===state.selected?'active':'';b.setAttribute('aria-pressed',String(coreIdFor(d.id)===state.selected));let dot=document.createElement('span');dot.className='item-dot';let label=document.createElement('span');label.textContent=d.label;let code=document.createElement('small');code.textContent=d.code;b.append(dot,label,code);b.onclick=()=>selectMuscle(d.id);$('#structure-list').append(b);}
  $('#isolate').classList.toggle('active',state.isolated);$('#isolate').setAttribute('aria-pressed',String(state.isolated));$('#isolate span').textContent=state.isolated?'显示周围结构':'只看这块';$('#isolate').disabled=state.whole;
  $('#layer-note').textContent=state.layer==='fascia'?'筋膜层为几何占位；只验证透明、选择和隔离。':state.layer==='region'?'区域模式隐藏纤维，点击名称可进入肌肉细节。':'可直接点击中间肌肉，或点列表中的名称。';
  $('#toggle-pulse').classList.toggle('off',!state.pulse);$('#toggle-pulse').setAttribute('aria-pressed',String(state.pulse));$('#toggle-labels').classList.toggle('off',!state.labels);$('#anatomy-labels').hidden=!state.labels||state.whole;$('#label-lines').style.display=state.labels&&!state.whole?'block':'none';
- buildLabels();navParts();
+ buildLabels();navParts();globalThis.__rootScmApply?.(state);
 }
 function focusDetail(reg){const r=REGIONS[reg];detailCamera.desired=[...r.center];detailCamera.wantDist=r.dist;detailCamera.wantTheta=r.theta;detailCamera.wantPhi=r.phi;}
-function gotoRegion(reg,id=null,layer=null){if(!REGIONS[reg])return;const operation=id?'bodymate_core_select_structure':layer?'bodymate_core_select_region_layer':'bodymate_core_select_region';const args=id?[id]:layer?[reg,layer]:[reg];if(!callCore(operation,...args))return;state.bubble=true;
+function gotoRegion(reg,id=null,layer=null){if(!REGIONS[reg])return;const operation=id?'bodymate_core_select_structure':layer?'bodymate_core_select_region_layer':'bodymate_core_select_region';const args=id?[coreIdFor(id)]:layer?[reg,layer]:[reg];if(!callCore(operation,...args))return;state.bubble=true;
  const r=REGIONS[state.region];focusDetail(state.region);updateUI();showChat('已切到'+r.name+'。点一条肌肉或它的名称，我们就看那一块。');
 }
-function selectMuscle(id,{refocus=false}={}){const d=DATA[id],wasWhole=state.whole,wasRegion=state.region;if(!d||!callCore('bodymate_core_select_structure',id))return;state.bubble=true;if(refocus||wasWhole||wasRegion!==state.region)focusDetail(state.region);updateUI();showChat('已选中这块。可以单独看轮廓，也可以继续问。当前外形仍是交互占位。');}
+function selectMuscle(id,{refocus=false}={}){const d=DATA[presentationIdFor(id)]||DATA[id],wasWhole=state.whole,wasRegion=state.region;if(!d||!callCore('bodymate_core_select_structure',coreIdFor(d.id)))return;state.bubble=true;if(refocus||wasWhole||wasRegion!==state.region)focusDetail(state.region);updateUI();showChat('已选中这块。可以单独看轮廓，也可以继续问。当前外形仍是交互占位。');}
 function setLayer(layer){if(!callCore('bodymate_core_set_layer',layer))return;state.bubble=true;updateUI();showChat(layer==='fascia'?'已切换到筋膜占位层。当前只验证分层交互，不代表真实筋膜外形。':'肌肉细节已显示。点击任何可选肌肉或标签进行高亮。');}
 function resetAll(){if(!callCore('bodymate_core_reset_overview'))return;state.bubble=false;detailCamera.desired=[0,3.80,0];detailCamera.wantDist=13.5;detailCamera.wantTheta=.13;detailCamera.wantPhi=.025;updateUI();showChat('已恢复中央全身总览。左侧导航始终保持全身；点击任何部位，中央会再次进入局部细节。');toast('已恢复全身；继续从左侧选一个部位。');}
 function toggleIsolate(){if(state.whole)return;const action=state.isolated?'bodymate_core_restore_context':'bodymate_core_isolate_selected';if(!callCore(action))return;updateUI();toast(state.isolated?'只显示当前结构；左侧完整人体不变。':'已恢复当前区域的其他结构。');}
@@ -664,4 +665,4 @@ try{buildAnatomy();registerCore();nav=new View($('#nav-canvas'),navCamera);detai
  window.__bodymate={get state(){return{...state};},data:DATA,regions:REGIONS,select:selectMuscle,region:gotoRegion,reset:resetAll,setLayer,command,get history(){return chatHistory.map(x=>({...x}));},get ready(){return ready;},get views(){return{nav,detail,orb};},project(id,which='nav'){const v=which==='nav'?nav:detail,d=DATA[id];const p=v.camera.project(d.center,v.w,v.h),r=v.canvas.getBoundingClientRect();return{x:r.left+p.x,y:r.top+p.y,visible:p.visible};},projectPoint(p,which='nav'){const v=which==='nav'?nav:detail,r=v.canvas.getBoundingClientRect(),q=v.camera.project(p,v.w,v.h);return{x:r.left+q.x,y:r.top+q.y};},stats(){return{frames:renderFrame,navCalls:nav.drawCalls,detailCalls:detail.drawCalls,cache:detail.cache.size,drawnMuscles:DETAIL.filter(x=>x.visible!==false&&x.type==='muscle').map(x=>x.id),drawnFascia:DETAIL.filter(x=>x.visible!==false&&x.type==='fascia').map(x=>x.id),drawnSupport:DETAIL.filter(x=>x.visible!==false&&x.type==='support').length,leftTarget:[...navCamera.target],leftHeight:navCamera.halfHeight};}};
 }catch(e){console.error(e);$('#fatal').hidden=false;$('#fatal').textContent='3D 白模未启动：'+e.message+'。请使用支持 WebGL 的 Edge / Chrome。页面内已包含所有代码，无需加载 CDN。';$('#engine-status').textContent='3D 初始化失败';}
 })();
-</script></body></html>
+</script><script src="assets/runtime/root-scm-runtime.js"></script><script src="assets/runtime/root-scm-root-adapter.js"></script></body></html>
