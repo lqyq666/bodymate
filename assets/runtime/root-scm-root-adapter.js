@@ -56,5 +56,6 @@
     registrySource.hidden = false; registrySource.textContent = `${entry.sourceProvider} · 真实公开解剖网格，用于结构位置与形态认知。`;
     if (tag) tag.textContent = '真实公开解剖资产 · CC BY 4.0 · 非医学诊断';
   };
+  globalThis.__rootScmQueryFeedback = (feedback) => viewer?.setQueryFeedback?.(feedback);
   globalThis.__rootScmApply(globalThis.__bodymate?.state || {});
 })();
