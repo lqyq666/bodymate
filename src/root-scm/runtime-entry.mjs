@@ -4,6 +4,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { neckRegistry } from '../anatomy/neck-registry.mjs';
 import { combinedBounds, materialPlanForSnapshot, selectedFocusPlan } from './presentation-plan.mjs';
 import { labelAnchorFromBounds, labelCapForViewport, layoutLabelPlans, rankedLabelEntries } from './label-layout.mjs';
+import { createCoachC } from '../coach-c/model.mjs';
+import { coachBubblePlan, coachPlacementPlan, coachPresentationPlan } from '../coach-c/placement.mjs';
 import { humanAtlasNeckGlbBase64 } from 'virtual:bodymate-human-atlas-neck';
 
 const bytes = Uint8Array.from(atob(humanAtlasNeckGlbBase64), (char) => char.charCodeAt(0));
@@ -16,11 +18,13 @@ export function mount({ canvas, onPick, onError = () => {} }) {
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(32, 1, .001, 10), controls = new OrbitControls(camera, canvas);
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2(), meshes = new Map(), meshBounds = new Map();
   const cameraGoal = new THREE.Vector3(), targetGoal = new THREE.Vector3();
-  let disposed = false, snapshot = null, transitionActive = false, initialized = false;
+  const coach = createCoachC(THREE), coachGoal = new THREE.Vector3();
+  let disposed = false, snapshot = null, transitionActive = false, initialized = false, coachInitialized = false, selectedLabelScreen = null;
   scene.add(new THREE.HemisphereLight(0xf9fcff, 0x9cafc2, 1.7));
   const key = new THREE.DirectionalLight(0xffffff, 1.65); key.position.set(.8, 1.1, 1.55); scene.add(key);
   const fill = new THREE.DirectionalLight(0xbfdcff, .34); fill.position.set(-1.3, .25, .8); scene.add(fill);
   const rim = new THREE.DirectionalLight(0xe9f4ff, .16); rim.position.set(.1, .8, -1.5); scene.add(rim);
+  coach.group.visible = false; scene.add(coach.group);
   controls.enableDamping = true; controls.dampingFactor = .08; controls.minDistance = .03; controls.maxDistance = 2.5;
 
   const labelLayer = document.createElement('div');
@@ -30,6 +34,12 @@ export function mount({ canvas, onPick, onError = () => {} }) {
   const labelLines = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   Object.assign(labelLines.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', overflow: 'visible' });
   labelLayer.append(labelLines);
+  const coachBubble = document.createElement('div');
+  coachBubble.className = 'coach-c-bubble'; coachBubble.hidden = true;
+  Object.assign(coachBubble.style, { position: 'absolute', pointerEvents: 'none', width: '190px', minHeight: '62px', padding: '8px 10px', border: '1px solid #d6e4f1', borderRadius: '12px', background: '#fbfdffef', color: '#365575', font: '600 11px/1.35 system-ui,sans-serif', boxShadow: '0 7px 20px #5f789c20', zIndex: '6' });
+  const coachBubbleTitle = document.createElement('strong'), coachBubbleCopy = document.createElement('small');
+  Object.assign(coachBubbleTitle.style, { display: 'block', color: '#2679bb', fontSize: '11px' }); Object.assign(coachBubbleCopy.style, { display: 'block', marginTop: '3px', color: '#718aa4', fontSize: '9px', fontWeight: '500' });
+  coachBubble.append(coachBubbleTitle, coachBubbleCopy); labelLayer.append(coachBubble);
   const labelNodes = new Map();
   const lineNodes = new Map();
   for (const entry of neckRegistry) {
@@ -62,12 +72,27 @@ export function mount({ canvas, onPick, onError = () => {} }) {
     const visibleEntries = neckRegistry.filter((entry) => meshes.has(entry.structureId) && (!snapshot.isolated || entry.structureId === snapshot.selected)).map((entry) => ({ entry, anchor: labelAnchorFromBounds(meshBounds.get(entry.structureId)) }));
     const plans = layoutLabelPlans(rankedLabelEntries(visibleEntries, snapshot.selected, snapshot.isolated ? 1 : labelCapForViewport(rect.width)), { width: rect.width, height: rect.height, project: (anchor) => { const point = new THREE.Vector3(anchor.x, anchor.y, anchor.z).project(camera); return { x: (point.x * .5 + .5) * rect.width, y: (-point.y * .5 + .5) * rect.height, z: point.z }; } });
     const planned = new Map(plans.map((plan) => [plan.entry.structureId, plan]));
-    for (const [id, node] of labelNodes) { const plan = planned.get(id), lineNodesForId = lineNodes.get(id); node.hidden = !plan?.visible; lineNodesForId.line.style.display = plan?.visible ? '' : 'none'; lineNodesForId.dot.style.display = plan?.visible ? '' : 'none'; if (!plan?.visible) continue; node.style.left = `${plan.x}px`; node.style.top = `${plan.y}px`; node.style.borderColor = plan.selected ? '#83b9f4' : '#c4d3e2'; node.style.color = plan.selected ? '#236fae' : '#365575'; node.style.boxShadow = plan.selected ? '0 5px 18px #83b9f452' : '0 4px 14px #5f789c21'; const startX = plan.x + (plan.lane === 'left' ? 54 : -54); const stroke = plan.selected ? '#83b9f4' : '#bdcddd'; lineNodesForId.line.setAttribute('x1', String(startX)); lineNodesForId.line.setAttribute('y1', String(plan.y)); lineNodesForId.line.setAttribute('x2', String(plan.leader.x)); lineNodesForId.line.setAttribute('y2', String(plan.leader.y)); lineNodesForId.line.setAttribute('stroke', stroke); lineNodesForId.line.setAttribute('stroke-width', plan.selected ? '1.4' : '1'); lineNodesForId.dot.setAttribute('cx', String(plan.leader.x)); lineNodesForId.dot.setAttribute('cy', String(plan.leader.y)); lineNodesForId.dot.setAttribute('r', plan.selected ? '2.5' : '1.7'); lineNodesForId.dot.setAttribute('fill', stroke); }
+    selectedLabelScreen = null;
+    for (const [id, node] of labelNodes) { const plan = planned.get(id), lineNodesForId = lineNodes.get(id); node.hidden = !plan?.visible; lineNodesForId.line.style.display = plan?.visible ? '' : 'none'; lineNodesForId.dot.style.display = plan?.visible ? '' : 'none'; if (!plan?.visible) continue; node.style.left = `${plan.x}px`; node.style.top = `${plan.y}px`; node.style.zIndex = plan.selected ? '8' : '3'; node.style.borderColor = plan.selected ? '#83b9f4' : '#c4d3e2'; node.style.color = plan.selected ? '#236fae' : '#365575'; node.style.boxShadow = plan.selected ? '0 5px 18px #83b9f452' : '0 4px 14px #5f789c21'; if (plan.selected) selectedLabelScreen = { x: plan.x, y: plan.y }; const startX = plan.x + (plan.lane === 'left' ? 54 : -54); const stroke = plan.selected ? '#83b9f4' : '#bdcddd'; lineNodesForId.line.setAttribute('x1', String(startX)); lineNodesForId.line.setAttribute('y1', String(plan.y)); lineNodesForId.line.setAttribute('x2', String(plan.leader.x)); lineNodesForId.line.setAttribute('y2', String(plan.leader.y)); lineNodesForId.line.setAttribute('stroke', stroke); lineNodesForId.line.setAttribute('stroke-width', plan.selected ? '1.4' : '1'); lineNodesForId.dot.setAttribute('cx', String(plan.leader.x)); lineNodesForId.dot.setAttribute('cy', String(plan.leader.y)); lineNodesForId.dot.setAttribute('r', plan.selected ? '2.5' : '1.7'); lineNodesForId.dot.setAttribute('fill', stroke); }
+  };
+  const updateCoach = () => {
+    const rect = canvas.getBoundingClientRect(), mesh = meshes.get(snapshot?.selected), entry = entriesById.get(snapshot?.selected);
+    const presentation = mesh && coachPresentationPlan(snapshot, meshBounds.get(snapshot?.selected));
+    if (!presentation?.visible || !rect.width || !rect.height) { coach.group.visible = false; coachBubble.hidden = true; return; }
+    const target = new THREE.Vector3(presentation.target.x, presentation.target.y, presentation.target.z), projected = target.clone().project(camera);
+    const plan = coachPlacementPlan({ bounds: meshBounds.get(snapshot.selected), viewport: { width: rect.width, height: rect.height }, projectedCenter: { x: (projected.x * .5 + .5) * rect.width, y: (-projected.y * .5 + .5) * rect.height }, cameraDirection: currentDirection(), cameraRight: new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion).normalize().toArray() });
+    coachGoal.set(plan.position.x, plan.position.y, plan.position.z);
+    const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (!coachInitialized || reduced) { coach.group.position.copy(coachGoal); coach.group.scale.setScalar(plan.scale); coachInitialized = true; } else { coach.group.position.lerp(coachGoal, .14); coach.group.scale.lerp(new THREE.Vector3(plan.scale, plan.scale, plan.scale), .14); }
+    coach.group.visible = true; coach.update({ cameraPosition: camera.position, target, pointSide: plan.side === 'right' ? -1 : 1 });
+    const coachScreen = coach.group.position.clone().add(new THREE.Vector3(0, plan.scale * .7, 0)).project(camera);
+    const bubble = coachBubblePlan({ coachScreen: { x: (coachScreen.x * .5 + .5) * rect.width, y: (-coachScreen.y * .5 + .5) * rect.height }, viewport: { width: rect.width, height: rect.height }, selectedLabelScreen });
+    coachBubble.hidden = false; coachBubble.style.left = `${bubble.x}px`; coachBubble.style.top = `${bubble.y}px`; coachBubble.style.width = `${bubble.width}px`; coachBubbleTitle.textContent = entry.displayNameZh; coachBubbleCopy.textContent = rect.width <= 480 ? entry.displayNameZh : `现在看的是${entry.displayNameZh}。`;
   };
   const applySnapshot = (next) => { const previous = snapshot; snapshot = next; paint(); if (meshes.size && (!previous?.selected || previous.selected !== next?.selected)) focusSelected(); else if (previous?.isolated && !next?.isolated) focusContext(); };
   controls.addEventListener('start', () => { transitionActive = false; });
-  const render = () => { if (disposed) return; if (transitionActive) { const speed = .14; controls.target.lerp(targetGoal, speed); camera.position.lerp(cameraGoal, speed); if (controls.target.distanceToSquared(targetGoal) < .0000001 && camera.position.distanceToSquared(cameraGoal) < .0000001) { controls.target.copy(targetGoal); camera.position.copy(cameraGoal); transitionActive = false; } } controls.update(); updateLabels(); renderer.render(scene, camera); requestAnimationFrame(render); }; requestAnimationFrame(render);
+  const render = () => { if (disposed) return; if (transitionActive) { const speed = .14; controls.target.lerp(targetGoal, speed); camera.position.lerp(cameraGoal, speed); if (controls.target.distanceToSquared(targetGoal) < .0000001 && camera.position.distanceToSquared(cameraGoal) < .0000001) { controls.target.copy(targetGoal); camera.position.copy(cameraGoal); transitionActive = false; } } controls.update(); updateLabels(); updateCoach(); renderer.render(scene, camera); requestAnimationFrame(render); }; requestAnimationFrame(render);
   canvas.addEventListener('pointerup', (event) => { if (event.movementX || event.movementY || !meshes.size) return; const rect = canvas.getBoundingClientRect(); pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1); raycaster.setFromCamera(pointer, camera); const hit = raycaster.intersectObjects([...meshes.values()], false)[0]; if (hit) onPick(hit.object.userData.structureId); });
   new GLTFLoader().parse(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '', (gltf) => { gltf.scene.traverse((node) => { if (!node.isMesh) return; const id = node.userData?.structureId || node.name; if (!entriesById.has(id)) return; node.userData.structureId = id; node.material = node.material.clone(); meshes.set(id, node); meshBounds.set(id, plainBounds(new THREE.Box3().setFromObject(node))); }); if (meshes.size !== neckRegistry.length) throw Error('Human Atlas neck nodes missing from generated runtime.'); scene.add(gltf.scene); paint(); focusSelected(); }, onError);
-  return { show() { canvas.hidden = false; }, hide() { canvas.hidden = true; }, applySnapshot, focusSelected, focusContext, dispose() { disposed = true; observer.disconnect(); labelLayer.remove(); renderer.dispose(); } };
+  return { show() { canvas.hidden = false; }, hide() { canvas.hidden = true; coachBubble.hidden = true; }, applySnapshot, focusSelected, focusContext, dispose() { disposed = true; observer.disconnect(); labelLayer.remove(); renderer.dispose(); } };
 }
