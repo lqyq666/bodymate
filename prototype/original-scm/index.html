@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BodyMate · Original SCM visual study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head>
+<body>
+  <main class="lab-shell">
+    <header>
+      <div><p class="eyebrow">BodyMate · independent visual study</p><h1>右侧胸锁乳突肌 · 原创效果验证</h1></div>
+      <p id="status" role="status">正在初始化原创程序化模型…</p>
+    </header>
+    <section class="viewer-panel" aria-label="原创右侧胸锁乳突肌三维查看器">
+      <canvas id="scene" aria-label="可点击的原创胸锁乳突肌视觉模型"></canvas>
+      <div class="stage-copy"><span class="dot"></span>浅蓝表示 MoonBit 当前选中结构</div>
+      <div class="disclaimer">原创程序化视觉研究 · 不是医学精确模型或诊断工具</div>
+    </section>
+    <aside>
+      <p class="eyebrow">Current structure</p>
+      <h2 id="selection">尚未选择</h2>
+      <p>主肌腹与纤维束均在浏览器中由原创控制点生成。点击结构后，状态由 MoonBit 统一校验。</p>
+      <div class="controls">
+        <button id="select" class="primary" type="button">选择并聚焦 SCM</button>
+        <button id="isolate" type="button" disabled>只看这块</button>
+        <button id="restore" type="button" disabled>恢复参考结构</button>
+        <button id="focus" type="button" disabled>按模型边界重新聚焦</button>
+      </div>
+      <dl>
+        <div><dt>BodyMate stable ID</dt><dd>bodymate.neck.sternocleidomastoid.right</dd></div>
+        <div><dt>MoonBit revision</dt><dd id="revision">—</dd></div>
+        <div><dt>Renderer visibility</dt><dd id="visibility">—</dd></div>
+        <div><dt>Asset boundary</dt><dd>原创程序化几何 · 0 个导入网格</dd></div>
+      </dl>
+    </aside>
+  </main>
+  <footer>离线视觉原型 · 本地 Three.js · 无运行时外网请求</footer>
+  <script src="../../_build/js/debug/build/core/core.js"></script>
+  <script type="module" src="./original-scm-app.mjs"></script>
+</body>
+</html>
