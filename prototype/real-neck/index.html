@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>BodyMate · Real Neck Asset Spike</title><link rel="stylesheet" href="./styles.css"><script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js"}}</script></head>
+<body>
+  <main class="lab-shell">
+    <header><p>Stage 2A · isolated feasibility spike</p><h1>真实颈肩结构链路验证</h1><span id="status">等待本地资产</span></header>
+    <section class="viewer-panel" aria-label="真实颈肩模型验证"><canvas id="scene" aria-label="可点击的 BodyParts3D 颈肩网格"></canvas><div class="legend"><span class="dot"></span>浅蓝：MoonBit 当前选中结构</div></section>
+    <aside><p class="eyebrow">CURRENT STRUCTURE</p><h2 id="selection">尚未选择</h2><p id="source">本地资产未加载。请按 README 放入 ignored local-assets。</p><div class="controls"><button id="isolate" disabled>只看这块</button><button id="restore" disabled>恢复周围结构</button><button id="reset" disabled>重置观察</button></div><dl><div><dt>MoonBit revision</dt><dd id="revision">—</dd></div><div><dt>Renderer visibility</dt><dd id="visibility">—</dd></div></dl></aside>
+  </main>
+  <footer>BodyParts3D local validation only · no CDN · no production-page replacement</footer>
+  <script type="module" src="./spike-app.mjs"></script>
+</body>
+</html>
