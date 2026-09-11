@@ -17,6 +17,16 @@
   let viewer; let failed = false;
   const legacyTag = '交互占位 · 非解剖教材';
   const tag = document.querySelector('.data-tag');
+  const summary = document.querySelector('.current-summary');
+  const registryEnglish = document.createElement('small');
+  registryEnglish.id = 'selection-english';
+  Object.assign(registryEnglish.style, { display: 'block', marginTop: '5px', color: '#52779e', fontSize: '10px', letterSpacing: '.6px' });
+  const registrySource = document.createElement('small');
+  registrySource.id = 'selection-source';
+  Object.assign(registrySource.style, { display: 'block', marginTop: '4px', color: '#718aa4', fontSize: '10px', lineHeight: '1.5' });
+  summary?.append(registryEnglish, registrySource);
+  const groupName = (group) => group === 'shoulder' ? '肩带' : '颈部';
+  const sideName = (side) => side === 'left' ? '左侧' : '右侧';
   const restoreLegacy = (error) => {
     failed = true; canvas.hidden = true; legacy.hidden = false;
     overlays.forEach((node) => { node.style.visibility = ''; });
@@ -32,10 +42,18 @@
     const entry = anatomyEntryFor(snapshot.selected);
     const active = !failed && entry && !snapshot.whole;
     legacy.hidden = active; canvas.hidden = !active; overlays.forEach((node) => { node.style.visibility = active ? 'hidden' : ''; });
-    if (!active) { if (tag) tag.textContent = legacyTag; return; }
-    viewer.show(); viewer.applySnapshot(snapshot); viewer.focusSelected();
+    attribution.hidden = !active;
+    if (!active) {
+      if (tag) tag.textContent = legacyTag;
+      registryEnglish.hidden = true; registrySource.hidden = true;
+      if (failed && entry && !snapshot.whole) document.querySelector('#selection-meta').textContent = '真实 SCM 资源未能初始化，当前显示交互白模。';
+      return;
+    }
+    viewer.show(); viewer.applySnapshot(snapshot);
     document.querySelector('#selection-name').textContent = entry.displayNameZh;
-    document.querySelector('#selection-meta').textContent = `${entry.region === 'neck' ? '颈肩' : entry.region} · ${entry.sourceProvider} 真实公开解剖网格`;
+    document.querySelector('#selection-meta').textContent = `${groupName(entry.uiGroup)} · ${sideName(entry.side)}`;
+    registryEnglish.hidden = false; registryEnglish.textContent = entry.canonicalName.toUpperCase();
+    registrySource.hidden = false; registrySource.textContent = `${entry.sourceProvider} · 真实公开解剖网格，用于结构位置与形态认知。`;
     if (tag) tag.textContent = '真实公开解剖资产 · CC BY 4.0 · 非医学诊断';
   };
   globalThis.__rootScmApply(globalThis.__bodymate?.state || {});

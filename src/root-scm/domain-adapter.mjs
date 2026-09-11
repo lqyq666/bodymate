@@ -1,4 +1,5 @@
 import { entryForPresentationId } from './registry.mjs';
+import { selectedFocusPlan } from './presentation-plan.mjs';
 
 export function parseCoreSnapshot(reply) {
   const fields = String(reply).split('|');
@@ -30,7 +31,5 @@ export function selectPresentationStructure(core, id) {
 }
 
 export function focusPlanFromBounds(bounds, direction = [1, .48, 1]) {
-  const dx = bounds.max.x - bounds.min.x, dy = bounds.max.y - bounds.min.y, dz = bounds.max.z - bounds.min.z;
-  const radius = Math.max(Math.hypot(dx, dy, dz) / 2, .001);
-  return { target: { x: (bounds.min.x + bounds.max.x) / 2, y: (bounds.min.y + bounds.max.y) / 2, z: (bounds.min.z + bounds.max.z) / 2 }, distance: radius * 3.1, direction };
+  return selectedFocusPlan(bounds, direction);
 }
