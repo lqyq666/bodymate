@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "decision": "APPROVED_PUBLIC_ASSET",
+  "decisionScope": "Only the listed Open Anatomy VTK files are approved as future public source assets. No anatomy binary is included in this repository or this decision commit.",
+  "approvedArchive": {
+    "exactFile": "head-neck-2016-09.zip",
+    "sourceUrl": "https://www.openanatomy.org/atlases/nac/head-neck-2016-09.zip",
+    "bytes": 31612667,
+    "sha256": "C224F054569B284C9A948F6F96B0299EAEE13D3AC661A3386657A743FA8552C4"
+  },
+  "approvedPublicAssets": [
+    {
+      "stableStructureId": "bodymate.neck.sternocleidomastoid.right",
+      "provider": "Open Anatomy Project / Surgical Planning Laboratory, Brigham and Women's Hospital",
+      "upstreamProject": "SPL Head and Neck Atlas (September 2015)",
+      "exactFile": "head-neck-2016-09/models/Model_62_right_sternocleidomastoideus_muscle.vtk",
+      "sourceUrl": "https://www.openanatomy.org/atlases/nac/head-neck-2016-09.zip",
+      "sourceStructureId": "Model_62_right_sternocleidomastoideus_muscle",
+      "canonicalName": "right sternocleidomastoid muscle",
+      "meshCountForConcept": 1,
+      "meshComplexity": { "vertices": 6507, "triangleStrips": 2524, "triangles": 15358, "bytes": 237940, "sha256": "0648D7493750FFD03DDAA38D61F4879322E856FE26A0EBAC7406FE8B451206B2" },
+      "datasetLicense": "3D Slicer License, Part B (archive LICENSE.md)",
+      "perFileLicense": "Inherited from the exact atlas archive root LICENSE.md; no conflicting file-local notice was found.",
+      "provenance": "A CT-based SPL atlas produced from the MANIX/OsiriX data set, published by Open Anatomy as the SPL Head and Neck Atlas with this independently named mesh.",
+      "redistribution": "Allowed with right to sublicense, subject to retaining the full 3D Slicer License and applicable notices.",
+      "publicGitHubRedistribution": "Allowed when the required license preface, full license text, and applicable attributions are included with the redistributed asset.",
+      "derivativeAndGlbConversion": "Allowed: the license grants the right to reproduce and make derivative works; VTK-to-GLB is a derivative conversion and must retain the license obligations.",
+      "commercialUse": "Permitted; the license says commercialization is at the user's sole risk and does not make a clinical-use claim.",
+      "shareAlike": "No reciprocal share-alike obligation in the 3D Slicer License.",
+      "attributionExactText": "All or portions of this licensed product (such portions are the ‘Software’) have been obtained under license from The Brigham and Women’s Hospital, Inc. and are subject to the following terms and conditions:",
+      "attributionExecution": "Ship the exact preface above, the complete 3D Slicer License Part B, and all applicable source notices next to any redistributed converted asset. Credit the SPL Head and Neck Atlas, Marianna Jakab, Ron Kikinis, and Open Anatomy in the asset NOTICE file.",
+      "threeJsFit": "Yes. Binary VTK polydata is independently named and small enough for a deterministic offline VTK-to-GLB conversion, then native Three.js GLTFLoader use."
+    }
+  ],
+  "supportingMeshesInApprovedSource": [
+    {
+      "sourceStructureId": "Model_54_right_trapezius_muscle",
+      "exactFile": "head-neck-2016-09/models/Model_54_right_trapezius_muscle.vtk",
+      "canonicalName": "right trapezius muscle (whole muscle, not an upper-only submesh)",
+      "meshCountForConcept": 1,
+      "meshComplexity": { "vertices": 13530, "triangleStrips": 4709, "triangles": 31613, "bytes": 488994, "sha256": "5A5117807559FF68439ACAF33F2926EF7A8B2109C8C706271BCD383232A01EAD" },
+      "registryStatus": "Source can be tracked, but must not substitute the existing upper-trapezius stable ID until product semantics accept whole-muscle selection."
+    },
+    {
+      "sourceStructureId": "Model_58_right_levator_scapulae_muscle",
+      "exactFile": "head-neck-2016-09/models/Model_58_right_levator_scapulae_muscle.vtk",
+      "canonicalName": "right levator scapulae muscle",
+      "meshCountForConcept": 1,
+      "meshComplexity": { "vertices": 3907, "triangleStrips": 1436, "triangles": 9110, "bytes": 141844, "sha256": "F2F368D997A3030D2EEEF65D37C8EA0FEEC5D923DA0FE750BB75D1F154E56E21" },
+      "registryStatus": "Candidate for a future distinct stable ID."
+    },
+    {
+      "sourceStructureId": "Model_60_right_scalenius_muscle",
+      "exactFile": "head-neck-2016-09/models/Model_60_right_scalenius_muscle.vtk",
+      "canonicalName": "right scalenius muscle",
+      "meshCountForConcept": 1,
+      "meshComplexity": { "vertices": 1103, "triangleStrips": 399, "triangles": 2585, "bytes": 40150, "sha256": "B3BAD508A903B682916860B7D3B9D4C49B3996A14E4DD4BB0268ED53198DDB8C" },
+      "registryStatus": "Candidate for a future distinct stable ID; source granularity is a scalenius label, not separately labelled anterior/middle/posterior scalenes."
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "provider": "Database Center for Life Science",
+      "upstreamProject": "BodyParts3D Release 4.0",
+      "exactFiles": ["FJ1595.obj", "FJ1521.obj"],
+      "sourceStructureIds": ["FMA13408 / BP4909", "FMA33586 / BP5636"],
+      "datasetLicense": "Archive README declares CC BY 4.0.",
+      "perFileLicense": "The inspected OBJ headers declare CC BY-SA 2.1 Japan.",
+      "provenance": "Official BodyParts3D FJ atomic meshes; SCM and descending right trapezius were technically verified in Stage 2A.",
+      "decision": "REJECTED_LICENSE_CONFLICT",
+      "reason": "The archive-level and OBJ-level license markers conflict. Under the Stage 2A rule, no BodyParts3D OBJ, GLB, or conversion may enter a public repository before DBCLS provides written clarification."
+    },
+    {
+      "provider": "Z-Anatomy",
+      "upstreamProject": "Models-of-human-anatomy",
+      "exactFiles": ["Z-Anatomy/Startup.blend"],
+      "sourceStructureIds": ["Sternocleidomastoid muscle.r", "Descending part of trapezius muscle.r", "Levator scapulae.r"],
+      "datasetLicense": "CC BY-SA 4.0 declared by the repository.",
+      "perFileLicense": "The published container is covered by the repository license; the individual Blender objects have no independent license notice.",
+      "provenance": "The repository explicitly states its models are derived from BodyParts3D and requires both BodyParts3D CC BY-SA 2.1 Japan and Z-Anatomy attribution.",
+      "decision": "REJECTED_INHERITED_LICENSE_RISK",
+      "reason": "The exact blend objects are discoverable, but their inherited BodyParts3D provenance preserves the unresolved license chain and cannot be approved under this stage's special rule."
+    },
+    {
+      "provider": "Kevin-Mattheus-Moerman",
+      "upstreamProject": "BodyParts3D conversion repository",
+      "exactFiles": ["assets/BodyParts3D_data/stl/FMA13408.stl", "assets/BodyParts3D_data/stl/FMA33586.stl"],
+      "sourceStructureIds": ["FMA13408", "FMA33586"],
+      "datasetLicense": "CC BY-SA 2.1 Japan for derived geometry; repository code is MIT.",
+      "perFileLicense": "Repository LICENSE_content applies to its converted STL geometry.",
+      "provenance": "Explicit conversion from BodyParts3D version 3.0 / 20110915 OBJ meshes.",
+      "decision": "REJECTED_INHERITED_LICENSE_RISK",
+      "reason": "This is a transparent but still BodyParts3D-derived conversion, so it remains disallowed pending DBCLS clarification."
+    },
+    {
+      "provider": "U.S. National Library of Medicine",
+      "upstreamProject": "Visible Human Project / Segmented Internal Organs",
+      "exactFiles": [],
+      "sourceStructureIds": [],
+      "datasetLicense": "Visible Human source images are publicly available; the reviewed Segmented Internal Organs release is CC BY 4.0.",
+      "perFileLicense": "No reviewed neck SCM mesh file was available in the assessed lower-body/internal-organ release.",
+      "provenance": "Visible Human cryosections; reviewed derived mesh release covers pelvis through ankle rather than the neck target.",
+      "decision": "REJECTED_SCOPE",
+      "reason": "No independently selectable neck SCM mesh was identified, so it cannot meet the minimum Stage 2B structure target."
+    }
+  ]
+}
