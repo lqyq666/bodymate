@@ -1,0 +1,13 @@
+export function parseCoreSnapshot(reply) {
+  const fields = String(reply).split('|');
+  if (fields[0] !== 'ok' || fields.length !== 7) return null;
+  const revision = Number(fields[6]);
+  if (!fields[1] || !fields[2] || !['muscle', 'fascia'].includes(fields[3]) || !['true', 'false'].includes(fields[4]) || !['true', 'false'].includes(fields[5]) || !Number.isSafeInteger(revision) || revision < 0) return null;
+  return Object.freeze({ region: fields[1], selected: fields[2], layer: fields[3], isolated: fields[4] === 'true', overview: fields[5] === 'true', revision });
+}
+export function visibilityForSnapshot(entries, snapshot) { return new Map(entries.map((entry) => [entry.structureId, !snapshot.isolated || entry.structureId === snapshot.selected])); }
+export function focusPlanFromBounds(bounds) {
+  const dx = bounds.max.x - bounds.min.x, dy = bounds.max.y - bounds.min.y, dz = bounds.max.z - bounds.min.z;
+  const radius = Math.max(Math.hypot(dx, dy, dz) / 2, 0.001);
+  return { target: { x: (bounds.min.x + bounds.max.x) / 2, y: (bounds.min.y + bounds.max.y) / 2, z: (bounds.min.z + bounds.max.z) / 2 }, distance: radius * 3.1 };
+}
