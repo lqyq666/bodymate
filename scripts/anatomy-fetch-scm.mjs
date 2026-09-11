@@ -1,0 +1,2 @@
+import { fetchScmSource, sha256 } from './anatomy-source.mjs';
+try { const source = await fetchScmSource({ refresh: process.argv.includes('--refresh') }); console.log(`Verified ${source.archive} (${sha256(source.archiveBytes)})`); console.log(`Extracted and verified ${source.vtk} (${sha256(source.vtkBytes)})`); console.log(`Verified upstream 3D Slicer License (${sha256(source.licenseBytes)})`); } catch (error) { console.error(error.message); process.exitCode = 1; }

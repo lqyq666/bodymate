@@ -18,7 +18,7 @@
       "sourceStructureId": "Model_62_right_sternocleidomastoideus_muscle",
       "canonicalName": "right sternocleidomastoid muscle",
       "meshCountForConcept": 1,
-      "meshComplexity": { "vertices": 6507, "triangleStrips": 2524, "triangles": 15358, "bytes": 237940, "sha256": "0648D7493750FFD03DDAA38D61F4879322E856FE26A0EBAC7406FE8B451206B2" },
+      "meshComplexity": { "vertices": 6507, "triangleStrips": 2524, "triangles": 12834, "bytes": 237940, "sha256": "0648D7493750FFD03DDAA38D61F4879322E856FE26A0EBAC7406FE8B451206B2" },
       "datasetLicense": "3D Slicer License, Part B (archive LICENSE.md)",
       "perFileLicense": "Inherited from the exact atlas archive root LICENSE.md; no conflicting file-local notice was found.",
       "provenance": "A CT-based SPL atlas produced from the MANIX/OsiriX data set, published by Open Anatomy as the SPL Head and Neck Atlas with this independently named mesh.",

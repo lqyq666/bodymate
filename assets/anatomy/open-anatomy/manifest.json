@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "structureId": "bodymate.neck.sternocleidomastoid.right",
+  "canonicalName": "right sternocleidomastoid muscle",
+  "displayNameZh": "右侧胸锁乳突肌",
+  "provider": "Open Anatomy Project / Surgical Planning Laboratory, Brigham and Women's Hospital",
+  "atlas": "SPL Head and Neck Atlas (September 2015)",
+  "sourceUrl": "https://www.openanatomy.org/atlases/nac/head-neck-2016-09.zip",
+  "sourceArchive": "head-neck-2016-09.zip",
+  "sourceArchiveSha256": "C224F054569B284C9A948F6F96B0299EAEE13D3AC661A3386657A743FA8552C4",
+  "sourceFile": "head-neck-2016-09/models/Model_62_right_sternocleidomastoideus_muscle.vtk",
+  "sourceStructureId": "Model_62_right_sternocleidomastoideus_muscle",
+  "sourceSha256": "0648D7493750FFD03DDAA38D61F4879322E856FE26A0EBAC7406FE8B451206B2",
+  "outputFile": "assets/anatomy/open-anatomy/scm-right.glb",
+  "outputSha256": "0C4E76694D9206AE1DC160C44B3019B9C4819EB4C8F6FBDDBB2993828C8FCFA7",
+  "license": "3D Slicer License Part B",
+  "licensePath": "assets/anatomy/open-anatomy/LICENSE.md",
+  "noticePath": "assets/anatomy/open-anatomy/NOTICE.md",
+  "upstreamArchiveLicensePath": "assets/anatomy/open-anatomy/UPSTREAM_ARCHIVE_LICENSE.md",
+  "coordinateSystem": "Source LPS (left-posterior-superior); output glTF right-handed with +X anatomical right, +Y superior, +Z posterior.",
+  "sourceUnit": "millimeter (atlas NRRD space directions)",
+  "outputUnit": "meter",
+  "scale": 0.001,
+  "axisTransform": [
+    -0.001,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0.001,
+    0,
+    0,
+    0.001,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "converter": "bodymate-vtk-polydata-to-glb",
+  "converterVersion": "1.0.0",
+  "converterToolchain": {
+    "gltfTransformCore": "4.5.0",
+    "node": "24.18.0"
+  },
+  "conversionConfig": {
+    "triangleStripExpansion": "deterministic alternating-winding triangle list",
+    "normalGeneration": "deterministic area-weighted vertex normals",
+    "geometryCentering": "none",
+    "geometryRotation": "none",
+    "geometrySimplification": "none",
+    "compression": "none"
+  },
+  "vertexCount": 6507,
+  "triangleCount": 12834,
+  "boundingBox": {
+    "sourceLpsMillimeters": {
+      "min": [
+        0.9500682353973389,
+        -37.373252868652344,
+        -109.5930404663086
+      ],
+      "max": [
+        50.111175537109375,
+        10.964751243591309,
+        3.292875051498413
+      ]
+    },
+    "outputGltfMeters": {
+      "min": [
+        -0.05011117553710938,
+        -0.10959304046630859,
+        -0.03737325286865235
+      ],
+      "max": [
+        -0.0009500682353973389,
+        0.003292875051498413,
+        0.010964751243591309
+      ]
+    }
+  },
+  "meshNames": [
+    "bodymate.neck.sternocleidomastoid.right"
+  ],
+  "nodeNames": [
+    "bodymate.neck.sternocleidomastoid.right"
+  ]
+}
