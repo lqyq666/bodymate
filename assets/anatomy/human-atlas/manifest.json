@@ -17,12 +17,17 @@
   "conversion": "deterministic extraction from pinned Human Atlas browser chunks; no geometry centering, simplification, compression, or coordinate transform by BodyMate",
   "entries": [
     {
-      "sourceMeshId": "FJ1595",
+      "presentationId": "scm_r",
       "structureId": "bodymate.neck.sternocleidomastoid.right",
-      "canonicalName": "right sternocleidomastoid",
       "displayNameZh": "右侧胸锁乳突肌",
+      "canonicalName": "right sternocleidomastoid",
+      "region": "neck",
+      "layer": "muscle",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1595",
       "sourceConceptId": "FMA13408",
       "sourceChunk": "body-5.bin",
+      "isDefault": true,
       "vertexCount": 2166,
       "triangleCount": 2274,
       "bounds": {
@@ -39,12 +44,17 @@
       }
     },
     {
-      "sourceMeshId": "FJ1521",
+      "presentationId": "trapezius_r",
       "structureId": "bodymate.neck.trapezius.upper.right",
-      "canonicalName": "descending part of right trapezius",
       "displayNameZh": "右侧斜方肌上部",
+      "canonicalName": "descending part of right trapezius",
+      "region": "neck",
+      "layer": "muscle",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1521",
       "sourceConceptId": "FMA33586",
       "sourceChunk": "body-4.bin",
+      "isDefault": false,
       "vertexCount": 2394,
       "triangleCount": 2618,
       "bounds": {
@@ -61,12 +71,17 @@
       }
     },
     {
-      "sourceMeshId": "FJ1532",
+      "presentationId": "levator_r",
       "structureId": "bodymate.neck.levator-scapulae.right",
-      "canonicalName": "right levator scapulae",
       "displayNameZh": "右侧肩胛提肌",
+      "canonicalName": "right levator scapulae",
+      "region": "neck",
+      "layer": "muscle",
+      "sourceProvider": "Human Atlas / BodyParts3D 4.0",
+      "sourceMeshId": "FJ1532",
       "sourceConceptId": "FMA32540",
       "sourceChunk": "body-4.bin",
+      "isDefault": false,
       "vertexCount": 1262,
       "triangleCount": 1314,
       "bounds": {

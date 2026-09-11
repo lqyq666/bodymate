@@ -1,10 +1,7 @@
 /* Root bridge only: MoonBit owns product state; BodyMateRootScmRuntime owns rendering/picking. */
 (() => {
-  const realNeck = new Map([
-    ['bodymate.neck.sternocleidomastoid.right', '右侧胸锁乳突肌'],
-    ['bodymate.neck.trapezius.upper.right', '右侧斜方肌上部'],
-    ['bodymate.neck.levator-scapulae.right', '右侧肩胛提肌'],
-  ]);
+  const anatomyRegistry = globalThis.BodyMateAnatomyRegistry || [];
+  const anatomyEntryFor = (id) => anatomyRegistry.find((entry) => entry.structureId === id) || null;
   const detail = document.querySelector('#detail-view');
   const legacy = document.querySelector('#detail-canvas');
   const canvas = document.createElement('canvas');
@@ -15,7 +12,7 @@
   attribution.id = 'asset-attribution'; attribution.type = 'button'; attribution.textContent = '资产来源 / License';
   Object.assign(attribution.style, { font: 'inherit', fontSize: '9px', color: '#477eaf', background: 'transparent', textDecoration: 'underline', padding: '4px 0', marginTop: '5px' });
   document.querySelector('.current-summary')?.append(attribution);
-  attribution.onclick = () => alert('Human Atlas / BodyParts3D 4.0\nBodyParts3D, © The Database Center for Life Science\nCC BY 4.0；署名：assets/anatomy/human-atlas/ATTRIBUTION.md');
+  attribution.onclick = () => alert(`${anatomyRegistry[0]?.sourceProvider || 'Human Atlas / BodyParts3D 4.0'}\nBodyParts3D, © The Database Center for Life Science\nCC BY 4.0；署名：assets/anatomy/human-atlas/ATTRIBUTION.md`);
   const overlays = ['#label-lines', '#anatomy-labels', '#coach-bubble', '.detail-instruction', '.fiber-note'].map((selector) => document.querySelector(selector)).filter(Boolean);
   let viewer; let failed = false;
   const legacyTag = '交互占位 · 非解剖教材';
@@ -32,12 +29,13 @@
     viewer = globalThis.BodyMateRootScmRuntime.mount({ canvas, onPick: (structureId) => globalThis.__bodymate?.select(structureId), onError: restoreLegacy });
   } catch (error) { restoreLegacy(error); }
   globalThis.__rootScmApply = (snapshot) => {
-    const active = !failed && realNeck.has(snapshot.selected) && !snapshot.whole;
+    const entry = anatomyEntryFor(snapshot.selected);
+    const active = !failed && entry && !snapshot.whole;
     legacy.hidden = active; canvas.hidden = !active; overlays.forEach((node) => { node.style.visibility = active ? 'hidden' : ''; });
     if (!active) { if (tag) tag.textContent = legacyTag; return; }
     viewer.show(); viewer.applySnapshot(snapshot); viewer.focusSelected();
-    document.querySelector('#selection-name').textContent = realNeck.get(snapshot.selected);
-    document.querySelector('#selection-meta').textContent = '颈肩 · Human Atlas 真实公开解剖网格 · BodyParts3D 4.0';
+    document.querySelector('#selection-name').textContent = entry.displayNameZh;
+    document.querySelector('#selection-meta').textContent = `${entry.region === 'neck' ? '颈肩' : entry.region} · ${entry.sourceProvider} 真实公开解剖网格`;
     if (tag) tag.textContent = '真实公开解剖资产 · CC BY 4.0 · 非医学诊断';
   };
   globalThis.__rootScmApply(globalThis.__bodymate?.state || {});

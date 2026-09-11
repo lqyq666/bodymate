@@ -141,8 +141,8 @@ test('generated classic runtime is derived from the pinned Human Atlas neck GLB 
 test('Human Atlas neck package pins three independently named real meshes with CC BY attribution', () => {
   assert.equal(humanAtlasManifest.sourceCommit, '1c38bf35c254a891200d3cedecfd57abebe83d8d');
   assert.equal(humanAtlasManifest.license, 'CC BY 4.0');
-  assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.sourceMeshId), ['FJ1595', 'FJ1521', 'FJ1532']);
-  assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.structureId), ['bodymate.neck.sternocleidomastoid.right', 'bodymate.neck.trapezius.upper.right', 'bodymate.neck.levator-scapulae.right']);
+  assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.sourceMeshId), rootScmRegistry.map((entry) => entry.sourceMeshId));
+  assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.structureId), rootScmRegistry.map((entry) => entry.structureId));
   assert.match(html, /\['scm_r','trapezius_r','levator_r'\]\.map\(id=>DATA\[id\]\)/);
 });
 

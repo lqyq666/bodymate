@@ -511,12 +511,12 @@ function buildAnatomy(){
 })();
 //# sourceMappingURL=core.js.map
 </script>
-<!-- MOONBIT_CORE_END --><script>/* Interaction controller. Renderer and geometry are bundled locally; no CDN,
+<!-- MOONBIT_CORE_END --><script src="assets/runtime/anatomy-registry.js"></script><script>/* Interaction controller. Renderer and geometry are bundled locally; no CDN,
    network model, API key or medically authoritative asset is used. */
 (function(){
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const ROOT_SCM_ID='bodymate.neck.sternocleidomastoid.right';const ROOT_REAL_NECK_IDS={scm_r:ROOT_SCM_ID,trapezius_r:'bodymate.neck.trapezius.upper.right',levator_r:'bodymate.neck.levator-scapulae.right'};const coreIdFor=id=>ROOT_REAL_NECK_IDS[id]??id;const presentationIdFor=id=>Object.entries(ROOT_REAL_NECK_IDS).find(([,core])=>core===id)?.[0]??id;
+const ROOT_ANATOMY_REGISTRY=globalThis.BodyMateAnatomyRegistry||[];const rootEntryFor=id=>ROOT_ANATOMY_REGISTRY.find(entry=>entry.presentationId===id||entry.structureId===id);const ROOT_SCM_ID=ROOT_ANATOMY_REGISTRY.find(entry=>entry.isDefault)?.structureId;const coreIdFor=id=>rootEntryFor(id)?.structureId??id;const presentationIdFor=id=>rootEntryFor(id)?.presentationId??id;
 const state={region:'neck',selected:ROOT_SCM_ID,layer:'muscle',isolated:false,labels:true,pulse:!reduced,whole:false,bubble:true,completed:3,selectionRevision:0,showSupport:true};
 let nav,detail,orb,ready=false,lastTime=0,toastTimer=0,particles=[],orbItems=[],renderFrame=0;
 const navCamera=new Camera([0,3.76,.02],13,0,.025,true), detailCamera=new Camera(REGIONS.neck.center,REGIONS.neck.dist,REGIONS.neck.theta,.04),orbCamera=new Camera([0,-.09,0],4.45,.14,.18);
