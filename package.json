@@ -1,0 +1,9 @@
+{
+  "name": "bodymate",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline anatomy exploration whitebox",
+  "scripts": {
+    "verify": "node --test test/bodymate.contract.test.mjs"
+  }
+}
