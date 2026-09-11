@@ -12,6 +12,7 @@
     "anatomy:fetch-scm": "node scripts/anatomy-fetch-scm.mjs",
     "anatomy:build-scm": "node scripts/anatomy-build-scm.mjs",
     "anatomy:rebuild-scm": "node scripts/anatomy-rebuild-scm.mjs",
+    "anatomy:rebuild-human-atlas-neck": "node scripts/build-human-atlas-neck.mjs",
     "anatomy:serve-scm": "node scripts/serve-public-scm.mjs",
     "root-scm:build-runtime": "node scripts/build-root-scm-runtime.mjs"
   },

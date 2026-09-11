@@ -3,13 +3,16 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
-import { canonicalScmId, entryForPresentationId, legacyPresentationIdForCoreId } from '../src/root-scm/registry.mjs';
-import { focusPlanFromBounds, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
+import { NodeIO } from '@gltf-transform/core';
+import { canonicalScmId, entryForPresentationId, legacyPresentationIdForCoreId, rootScmRegistry } from '../src/root-scm/registry.mjs';
+import { focusPlanFromBounds, parseCoreSnapshot, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
 
 const root = new URL('../', import.meta.url);
 const html = await readFile(new URL('index.html', root), 'utf8');
 const manifest = JSON.parse(await readFile(new URL('assets/anatomy/open-anatomy/manifest.json', root), 'utf8'));
 const glb = await readFile(new URL('assets/anatomy/open-anatomy/scm-right.glb', root));
+const humanAtlasManifest = JSON.parse(await readFile(new URL('assets/anatomy/human-atlas/manifest.json', root), 'utf8'));
+const humanAtlasGlb = await readFile(new URL('assets/anatomy/human-atlas/neck-muscles.glb', root));
 const runtime = await readFile(new URL('assets/runtime/root-scm-runtime.js', root), 'utf8');
 const start = '<!-- MOONBIT_CORE_START -->';
 const end = '<!-- MOONBIT_CORE_END -->';
@@ -43,6 +46,36 @@ test('root domain adapter registers the canonical SCM once without registering t
   assert.equal(snapshot(runtime), before);
 });
 
+test('each Human Atlas muscle selects its canonical ID through MoonBit with one active selection', () => {
+  const runtime = core();
+  runtime.bodymate_core_clear();
+  registerRootEntries(runtime, rootScmRegistry);
+  const ids = humanAtlasManifest.entries.map((entry) => entry.structureId);
+  for (const id of ids) assert.equal(selectPresentationStructure(runtime, id)?.selected, id);
+  assert.equal(selectPresentationStructure(runtime, ids[0])?.selected, ids[0]);
+  assert.equal(selectPresentationStructure(runtime, ids[1])?.selected, ids[1]);
+  assert.equal(parseCoreSnapshot(snapshot(runtime)).selected, ids[1], 'switching SCM → trapezius must clear SCM selection');
+});
+
+test('Human Atlas pick bridge forwards the picked canonical mesh ID to MoonBit', async () => {
+  const adapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
+  const selectors = ['#detail-view', '#detail-canvas', '.current-summary', '#label-lines', '#anatomy-labels', '#coach-bubble', '.detail-instruction', '.fiber-note', '.data-tag', '#selection-meta', '#selection-name'];
+  const nodes = new Map(selectors.map((selector) => [selector, node()]));
+  const selected = [];
+  let onPick;
+  const context = vm.createContext({
+    document: { querySelector: (selector) => nodes.get(selector) ?? null, createElement: () => node() },
+    location: { search: '' }, URLSearchParams,
+    console: { error() {} },
+    __bodymate: { state: { selected: canonicalScmId, whole: false }, select: (id) => selected.push(id) },
+    BodyMateRootScmRuntime: { mount: (options) => { onPick = options.onPick; return { show() {}, applySnapshot() {}, focusSelected() {} }; } },
+  });
+  context.globalThis = context;
+  new vm.Script(adapter).runInContext(context);
+  for (const entry of humanAtlasManifest.entries) onPick(entry.structureId);
+  assert.deepEqual(selected, humanAtlasManifest.entries.map((entry) => entry.structureId));
+});
+
 test('root legacy rendering comparisons resolve through the canonical ID adapter', () => {
   const controller = html;
   assert.match(controller, /coreIdFor\(m\.id\)===state\.selected/);
@@ -70,8 +103,8 @@ test('root retains legacy views and restores the legacy presentation on real-vie
   assert.match(adapter, /canvas\.hidden = true/);
   assert.match(adapter, /tag\.textContent = legacyTag/);
   assert.match(adapter, /overlays\.forEach\(\(node\) => \{ node\.style\.visibility = ''; \}\)/);
-  assert.match(adapter, /Open Anatomy \/ SPL Head and Neck Atlas/);
-  assert.match(adapter, /assets\/anatomy\/open-anatomy\/NOTICE\.md/);
+  assert.match(adapter, /Human Atlas \/ BodyParts3D 4\.0/);
+  assert.match(adapter, /assets\/anatomy\/human-atlas\/ATTRIBUTION\.md/);
 });
 
 test('forced real-viewer failure keeps isolate and restore snapshots on the legacy canvas with the placeholder tag', async () => {
@@ -95,14 +128,34 @@ test('forced real-viewer failure keeps isolate and restore snapshots on the lega
   assert.equal(nodes.get('#label-lines').style.visibility, '');
 });
 
-test('generated classic runtime is derived from the canonical GLB and has no external anatomy request', async () => {
+test('generated classic runtime is derived from the pinned Human Atlas neck GLB and has no external anatomy request', async () => {
   const source = await readFile(new URL('src/root-scm/runtime-entry.mjs', root), 'utf8');
-  assert.equal(hash(glb), manifest.outputSha256);
+  assert.equal(hash(humanAtlasGlb), humanAtlasManifest.outputSha256);
   assert.match(runtime, /GENERATED DERIVED RUNTIME REPRESENTATION/);
-  assert.match(runtime, new RegExp(manifest.outputSha256));
+  assert.match(runtime, new RegExp(humanAtlasManifest.outputSha256));
   assert.match(runtime, /BodyMateRootScmRuntime/);
   assert.doesNotMatch(source, /\bfetch\s*\(/);
   assert.doesNotMatch(source, /loadAsync\s*\(/);
+});
+
+test('Human Atlas neck package pins three independently named real meshes with CC BY attribution', () => {
+  assert.equal(humanAtlasManifest.sourceCommit, '1c38bf35c254a891200d3cedecfd57abebe83d8d');
+  assert.equal(humanAtlasManifest.license, 'CC BY 4.0');
+  assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.sourceMeshId), ['FJ1595', 'FJ1521', 'FJ1532']);
+  assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.structureId), ['bodymate.neck.sternocleidomastoid.right', 'bodymate.neck.trapezius.upper.right', 'bodymate.neck.levator-scapulae.right']);
+  assert.match(html, /\['scm_r','trapezius_r','levator_r'\]\.map\(id=>DATA\[id\]\)/);
+});
+
+test('committed Human Atlas neck GLB preserves all three mapped meshes and their documented topology', async () => {
+  const document = await new NodeIO().readBinary(humanAtlasGlb);
+  const nodes = document.getRoot().listNodes();
+  for (const entry of humanAtlasManifest.entries) {
+    const node = nodes.find((candidate) => candidate.getName() === entry.structureId);
+    assert.ok(node?.getMesh(), `${entry.structureId} should have a real GLB mesh`);
+    const primitive = node.getMesh().listPrimitives()[0];
+    assert.equal(primitive.getAttribute('POSITION').getCount(), entry.vertexCount);
+    assert.equal(primitive.getIndices().getCount() / 3, entry.triangleCount);
+  }
 });
 
 test('canonical public source retains provenance gates for root integration', async () => {

@@ -516,7 +516,7 @@ function buildAnatomy(){
 (function(){
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const ROOT_SCM_ID='bodymate.neck.sternocleidomastoid.right';const coreIdFor=id=>id==='scm_r'?ROOT_SCM_ID:id;const presentationIdFor=id=>id===ROOT_SCM_ID?'scm_r':id;
+const ROOT_SCM_ID='bodymate.neck.sternocleidomastoid.right';const ROOT_REAL_NECK_IDS={scm_r:ROOT_SCM_ID,trapezius_r:'bodymate.neck.trapezius.upper.right',levator_r:'bodymate.neck.levator-scapulae.right'};const coreIdFor=id=>ROOT_REAL_NECK_IDS[id]??id;const presentationIdFor=id=>Object.entries(ROOT_REAL_NECK_IDS).find(([,core])=>core===id)?.[0]??id;
 const state={region:'neck',selected:ROOT_SCM_ID,layer:'muscle',isolated:false,labels:true,pulse:!reduced,whole:false,bubble:true,completed:3,selectionRevision:0,showSupport:true};
 let nav,detail,orb,ready=false,lastTime=0,toastTimer=0,particles=[],orbItems=[],renderFrame=0;
 const navCamera=new Camera([0,3.76,.02],13,0,.025,true), detailCamera=new Camera(REGIONS.neck.center,REGIONS.neck.dist,REGIONS.neck.theta,.04),orbCamera=new Camera([0,-.09,0],4.45,.14,.18);
@@ -530,7 +530,7 @@ function callCore(name,...args){const fn=globalThis[name];if(typeof fn!=='functi
 function registerCore(){const clear=globalThis.bodymate_core_clear;if(typeof clear!=='function')throw Error('MoonBit 核心未加载：bodymate_core_clear');if(!String(clear()).startsWith('ok|'))throw Error('MoonBit 清空失败');for(const d of Object.values(DATA)){const id=coreIdFor(d.id),ok=globalThis.bodymate_core_register(id,d.label,d.region,d.type,id===REGIONS[d.region].default);if(!String(ok).startsWith('ok|'))throw Error('MoonBit 注册失败：'+ok);}if(!callCore('bodymate_core_select_region','neck'))throw Error('MoonBit 初始选择失败');}
 function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),3100);}
 function namesForRegion(reg,layer=state.layer){return Object.values(DATA).filter(d=>d.region===reg&&(layer==='fascia'?d.type==='fascia':d.type==='muscle'));}
-function primaryList(reg,layer=state.layer){let arr=namesForRegion(reg,layer);if(layer==='fascia')return arr;let preferred=arr.filter(d=>!d.id.includes('_clav_'));return preferred;}
+function primaryList(reg,layer=state.layer){let arr=namesForRegion(reg,layer);if(layer==='fascia')return arr;if(reg==='neck'&&layer==='muscle')return ['scm_r','trapezius_r','levator_r'].map(id=>DATA[id]);let preferred=arr.filter(d=>!d.id.includes('_clav_'));return preferred;}
 function navParts(){NAV=[...navFloor,...SUPPORT.map(m=>({...m,color:m.type==='support'?[.82,.88,.94]:m.color})),...BODY.map(m=>({...m,color:[.91,.94,.98]})),...FIBERS.map(m=>({...m,color:[.69,.77,.87],alpha:.50}))];}
 function showChat(answer,question='',sourceId=null){
  const d=DATA[sourceId]||current();
