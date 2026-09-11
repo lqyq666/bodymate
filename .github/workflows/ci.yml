@@ -1,0 +1,27 @@
+name: verify
+
+on:
+  push:
+    branches: [main, feat/moonbit-interaction-core]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install verified MoonBit
+        run: |
+          # The official Linux archive is currently published only as latest.
+          # scripts/moon-toolchain.mjs rejects any version other than 0.1.20260904.
+          curl -fsSL https://cli.moonbitlang.cn/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Build and verify committed artifact
+        run: |
+          npm run build
+          git diff --exit-code -- index.html
+          npm run check

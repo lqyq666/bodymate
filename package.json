@@ -4,6 +4,8 @@
   "private": true,
   "description": "Offline anatomy exploration whitebox",
   "scripts": {
-    "verify": "node --test test/bodymate.contract.test.mjs"
+    "build": "node scripts/build-moonbit.mjs",
+    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs",
+    "check": "npm run verify && node scripts/check-generated.mjs"
   }
 }
