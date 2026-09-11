@@ -8,7 +8,7 @@ The approved future source asset for the minimum Stage 2B target is the **right 
 - Exact file: `head-neck-2016-09/models/Model_62_right_sternocleidomastoideus_muscle.vtk`
 - Source structure ID: `Model_62_right_sternocleidomastoideus_muscle`
 - Granularity: one independently named mesh for the right SCM.
-- Measured source complexity: 6,507 vertices, 2,524 triangle strips / 15,358 triangles, 237,940 bytes.
+- Measured source complexity: 6,507 vertices, 2,524 triangle strips / 12,834 triangles, 237,940 bytes.
 - Pinned archive: 31,612,667 bytes, SHA-256 `C224F054569B284C9A948F6F96B0299EAEE13D3AC661A3386657A743FA8552C4`.
 
 The release page identifies this as a CT-based atlas of the MANIX/OsiriX data set with 3D models of the labelled anatomy, identifies Marianna Jakab and Ron Kikinis as authors, and releases the atlas under [3D Slicer License Part B](https://www.openanatomy.org/atlas-pages/slicer-license.html#PART-B). The exact archive root `LICENSE.md` applies that license to the atlas. No contradictory file-local notice was found in the SCM VTK file.

@@ -1,0 +1,2 @@
+export const publicScmRegistry = Object.freeze([Object.freeze({ structureId: 'bodymate.neck.sternocleidomastoid.right', canonicalName: 'right sternocleidomastoid muscle', displayNameZh: '右侧胸锁乳突肌', region: 'neck', layer: 'muscle', source: 'Open Anatomy / SPL Head and Neck Atlas', sourceStructureId: 'Model_62_right_sternocleidomastoideus_muscle', nodeNames: ['bodymate.neck.sternocleidomastoid.right'] })]);
+export function entryForPublicNode(name) { return publicScmRegistry.find((entry) => entry.nodeNames.includes(name)) ?? null; }

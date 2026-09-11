@@ -16,11 +16,26 @@ jobs:
           node-version: 24
       - name: Install Node dependencies
         run: npm ci
+      - name: Restore verified MoonBit cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.moon
+          key: moonbit-linux-0.1.20260904-v1
       - name: Install verified MoonBit
+        shell: bash
         run: |
+          set -euo pipefail
           # The official Linux archive is currently published only as latest.
-          # scripts/moon-toolchain.mjs rejects any version other than 0.1.20260904.
-          curl -fsSL https://cli.moonbitlang.cn/install/unix.sh | bash
+          # scripts/moon-toolchain.mjs still rejects any version other than 0.1.20260904.
+          moon_bin="$HOME/.moon/bin/moon"
+          if [[ ! -x "$moon_bin" ]] || ! "$moon_bin" --version | grep -Fq 'moon 0.1.20260904'; then
+            installer="$RUNNER_TEMP/moonbit-install.sh"
+            curl --fail --show-error --location --retry 4 --retry-all-errors --connect-timeout 20 --max-time 60 --output "$installer" https://cli.moonbitlang.cn/install/unix.sh
+            grep -Fq 'curl --fail --location --progress-bar' "$installer"
+            sed -i 's/curl --fail --location --progress-bar/curl --fail --location --progress-bar --retry 4 --retry-all-errors --connect-timeout 20 --max-time 90/g' "$installer"
+            bash "$installer"
+          fi
+          "$moon_bin" --version | grep -Fq 'moon 0.1.20260904'
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - name: Build and verify committed artifact
         run: |

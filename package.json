@@ -5,12 +5,17 @@
   "description": "Offline anatomy exploration whitebox",
   "scripts": {
     "build": "node scripts/build-moonbit.mjs",
-    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs",
+    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/public-scm-asset.test.mjs test/moonbit-ci-install.test.mjs",
     "check": "npm run verify && node scripts/check-generated.mjs",
     "spike:verify-local": "node scripts/verify-local-neck-asset.mjs",
-    "spike:serve": "node scripts/serve-spike.mjs"
+    "spike:serve": "node scripts/serve-spike.mjs",
+    "anatomy:fetch-scm": "node scripts/anatomy-fetch-scm.mjs",
+    "anatomy:build-scm": "node scripts/anatomy-build-scm.mjs",
+    "anatomy:rebuild-scm": "node scripts/anatomy-rebuild-scm.mjs",
+    "anatomy:serve-scm": "node scripts/serve-public-scm.mjs"
   },
   "dependencies": {
+    "@gltf-transform/core": "4.5.0",
     "three": "0.180.0"
   }
 }
