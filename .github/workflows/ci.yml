@@ -16,7 +16,9 @@ jobs:
           node-version: 24
       - name: Install verified MoonBit
         run: |
-          curl -fsSL https://cli.moonbitlang.cn/install/unix.sh | bash -s -- 0.1.20260904
+          # The official Linux archive is currently published only as latest.
+          # scripts/moon-toolchain.mjs rejects any version other than 0.1.20260904.
+          curl -fsSL https://cli.moonbitlang.cn/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - name: Build and verify committed artifact
         run: |
