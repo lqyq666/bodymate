@@ -1,16 +1,22 @@
 # BodyMate
 
-BodyMate is an offline interactive anatomy explorer for a bounded neck-and-shoulder model. It makes real mapped anatomy easier to inspect through mesh picking and deterministic Chinese/English queries, including structure sets, movement coverage, and movement comparisons.
+BodyMate is an offline interactive anatomy and movement laboratory. Its default view presents a complete Human Atlas body with real muscle and skeletal meshes, three parameterized exercise demonstrations, qualitative muscle participation, and independent overview navigation. A focused neck laboratory adds deterministic Chinese/English structure, movement, and comparison queries.
 
-The shipped demo is real today: 14 independently named Human Atlas / BodyParts3D muscle meshes, locally bundled Three.js presentation, and a MoonBit domain engine. It is not complete human anatomy, a biomechanics database, AI, or a medical product.
+The shipped product is real today: 415 muscle meshes, 282 skeletal and related structures, one shared 21-joint rig, push-up/squat/curl motion, and a MoonBit domain engine. It is an educational prototype, not a biomechanics solver, EMG measurement, training prescription, diagnosis, or medical product.
 
 ## Why MoonBit is central
 
-MoonBit is the single authority for the canonical structure registry, query resolver, StructureSet semantics, bounded movement/evidence catalog, comparison set algebra, action validation, state transitions, event log, and versioned snapshots. JavaScript parses those contracts and renders them. Three.js decides how a validated result looks; it does not decide what the product means.
+MoonBit is the authority for the canonical neck registry, deterministic query resolution, StructureSet semantics, bounded movement/evidence relationships, comparison set algebra, action validation, state transitions, event log, and versioned snapshots. The complete-body motion domain is being brought under the same boundary: MoonBit decides what an action means and whether state may change; JavaScript and Three.js apply accepted output to the rig, camera, materials, labels, and controls.
 
 ```text
-mesh pick or query -> MoonBit resolver -> MoonBit action engine -> validated snapshot -> JS adapter -> Three.js / Coach C / UI
+input or mesh pick -> MoonBit domain action -> validated snapshot -> JS adapter -> Three.js / Coach C / UI
 ```
+
+## Views
+
+- `/?view=full-body` — default complete-body anatomy, muscle/bone/x-ray modes, motion playback, parameter controls, qualitative participation, and structure search.
+- `/?view=neck-lab` — the MoonBit-authoritative 14-structure neck and shoulder laboratory.
+- `/?view=motion-lab` — the retained earlier full-body motion presentation.
 
 ## Run and verify
 
@@ -23,18 +29,26 @@ npm run check
 npm run moonbit:stats
 ```
 
-Then open `index.html` directly with `file://`. The runtime makes no CDN, API, model, anatomy, backend, account, or database request; outbound links appear only when a reviewer deliberately opens a bundled evidence citation.
+Serve the repository for the complete-body experience:
 
-The current canonical MoonBit metrics are 9 production files, 1288 effective production LOC, 10 test files, 294 effective test LOC, 30 MoonBit tests, and 29 exported functions. `npm run moonbit:stats` is the authority for regenerated values.
+```text
+python -m http.server 4174 --bind 127.0.0.1
+```
 
-## Three reviewer demos
+Then open `http://127.0.0.1:4174/?view=full-body`. The page makes no required runtime CDN, API, model, anatomy, backend, account, or database request. The retained neck laboratory also supports direct `file://` delivery; the large compressed full-body transport is byte-verified separately because automated browser tooling blocks interactive `file://` control.
 
-1. `右侧斜角肌` — a MoonBit StructureSet resolves to three real highlighted meshes.
-2. `耸肩涉及哪些肌肉` — a MoonBit movement mapping resolves evidence-backed, current-model coverage.
-3. `低头和向右转头有哪些共同结构` — MoonBit comparison algebra shows overlap, only-left, and only-right structures.
+Run `npm run moonbit:stats` for current generated metrics rather than relying on a hand-maintained number.
 
-Use [the reviewer quickstart](docs/REVIEWER_QUICKSTART.md) for the exact route. [Architecture](docs/MOONBIT_ARCHITECTURE.md), [review guide](docs/MOONBIT_REVIEW_GUIDE.md), [test matrix](docs/TEST_MATRIX.md), [movement evidence](docs/MOVEMENT_EVIDENCE.md), and [asset provenance](docs/HUMAN_ATLAS_NECK_ASSET.md) document the evidence.
+## Reviewer path
+
+1. In the complete-body view, play push-up, change hand width and elbow angle, pause, seek, and restore standing.
+2. Play squat, change stance width, toe angle, and depth, then compare muscle, bone, and x-ray modes.
+3. Open `/?view=neck-lab` and enter `右侧斜角肌` — one MoonBit StructureSet highlights three real meshes.
+4. Enter `耸肩涉及哪些肌肉` — MoonBit resolves evidence-backed current-model coverage.
+5. Enter `低头和向右转头有哪些共同结构` — MoonBit comparison algebra returns overlap, only-left, and only-right structures.
+
+Use [the reviewer quickstart](docs/REVIEWER_QUICKSTART.md) for the exact route. [Architecture](docs/MOONBIT_ARCHITECTURE.md), [review guide](docs/MOONBIT_REVIEW_GUIDE.md), [test matrix](docs/TEST_MATRIX.md), [movement evidence](docs/MOVEMENT_EVIDENCE.md), and [asset provenance](assets/anatomy/human-atlas/RIGGED_BODY_ATTRIBUTION.md) document the evidence.
 
 ## Boundaries and limitations
 
-BodyMate is an educational, offline-first prototype. The anatomy is intentionally limited to 14 neck/shoulder structures and the movement catalog is intentionally small. Movement mappings identify only evidence-backed structures covered by the current model; they are not complete activation models, EMG measurements, diagnosis, treatment, rehabilitation, or training advice. There is no remote AI or backend.
+The complete body is a presentation and motion layer over attributed Human Atlas geometry. Its three actions use a fixed educational rig; fingers and toes are not independently driven, soft tissue is not simulated, and red intensity is not force or activation measurement. The MoonBit neck knowledge model remains deliberately bounded to 14 structures and a small evidence-backed movement catalog. There is no remote AI or backend.
