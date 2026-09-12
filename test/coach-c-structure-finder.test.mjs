@@ -40,6 +40,7 @@ test('MoonBit normalizes sides and produces deterministic safe candidate groups'
   assert.equal(resolve(context, 'SCM').candidates.length, 2);
   assert.equal(resolve(context, '右侧斜角肌').candidates.length, 3);
   assert.equal(resolve(context, 'scalene').candidates.length, 6);
+  assert.equal(resolve(context, '脖子侧面').resolution, 'AMBIGUOUS');
 });
 
 test('MoonBit rejects unsupported anatomy and health input without a domain mutation', () => {
