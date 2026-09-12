@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node scripts/build-moonbit.mjs && node scripts/build-moonbit-registry.mjs && node scripts/build-anatomy-registry-runtime.mjs && node scripts/build-coach-query-runtime.mjs && node scripts/build-root-scm-runtime.mjs",
     "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/public-scm-asset.test.mjs test/moonbit-ci-install.test.mjs test/root-scm-integration.test.mjs test/anatomy-registry.test.mjs test/neck-presentation.test.mjs test/coach-c-spatial.test.mjs test/coach-c-structure-finder.test.mjs",
-    "check": "npm run verify && node scripts/check-generated.mjs",
+    "check": "npm run verify && node scripts/check-generated.mjs && node scripts/audit-repository-hygiene.mjs",
     "moonbit:stats": "node scripts/moonbit-stats.mjs",
     "spike:verify-local": "node scripts/verify-local-neck-asset.mjs",
     "spike:serve": "node scripts/serve-spike.mjs",
