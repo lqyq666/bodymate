@@ -9,6 +9,14 @@ const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const defaultOutputDir = join(root, 'assets/anatomy/human-atlas');
 export const entries = neckRegistry;
 
+export function verifySourceIdentity(atlas) {
+  for (const entry of entries) {
+    const sourcePart = atlas.parts.find((part) => part.id === entry.sourceMeshId);
+    if (!sourcePart) throw Error(`Pinned Human Atlas does not contain ${entry.sourceMeshId}.`);
+    if (`body-${sourcePart.chunk}.bin` !== entry.sourceChunk || sourcePart.conceptId !== entry.sourceConceptId) throw Error(`Pinned Human Atlas source identity drift for ${entry.sourceMeshId}.`);
+  }
+}
+
 function sliceFloat32(bytes, offset, count) { return new Float32Array(bytes.buffer, bytes.byteOffset + offset, count).slice(); }
 function sliceNormals(bytes, offset, count) { const source = new Int16Array(bytes.buffer, bytes.byteOffset + offset, count); return Float32Array.from(source, (value) => value / 32767); }
 function sliceIndices(bytes, offset, count) { return new Uint32Array(bytes.buffer, bytes.byteOffset + offset, count).slice(); }
@@ -17,13 +25,12 @@ function boundsFor(positions) { const min = [Infinity, Infinity, Infinity], max 
 export async function buildHumanAtlasNeck({ source, outputDir = defaultOutputDir } = {}) {
   const files = source ?? await fetchVerifiedHumanAtlasSource();
   const atlas = JSON.parse(Buffer.from(files['atlas.json']).toString('utf8'));
+  verifySourceIdentity(atlas);
   const document = new Document(), buffer = document.createBuffer('human-atlas-neck-buffer'), scene = document.createScene('bodymate-human-atlas-neck');
   const material = document.createMaterial('human-atlas-neck-material').setBaseColorFactor([.84, .88, .92, 1]).setMetallicFactor(.01).setRoughnessFactor(.58);
   const manifestEntries = [];
   for (const entry of entries) {
     const sourcePart = atlas.parts.find((part) => part.id === entry.sourceMeshId);
-    if (!sourcePart) throw Error(`Pinned Human Atlas does not contain ${entry.sourceMeshId}.`);
-    if (`body-${sourcePart.chunk}.bin` !== entry.sourceChunk || sourcePart.conceptId !== entry.sourceConceptId) throw Error(`Pinned Human Atlas source identity drift for ${entry.sourceMeshId}.`);
     const chunk = files[entry.sourceChunk];
     if (!chunk) throw Error(`No verified Human Atlas chunk loaded for ${entry.sourceMeshId}.`);
     const positions = sliceFloat32(chunk, sourcePart.positions, sourcePart.vertexCount * 3);

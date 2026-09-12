@@ -16,11 +16,12 @@ export const sourceFiles = Object.freeze({
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex').toUpperCase();
 
-export async function fetchVerifiedHumanAtlasSource({ cacheDir = join(tmpdir(), 'bodymate-human-atlas') } = {}) {
+export async function fetchVerifiedHumanAtlasSource({ cacheDir = join(tmpdir(), 'bodymate-human-atlas'), allowNetwork = process.env.BODYMATE_ALLOW_NETWORK === '1' } = {}) {
   await mkdir(cacheDir, { recursive: true });
   const files = {};
   for (const [file, expected] of Object.entries(sourceFiles)) {
     const target = join(cacheDir, file);
+    if (!existsSync(target) && !allowNetwork) throw Error(`Human Atlas source cache is missing ${file}. Set BODYMATE_ALLOW_NETWORK=1 only for an explicit source refresh.`);
     const bytes = existsSync(target) ? await readFile(target) : new Uint8Array(await (await fetch(`${rawBaseUrl}/${file}`)).arrayBuffer());
     if (sha256(bytes) !== expected) throw Error(`Human Atlas ${file} SHA-256 mismatch; refusing to build.`);
     if (!existsSync(target)) await writeFile(target, bytes);

@@ -24,7 +24,7 @@
       const en = document.createElement('small'); en.textContent = candidate.canonicalName.toUpperCase(); Object.assign(en.style, { color: '#7891aa', fontSize: '8px', fontWeight: '500' });
       button.append(zh, en);
       button.onclick = () => {
-        const select = { schemaVersion: 1, action: 'SELECT_STRUCTURE', structureId: candidate.structureId, confidence: 1, source: 'local-resolver' };
+        const select = { schemaVersion: 1, action: 'SELECT_STRUCTURE', structureId: candidate.structureId, confidence: 1, source: 'moonbit-domain' };
         if (query.isValidCoachActionContract(select) && execute(select)) { clear(); feedback(null); record(text, `已选中：${candidate.displayNameZh}。`, candidate.structureId); }
       };
       result.append(button);

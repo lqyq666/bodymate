@@ -1,1 +1,1 @@
-export { coachActionNames, executeCoachAction, isValidCoachActionContract, resolveCoachQuery } from './structure-finder.mjs';
+export { coachActionNames, executeCoachAction, isValidCoachActionContract, parseMoonbitQueryResult, resolveCoachQuery } from './structure-finder.mjs';
