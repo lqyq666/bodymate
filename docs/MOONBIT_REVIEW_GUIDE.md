@@ -35,6 +35,15 @@ Also replay `右边脖子` (still ambiguous) and `右侧胸锁乳突肌` (still 
 
 Replay `向右转头涉及哪些结构` for the left SCM/right splenius-capitis coverage, then select any mapped mesh and confirm movement mode clears. Replay `我转头时脖子疼` and confirm the health safety response returns without a state mutation.
 
+## Movement comparison replay
+
+1. Query `低头和向右转头有哪些共同结构`.
+2. MoonBit resolver returns `MOVEMENT_COMPARISON` and `SHOW_MOVEMENT_COMPARISON` for `cervical_flexion,cervical_rotation_right`.
+3. MoonBit set algebra yields left SCM as overlap, right SCM as only-left, and right splenius capitis as only-right; snapshot v5 retains each side’s role and evidence ID.
+4. The renderer colors those three buckets and the right card shows the compact legend. Coach C points to the MoonBit-selected overlap focus.
+5. Replay `向左转头和向右转头有什么区别`: overlap is empty, so the UI must say only that no common mapped structure exists in the current model coverage.
+6. Select an exact mesh and verify both movement and comparison state clear. Replay `低头和转头都疼` and verify health rejection has no state mutation.
+
 ## Required commands
 
 ```text

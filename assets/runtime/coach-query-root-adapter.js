@@ -40,6 +40,10 @@
       if (execute(resolution.action)) { clear(); feedback(resolution.message, 'Coach C'); record(text, resolution.message); }
       return;
     }
+    if (resolution.classification === 'MOVEMENT_COMPARISON' && resolution.resolution === 'EXACT') {
+      if (execute(resolution.action)) { clear(); feedback(resolution.message, 'Coach C'); record(text, resolution.message); }
+      return;
+    }
     if (resolution.classification === 'STRUCTURE_LOOKUP' && resolution.resolution === 'AMBIGUOUS') { feedback(resolution.message, 'Coach C'); record(text, resolution.message); showCandidates(resolution, text); return; }
     if (resolution.classification === 'DOMAIN_COMMAND') {
       if (execute(resolution.action)) { clear(); feedback(resolution.message, 'Coach C'); record(text, resolution.message); }

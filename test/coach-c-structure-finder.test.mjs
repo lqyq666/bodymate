@@ -87,6 +87,20 @@ test('movement queries are MoonBit-owned evidence mappings and mutate only throu
   assert.match(context.bodymate_domain_snapshot_v4(), /bodymate\.movement\.set\.shoulder_girdle_elevation/);
 });
 
+test('movement comparisons remain MoonBit-owned and health input cannot execute them', () => {
+  const context = core(), before = snapshot(context), comparison = resolve(context, '低头和向右转头有哪些共同结构');
+  assert.equal(comparison.classification, 'MOVEMENT_COMPARISON');
+  assert.equal(comparison.action.action, 'SHOW_MOVEMENT_COMPARISON');
+  assert.equal(comparison.action.structureId, 'cervical_flexion,cervical_rotation_right');
+  assert.equal(snapshot(context), before);
+  assert.equal(executeCoachAction(comparison.action, { core: context }), true);
+  assert.match(context.bodymate_domain_snapshot_v5(), /cervical_flexion\|颈部屈曲 \/ 低头\|cervical_rotation_right\|颈部向右旋转/);
+  const after = snapshot(context), health = resolve(context, '低头和转头都疼，是不是同一块肌肉有问题');
+  assert.equal(health.classification, 'UNSUPPORTED_HEALTH_QUERY');
+  assert.equal(health.action, null);
+  assert.equal(snapshot(context), after);
+});
+
 test('ambiguous candidates do not mutate MoonBit until a user selection action is accepted', () => {
   const context = core(), outcome = resolve(context, '右边脖子'), before = snapshot(context);
   assert.equal(outcome.action.action, 'FIND_STRUCTURE');

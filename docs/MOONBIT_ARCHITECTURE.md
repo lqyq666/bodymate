@@ -42,6 +42,12 @@ Resolver v3 adds `MOVEMENT_LOOKUP` and `STRUCTURE_SET_LOOKUP`; health-language c
 
 The current catalog is deliberately limited to shoulder-girdle elevation, right/left cervical rotation, and cervical flexion. It says “当前模型覆盖范围内的参与结构”, never activation percentage, EMG, diagnosis, or exercise prescription. See `docs/MOVEMENT_EVIDENCE.md` for sources and exclusions.
 
+## Movement comparison and set algebra
+
+Stage 5C reuses those validated mappings without adding movements or evidence claims. MoonBit exposes pure canonical-ID union, intersection, and directional-difference functions, then builds a `MovementComparison` that preserves each structure’s left/right `ParticipationRole` and evidence IDs. Canonical registry order makes the algebra deterministic and commutative where required.
+
+`SHOW_MOVEMENT_COMPARISON` makes the comparison active, derives the existing `StructureSet` presentation primitive, and selects an overlap member when present (otherwise a deterministic directional member). Selecting a structure, showing a movement mapping, clearing the structure set, and resetting overview clear comparison state. Snapshot v5 carries movement labels and ordered comparison members as `structureId^bucket^leftRole^rightRole^leftEvidenceIds^rightEvidenceIds`; JavaScript parses it and has no comparison algebra or mapping table.
+
 ## Public bridge
 
 The embedded IIFE exports legacy `bodymate_core_*` compatibility calls plus these domain calls:
