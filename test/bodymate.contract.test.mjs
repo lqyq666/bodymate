@@ -30,6 +30,16 @@ test('does not add external runtime dependencies or medical claims', () => {
   assert.match(source, /不提供医学或拉伸建议/);
 });
 
+test('ships an offline push-up demo with broad activation regions and an uncluttered question panel', () => {
+  assert.match(source, /const EXERCISE_DEMOS = Object\.freeze\(/);
+  assert.match(source, /canvas\.id = 'exercise-canvas'/);
+  assert.match(source, /activateExercise\('push_up'\)/);
+  assert.match(source, /胸大肌.*肱三头肌.*前三角肌/);
+  assert.match(source, /exercise-demo-active \.current-summary/);
+  assert.match(source, /exercise-demo-active \.progress-mini/);
+  assert.match(source, /depth=reduced \? \.5/);
+});
+
 test('delegates selection revision and explicit muscle entry to the embedded core', () => {
   const controller = source.slice(source.indexOf('/* Interaction controller.'));
   assert.doesNotMatch(controller, /selectionRevision\+\+/);

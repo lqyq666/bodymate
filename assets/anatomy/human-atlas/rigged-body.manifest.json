@@ -1,0 +1,7236 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "1c38bf35c254a891200d3cedecfd57abebe83d8d",
+  "sourceHashes": {
+    "atlas.json": "C359F4BCD2CBA90B7411D66D5E9FC04DC81294D46CD5C1E8B212C824F2E5BBEE",
+    "body-0.bin": "B33B2B5AAC20F35FBF6871F916607BF3C4D386321C8C0FDADCCA6B5D24E3641E",
+    "body-1.bin": "AA077A4675F0D0DD3C9B0AF39DC8CF6BCB348C3BF7D283478D4206CE30A5A0DE",
+    "body-2.bin": "4B3ACFC35B91E4427EACA0E3BE897D33F144354342AE0E52A2328B582CA8BDBE",
+    "body-3.bin": "6FEBB76B50423331F66802A63BB43F04F99CE08129837015910EED43D0719268",
+    "body-4.bin": "0509E6C996FE5B935ACE770A5DBF2D83A474330B7E541A844052A080BBF814BB",
+    "body-5.bin": "32A967198FFED45839968228898F3D246C67F86FB26892C3AE270BE30E2F1149",
+    "body-8.bin": "18BEACFDEADC8AD483D692672AAE165F4323704CD7A9BFCBEBBD703F5E268E25",
+    "body-9.bin": "0AA8AA09A379A2D759872659A2EF68FC4510EE37E435C4EBC63EE679722A4547",
+    "body-10.bin": "4A959D998ACD35CF88518A0F2F8AB99B42D9F69C7CE0D6A814DF315EEAC807AC",
+    "body-11.bin": "E8C1AFE7F30FE710AD164EC9CD2287A32881606E7EB590AF47D76B3F84405027",
+    "body-12.bin": "61A6C8DA89BB20DF50C575964AC81AA4090EABFC2CB27AD2155AEA325F31C6C0",
+    "body-13.bin": "4C51B6BE85D5B705D2B52B79B9AD1CDAE0B65AD03C9402A2F2673C7633FD94F3"
+  },
+  "outputSha256": "CD2E2108F7551B87928989C445C78E8BB35D867C89D90CD766623CB4CF7E1522",
+  "license": "CC BY 4.0",
+  "muscleCount": 415,
+  "boneCount": 282,
+  "joints": [
+    {
+      "name": "pelvis",
+      "parent": null,
+      "position": [
+        0,
+        0.91,
+        -0.025
+      ]
+    },
+    {
+      "name": "spine",
+      "parent": "pelvis",
+      "position": [
+        0,
+        1.08,
+        -0.04
+      ]
+    },
+    {
+      "name": "chest",
+      "parent": "spine",
+      "position": [
+        0,
+        1.3,
+        -0.045
+      ]
+    },
+    {
+      "name": "neck",
+      "parent": "chest",
+      "position": [
+        0,
+        1.455,
+        -0.032
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "neck",
+      "position": [
+        0,
+        1.54,
+        -0.012
+      ]
+    },
+    {
+      "name": "rightShoulder",
+      "parent": "chest",
+      "position": [
+        -0.115,
+        1.397,
+        -0.035
+      ]
+    },
+    {
+      "name": "rightUpperArm",
+      "parent": "rightShoulder",
+      "position": [
+        -0.165,
+        1.395,
+        -0.025
+      ]
+    },
+    {
+      "name": "rightForearm",
+      "parent": "rightUpperArm",
+      "position": [
+        -0.218,
+        1.112,
+        -0.017
+      ]
+    },
+    {
+      "name": "rightHand",
+      "parent": "rightForearm",
+      "position": [
+        -0.252,
+        0.887,
+        -0.006
+      ]
+    },
+    {
+      "name": "rightThigh",
+      "parent": "pelvis",
+      "position": [
+        -0.057,
+        0.888,
+        -0.022
+      ]
+    },
+    {
+      "name": "rightShin",
+      "parent": "rightThigh",
+      "position": [
+        -0.075,
+        0.46,
+        -0.014
+      ]
+    },
+    {
+      "name": "rightFoot",
+      "parent": "rightShin",
+      "position": [
+        -0.067,
+        0.082,
+        -0.025
+      ]
+    },
+    {
+      "name": "rightToes",
+      "parent": "rightFoot",
+      "position": [
+        -0.071,
+        0.018,
+        0.104
+      ]
+    },
+    {
+      "name": "leftShoulder",
+      "parent": "chest",
+      "position": [
+        0.115,
+        1.397,
+        -0.035
+      ]
+    },
+    {
+      "name": "leftUpperArm",
+      "parent": "leftShoulder",
+      "position": [
+        0.165,
+        1.395,
+        -0.025
+      ]
+    },
+    {
+      "name": "leftForearm",
+      "parent": "leftUpperArm",
+      "position": [
+        0.218,
+        1.112,
+        -0.017
+      ]
+    },
+    {
+      "name": "leftHand",
+      "parent": "leftForearm",
+      "position": [
+        0.252,
+        0.887,
+        -0.006
+      ]
+    },
+    {
+      "name": "leftThigh",
+      "parent": "pelvis",
+      "position": [
+        0.057,
+        0.888,
+        -0.022
+      ]
+    },
+    {
+      "name": "leftShin",
+      "parent": "leftThigh",
+      "position": [
+        0.075,
+        0.46,
+        -0.014
+      ]
+    },
+    {
+      "name": "leftFoot",
+      "parent": "leftShin",
+      "position": [
+        0.067,
+        0.082,
+        -0.025
+      ]
+    },
+    {
+      "name": "leftToes",
+      "parent": "leftFoot",
+      "position": [
+        0.071,
+        0.018,
+        0.104
+      ]
+    }
+  ],
+  "motions": [
+    {
+      "id": "push_up",
+      "title": "俯卧撑",
+      "aliases": [
+        "俯卧撑",
+        "卧撑",
+        "push-up",
+        "push up"
+      ],
+      "duration": 4,
+      "muscles": [
+        "胸部",
+        "肩部",
+        "上臂后侧"
+      ],
+      "match": "pectoralis major|deltoid|triceps brachii|serratus anterior"
+    },
+    {
+      "id": "squat",
+      "title": "深蹲",
+      "aliases": [
+        "深蹲",
+        "squat"
+      ],
+      "duration": 4.4,
+      "muscles": [
+        "大腿前侧",
+        "臀部",
+        "大腿后侧"
+      ],
+      "match": "rectus femoris|vastus|gluteus|biceps femoris|semitendinosus|semimembranosus"
+    },
+    {
+      "id": "curl",
+      "title": "弯举",
+      "aliases": [
+        "弯举",
+        "二头弯举",
+        "curl"
+      ],
+      "duration": 3.6,
+      "muscles": [
+        "上臂前侧",
+        "前臂"
+      ],
+      "match": "biceps brachii|brachialis|brachioradialis"
+    }
+  ],
+  "entries": [
+    {
+      "structureId": "bodymate.bone.fj1252",
+      "sourceMeshId": "FJ1252",
+      "canonicalName": "Gingiva of upper jaw",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 883,
+      "triangles": 1424
+    },
+    {
+      "structureId": "bodymate.bone.fj1253",
+      "sourceMeshId": "FJ1253",
+      "canonicalName": "Gingiva of lower jaw",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 726,
+      "triangles": 1328
+    },
+    {
+      "structureId": "bodymate.bone.fj1254",
+      "sourceMeshId": "FJ1254",
+      "canonicalName": "Left lower first secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 807,
+      "triangles": 1606
+    },
+    {
+      "structureId": "bodymate.bone.fj1255",
+      "sourceMeshId": "FJ1255",
+      "canonicalName": "Left lower first secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 454,
+      "triangles": 900
+    },
+    {
+      "structureId": "bodymate.bone.fj1256",
+      "sourceMeshId": "FJ1256",
+      "canonicalName": "Left lower second secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 760,
+      "triangles": 1492
+    },
+    {
+      "structureId": "bodymate.bone.fj1257",
+      "sourceMeshId": "FJ1257",
+      "canonicalName": "Left lower second secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 450,
+      "triangles": 890
+    },
+    {
+      "structureId": "bodymate.bone.fj1258",
+      "sourceMeshId": "FJ1258",
+      "canonicalName": "Left lower central secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 323,
+      "triangles": 642
+    },
+    {
+      "structureId": "bodymate.bone.fj1259",
+      "sourceMeshId": "FJ1259",
+      "canonicalName": "Left lower lateral secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 323,
+      "triangles": 640
+    },
+    {
+      "structureId": "bodymate.bone.fj1260",
+      "sourceMeshId": "FJ1260",
+      "canonicalName": "Left lower secondary canine tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 362,
+      "triangles": 720
+    },
+    {
+      "structureId": "bodymate.bone.fj1261",
+      "sourceMeshId": "FJ1261",
+      "canonicalName": "Left upper first secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 912,
+      "triangles": 1812
+    },
+    {
+      "structureId": "bodymate.bone.fj1262",
+      "sourceMeshId": "FJ1262",
+      "canonicalName": "Left upper first secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 562,
+      "triangles": 1098
+    },
+    {
+      "structureId": "bodymate.bone.fj1263",
+      "sourceMeshId": "FJ1263",
+      "canonicalName": "Left upper second secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 823,
+      "triangles": 1598
+    },
+    {
+      "structureId": "bodymate.bone.fj1264",
+      "sourceMeshId": "FJ1264",
+      "canonicalName": "Left upper second secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 571,
+      "triangles": 1114
+    },
+    {
+      "structureId": "bodymate.bone.fj1265",
+      "sourceMeshId": "FJ1265",
+      "canonicalName": "Left upper central secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 398,
+      "triangles": 792
+    },
+    {
+      "structureId": "bodymate.bone.fj1266",
+      "sourceMeshId": "FJ1266",
+      "canonicalName": "Left upper lateral secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 366,
+      "triangles": 728
+    },
+    {
+      "structureId": "bodymate.bone.fj1267",
+      "sourceMeshId": "FJ1267",
+      "canonicalName": "Left upper secondary canine tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 387,
+      "triangles": 770
+    },
+    {
+      "structureId": "bodymate.bone.fj1268",
+      "sourceMeshId": "FJ1268",
+      "canonicalName": "Right lower first secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 805,
+      "triangles": 1594
+    },
+    {
+      "structureId": "bodymate.bone.fj1269",
+      "sourceMeshId": "FJ1269",
+      "canonicalName": "Right lower first secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 462,
+      "triangles": 920
+    },
+    {
+      "structureId": "bodymate.bone.fj1270",
+      "sourceMeshId": "FJ1270",
+      "canonicalName": "Right lower second secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 735,
+      "triangles": 1454
+    },
+    {
+      "structureId": "bodymate.bone.fj1271",
+      "sourceMeshId": "FJ1271",
+      "canonicalName": "Right lower second secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 458,
+      "triangles": 908
+    },
+    {
+      "structureId": "bodymate.bone.fj1272",
+      "sourceMeshId": "FJ1272",
+      "canonicalName": "Right lower central secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 327,
+      "triangles": 648
+    },
+    {
+      "structureId": "bodymate.bone.fj1273",
+      "sourceMeshId": "FJ1273",
+      "canonicalName": "Right lower lateral secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 311,
+      "triangles": 614
+    },
+    {
+      "structureId": "bodymate.bone.fj1274",
+      "sourceMeshId": "FJ1274",
+      "canonicalName": "Right lower secondary canine tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 363,
+      "triangles": 722
+    },
+    {
+      "structureId": "bodymate.bone.fj1275",
+      "sourceMeshId": "FJ1275",
+      "canonicalName": "Right upper second secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 848,
+      "triangles": 1628
+    },
+    {
+      "structureId": "bodymate.bone.fj1276",
+      "sourceMeshId": "FJ1276",
+      "canonicalName": "Right upper first secondary molar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 915,
+      "triangles": 1792
+    },
+    {
+      "structureId": "bodymate.bone.fj1277",
+      "sourceMeshId": "FJ1277",
+      "canonicalName": "Right upper first secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 557,
+      "triangles": 1096
+    },
+    {
+      "structureId": "bodymate.bone.fj1278",
+      "sourceMeshId": "FJ1278",
+      "canonicalName": "Right upper second secondary premolar tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 573,
+      "triangles": 1122
+    },
+    {
+      "structureId": "bodymate.bone.fj1279",
+      "sourceMeshId": "FJ1279",
+      "canonicalName": "Right upper central secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 399,
+      "triangles": 792
+    },
+    {
+      "structureId": "bodymate.bone.fj1280",
+      "sourceMeshId": "FJ1280",
+      "canonicalName": "Right upper lateral secondary incisor tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 355,
+      "triangles": 706
+    },
+    {
+      "structureId": "bodymate.bone.fj1281",
+      "sourceMeshId": "FJ1281",
+      "canonicalName": "Right upper secondary canine tooth",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 382,
+      "triangles": 760
+    },
+    {
+      "structureId": "bodymate.muscle.fj1294",
+      "sourceMeshId": "FJ1294",
+      "canonicalName": "Left inferior oblique",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 469,
+      "triangles": 890
+    },
+    {
+      "structureId": "bodymate.muscle.fj1295",
+      "sourceMeshId": "FJ1295",
+      "canonicalName": "Left inferior rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 444,
+      "triangles": 782
+    },
+    {
+      "structureId": "bodymate.muscle.fj1304",
+      "sourceMeshId": "FJ1304",
+      "canonicalName": "Left lateral rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 407,
+      "triangles": 728
+    },
+    {
+      "structureId": "bodymate.muscle.fj1306",
+      "sourceMeshId": "FJ1306",
+      "canonicalName": "Left levator palpebrae superioris",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 639,
+      "triangles": 1096
+    },
+    {
+      "structureId": "bodymate.muscle.fj1308",
+      "sourceMeshId": "FJ1308",
+      "canonicalName": "Left medial rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 319,
+      "triangles": 566
+    },
+    {
+      "structureId": "bodymate.muscle.fj1322",
+      "sourceMeshId": "FJ1322",
+      "canonicalName": "Left superior oblique",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 436,
+      "triangles": 792
+    },
+    {
+      "structureId": "bodymate.muscle.fj1323",
+      "sourceMeshId": "FJ1323",
+      "canonicalName": "Left superior rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 362,
+      "triangles": 622
+    },
+    {
+      "structureId": "bodymate.muscle.fj1345",
+      "sourceMeshId": "FJ1345",
+      "canonicalName": "Right inferior oblique",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 507,
+      "triangles": 922
+    },
+    {
+      "structureId": "bodymate.muscle.fj1346",
+      "sourceMeshId": "FJ1346",
+      "canonicalName": "Right inferior rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 438,
+      "triangles": 778
+    },
+    {
+      "structureId": "bodymate.muscle.fj1355",
+      "sourceMeshId": "FJ1355",
+      "canonicalName": "Right lateral rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 398,
+      "triangles": 720
+    },
+    {
+      "structureId": "bodymate.muscle.fj1357",
+      "sourceMeshId": "FJ1357",
+      "canonicalName": "Right levator palpebrae superioris",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 759,
+      "triangles": 1206
+    },
+    {
+      "structureId": "bodymate.muscle.fj1359",
+      "sourceMeshId": "FJ1359",
+      "canonicalName": "Right medial rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 335,
+      "triangles": 560
+    },
+    {
+      "structureId": "bodymate.muscle.fj1373",
+      "sourceMeshId": "FJ1373",
+      "canonicalName": "Right superior oblique",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 459,
+      "triangles": 812
+    },
+    {
+      "structureId": "bodymate.muscle.fj1374",
+      "sourceMeshId": "FJ1374",
+      "canonicalName": "Right superior rectus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 366,
+      "triangles": 618
+    },
+    {
+      "structureId": "bodymate.muscle.fj1383",
+      "sourceMeshId": "FJ1383",
+      "canonicalName": "First lumbrical of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 676,
+      "triangles": 474
+    },
+    {
+      "structureId": "bodymate.muscle.fj1383m",
+      "sourceMeshId": "FJ1383M",
+      "canonicalName": "First lumbrical of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 675,
+      "triangles": 474
+    },
+    {
+      "structureId": "bodymate.muscle.fj1384",
+      "sourceMeshId": "FJ1384",
+      "canonicalName": "First plantar interosseous of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 392,
+      "triangles": 410
+    },
+    {
+      "structureId": "bodymate.muscle.fj1384m",
+      "sourceMeshId": "FJ1384M",
+      "canonicalName": "First plantar interosseous of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 403,
+      "triangles": 416
+    },
+    {
+      "structureId": "bodymate.muscle.fj1385",
+      "sourceMeshId": "FJ1385",
+      "canonicalName": "Second lumbrical of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 208,
+      "triangles": 194
+    },
+    {
+      "structureId": "bodymate.muscle.fj1385m",
+      "sourceMeshId": "FJ1385M",
+      "canonicalName": "Second lumbrical of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 208,
+      "triangles": 194
+    },
+    {
+      "structureId": "bodymate.muscle.fj1386",
+      "sourceMeshId": "FJ1386",
+      "canonicalName": "Second plantar interosseous of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 366,
+      "triangles": 380
+    },
+    {
+      "structureId": "bodymate.muscle.fj1386m",
+      "sourceMeshId": "FJ1386M",
+      "canonicalName": "Second plantar interosseous of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 369,
+      "triangles": 386
+    },
+    {
+      "structureId": "bodymate.muscle.fj1387",
+      "sourceMeshId": "FJ1387",
+      "canonicalName": "Third lumbrical of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 457,
+      "triangles": 304
+    },
+    {
+      "structureId": "bodymate.muscle.fj1387m",
+      "sourceMeshId": "FJ1387M",
+      "canonicalName": "Third lumbrical of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 463,
+      "triangles": 306
+    },
+    {
+      "structureId": "bodymate.muscle.fj1388",
+      "sourceMeshId": "FJ1388",
+      "canonicalName": "Third plantar interosseous of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 776,
+      "triangles": 584
+    },
+    {
+      "structureId": "bodymate.muscle.fj1388m",
+      "sourceMeshId": "FJ1388M",
+      "canonicalName": "Third plantar interosseous of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 777,
+      "triangles": 586
+    },
+    {
+      "structureId": "bodymate.muscle.fj1389",
+      "sourceMeshId": "FJ1389",
+      "canonicalName": "Fourth lumbrical of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 364,
+      "triangles": 276
+    },
+    {
+      "structureId": "bodymate.muscle.fj1389m",
+      "sourceMeshId": "FJ1389M",
+      "canonicalName": "Fourth lumbrical of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 365,
+      "triangles": 276
+    },
+    {
+      "structureId": "bodymate.muscle.fj1390",
+      "sourceMeshId": "FJ1390",
+      "canonicalName": "Abductor digiti minimi of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 1123,
+      "triangles": 796
+    },
+    {
+      "structureId": "bodymate.muscle.fj1390m",
+      "sourceMeshId": "FJ1390M",
+      "canonicalName": "Abductor digiti minimi of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 1117,
+      "triangles": 790
+    },
+    {
+      "structureId": "bodymate.muscle.fj1391",
+      "sourceMeshId": "FJ1391",
+      "canonicalName": "Flexor digiti minimi brevis of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 671,
+      "triangles": 572
+    },
+    {
+      "structureId": "bodymate.muscle.fj1391m",
+      "sourceMeshId": "FJ1391M",
+      "canonicalName": "Flexor digiti minimi brevis of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 670,
+      "triangles": 568
+    },
+    {
+      "structureId": "bodymate.muscle.fj1393",
+      "sourceMeshId": "FJ1393",
+      "canonicalName": "Lateral head of right flexor hallucis brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 1709,
+      "triangles": 1180
+    },
+    {
+      "structureId": "bodymate.muscle.fj1393m",
+      "sourceMeshId": "FJ1393M",
+      "canonicalName": "Lateral head of left flexor hallucis brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 1716,
+      "triangles": 1182
+    },
+    {
+      "structureId": "bodymate.muscle.fj1394",
+      "sourceMeshId": "FJ1394",
+      "canonicalName": "Lateral head of right gastrocnemius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 482,
+      "triangles": 738
+    },
+    {
+      "structureId": "bodymate.muscle.fj1394m",
+      "sourceMeshId": "FJ1394M",
+      "canonicalName": "Lateral head of left gastrocnemius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 487,
+      "triangles": 748
+    },
+    {
+      "structureId": "bodymate.muscle.fj1395",
+      "sourceMeshId": "FJ1395",
+      "canonicalName": "Long head of right biceps femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 718,
+      "triangles": 1124
+    },
+    {
+      "structureId": "bodymate.muscle.fj1395m",
+      "sourceMeshId": "FJ1395M",
+      "canonicalName": "Long head of left biceps femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 726,
+      "triangles": 1124
+    },
+    {
+      "structureId": "bodymate.muscle.fj1396",
+      "sourceMeshId": "FJ1396",
+      "canonicalName": "Medial head of right flexor hallucis brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 990,
+      "triangles": 700
+    },
+    {
+      "structureId": "bodymate.muscle.fj1396m",
+      "sourceMeshId": "FJ1396M",
+      "canonicalName": "Medial head of left flexor hallucis brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 990,
+      "triangles": 700
+    },
+    {
+      "structureId": "bodymate.muscle.fj1397",
+      "sourceMeshId": "FJ1397",
+      "canonicalName": "Medial head of right gastrocnemius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 647,
+      "triangles": 882
+    },
+    {
+      "structureId": "bodymate.muscle.fj1397m",
+      "sourceMeshId": "FJ1397M",
+      "canonicalName": "Medial head of left gastrocnemius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 644,
+      "triangles": 892
+    },
+    {
+      "structureId": "bodymate.muscle.fj1398",
+      "sourceMeshId": "FJ1398",
+      "canonicalName": "Oblique head of right adductor hallucis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 971,
+      "triangles": 762
+    },
+    {
+      "structureId": "bodymate.muscle.fj1398m",
+      "sourceMeshId": "FJ1398M",
+      "canonicalName": "Oblique head of left adductor hallucis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 968,
+      "triangles": 760
+    },
+    {
+      "structureId": "bodymate.muscle.fj1399",
+      "sourceMeshId": "FJ1399",
+      "canonicalName": "Opponens digiti minimi of right foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 248,
+      "triangles": 182
+    },
+    {
+      "structureId": "bodymate.muscle.fj1399m",
+      "sourceMeshId": "FJ1399M",
+      "canonicalName": "Opponens digiti minimi of left foot",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 248,
+      "triangles": 182
+    },
+    {
+      "structureId": "bodymate.muscle.fj1400",
+      "sourceMeshId": "FJ1400",
+      "canonicalName": "Right abductor hallucis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 628,
+      "triangles": 554
+    },
+    {
+      "structureId": "bodymate.muscle.fj1400m",
+      "sourceMeshId": "FJ1400M",
+      "canonicalName": "Left abductor hallucis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 624,
+      "triangles": 552
+    },
+    {
+      "structureId": "bodymate.muscle.fj1401",
+      "sourceMeshId": "FJ1401",
+      "canonicalName": "Right adductor brevis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 503,
+      "triangles": 528
+    },
+    {
+      "structureId": "bodymate.muscle.fj1401m",
+      "sourceMeshId": "FJ1401M",
+      "canonicalName": "Left adductor brevis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 507,
+      "triangles": 522
+    },
+    {
+      "structureId": "bodymate.muscle.fj1402",
+      "sourceMeshId": "FJ1402",
+      "canonicalName": "Right adductor longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 408,
+      "triangles": 574
+    },
+    {
+      "structureId": "bodymate.muscle.fj1402m",
+      "sourceMeshId": "FJ1402M",
+      "canonicalName": "Left adductor longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 410,
+      "triangles": 574
+    },
+    {
+      "structureId": "bodymate.muscle.fj1403",
+      "sourceMeshId": "FJ1403",
+      "canonicalName": "Right adductor magnus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1786,
+      "triangles": 1648
+    },
+    {
+      "structureId": "bodymate.muscle.fj1403m",
+      "sourceMeshId": "FJ1403M",
+      "canonicalName": "Left adductor magnus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1801,
+      "triangles": 1658
+    },
+    {
+      "structureId": "bodymate.muscle.fj1404",
+      "sourceMeshId": "FJ1404",
+      "canonicalName": "Right adductor minimus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 825,
+      "triangles": 794
+    },
+    {
+      "structureId": "bodymate.muscle.fj1404m",
+      "sourceMeshId": "FJ1404M",
+      "canonicalName": "Left adductor minimus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 837,
+      "triangles": 798
+    },
+    {
+      "structureId": "bodymate.muscle.fj1406",
+      "sourceMeshId": "FJ1406",
+      "canonicalName": "Right extensor digitorum longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1859,
+      "triangles": 1326
+    },
+    {
+      "structureId": "bodymate.muscle.fj1406m",
+      "sourceMeshId": "FJ1406M",
+      "canonicalName": "Left extensor digitorum longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1848,
+      "triangles": 1326
+    },
+    {
+      "structureId": "bodymate.muscle.fj1407",
+      "sourceMeshId": "FJ1407",
+      "canonicalName": "Right extensor hallucis brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 870,
+      "triangles": 662
+    },
+    {
+      "structureId": "bodymate.muscle.fj1407m",
+      "sourceMeshId": "FJ1407M",
+      "canonicalName": "Left extensor hallucis brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 873,
+      "triangles": 664
+    },
+    {
+      "structureId": "bodymate.muscle.fj1408",
+      "sourceMeshId": "FJ1408",
+      "canonicalName": "Right extensor hallucis longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 618,
+      "triangles": 526
+    },
+    {
+      "structureId": "bodymate.muscle.fj1408m",
+      "sourceMeshId": "FJ1408M",
+      "canonicalName": "Left extensor hallucis longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 626,
+      "triangles": 548
+    },
+    {
+      "structureId": "bodymate.muscle.fj1409",
+      "sourceMeshId": "FJ1409",
+      "canonicalName": "Right fibularis brevis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 802,
+      "triangles": 632
+    },
+    {
+      "structureId": "bodymate.muscle.fj1409m",
+      "sourceMeshId": "FJ1409M",
+      "canonicalName": "Left fibularis brevis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 790,
+      "triangles": 624
+    },
+    {
+      "structureId": "bodymate.muscle.fj1410",
+      "sourceMeshId": "FJ1410",
+      "canonicalName": "Right fibularis longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1083,
+      "triangles": 892
+    },
+    {
+      "structureId": "bodymate.muscle.fj1410m",
+      "sourceMeshId": "FJ1410M",
+      "canonicalName": "Left fibularis longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1081,
+      "triangles": 890
+    },
+    {
+      "structureId": "bodymate.muscle.fj1411",
+      "sourceMeshId": "FJ1411",
+      "canonicalName": "Right fibularis tertius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1017,
+      "triangles": 716
+    },
+    {
+      "structureId": "bodymate.muscle.fj1411m",
+      "sourceMeshId": "FJ1411M",
+      "canonicalName": "Left fibularis tertius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1004,
+      "triangles": 716
+    },
+    {
+      "structureId": "bodymate.muscle.fj1412",
+      "sourceMeshId": "FJ1412",
+      "canonicalName": "Right flexor accessorius",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 555,
+      "triangles": 576
+    },
+    {
+      "structureId": "bodymate.muscle.fj1412m",
+      "sourceMeshId": "FJ1412M",
+      "canonicalName": "Left flexor accessorius",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 554,
+      "triangles": 576
+    },
+    {
+      "structureId": "bodymate.muscle.fj1413",
+      "sourceMeshId": "FJ1413",
+      "canonicalName": "Right flexor digitorum brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 1662,
+      "triangles": 1254
+    },
+    {
+      "structureId": "bodymate.muscle.fj1413m",
+      "sourceMeshId": "FJ1413M",
+      "canonicalName": "Left flexor digitorum brevis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 1668,
+      "triangles": 1272
+    },
+    {
+      "structureId": "bodymate.muscle.fj1414",
+      "sourceMeshId": "FJ1414",
+      "canonicalName": "Right flexor digitorum longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1081,
+      "triangles": 1006
+    },
+    {
+      "structureId": "bodymate.muscle.fj1414m",
+      "sourceMeshId": "FJ1414M",
+      "canonicalName": "Left flexor digitorum longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1103,
+      "triangles": 1024
+    },
+    {
+      "structureId": "bodymate.muscle.fj1415",
+      "sourceMeshId": "FJ1415",
+      "canonicalName": "Right flexor hallucis longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 605,
+      "triangles": 660
+    },
+    {
+      "structureId": "bodymate.muscle.fj1415m",
+      "sourceMeshId": "FJ1415M",
+      "canonicalName": "Left flexor hallucis longus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 604,
+      "triangles": 664
+    },
+    {
+      "structureId": "bodymate.muscle.fj1416",
+      "sourceMeshId": "FJ1416",
+      "canonicalName": "Right gemellus inferior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 393,
+      "triangles": 460
+    },
+    {
+      "structureId": "bodymate.muscle.fj1416m",
+      "sourceMeshId": "FJ1416M",
+      "canonicalName": "Left gemellus inferior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 390,
+      "triangles": 456
+    },
+    {
+      "structureId": "bodymate.muscle.fj1417",
+      "sourceMeshId": "FJ1417",
+      "canonicalName": "Right gemellus superior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 409,
+      "triangles": 306
+    },
+    {
+      "structureId": "bodymate.muscle.fj1417m",
+      "sourceMeshId": "FJ1417M",
+      "canonicalName": "Left gemellus superior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 411,
+      "triangles": 306
+    },
+    {
+      "structureId": "bodymate.muscle.fj1418",
+      "sourceMeshId": "FJ1418",
+      "canonicalName": "Right gluteus maximus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1328,
+      "triangles": 1236
+    },
+    {
+      "structureId": "bodymate.muscle.fj1418m",
+      "sourceMeshId": "FJ1418M",
+      "canonicalName": "Left gluteus maximus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1336,
+      "triangles": 1240
+    },
+    {
+      "structureId": "bodymate.muscle.fj1419",
+      "sourceMeshId": "FJ1419",
+      "canonicalName": "Right gluteus medius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1129,
+      "triangles": 1370
+    },
+    {
+      "structureId": "bodymate.muscle.fj1419m",
+      "sourceMeshId": "FJ1419M",
+      "canonicalName": "Left gluteus medius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1126,
+      "triangles": 1378
+    },
+    {
+      "structureId": "bodymate.muscle.fj1420",
+      "sourceMeshId": "FJ1420",
+      "canonicalName": "Right gluteus minimus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1346,
+      "triangles": 1432
+    },
+    {
+      "structureId": "bodymate.muscle.fj1420m",
+      "sourceMeshId": "FJ1420M",
+      "canonicalName": "Left gluteus minimus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1350,
+      "triangles": 1436
+    },
+    {
+      "structureId": "bodymate.muscle.fj1421",
+      "sourceMeshId": "FJ1421",
+      "canonicalName": "Right gracilis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 657,
+      "triangles": 696
+    },
+    {
+      "structureId": "bodymate.muscle.fj1421m",
+      "sourceMeshId": "FJ1421M",
+      "canonicalName": "Left gracilis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 666,
+      "triangles": 696
+    },
+    {
+      "structureId": "bodymate.muscle.fj1422",
+      "sourceMeshId": "FJ1422",
+      "canonicalName": "Right iliacus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1475,
+      "triangles": 1322
+    },
+    {
+      "structureId": "bodymate.muscle.fj1422m",
+      "sourceMeshId": "FJ1422M",
+      "canonicalName": "Left iliacus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1478,
+      "triangles": 1334
+    },
+    {
+      "structureId": "bodymate.connective.fj1423",
+      "sourceMeshId": "FJ1423",
+      "canonicalName": "Right iliotibial tract",
+      "kind": "connective",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 2355,
+      "triangles": 3776
+    },
+    {
+      "structureId": "bodymate.connective.fj1423m",
+      "sourceMeshId": "FJ1423M",
+      "canonicalName": "Left iliotibial tract",
+      "kind": "connective",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 2359,
+      "triangles": 3776
+    },
+    {
+      "structureId": "bodymate.muscle.fj1425",
+      "sourceMeshId": "FJ1425",
+      "canonicalName": "Right obturator externus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 498,
+      "triangles": 562
+    },
+    {
+      "structureId": "bodymate.muscle.fj1425m",
+      "sourceMeshId": "FJ1425M",
+      "canonicalName": "Left obturator externus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 504,
+      "triangles": 564
+    },
+    {
+      "structureId": "bodymate.muscle.fj1426",
+      "sourceMeshId": "FJ1426",
+      "canonicalName": "Right obturator internus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1084,
+      "triangles": 1250
+    },
+    {
+      "structureId": "bodymate.muscle.fj1426m",
+      "sourceMeshId": "FJ1426M",
+      "canonicalName": "Left obturator internus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1091,
+      "triangles": 1258
+    },
+    {
+      "structureId": "bodymate.muscle.fj1427",
+      "sourceMeshId": "FJ1427",
+      "canonicalName": "Right pectineus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 525,
+      "triangles": 678
+    },
+    {
+      "structureId": "bodymate.muscle.fj1427m",
+      "sourceMeshId": "FJ1427M",
+      "canonicalName": "Left pectineus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 533,
+      "triangles": 682
+    },
+    {
+      "structureId": "bodymate.muscle.fj1428",
+      "sourceMeshId": "FJ1428",
+      "canonicalName": "Right piriformis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 511,
+      "triangles": 614
+    },
+    {
+      "structureId": "bodymate.muscle.fj1428m",
+      "sourceMeshId": "FJ1428M",
+      "canonicalName": "Left piriformis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 507,
+      "triangles": 610
+    },
+    {
+      "structureId": "bodymate.muscle.fj1429",
+      "sourceMeshId": "FJ1429",
+      "canonicalName": "Right plantaris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 376,
+      "triangles": 552
+    },
+    {
+      "structureId": "bodymate.muscle.fj1429m",
+      "sourceMeshId": "FJ1429M",
+      "canonicalName": "Left plantaris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 382,
+      "triangles": 552
+    },
+    {
+      "structureId": "bodymate.muscle.fj1430",
+      "sourceMeshId": "FJ1430",
+      "canonicalName": "Right popliteus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 357,
+      "triangles": 468
+    },
+    {
+      "structureId": "bodymate.muscle.fj1430m",
+      "sourceMeshId": "FJ1430M",
+      "canonicalName": "Left popliteus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 356,
+      "triangles": 462
+    },
+    {
+      "structureId": "bodymate.muscle.fj1431",
+      "sourceMeshId": "FJ1431",
+      "canonicalName": "Right psoas major",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1401,
+      "triangles": 1408
+    },
+    {
+      "structureId": "bodymate.muscle.fj1431m",
+      "sourceMeshId": "FJ1431M",
+      "canonicalName": "Left psoas major",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1378,
+      "triangles": 1402
+    },
+    {
+      "structureId": "bodymate.muscle.fj1432",
+      "sourceMeshId": "FJ1432",
+      "canonicalName": "Right quadratus femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 743,
+      "triangles": 780
+    },
+    {
+      "structureId": "bodymate.muscle.fj1432m",
+      "sourceMeshId": "FJ1432M",
+      "canonicalName": "Left quadratus femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 743,
+      "triangles": 782
+    },
+    {
+      "structureId": "bodymate.muscle.fj1433",
+      "sourceMeshId": "FJ1433",
+      "canonicalName": "Right rectus femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 910,
+      "triangles": 1250
+    },
+    {
+      "structureId": "bodymate.muscle.fj1433m",
+      "sourceMeshId": "FJ1433M",
+      "canonicalName": "Left rectus femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 918,
+      "triangles": 1250
+    },
+    {
+      "structureId": "bodymate.muscle.fj1434",
+      "sourceMeshId": "FJ1434",
+      "canonicalName": "Right sartorius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1020,
+      "triangles": 756
+    },
+    {
+      "structureId": "bodymate.muscle.fj1434m",
+      "sourceMeshId": "FJ1434M",
+      "canonicalName": "Left sartorius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1017,
+      "triangles": 756
+    },
+    {
+      "structureId": "bodymate.muscle.fj1435",
+      "sourceMeshId": "FJ1435",
+      "canonicalName": "Right semimembranosus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 664,
+      "triangles": 1014
+    },
+    {
+      "structureId": "bodymate.muscle.fj1435m",
+      "sourceMeshId": "FJ1435M",
+      "canonicalName": "Left semimembranosus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 659,
+      "triangles": 1014
+    },
+    {
+      "structureId": "bodymate.muscle.fj1436",
+      "sourceMeshId": "FJ1436",
+      "canonicalName": "Right semitendinosus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 638,
+      "triangles": 596
+    },
+    {
+      "structureId": "bodymate.muscle.fj1436m",
+      "sourceMeshId": "FJ1436M",
+      "canonicalName": "Left semitendinosus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 624,
+      "triangles": 596
+    },
+    {
+      "structureId": "bodymate.muscle.fj1437",
+      "sourceMeshId": "FJ1437",
+      "canonicalName": "Right soleus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 792,
+      "triangles": 1004
+    },
+    {
+      "structureId": "bodymate.muscle.fj1437m",
+      "sourceMeshId": "FJ1437M",
+      "canonicalName": "Left soleus",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 778,
+      "triangles": 976
+    },
+    {
+      "structureId": "bodymate.muscle.fj1439",
+      "sourceMeshId": "FJ1439",
+      "canonicalName": "Right tibialis anterior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1116,
+      "triangles": 766
+    },
+    {
+      "structureId": "bodymate.muscle.fj1439m",
+      "sourceMeshId": "FJ1439M",
+      "canonicalName": "Left tibialis anterior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1113,
+      "triangles": 756
+    },
+    {
+      "structureId": "bodymate.muscle.fj1440",
+      "sourceMeshId": "FJ1440",
+      "canonicalName": "Right tibialis posterior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 2920,
+      "triangles": 1944
+    },
+    {
+      "structureId": "bodymate.muscle.fj1440m",
+      "sourceMeshId": "FJ1440M",
+      "canonicalName": "Left tibialis posterior",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 2917,
+      "triangles": 1934
+    },
+    {
+      "structureId": "bodymate.muscle.fj1441",
+      "sourceMeshId": "FJ1441",
+      "canonicalName": "Right vastus intermedius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 840,
+      "triangles": 936
+    },
+    {
+      "structureId": "bodymate.muscle.fj1441m",
+      "sourceMeshId": "FJ1441M",
+      "canonicalName": "Left vastus intermedius",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 839,
+      "triangles": 936
+    },
+    {
+      "structureId": "bodymate.muscle.fj1442",
+      "sourceMeshId": "FJ1442",
+      "canonicalName": "Right vastus lateralis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 1091,
+      "triangles": 1470
+    },
+    {
+      "structureId": "bodymate.muscle.fj1442m",
+      "sourceMeshId": "FJ1442M",
+      "canonicalName": "Left vastus lateralis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 1080,
+      "triangles": 1470
+    },
+    {
+      "structureId": "bodymate.muscle.fj1443",
+      "sourceMeshId": "FJ1443",
+      "canonicalName": "Right vastus medialis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 784,
+      "triangles": 1000
+    },
+    {
+      "structureId": "bodymate.muscle.fj1443m",
+      "sourceMeshId": "FJ1443M",
+      "canonicalName": "Left vastus medialis",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 776,
+      "triangles": 1000
+    },
+    {
+      "structureId": "bodymate.muscle.fj1444",
+      "sourceMeshId": "FJ1444",
+      "canonicalName": "Short head of right biceps femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "right",
+      "vertexCount": 456,
+      "triangles": 492
+    },
+    {
+      "structureId": "bodymate.muscle.fj1444m",
+      "sourceMeshId": "FJ1444M",
+      "canonicalName": "Short head of left biceps femoris",
+      "kind": "muscle",
+      "region": "leg",
+      "side": "left",
+      "vertexCount": 450,
+      "triangles": 480
+    },
+    {
+      "structureId": "bodymate.muscle.fj1445",
+      "sourceMeshId": "FJ1445",
+      "canonicalName": "Transverse head of right adductor hallucis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 950,
+      "triangles": 654
+    },
+    {
+      "structureId": "bodymate.muscle.fj1445m",
+      "sourceMeshId": "FJ1445M",
+      "canonicalName": "Transverse head of left adductor hallucis",
+      "kind": "muscle",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 951,
+      "triangles": 656
+    },
+    {
+      "structureId": "bodymate.muscle.fj1446",
+      "sourceMeshId": "FJ1446",
+      "canonicalName": "Abdominal part of right pectoralis major",
+      "kind": "muscle",
+      "region": "chestAttachment",
+      "side": "right",
+      "vertexCount": 563,
+      "triangles": 726
+    },
+    {
+      "structureId": "bodymate.muscle.fj1446m",
+      "sourceMeshId": "FJ1446M",
+      "canonicalName": "Abdominal part of left pectoralis major",
+      "kind": "muscle",
+      "region": "chestAttachment",
+      "side": "left",
+      "vertexCount": 564,
+      "triangles": 722
+    },
+    {
+      "structureId": "bodymate.muscle.fj1447",
+      "sourceMeshId": "FJ1447",
+      "canonicalName": "Clavicular part of right pectoralis major",
+      "kind": "muscle",
+      "region": "chestAttachment",
+      "side": "right",
+      "vertexCount": 917,
+      "triangles": 998
+    },
+    {
+      "structureId": "bodymate.muscle.fj1447m",
+      "sourceMeshId": "FJ1447M",
+      "canonicalName": "Clavicular part of left pectoralis major",
+      "kind": "muscle",
+      "region": "chestAttachment",
+      "side": "left",
+      "vertexCount": 922,
+      "triangles": 998
+    },
+    {
+      "structureId": "bodymate.muscle.fj1449m",
+      "sourceMeshId": "FJ1449M",
+      "canonicalName": "Left coccygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1232,
+      "triangles": 1392
+    },
+    {
+      "structureId": "bodymate.muscle.fj1450m",
+      "sourceMeshId": "FJ1450M",
+      "canonicalName": "External anal sphincter",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 240,
+      "triangles": 350
+    },
+    {
+      "structureId": "bodymate.muscle.fj1451",
+      "sourceMeshId": "FJ1451",
+      "canonicalName": "external intercostal muscle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 36746,
+      "triangles": 26416
+    },
+    {
+      "structureId": "bodymate.muscle.fj1451m",
+      "sourceMeshId": "FJ1451M",
+      "canonicalName": "External intercostal muscle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 36851,
+      "triangles": 26534
+    },
+    {
+      "structureId": "bodymate.muscle.fj1452",
+      "sourceMeshId": "FJ1452",
+      "canonicalName": "Right external oblique",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 17145,
+      "triangles": 24600
+    },
+    {
+      "structureId": "bodymate.muscle.fj1452m",
+      "sourceMeshId": "FJ1452M",
+      "canonicalName": "Left external oblique",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 17116,
+      "triangles": 24600
+    },
+    {
+      "structureId": "bodymate.muscle.fj1453m",
+      "sourceMeshId": "FJ1453M",
+      "canonicalName": "Left iliococcygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2244,
+      "triangles": 2116
+    },
+    {
+      "structureId": "bodymate.muscle.fj1454",
+      "sourceMeshId": "FJ1454",
+      "canonicalName": "innermost intercostal muscle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 27286,
+      "triangles": 21278
+    },
+    {
+      "structureId": "bodymate.muscle.fj1454m",
+      "sourceMeshId": "FJ1454M",
+      "canonicalName": "Innermost intercostal muscle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 27252,
+      "triangles": 21206
+    },
+    {
+      "structureId": "bodymate.muscle.fj1455",
+      "sourceMeshId": "FJ1455",
+      "canonicalName": "internal intercostal muscle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 25147,
+      "triangles": 19942
+    },
+    {
+      "structureId": "bodymate.muscle.fj1455m",
+      "sourceMeshId": "FJ1455M",
+      "canonicalName": "Internal intercostal muscle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 25053,
+      "triangles": 19898
+    },
+    {
+      "structureId": "bodymate.muscle.fj1456",
+      "sourceMeshId": "FJ1456",
+      "canonicalName": "Right pectoralis minor",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2726,
+      "triangles": 2612
+    },
+    {
+      "structureId": "bodymate.muscle.fj1456m",
+      "sourceMeshId": "FJ1456M",
+      "canonicalName": "Left pectoralis minor",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2729,
+      "triangles": 2590
+    },
+    {
+      "structureId": "bodymate.muscle.fj1457m",
+      "sourceMeshId": "FJ1457M",
+      "canonicalName": "Left pubococcygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1753,
+      "triangles": 1866
+    },
+    {
+      "structureId": "bodymate.muscle.fj1458m",
+      "sourceMeshId": "FJ1458M",
+      "canonicalName": "Left puborectalis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2765,
+      "triangles": 2058
+    },
+    {
+      "structureId": "bodymate.muscle.fj1459",
+      "sourceMeshId": "FJ1459",
+      "canonicalName": "Right serratus anterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 7818,
+      "triangles": 10826
+    },
+    {
+      "structureId": "bodymate.muscle.fj1459m",
+      "sourceMeshId": "FJ1459M",
+      "canonicalName": "Left serratus anterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 7810,
+      "triangles": 10826
+    },
+    {
+      "structureId": "bodymate.muscle.fj1460",
+      "sourceMeshId": "FJ1460",
+      "canonicalName": "Right subclavius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 670,
+      "triangles": 824
+    },
+    {
+      "structureId": "bodymate.muscle.fj1460m",
+      "sourceMeshId": "FJ1460M",
+      "canonicalName": "Left subclavius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 673,
+      "triangles": 818
+    },
+    {
+      "structureId": "bodymate.muscle.fj1461",
+      "sourceMeshId": "FJ1461",
+      "canonicalName": "Right transversus thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 3482,
+      "triangles": 2458
+    },
+    {
+      "structureId": "bodymate.muscle.fj1461m",
+      "sourceMeshId": "FJ1461M",
+      "canonicalName": "Left transversus thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 3482,
+      "triangles": 2448
+    },
+    {
+      "structureId": "bodymate.muscle.fj1462",
+      "sourceMeshId": "FJ1462",
+      "canonicalName": "Set of right levatores costarum breves",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2937,
+      "triangles": 1872
+    },
+    {
+      "structureId": "bodymate.muscle.fj1462m",
+      "sourceMeshId": "FJ1462M",
+      "canonicalName": "Set of left levatores costarum breves",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2922,
+      "triangles": 1882
+    },
+    {
+      "structureId": "bodymate.muscle.fj1463",
+      "sourceMeshId": "FJ1463",
+      "canonicalName": "Set of right levatores costarum longi",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2656,
+      "triangles": 2686
+    },
+    {
+      "structureId": "bodymate.muscle.fj1463m",
+      "sourceMeshId": "FJ1463M",
+      "canonicalName": "Set of left levatores costarum longi",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2619,
+      "triangles": 2686
+    },
+    {
+      "structureId": "bodymate.muscle.fj1464",
+      "sourceMeshId": "FJ1464",
+      "canonicalName": "Sternocostal part of right pectoralis major",
+      "kind": "muscle",
+      "region": "chestAttachment",
+      "side": "right",
+      "vertexCount": 3278,
+      "triangles": 3480
+    },
+    {
+      "structureId": "bodymate.muscle.fj1464m",
+      "sourceMeshId": "FJ1464M",
+      "canonicalName": "Sternocostal part of left pectoralis major",
+      "kind": "muscle",
+      "region": "chestAttachment",
+      "side": "left",
+      "vertexCount": 3271,
+      "triangles": 3490
+    },
+    {
+      "structureId": "bodymate.muscle.fj1466",
+      "sourceMeshId": "FJ1466",
+      "canonicalName": "Abductor digiti minimi of right hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 542,
+      "triangles": 380
+    },
+    {
+      "structureId": "bodymate.muscle.fj1466m",
+      "sourceMeshId": "FJ1466M",
+      "canonicalName": "Abductor digiti minimi of left hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 536,
+      "triangles": 380
+    },
+    {
+      "structureId": "bodymate.muscle.fj1467",
+      "sourceMeshId": "FJ1467",
+      "canonicalName": "Acromial part of right deltoid",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 545,
+      "triangles": 686
+    },
+    {
+      "structureId": "bodymate.muscle.fj1467m",
+      "sourceMeshId": "FJ1467M",
+      "canonicalName": "Acromial part of left deltoid",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 544,
+      "triangles": 686
+    },
+    {
+      "structureId": "bodymate.muscle.fj1468",
+      "sourceMeshId": "FJ1468",
+      "canonicalName": "Clavicular part of right deltoid",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 2121,
+      "triangles": 1486
+    },
+    {
+      "structureId": "bodymate.muscle.fj1468m",
+      "sourceMeshId": "FJ1468M",
+      "canonicalName": "Clavicular part of left deltoid",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 2143,
+      "triangles": 1500
+    },
+    {
+      "structureId": "bodymate.muscle.fj1469",
+      "sourceMeshId": "FJ1469",
+      "canonicalName": "Left flexor pollicis brevis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 547,
+      "triangles": 490
+    },
+    {
+      "structureId": "bodymate.muscle.fj1469m",
+      "sourceMeshId": "FJ1469M",
+      "canonicalName": "Right flexor pollicis brevis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 551,
+      "triangles": 492
+    },
+    {
+      "structureId": "bodymate.muscle.fj1470",
+      "sourceMeshId": "FJ1470",
+      "canonicalName": "Flexor digiti minimi brevis of right hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 232,
+      "triangles": 216
+    },
+    {
+      "structureId": "bodymate.muscle.fj1470m",
+      "sourceMeshId": "FJ1470M",
+      "canonicalName": "Flexor digiti minimi brevis of left hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 233,
+      "triangles": 216
+    },
+    {
+      "structureId": "bodymate.muscle.fj1472",
+      "sourceMeshId": "FJ1472",
+      "canonicalName": "Right extensor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 2167,
+      "triangles": 1136
+    },
+    {
+      "structureId": "bodymate.muscle.fj1472m",
+      "sourceMeshId": "FJ1472M",
+      "canonicalName": "Left extensor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 2185,
+      "triangles": 1152
+    },
+    {
+      "structureId": "bodymate.muscle.fj1473",
+      "sourceMeshId": "FJ1473",
+      "canonicalName": "Humeral head of right flexor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 694,
+      "triangles": 680
+    },
+    {
+      "structureId": "bodymate.muscle.fj1473m",
+      "sourceMeshId": "FJ1473M",
+      "canonicalName": "Humeral head of left flexor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 666,
+      "triangles": 674
+    },
+    {
+      "structureId": "bodymate.muscle.fj1474",
+      "sourceMeshId": "FJ1474",
+      "canonicalName": "Humeral head of right pronator teres",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 984,
+      "triangles": 856
+    },
+    {
+      "structureId": "bodymate.muscle.fj1474m",
+      "sourceMeshId": "FJ1474M",
+      "canonicalName": "Humeral head of left pronator teres",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1002,
+      "triangles": 860
+    },
+    {
+      "structureId": "bodymate.muscle.fj1475",
+      "sourceMeshId": "FJ1475",
+      "canonicalName": "Right flexor digitorum superficialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1998,
+      "triangles": 1912
+    },
+    {
+      "structureId": "bodymate.muscle.fj1475m",
+      "sourceMeshId": "FJ1475M",
+      "canonicalName": "Left flexor digitorum superficialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1993,
+      "triangles": 1912
+    },
+    {
+      "structureId": "bodymate.muscle.fj1477",
+      "sourceMeshId": "FJ1477",
+      "canonicalName": "Lateral head of right triceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 656,
+      "triangles": 838
+    },
+    {
+      "structureId": "bodymate.muscle.fj1477m",
+      "sourceMeshId": "FJ1477M",
+      "canonicalName": "Lateral head of left triceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 661,
+      "triangles": 830
+    },
+    {
+      "structureId": "bodymate.muscle.fj1478",
+      "sourceMeshId": "FJ1478",
+      "canonicalName": "Long head of right biceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 466,
+      "triangles": 492
+    },
+    {
+      "structureId": "bodymate.muscle.fj1478m",
+      "sourceMeshId": "FJ1478M",
+      "canonicalName": "Long head of left biceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 457,
+      "triangles": 492
+    },
+    {
+      "structureId": "bodymate.muscle.fj1479",
+      "sourceMeshId": "FJ1479",
+      "canonicalName": "Long head of right triceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 504,
+      "triangles": 560
+    },
+    {
+      "structureId": "bodymate.muscle.fj1479m",
+      "sourceMeshId": "FJ1479M",
+      "canonicalName": "Long head of left triceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 504,
+      "triangles": 562
+    },
+    {
+      "structureId": "bodymate.muscle.fj1480",
+      "sourceMeshId": "FJ1480",
+      "canonicalName": "Medial head of right triceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 325,
+      "triangles": 372
+    },
+    {
+      "structureId": "bodymate.muscle.fj1480m",
+      "sourceMeshId": "FJ1480M",
+      "canonicalName": "Medial head of left triceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 325,
+      "triangles": 374
+    },
+    {
+      "structureId": "bodymate.muscle.fj1481",
+      "sourceMeshId": "FJ1481",
+      "canonicalName": "Oblique head of right adductor pollicis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 629,
+      "triangles": 534
+    },
+    {
+      "structureId": "bodymate.muscle.fj1481m",
+      "sourceMeshId": "FJ1481M",
+      "canonicalName": "Oblique head of left adductor pollicis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 620,
+      "triangles": 528
+    },
+    {
+      "structureId": "bodymate.muscle.fj1482",
+      "sourceMeshId": "FJ1482",
+      "canonicalName": "Opponens digiti minimi of right hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 534,
+      "triangles": 382
+    },
+    {
+      "structureId": "bodymate.muscle.fj1482m",
+      "sourceMeshId": "FJ1482M",
+      "canonicalName": "Opponens digiti minimi of left hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 532,
+      "triangles": 382
+    },
+    {
+      "structureId": "bodymate.muscle.fj1483",
+      "sourceMeshId": "FJ1483",
+      "canonicalName": "Right abductor pollicis brevis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 610,
+      "triangles": 576
+    },
+    {
+      "structureId": "bodymate.muscle.fj1483m",
+      "sourceMeshId": "FJ1483M",
+      "canonicalName": "Left abductor pollicis brevis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 607,
+      "triangles": 578
+    },
+    {
+      "structureId": "bodymate.muscle.fj1484",
+      "sourceMeshId": "FJ1484",
+      "canonicalName": "Right abductor pollicis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 655,
+      "triangles": 592
+    },
+    {
+      "structureId": "bodymate.muscle.fj1484m",
+      "sourceMeshId": "FJ1484M",
+      "canonicalName": "Left abductor pollicis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 657,
+      "triangles": 600
+    },
+    {
+      "structureId": "bodymate.muscle.fj1485",
+      "sourceMeshId": "FJ1485",
+      "canonicalName": "Right anconeus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 700,
+      "triangles": 654
+    },
+    {
+      "structureId": "bodymate.muscle.fj1485m",
+      "sourceMeshId": "FJ1485M",
+      "canonicalName": "Left anconeus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 693,
+      "triangles": 640
+    },
+    {
+      "structureId": "bodymate.muscle.fj1486",
+      "sourceMeshId": "FJ1486",
+      "canonicalName": "Right brachialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 630,
+      "triangles": 712
+    },
+    {
+      "structureId": "bodymate.muscle.fj1486m",
+      "sourceMeshId": "FJ1486M",
+      "canonicalName": "Left brachialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 621,
+      "triangles": 702
+    },
+    {
+      "structureId": "bodymate.muscle.fj1487",
+      "sourceMeshId": "FJ1487",
+      "canonicalName": "Right brachioradialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1012,
+      "triangles": 1072
+    },
+    {
+      "structureId": "bodymate.muscle.fj1487m",
+      "sourceMeshId": "FJ1487M",
+      "canonicalName": "Left brachioradialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 991,
+      "triangles": 1070
+    },
+    {
+      "structureId": "bodymate.muscle.fj1488",
+      "sourceMeshId": "FJ1488",
+      "canonicalName": "Right coracobrachialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 329,
+      "triangles": 280
+    },
+    {
+      "structureId": "bodymate.muscle.fj1488m",
+      "sourceMeshId": "FJ1488M",
+      "canonicalName": "Left coracobrachialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 321,
+      "triangles": 276
+    },
+    {
+      "structureId": "bodymate.muscle.fj1489",
+      "sourceMeshId": "FJ1489",
+      "canonicalName": "Right extensor carpi radialis brevis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 585,
+      "triangles": 522
+    },
+    {
+      "structureId": "bodymate.muscle.fj1489m",
+      "sourceMeshId": "FJ1489M",
+      "canonicalName": "Left extensor carpi radialis brevis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 560,
+      "triangles": 508
+    },
+    {
+      "structureId": "bodymate.muscle.fj1490",
+      "sourceMeshId": "FJ1490",
+      "canonicalName": "Right extensor carpi radialis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 528,
+      "triangles": 544
+    },
+    {
+      "structureId": "bodymate.muscle.fj1490m",
+      "sourceMeshId": "FJ1490M",
+      "canonicalName": "Left extensor carpi radialis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 537,
+      "triangles": 544
+    },
+    {
+      "structureId": "bodymate.muscle.fj1491",
+      "sourceMeshId": "FJ1491",
+      "canonicalName": "Right extensor digiti minimi",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 304,
+      "triangles": 314
+    },
+    {
+      "structureId": "bodymate.muscle.fj1491m",
+      "sourceMeshId": "FJ1491M",
+      "canonicalName": "Left extensor digiti minimi",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 310,
+      "triangles": 314
+    },
+    {
+      "structureId": "bodymate.muscle.fj1492",
+      "sourceMeshId": "FJ1492",
+      "canonicalName": "Right extensor digitorum",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1313,
+      "triangles": 1054
+    },
+    {
+      "structureId": "bodymate.muscle.fj1492m",
+      "sourceMeshId": "FJ1492M",
+      "canonicalName": "Left extensor digitorum",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1305,
+      "triangles": 1062
+    },
+    {
+      "structureId": "bodymate.muscle.fj1493",
+      "sourceMeshId": "FJ1493",
+      "canonicalName": "Right extensor indicis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 426,
+      "triangles": 340
+    },
+    {
+      "structureId": "bodymate.muscle.fj1493m",
+      "sourceMeshId": "FJ1493M",
+      "canonicalName": "Left extensor indicis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 431,
+      "triangles": 342
+    },
+    {
+      "structureId": "bodymate.muscle.fj1494",
+      "sourceMeshId": "FJ1494",
+      "canonicalName": "Right extensor pollicis brevis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 497,
+      "triangles": 438
+    },
+    {
+      "structureId": "bodymate.muscle.fj1494m",
+      "sourceMeshId": "FJ1494M",
+      "canonicalName": "Left extensor pollicis brevis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 491,
+      "triangles": 434
+    },
+    {
+      "structureId": "bodymate.muscle.fj1495",
+      "sourceMeshId": "FJ1495",
+      "canonicalName": "Right extensor pollicis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 613,
+      "triangles": 488
+    },
+    {
+      "structureId": "bodymate.muscle.fj1495m",
+      "sourceMeshId": "FJ1495M",
+      "canonicalName": "Left extensor pollicis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 623,
+      "triangles": 490
+    },
+    {
+      "structureId": "bodymate.muscle.fj1496",
+      "sourceMeshId": "FJ1496",
+      "canonicalName": "Right flexor carpi radialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 299,
+      "triangles": 310
+    },
+    {
+      "structureId": "bodymate.muscle.fj1496m",
+      "sourceMeshId": "FJ1496M",
+      "canonicalName": "Left flexor carpi radialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 300,
+      "triangles": 312
+    },
+    {
+      "structureId": "bodymate.muscle.fj1497",
+      "sourceMeshId": "FJ1497",
+      "canonicalName": "Right flexor digitorum profundus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1520,
+      "triangles": 1304
+    },
+    {
+      "structureId": "bodymate.muscle.fj1497m",
+      "sourceMeshId": "FJ1497M",
+      "canonicalName": "Left flexor digitorum profundus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1521,
+      "triangles": 1296
+    },
+    {
+      "structureId": "bodymate.muscle.fj1498",
+      "sourceMeshId": "FJ1498",
+      "canonicalName": "Right flexor pollicis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1311,
+      "triangles": 824
+    },
+    {
+      "structureId": "bodymate.muscle.fj1498m",
+      "sourceMeshId": "FJ1498M",
+      "canonicalName": "Left flexor pollicis longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1322,
+      "triangles": 834
+    },
+    {
+      "structureId": "bodymate.muscle.fj1499",
+      "sourceMeshId": "FJ1499",
+      "canonicalName": "Right flexor digitorum superficialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 329,
+      "triangles": 368
+    },
+    {
+      "structureId": "bodymate.muscle.fj1499m",
+      "sourceMeshId": "FJ1499M",
+      "canonicalName": "Left flexor digitorum superficialis",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 328,
+      "triangles": 366
+    },
+    {
+      "structureId": "bodymate.muscle.fj1500",
+      "sourceMeshId": "FJ1500",
+      "canonicalName": "Right infraspinatus muscle",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 528,
+      "triangles": 536
+    },
+    {
+      "structureId": "bodymate.muscle.fj1500m",
+      "sourceMeshId": "FJ1500M",
+      "canonicalName": "Left infraspinatus muscle",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 510,
+      "triangles": 530
+    },
+    {
+      "structureId": "bodymate.muscle.fj1501",
+      "sourceMeshId": "FJ1501",
+      "canonicalName": "Right opponens pollicis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 769,
+      "triangles": 680
+    },
+    {
+      "structureId": "bodymate.muscle.fj1501m",
+      "sourceMeshId": "FJ1501M",
+      "canonicalName": "Left opponens pollicis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 769,
+      "triangles": 680
+    },
+    {
+      "structureId": "bodymate.muscle.fj1502",
+      "sourceMeshId": "FJ1502",
+      "canonicalName": "Right palmaris longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 2090,
+      "triangles": 1500
+    },
+    {
+      "structureId": "bodymate.muscle.fj1502m",
+      "sourceMeshId": "FJ1502M",
+      "canonicalName": "Left palmaris longus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 2094,
+      "triangles": 1506
+    },
+    {
+      "structureId": "bodymate.muscle.fj1503",
+      "sourceMeshId": "FJ1503",
+      "canonicalName": "Right pronator quadratus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1724,
+      "triangles": 1284
+    },
+    {
+      "structureId": "bodymate.muscle.fj1503m",
+      "sourceMeshId": "FJ1503M",
+      "canonicalName": "Left pronator quadratus",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1737,
+      "triangles": 1292
+    },
+    {
+      "structureId": "bodymate.muscle.fj1504",
+      "sourceMeshId": "FJ1504",
+      "canonicalName": "Right subscapularis",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 2368,
+      "triangles": 1524
+    },
+    {
+      "structureId": "bodymate.muscle.fj1504m",
+      "sourceMeshId": "FJ1504M",
+      "canonicalName": "Left subscapularis",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 2342,
+      "triangles": 1512
+    },
+    {
+      "structureId": "bodymate.muscle.fj1505",
+      "sourceMeshId": "FJ1505",
+      "canonicalName": "Right supinator",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1229,
+      "triangles": 1266
+    },
+    {
+      "structureId": "bodymate.muscle.fj1505m",
+      "sourceMeshId": "FJ1505M",
+      "canonicalName": "Left supinator",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1253,
+      "triangles": 1282
+    },
+    {
+      "structureId": "bodymate.muscle.fj1506",
+      "sourceMeshId": "FJ1506",
+      "canonicalName": "Right supraspinatus",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 622,
+      "triangles": 564
+    },
+    {
+      "structureId": "bodymate.muscle.fj1506m",
+      "sourceMeshId": "FJ1506M",
+      "canonicalName": "Left supraspinatus",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 627,
+      "triangles": 564
+    },
+    {
+      "structureId": "bodymate.muscle.fj1507",
+      "sourceMeshId": "FJ1507",
+      "canonicalName": "Right teres major",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 775,
+      "triangles": 700
+    },
+    {
+      "structureId": "bodymate.muscle.fj1507m",
+      "sourceMeshId": "FJ1507M",
+      "canonicalName": "Left teres major",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 783,
+      "triangles": 702
+    },
+    {
+      "structureId": "bodymate.muscle.fj1508",
+      "sourceMeshId": "FJ1508",
+      "canonicalName": "Right teres minor",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 316,
+      "triangles": 372
+    },
+    {
+      "structureId": "bodymate.muscle.fj1508m",
+      "sourceMeshId": "FJ1508M",
+      "canonicalName": "Left teres minor",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 307,
+      "triangles": 364
+    },
+    {
+      "structureId": "bodymate.muscle.fj1509",
+      "sourceMeshId": "FJ1509",
+      "canonicalName": "Set of dorsal interossei of right hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 2817,
+      "triangles": 1792
+    },
+    {
+      "structureId": "bodymate.muscle.fj1509m",
+      "sourceMeshId": "FJ1509M",
+      "canonicalName": "Set of dorsal interossei of left hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 2807,
+      "triangles": 1788
+    },
+    {
+      "structureId": "bodymate.muscle.fj1510",
+      "sourceMeshId": "FJ1510",
+      "canonicalName": "Set of lumbricals of right hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 2144,
+      "triangles": 1640
+    },
+    {
+      "structureId": "bodymate.muscle.fj1510m",
+      "sourceMeshId": "FJ1510M",
+      "canonicalName": "Set of lumbricals of left hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 2140,
+      "triangles": 1640
+    },
+    {
+      "structureId": "bodymate.muscle.fj1511",
+      "sourceMeshId": "FJ1511",
+      "canonicalName": "Set of palmar interossei of right hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 976,
+      "triangles": 738
+    },
+    {
+      "structureId": "bodymate.muscle.fj1511m",
+      "sourceMeshId": "FJ1511M",
+      "canonicalName": "Set of palmar interossei of left hand",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 982,
+      "triangles": 740
+    },
+    {
+      "structureId": "bodymate.muscle.fj1512",
+      "sourceMeshId": "FJ1512",
+      "canonicalName": "Short head of right biceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1035,
+      "triangles": 804
+    },
+    {
+      "structureId": "bodymate.muscle.fj1512m",
+      "sourceMeshId": "FJ1512M",
+      "canonicalName": "Short head of left biceps brachii",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1032,
+      "triangles": 816
+    },
+    {
+      "structureId": "bodymate.muscle.fj1513",
+      "sourceMeshId": "FJ1513",
+      "canonicalName": "Spinal part of right deltoid",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "right",
+      "vertexCount": 1063,
+      "triangles": 1028
+    },
+    {
+      "structureId": "bodymate.muscle.fj1513m",
+      "sourceMeshId": "FJ1513M",
+      "canonicalName": "Spinal part of left deltoid",
+      "kind": "muscle",
+      "region": "shoulderAttachment",
+      "side": "left",
+      "vertexCount": 1078,
+      "triangles": 1046
+    },
+    {
+      "structureId": "bodymate.muscle.fj1514",
+      "sourceMeshId": "FJ1514",
+      "canonicalName": "Superficial head of right flexor pollicis brevis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 786,
+      "triangles": 540
+    },
+    {
+      "structureId": "bodymate.muscle.fj1514m",
+      "sourceMeshId": "FJ1514M",
+      "canonicalName": "Superficial head of left flexor pollicis brevis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 786,
+      "triangles": 540
+    },
+    {
+      "structureId": "bodymate.muscle.fj1515",
+      "sourceMeshId": "FJ1515",
+      "canonicalName": "Transverse head of right adductor pollicis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 535,
+      "triangles": 582
+    },
+    {
+      "structureId": "bodymate.muscle.fj1515m",
+      "sourceMeshId": "FJ1515M",
+      "canonicalName": "Transverse head of left adductor pollicis",
+      "kind": "muscle",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 537,
+      "triangles": 582
+    },
+    {
+      "structureId": "bodymate.muscle.fj1516",
+      "sourceMeshId": "FJ1516",
+      "canonicalName": "Ulnar head of right pronator teres",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 486,
+      "triangles": 542
+    },
+    {
+      "structureId": "bodymate.muscle.fj1516m",
+      "sourceMeshId": "FJ1516M",
+      "canonicalName": "Ulnar head of left pronator teres",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 489,
+      "triangles": 548
+    },
+    {
+      "structureId": "bodymate.muscle.fj1517",
+      "sourceMeshId": "FJ1517",
+      "canonicalName": "Right extensor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 662,
+      "triangles": 504
+    },
+    {
+      "structureId": "bodymate.muscle.fj1517m",
+      "sourceMeshId": "FJ1517M",
+      "canonicalName": "Left extensor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 666,
+      "triangles": 508
+    },
+    {
+      "structureId": "bodymate.muscle.fj1518",
+      "sourceMeshId": "FJ1518",
+      "canonicalName": "Ulnar head of right flexor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "right",
+      "vertexCount": 1262,
+      "triangles": 868
+    },
+    {
+      "structureId": "bodymate.muscle.fj1518m",
+      "sourceMeshId": "FJ1518M",
+      "canonicalName": "Ulnar head of left flexor carpi ulnaris",
+      "kind": "muscle",
+      "region": "arm",
+      "side": "left",
+      "vertexCount": 1269,
+      "triangles": 868
+    },
+    {
+      "structureId": "bodymate.muscle.fj1520",
+      "sourceMeshId": "FJ1520",
+      "canonicalName": "Ascending part of right trapezius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2787,
+      "triangles": 2654
+    },
+    {
+      "structureId": "bodymate.muscle.fj1520m",
+      "sourceMeshId": "FJ1520M",
+      "canonicalName": "Ascending part of left trapezius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2752,
+      "triangles": 2640
+    },
+    {
+      "structureId": "bodymate.muscle.fj1521",
+      "sourceMeshId": "FJ1521",
+      "canonicalName": "Descending part of right trapezius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2394,
+      "triangles": 2618
+    },
+    {
+      "structureId": "bodymate.muscle.fj1521m",
+      "sourceMeshId": "FJ1521M",
+      "canonicalName": "Descending part of left trapezius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2380,
+      "triangles": 2622
+    },
+    {
+      "structureId": "bodymate.muscle.fj1522",
+      "sourceMeshId": "FJ1522",
+      "canonicalName": "Right lumbar rotator",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 3271,
+      "triangles": 2174
+    },
+    {
+      "structureId": "bodymate.muscle.fj1522m",
+      "sourceMeshId": "FJ1522M",
+      "canonicalName": "Left lumbar rotator",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 3271,
+      "triangles": 2174
+    },
+    {
+      "structureId": "bodymate.muscle.fj1524",
+      "sourceMeshId": "FJ1524",
+      "canonicalName": "Right cervical rotator",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 3487,
+      "triangles": 2252
+    },
+    {
+      "structureId": "bodymate.muscle.fj1524m",
+      "sourceMeshId": "FJ1524M",
+      "canonicalName": "Left cervical rotator",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 3460,
+      "triangles": 2246
+    },
+    {
+      "structureId": "bodymate.muscle.fj1525",
+      "sourceMeshId": "FJ1525",
+      "canonicalName": "thoracic rotator",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 5805,
+      "triangles": 3978
+    },
+    {
+      "structureId": "bodymate.muscle.fj1525m",
+      "sourceMeshId": "FJ1525M",
+      "canonicalName": "Thoracic rotator",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 5814,
+      "triangles": 3966
+    },
+    {
+      "structureId": "bodymate.muscle.fj1526",
+      "sourceMeshId": "FJ1526",
+      "canonicalName": "Right iliocostalis cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 988,
+      "triangles": 902
+    },
+    {
+      "structureId": "bodymate.muscle.fj1526m",
+      "sourceMeshId": "FJ1526M",
+      "canonicalName": "Left iliocostalis cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 988,
+      "triangles": 898
+    },
+    {
+      "structureId": "bodymate.muscle.fj1527",
+      "sourceMeshId": "FJ1527",
+      "canonicalName": "Right iliocostalis lumborum",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 3264,
+      "triangles": 3490
+    },
+    {
+      "structureId": "bodymate.muscle.fj1527m",
+      "sourceMeshId": "FJ1527M",
+      "canonicalName": "Left iliocostalis lumborum",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 3278,
+      "triangles": 3490
+    },
+    {
+      "structureId": "bodymate.muscle.fj1528",
+      "sourceMeshId": "FJ1528",
+      "canonicalName": "Right iliocostalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1684,
+      "triangles": 1844
+    },
+    {
+      "structureId": "bodymate.muscle.fj1528m",
+      "sourceMeshId": "FJ1528M",
+      "canonicalName": "Left iliocostalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1703,
+      "triangles": 1844
+    },
+    {
+      "structureId": "bodymate.muscle.fj1532",
+      "sourceMeshId": "FJ1532",
+      "canonicalName": "Right levator scapulae",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1262,
+      "triangles": 1314
+    },
+    {
+      "structureId": "bodymate.muscle.fj1532m",
+      "sourceMeshId": "FJ1532M",
+      "canonicalName": "Left levator scapulae",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1285,
+      "triangles": 1316
+    },
+    {
+      "structureId": "bodymate.muscle.fj1533",
+      "sourceMeshId": "FJ1533",
+      "canonicalName": "Right longissimus capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 860,
+      "triangles": 780
+    },
+    {
+      "structureId": "bodymate.muscle.fj1533m",
+      "sourceMeshId": "FJ1533M",
+      "canonicalName": "Left longissimus capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 867,
+      "triangles": 792
+    },
+    {
+      "structureId": "bodymate.muscle.fj1534",
+      "sourceMeshId": "FJ1534",
+      "canonicalName": "Right longissimus cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1065,
+      "triangles": 916
+    },
+    {
+      "structureId": "bodymate.muscle.fj1534m",
+      "sourceMeshId": "FJ1534M",
+      "canonicalName": "Left longissimus cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1056,
+      "triangles": 912
+    },
+    {
+      "structureId": "bodymate.muscle.fj1535",
+      "sourceMeshId": "FJ1535",
+      "canonicalName": "Right longissimus thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 5774,
+      "triangles": 4136
+    },
+    {
+      "structureId": "bodymate.muscle.fj1535m",
+      "sourceMeshId": "FJ1535M",
+      "canonicalName": "Left longissimus thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 5816,
+      "triangles": 4176
+    },
+    {
+      "structureId": "bodymate.muscle.fj1536",
+      "sourceMeshId": "FJ1536",
+      "canonicalName": "Right rhomboid major",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1824,
+      "triangles": 1860
+    },
+    {
+      "structureId": "bodymate.muscle.fj1536m",
+      "sourceMeshId": "FJ1536M",
+      "canonicalName": "Left rhomboid major",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1806,
+      "triangles": 1852
+    },
+    {
+      "structureId": "bodymate.muscle.fj1537",
+      "sourceMeshId": "FJ1537",
+      "canonicalName": "Right rhomboid minor",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 645,
+      "triangles": 746
+    },
+    {
+      "structureId": "bodymate.muscle.fj1537m",
+      "sourceMeshId": "FJ1537M",
+      "canonicalName": "Left rhomboid minor",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 644,
+      "triangles": 742
+    },
+    {
+      "structureId": "bodymate.muscle.fj1538",
+      "sourceMeshId": "FJ1538",
+      "canonicalName": "Right semispinalis capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2307,
+      "triangles": 1336
+    },
+    {
+      "structureId": "bodymate.muscle.fj1538m",
+      "sourceMeshId": "FJ1538M",
+      "canonicalName": "Left semispinalis capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2315,
+      "triangles": 1340
+    },
+    {
+      "structureId": "bodymate.muscle.fj1539",
+      "sourceMeshId": "FJ1539",
+      "canonicalName": "Right semispinalis cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1712,
+      "triangles": 1402
+    },
+    {
+      "structureId": "bodymate.muscle.fj1539m",
+      "sourceMeshId": "FJ1539M",
+      "canonicalName": "Left semispinalis cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1701,
+      "triangles": 1390
+    },
+    {
+      "structureId": "bodymate.muscle.fj1540",
+      "sourceMeshId": "FJ1540",
+      "canonicalName": "Right semispinalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2272,
+      "triangles": 1690
+    },
+    {
+      "structureId": "bodymate.muscle.fj1540m",
+      "sourceMeshId": "FJ1540M",
+      "canonicalName": "Left semispinalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2301,
+      "triangles": 1718
+    },
+    {
+      "structureId": "bodymate.muscle.fj1541",
+      "sourceMeshId": "FJ1541",
+      "canonicalName": "Right serratus posterior inferior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 3285,
+      "triangles": 3832
+    },
+    {
+      "structureId": "bodymate.muscle.fj1541m",
+      "sourceMeshId": "FJ1541M",
+      "canonicalName": "Left serratus posterior inferior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 3263,
+      "triangles": 3830
+    },
+    {
+      "structureId": "bodymate.muscle.fj1542",
+      "sourceMeshId": "FJ1542",
+      "canonicalName": "Right serratus posterior superior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2778,
+      "triangles": 3042
+    },
+    {
+      "structureId": "bodymate.muscle.fj1542m",
+      "sourceMeshId": "FJ1542M",
+      "canonicalName": "Left serratus posterior superior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2765,
+      "triangles": 3066
+    },
+    {
+      "structureId": "bodymate.muscle.fj1543",
+      "sourceMeshId": "FJ1543",
+      "canonicalName": "spinalis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 787,
+      "triangles": 672
+    },
+    {
+      "structureId": "bodymate.muscle.fj1543m",
+      "sourceMeshId": "FJ1543M",
+      "canonicalName": "Spinalis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 792,
+      "triangles": 680
+    },
+    {
+      "structureId": "bodymate.muscle.fj1544",
+      "sourceMeshId": "FJ1544",
+      "canonicalName": "Right spinalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2063,
+      "triangles": 1632
+    },
+    {
+      "structureId": "bodymate.muscle.fj1544m",
+      "sourceMeshId": "FJ1544M",
+      "canonicalName": "Left spinalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2048,
+      "triangles": 1632
+    },
+    {
+      "structureId": "bodymate.muscle.fj1545",
+      "sourceMeshId": "FJ1545",
+      "canonicalName": "Right splenius capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1448,
+      "triangles": 1716
+    },
+    {
+      "structureId": "bodymate.muscle.fj1545m",
+      "sourceMeshId": "FJ1545M",
+      "canonicalName": "Left splenius capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1432,
+      "triangles": 1716
+    },
+    {
+      "structureId": "bodymate.muscle.fj1546",
+      "sourceMeshId": "FJ1546",
+      "canonicalName": "Right splenius cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1635,
+      "triangles": 1376
+    },
+    {
+      "structureId": "bodymate.muscle.fj1546m",
+      "sourceMeshId": "FJ1546M",
+      "canonicalName": "Left splenius cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1624,
+      "triangles": 1376
+    },
+    {
+      "structureId": "bodymate.muscle.fj1547",
+      "sourceMeshId": "FJ1547",
+      "canonicalName": "lateral lumbar intertransversarius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1089,
+      "triangles": 762
+    },
+    {
+      "structureId": "bodymate.muscle.fj1547m",
+      "sourceMeshId": "FJ1547M",
+      "canonicalName": "Lateral lumbar intertransversarius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1092,
+      "triangles": 762
+    },
+    {
+      "structureId": "bodymate.muscle.fj1548",
+      "sourceMeshId": "FJ1548",
+      "canonicalName": "medial lumbar intertransversarius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 773,
+      "triangles": 736
+    },
+    {
+      "structureId": "bodymate.muscle.fj1548m",
+      "sourceMeshId": "FJ1548M",
+      "canonicalName": "Medial lumbar intertransversarius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 770,
+      "triangles": 734
+    },
+    {
+      "structureId": "bodymate.muscle.fj1549",
+      "sourceMeshId": "FJ1549",
+      "canonicalName": "set of anterior cervical intertransversarii",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 718,
+      "triangles": 620
+    },
+    {
+      "structureId": "bodymate.muscle.fj1549m",
+      "sourceMeshId": "FJ1549M",
+      "canonicalName": "Set of anterior cervical intertransversarii",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 717,
+      "triangles": 626
+    },
+    {
+      "structureId": "bodymate.muscle.fj1550",
+      "sourceMeshId": "FJ1550",
+      "canonicalName": "set of interspinales lumborum",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 594,
+      "triangles": 464
+    },
+    {
+      "structureId": "bodymate.muscle.fj1550m",
+      "sourceMeshId": "FJ1550M",
+      "canonicalName": "Set of interspinales lumborum",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 589,
+      "triangles": 464
+    },
+    {
+      "structureId": "bodymate.muscle.fj1551",
+      "sourceMeshId": "FJ1551",
+      "canonicalName": "Right interspinalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 374,
+      "triangles": 312
+    },
+    {
+      "structureId": "bodymate.muscle.fj1551m",
+      "sourceMeshId": "FJ1551M",
+      "canonicalName": "Left interspinalis thoracis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 372,
+      "triangles": 312
+    },
+    {
+      "structureId": "bodymate.muscle.fj1552",
+      "sourceMeshId": "FJ1552",
+      "canonicalName": "set of interspinales cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 748,
+      "triangles": 626
+    },
+    {
+      "structureId": "bodymate.muscle.fj1552m",
+      "sourceMeshId": "FJ1552M",
+      "canonicalName": "Set of interspinales cervicis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 772,
+      "triangles": 640
+    },
+    {
+      "structureId": "bodymate.muscle.fj1553",
+      "sourceMeshId": "FJ1553",
+      "canonicalName": "set of posterior cervical intertransversarii",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 773,
+      "triangles": 654
+    },
+    {
+      "structureId": "bodymate.muscle.fj1553m",
+      "sourceMeshId": "FJ1553M",
+      "canonicalName": "Set of posterior cervical intertransversarii",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 777,
+      "triangles": 664
+    },
+    {
+      "structureId": "bodymate.muscle.fj1554",
+      "sourceMeshId": "FJ1554",
+      "canonicalName": "Transverse part of right trapezius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1989,
+      "triangles": 1960
+    },
+    {
+      "structureId": "bodymate.muscle.fj1554m",
+      "sourceMeshId": "FJ1554M",
+      "canonicalName": "Transverse part of left trapezius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1981,
+      "triangles": 1962
+    },
+    {
+      "structureId": "bodymate.muscle.fj1555",
+      "sourceMeshId": "FJ1555",
+      "canonicalName": "Left digastric",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 294,
+      "triangles": 436
+    },
+    {
+      "structureId": "bodymate.muscle.fj1556",
+      "sourceMeshId": "FJ1556",
+      "canonicalName": "Right digastric",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 334,
+      "triangles": 464
+    },
+    {
+      "structureId": "bodymate.muscle.fj1557",
+      "sourceMeshId": "FJ1557",
+      "canonicalName": "Inferior oblique part of left longus colli",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 335,
+      "triangles": 498
+    },
+    {
+      "structureId": "bodymate.muscle.fj1558",
+      "sourceMeshId": "FJ1558",
+      "canonicalName": "Left platysma",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2097,
+      "triangles": 3500
+    },
+    {
+      "structureId": "bodymate.muscle.fj1559",
+      "sourceMeshId": "FJ1559",
+      "canonicalName": "Left geniohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 277,
+      "triangles": 470
+    },
+    {
+      "structureId": "bodymate.muscle.fj1560",
+      "sourceMeshId": "FJ1560",
+      "canonicalName": "Left digastric",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 361,
+      "triangles": 380
+    },
+    {
+      "structureId": "bodymate.muscle.fj1561",
+      "sourceMeshId": "FJ1561",
+      "canonicalName": "Left longus capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 629,
+      "triangles": 856
+    },
+    {
+      "structureId": "bodymate.muscle.fj1562",
+      "sourceMeshId": "FJ1562",
+      "canonicalName": "Left mylohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 896,
+      "triangles": 1278
+    },
+    {
+      "structureId": "bodymate.muscle.fj1563",
+      "sourceMeshId": "FJ1563",
+      "canonicalName": "Left obliquus capitis inferior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 506,
+      "triangles": 684
+    },
+    {
+      "structureId": "bodymate.muscle.fj1564",
+      "sourceMeshId": "FJ1564",
+      "canonicalName": "Left obliquus capitis superior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1160,
+      "triangles": 948
+    },
+    {
+      "structureId": "bodymate.muscle.fj1565",
+      "sourceMeshId": "FJ1565",
+      "canonicalName": "Left omohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 893,
+      "triangles": 1178
+    },
+    {
+      "structureId": "bodymate.muscle.fj1566",
+      "sourceMeshId": "FJ1566",
+      "canonicalName": "Left rectus capitis anterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 550,
+      "triangles": 644
+    },
+    {
+      "structureId": "bodymate.muscle.fj1567",
+      "sourceMeshId": "FJ1567",
+      "canonicalName": "Left rectus capitis posterior major",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 682,
+      "triangles": 926
+    },
+    {
+      "structureId": "bodymate.muscle.fj1568",
+      "sourceMeshId": "FJ1568",
+      "canonicalName": "Left rectus capitis posterior minor",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 607,
+      "triangles": 710
+    },
+    {
+      "structureId": "bodymate.muscle.fj1569",
+      "sourceMeshId": "FJ1569",
+      "canonicalName": "Left rectus capitis lateralis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 544,
+      "triangles": 622
+    },
+    {
+      "structureId": "bodymate.muscle.fj1570",
+      "sourceMeshId": "FJ1570",
+      "canonicalName": "Left scalenus anterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 663,
+      "triangles": 784
+    },
+    {
+      "structureId": "bodymate.muscle.fj1571",
+      "sourceMeshId": "FJ1571",
+      "canonicalName": "Left scalenus medius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1288,
+      "triangles": 1266
+    },
+    {
+      "structureId": "bodymate.muscle.fj1572",
+      "sourceMeshId": "FJ1572",
+      "canonicalName": "Left scalenus posterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 985,
+      "triangles": 1170
+    },
+    {
+      "structureId": "bodymate.muscle.fj1573",
+      "sourceMeshId": "FJ1573",
+      "canonicalName": "Left sternocleidomastoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1825,
+      "triangles": 2248
+    },
+    {
+      "structureId": "bodymate.muscle.fj1574",
+      "sourceMeshId": "FJ1574",
+      "canonicalName": "Left sternohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 581,
+      "triangles": 804
+    },
+    {
+      "structureId": "bodymate.muscle.fj1575",
+      "sourceMeshId": "FJ1575",
+      "canonicalName": "Left sternothyroid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 473,
+      "triangles": 574
+    },
+    {
+      "structureId": "bodymate.muscle.fj1576",
+      "sourceMeshId": "FJ1576",
+      "canonicalName": "Left stylohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 513,
+      "triangles": 596
+    },
+    {
+      "structureId": "bodymate.muscle.fj1577",
+      "sourceMeshId": "FJ1577",
+      "canonicalName": "Left thyrohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 639,
+      "triangles": 904
+    },
+    {
+      "structureId": "bodymate.muscle.fj1578",
+      "sourceMeshId": "FJ1578",
+      "canonicalName": "Left digastric",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 584,
+      "triangles": 762
+    },
+    {
+      "structureId": "bodymate.muscle.fj1579",
+      "sourceMeshId": "FJ1579",
+      "canonicalName": "Right digastric",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 725,
+      "triangles": 886
+    },
+    {
+      "structureId": "bodymate.muscle.fj1580",
+      "sourceMeshId": "FJ1580",
+      "canonicalName": "Right geniohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 255,
+      "triangles": 452
+    },
+    {
+      "structureId": "bodymate.muscle.fj1582",
+      "sourceMeshId": "FJ1582",
+      "canonicalName": "Right longus capitis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 777,
+      "triangles": 938
+    },
+    {
+      "structureId": "bodymate.muscle.fj1583",
+      "sourceMeshId": "FJ1583",
+      "canonicalName": "Right mylohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 923,
+      "triangles": 1334
+    },
+    {
+      "structureId": "bodymate.muscle.fj1584",
+      "sourceMeshId": "FJ1584",
+      "canonicalName": "Right obliquus capitis inferior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 513,
+      "triangles": 710
+    },
+    {
+      "structureId": "bodymate.muscle.fj1585",
+      "sourceMeshId": "FJ1585",
+      "canonicalName": "Right obliquus capitis superior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1272,
+      "triangles": 958
+    },
+    {
+      "structureId": "bodymate.muscle.fj1586",
+      "sourceMeshId": "FJ1586",
+      "canonicalName": "Right omohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1035,
+      "triangles": 1270
+    },
+    {
+      "structureId": "bodymate.muscle.fj1587",
+      "sourceMeshId": "FJ1587",
+      "canonicalName": "Right platysma",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2504,
+      "triangles": 3914
+    },
+    {
+      "structureId": "bodymate.muscle.fj1588",
+      "sourceMeshId": "FJ1588",
+      "canonicalName": "Right rectus capitis anterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 557,
+      "triangles": 506
+    },
+    {
+      "structureId": "bodymate.muscle.fj1589",
+      "sourceMeshId": "FJ1589",
+      "canonicalName": "Right rectus capitis posterior major",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 757,
+      "triangles": 1002
+    },
+    {
+      "structureId": "bodymate.muscle.fj1590",
+      "sourceMeshId": "FJ1590",
+      "canonicalName": "Right rectus capitis posterior minor",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 682,
+      "triangles": 770
+    },
+    {
+      "structureId": "bodymate.muscle.fj1591",
+      "sourceMeshId": "FJ1591",
+      "canonicalName": "Right rectus capitis lateralis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 481,
+      "triangles": 552
+    },
+    {
+      "structureId": "bodymate.muscle.fj1592",
+      "sourceMeshId": "FJ1592",
+      "canonicalName": "Right scalenus anterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 665,
+      "triangles": 792
+    },
+    {
+      "structureId": "bodymate.muscle.fj1593",
+      "sourceMeshId": "FJ1593",
+      "canonicalName": "Right scalenus medius",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1376,
+      "triangles": 1332
+    },
+    {
+      "structureId": "bodymate.muscle.fj1594",
+      "sourceMeshId": "FJ1594",
+      "canonicalName": "Right scalenus posterior",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1056,
+      "triangles": 1204
+    },
+    {
+      "structureId": "bodymate.muscle.fj1595",
+      "sourceMeshId": "FJ1595",
+      "canonicalName": "Right sternocleidomastoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2166,
+      "triangles": 2274
+    },
+    {
+      "structureId": "bodymate.muscle.fj1596",
+      "sourceMeshId": "FJ1596",
+      "canonicalName": "Right sternohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 702,
+      "triangles": 918
+    },
+    {
+      "structureId": "bodymate.muscle.fj1597",
+      "sourceMeshId": "FJ1597",
+      "canonicalName": "Right sternothyroid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 497,
+      "triangles": 620
+    },
+    {
+      "structureId": "bodymate.muscle.fj1598",
+      "sourceMeshId": "FJ1598",
+      "canonicalName": "Right stylohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 454,
+      "triangles": 576
+    },
+    {
+      "structureId": "bodymate.muscle.fj1599",
+      "sourceMeshId": "FJ1599",
+      "canonicalName": "Right thyrohyoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 746,
+      "triangles": 886
+    },
+    {
+      "structureId": "bodymate.muscle.fj1600",
+      "sourceMeshId": "FJ1600",
+      "canonicalName": "Superior oblique part of left longus colli",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 733,
+      "triangles": 950
+    },
+    {
+      "structureId": "bodymate.muscle.fj1601",
+      "sourceMeshId": "FJ1601",
+      "canonicalName": "Vertical intermediate part of left longus colli",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 582,
+      "triangles": 660
+    },
+    {
+      "structureId": "bodymate.muscle.fj2418",
+      "sourceMeshId": "FJ2418",
+      "canonicalName": "Anterolateral head of lateral papillary muscle of left ventricle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 511,
+      "triangles": 776
+    },
+    {
+      "structureId": "bodymate.muscle.fj2419",
+      "sourceMeshId": "FJ2419",
+      "canonicalName": "Anterior papillary muscle of right ventricle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 548,
+      "triangles": 820
+    },
+    {
+      "structureId": "bodymate.muscle.fj2429",
+      "sourceMeshId": "FJ2429",
+      "canonicalName": "Lateral papillary muscle of left ventricle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 455,
+      "triangles": 722
+    },
+    {
+      "structureId": "bodymate.muscle.fj2430",
+      "sourceMeshId": "FJ2430",
+      "canonicalName": "Posterior papillary muscle of right ventricle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 462,
+      "triangles": 654
+    },
+    {
+      "structureId": "bodymate.muscle.fj2437",
+      "sourceMeshId": "FJ2437",
+      "canonicalName": "Septal papillary muscle of right ventricle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 510,
+      "triangles": 790
+    },
+    {
+      "structureId": "bodymate.bone.fj2440",
+      "sourceMeshId": "FJ2440",
+      "canonicalName": "Cricoid cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 838,
+      "triangles": 1514
+    },
+    {
+      "structureId": "bodymate.muscle.fj2542",
+      "sourceMeshId": "FJ2542",
+      "canonicalName": "Left coccygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1078,
+      "triangles": 1380
+    },
+    {
+      "structureId": "bodymate.muscle.fj2543",
+      "sourceMeshId": "FJ2543",
+      "canonicalName": "External anal sphincter",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 229,
+      "triangles": 344
+    },
+    {
+      "structureId": "bodymate.muscle.fj2544",
+      "sourceMeshId": "FJ2544",
+      "canonicalName": "Left iliococcygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1812,
+      "triangles": 1982
+    },
+    {
+      "structureId": "bodymate.muscle.fj2545",
+      "sourceMeshId": "FJ2545",
+      "canonicalName": "Left pubococcygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1261,
+      "triangles": 1592
+    },
+    {
+      "structureId": "bodymate.muscle.fj2546",
+      "sourceMeshId": "FJ2546",
+      "canonicalName": "Left puborectalis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2073,
+      "triangles": 1796
+    },
+    {
+      "structureId": "bodymate.muscle.fj2547",
+      "sourceMeshId": "FJ2547",
+      "canonicalName": "Right coccygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1213,
+      "triangles": 1396
+    },
+    {
+      "structureId": "bodymate.muscle.fj2548",
+      "sourceMeshId": "FJ2548",
+      "canonicalName": "External anal sphincter",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 240,
+      "triangles": 350
+    },
+    {
+      "structureId": "bodymate.muscle.fj2549",
+      "sourceMeshId": "FJ2549",
+      "canonicalName": "Right iliococcygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2045,
+      "triangles": 1812
+    },
+    {
+      "structureId": "bodymate.muscle.fj2550",
+      "sourceMeshId": "FJ2550",
+      "canonicalName": "Right pubococcygeus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1946,
+      "triangles": 1906
+    },
+    {
+      "structureId": "bodymate.muscle.fj2551",
+      "sourceMeshId": "FJ2551",
+      "canonicalName": "Right puborectalis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 3088,
+      "triangles": 2172
+    },
+    {
+      "structureId": "bodymate.bone.fj2554",
+      "sourceMeshId": "FJ2554",
+      "canonicalName": "Right major alar cartilage",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 210,
+      "triangles": 350
+    },
+    {
+      "structureId": "bodymate.bone.fj2555",
+      "sourceMeshId": "FJ2555",
+      "canonicalName": "Left major alar cartilage",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 236,
+      "triangles": 388
+    },
+    {
+      "structureId": "bodymate.muscle.fj2738",
+      "sourceMeshId": "FJ2738",
+      "canonicalName": "Left genioglossus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1583,
+      "triangles": 2542
+    },
+    {
+      "structureId": "bodymate.muscle.fj2739",
+      "sourceMeshId": "FJ2739",
+      "canonicalName": "Left hyoglossus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 876,
+      "triangles": 1392
+    },
+    {
+      "structureId": "bodymate.muscle.fj2741",
+      "sourceMeshId": "FJ2741",
+      "canonicalName": "Left levator veli palatini",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1668,
+      "triangles": 2708
+    },
+    {
+      "structureId": "bodymate.muscle.fj2748",
+      "sourceMeshId": "FJ2748",
+      "canonicalName": "Left tensor veli palatini",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1799,
+      "triangles": 3050
+    },
+    {
+      "structureId": "bodymate.muscle.fj2750",
+      "sourceMeshId": "FJ2750",
+      "canonicalName": "Right genioglossus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1272,
+      "triangles": 2080
+    },
+    {
+      "structureId": "bodymate.muscle.fj2751",
+      "sourceMeshId": "FJ2751",
+      "canonicalName": "Right hyoglossus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 836,
+      "triangles": 1352
+    },
+    {
+      "structureId": "bodymate.muscle.fj2753",
+      "sourceMeshId": "FJ2753",
+      "canonicalName": "Right levator veli palatini",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1708,
+      "triangles": 2708
+    },
+    {
+      "structureId": "bodymate.muscle.fj2760",
+      "sourceMeshId": "FJ2760",
+      "canonicalName": "Right tensor veli palatini",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1752,
+      "triangles": 3050
+    },
+    {
+      "structureId": "bodymate.muscle.fj2762",
+      "sourceMeshId": "FJ2762",
+      "canonicalName": "Uvular muscle",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 699,
+      "triangles": 1254
+    },
+    {
+      "structureId": "bodymate.bone.fj2769",
+      "sourceMeshId": "FJ2769",
+      "canonicalName": "Cricoid cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 838,
+      "triangles": 1514
+    },
+    {
+      "structureId": "bodymate.bone.fj2772",
+      "sourceMeshId": "FJ2772",
+      "canonicalName": "Hyoid bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 604,
+      "triangles": 1036
+    },
+    {
+      "structureId": "bodymate.bone.fj2773",
+      "sourceMeshId": "FJ2773",
+      "canonicalName": "Left cuneiform cartilage",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 91,
+      "triangles": 174
+    },
+    {
+      "structureId": "bodymate.muscle.fj2774",
+      "sourceMeshId": "FJ2774",
+      "canonicalName": "Left aryepiglotticus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 4468,
+      "triangles": 2602
+    },
+    {
+      "structureId": "bodymate.bone.fj2775",
+      "sourceMeshId": "FJ2775",
+      "canonicalName": "Left arytenoid cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 280,
+      "triangles": 528
+    },
+    {
+      "structureId": "bodymate.bone.fj2776",
+      "sourceMeshId": "FJ2776",
+      "canonicalName": "Left corniculate cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 109,
+      "triangles": 134
+    },
+    {
+      "structureId": "bodymate.muscle.fj2778",
+      "sourceMeshId": "FJ2778",
+      "canonicalName": "Left lateral crico-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1438,
+      "triangles": 2266
+    },
+    {
+      "structureId": "bodymate.muscle.fj2780",
+      "sourceMeshId": "FJ2780",
+      "canonicalName": "Left oblique arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1713,
+      "triangles": 2008
+    },
+    {
+      "structureId": "bodymate.muscle.fj2781",
+      "sourceMeshId": "FJ2781",
+      "canonicalName": "Oblique part of left cricothyroid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1860,
+      "triangles": 2498
+    },
+    {
+      "structureId": "bodymate.muscle.fj2782",
+      "sourceMeshId": "FJ2782",
+      "canonicalName": "Left posterior crico-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1200,
+      "triangles": 2098
+    },
+    {
+      "structureId": "bodymate.muscle.fj2783",
+      "sourceMeshId": "FJ2783",
+      "canonicalName": "Straight part of left cricothyroid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1710,
+      "triangles": 2096
+    },
+    {
+      "structureId": "bodymate.muscle.fj2784",
+      "sourceMeshId": "FJ2784",
+      "canonicalName": "Left thyro-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1318,
+      "triangles": 1928
+    },
+    {
+      "structureId": "bodymate.muscle.fj2785",
+      "sourceMeshId": "FJ2785",
+      "canonicalName": "Left thyro-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 2168,
+      "triangles": 2636
+    },
+    {
+      "structureId": "bodymate.muscle.fj2788",
+      "sourceMeshId": "FJ2788",
+      "canonicalName": "Left vocalis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 180,
+      "triangles": 252
+    },
+    {
+      "structureId": "bodymate.muscle.fj2791",
+      "sourceMeshId": "FJ2791",
+      "canonicalName": "Right aryepiglotticus",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 3302,
+      "triangles": 2066
+    },
+    {
+      "structureId": "bodymate.bone.fj2792",
+      "sourceMeshId": "FJ2792",
+      "canonicalName": "Right arytenoid cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 279,
+      "triangles": 534
+    },
+    {
+      "structureId": "bodymate.bone.fj2793",
+      "sourceMeshId": "FJ2793",
+      "canonicalName": "Right corniculate cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 108,
+      "triangles": 172
+    },
+    {
+      "structureId": "bodymate.bone.fj2795",
+      "sourceMeshId": "FJ2795",
+      "canonicalName": "Right cuneiform cartilage",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 88,
+      "triangles": 170
+    },
+    {
+      "structureId": "bodymate.muscle.fj2796",
+      "sourceMeshId": "FJ2796",
+      "canonicalName": "Right lateral crico-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1357,
+      "triangles": 2206
+    },
+    {
+      "structureId": "bodymate.muscle.fj2798",
+      "sourceMeshId": "FJ2798",
+      "canonicalName": "Right oblique arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1668,
+      "triangles": 1966
+    },
+    {
+      "structureId": "bodymate.muscle.fj2799",
+      "sourceMeshId": "FJ2799",
+      "canonicalName": "Oblique part of right cricothyroid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1714,
+      "triangles": 2460
+    },
+    {
+      "structureId": "bodymate.muscle.fj2800",
+      "sourceMeshId": "FJ2800",
+      "canonicalName": "Right posterior crico-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1160,
+      "triangles": 2094
+    },
+    {
+      "structureId": "bodymate.muscle.fj2801",
+      "sourceMeshId": "FJ2801",
+      "canonicalName": "Straight part of right cricothyroid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 977,
+      "triangles": 1160
+    },
+    {
+      "structureId": "bodymate.muscle.fj2802",
+      "sourceMeshId": "FJ2802",
+      "canonicalName": "Right thyro-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1362,
+      "triangles": 1970
+    },
+    {
+      "structureId": "bodymate.muscle.fj2803",
+      "sourceMeshId": "FJ2803",
+      "canonicalName": "Right thyro-arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 2384,
+      "triangles": 2870
+    },
+    {
+      "structureId": "bodymate.muscle.fj2806",
+      "sourceMeshId": "FJ2806",
+      "canonicalName": "Right vocalis",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 169,
+      "triangles": 252
+    },
+    {
+      "structureId": "bodymate.bone.fj2808",
+      "sourceMeshId": "FJ2808",
+      "canonicalName": "Thyroid cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1081,
+      "triangles": 2058
+    },
+    {
+      "structureId": "bodymate.muscle.fj2809",
+      "sourceMeshId": "FJ2809",
+      "canonicalName": "Transverse arytenoid",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 2642,
+      "triangles": 2914
+    },
+    {
+      "structureId": "bodymate.muscle.fj3131",
+      "sourceMeshId": "FJ3131",
+      "canonicalName": "Diaphragm",
+      "kind": "muscle",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 8469,
+      "triangles": 15074
+    },
+    {
+      "structureId": "bodymate.bone.fj3152",
+      "sourceMeshId": "FJ3152",
+      "canonicalName": "Right hip bone",
+      "kind": "bone",
+      "region": "pelvis",
+      "side": "right",
+      "vertexCount": 1036,
+      "triangles": 1898
+    },
+    {
+      "structureId": "bodymate.bone.fj3153",
+      "sourceMeshId": "FJ3153",
+      "canonicalName": "Xiphoid process",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 464,
+      "triangles": 864
+    },
+    {
+      "structureId": "bodymate.bone.fj3154",
+      "sourceMeshId": "FJ3154",
+      "canonicalName": "Tenth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1251,
+      "triangles": 2160
+    },
+    {
+      "structureId": "bodymate.bone.fj3155",
+      "sourceMeshId": "FJ3155",
+      "canonicalName": "Eleventh thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1238,
+      "triangles": 2006
+    },
+    {
+      "structureId": "bodymate.bone.fj3156",
+      "sourceMeshId": "FJ3156",
+      "canonicalName": "Twelfth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1228,
+      "triangles": 2062
+    },
+    {
+      "structureId": "bodymate.bone.fj3157",
+      "sourceMeshId": "FJ3157",
+      "canonicalName": "First lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1391,
+      "triangles": 2404
+    },
+    {
+      "structureId": "bodymate.bone.fj3158",
+      "sourceMeshId": "FJ3158",
+      "canonicalName": "First thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 915,
+      "triangles": 1398
+    },
+    {
+      "structureId": "bodymate.bone.fj3159",
+      "sourceMeshId": "FJ3159",
+      "canonicalName": "Second lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1493,
+      "triangles": 2492
+    },
+    {
+      "structureId": "bodymate.bone.fj3160",
+      "sourceMeshId": "FJ3160",
+      "canonicalName": "Second thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 965,
+      "triangles": 1570
+    },
+    {
+      "structureId": "bodymate.bone.fj3161",
+      "sourceMeshId": "FJ3161",
+      "canonicalName": "Third cervical vertebra",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 1184,
+      "triangles": 1766
+    },
+    {
+      "structureId": "bodymate.bone.fj3162",
+      "sourceMeshId": "FJ3162",
+      "canonicalName": "Third lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1420,
+      "triangles": 2454
+    },
+    {
+      "structureId": "bodymate.bone.fj3163",
+      "sourceMeshId": "FJ3163",
+      "canonicalName": "Third thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 997,
+      "triangles": 1696
+    },
+    {
+      "structureId": "bodymate.bone.fj3164",
+      "sourceMeshId": "FJ3164",
+      "canonicalName": "Fourth cervical vertebra",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 1288,
+      "triangles": 2062
+    },
+    {
+      "structureId": "bodymate.bone.fj3165",
+      "sourceMeshId": "FJ3165",
+      "canonicalName": "Fourth lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1503,
+      "triangles": 2630
+    },
+    {
+      "structureId": "bodymate.bone.fj3166",
+      "sourceMeshId": "FJ3166",
+      "canonicalName": "Fourth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1004,
+      "triangles": 1684
+    },
+    {
+      "structureId": "bodymate.bone.fj3167",
+      "sourceMeshId": "FJ3167",
+      "canonicalName": "Fifth cervical vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1396,
+      "triangles": 1934
+    },
+    {
+      "structureId": "bodymate.bone.fj3168",
+      "sourceMeshId": "FJ3168",
+      "canonicalName": "Fifth lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1469,
+      "triangles": 2640
+    },
+    {
+      "structureId": "bodymate.bone.fj3169",
+      "sourceMeshId": "FJ3169",
+      "canonicalName": "Fifth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1089,
+      "triangles": 1832
+    },
+    {
+      "structureId": "bodymate.bone.fj3170",
+      "sourceMeshId": "FJ3170",
+      "canonicalName": "Sixth cervical vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1257,
+      "triangles": 1928
+    },
+    {
+      "structureId": "bodymate.bone.fj3171",
+      "sourceMeshId": "FJ3171",
+      "canonicalName": "Sixth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1127,
+      "triangles": 1830
+    },
+    {
+      "structureId": "bodymate.bone.fj3172",
+      "sourceMeshId": "FJ3172",
+      "canonicalName": "Seventh cervical vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1162,
+      "triangles": 1520
+    },
+    {
+      "structureId": "bodymate.bone.fj3173",
+      "sourceMeshId": "FJ3173",
+      "canonicalName": "Seventh thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1223,
+      "triangles": 2094
+    },
+    {
+      "structureId": "bodymate.bone.fj3174",
+      "sourceMeshId": "FJ3174",
+      "canonicalName": "Eighth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1195,
+      "triangles": 2048
+    },
+    {
+      "structureId": "bodymate.bone.fj3175",
+      "sourceMeshId": "FJ3175",
+      "canonicalName": "Ninth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1153,
+      "triangles": 2040
+    },
+    {
+      "structureId": "bodymate.bone.fj3176",
+      "sourceMeshId": "FJ3176",
+      "canonicalName": "Atlas",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 1114,
+      "triangles": 1514
+    },
+    {
+      "structureId": "bodymate.bone.fj3177",
+      "sourceMeshId": "FJ3177",
+      "canonicalName": "Axis",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 1408,
+      "triangles": 2028
+    },
+    {
+      "structureId": "bodymate.bone.fj3178",
+      "sourceMeshId": "FJ3178",
+      "canonicalName": "Body of sternum",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 2511,
+      "triangles": 2810
+    },
+    {
+      "structureId": "bodymate.bone.fj3179",
+      "sourceMeshId": "FJ3179",
+      "canonicalName": "Distal phalanx of left second toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 168,
+      "triangles": 238
+    },
+    {
+      "structureId": "bodymate.bone.fj3180",
+      "sourceMeshId": "FJ3180",
+      "canonicalName": "Distal phalanx of left third toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 188,
+      "triangles": 336
+    },
+    {
+      "structureId": "bodymate.bone.fj3181",
+      "sourceMeshId": "FJ3181",
+      "canonicalName": "Distal phalanx of left fourth toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 146,
+      "triangles": 226
+    },
+    {
+      "structureId": "bodymate.bone.fj3182",
+      "sourceMeshId": "FJ3182",
+      "canonicalName": "Distal phalanx of left big toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 249,
+      "triangles": 366
+    },
+    {
+      "structureId": "bodymate.bone.fj3183",
+      "sourceMeshId": "FJ3183",
+      "canonicalName": "Distal phalanx of left index finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 198,
+      "triangles": 318
+    },
+    {
+      "structureId": "bodymate.bone.fj3184",
+      "sourceMeshId": "FJ3184",
+      "canonicalName": "Distal phalanx of left little finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 154,
+      "triangles": 198
+    },
+    {
+      "structureId": "bodymate.bone.fj3185",
+      "sourceMeshId": "FJ3185",
+      "canonicalName": "Distal phalanx of left little toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 160,
+      "triangles": 220
+    },
+    {
+      "structureId": "bodymate.bone.fj3186",
+      "sourceMeshId": "FJ3186",
+      "canonicalName": "Distal phalanx of left middle finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 170,
+      "triangles": 260
+    },
+    {
+      "structureId": "bodymate.bone.fj3187",
+      "sourceMeshId": "FJ3187",
+      "canonicalName": "Distal phalanx of left ring finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 138,
+      "triangles": 192
+    },
+    {
+      "structureId": "bodymate.bone.fj3188",
+      "sourceMeshId": "FJ3188",
+      "canonicalName": "Distal phalanx of left thumb",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 185,
+      "triangles": 262
+    },
+    {
+      "structureId": "bodymate.bone.fj3189",
+      "sourceMeshId": "FJ3189",
+      "canonicalName": "Distal phalanx of right second toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 168,
+      "triangles": 196
+    },
+    {
+      "structureId": "bodymate.bone.fj3190",
+      "sourceMeshId": "FJ3190",
+      "canonicalName": "Distal phalanx of right third toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 161,
+      "triangles": 258
+    },
+    {
+      "structureId": "bodymate.bone.fj3191",
+      "sourceMeshId": "FJ3191",
+      "canonicalName": "Distal phalanx of right fourth toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 142,
+      "triangles": 240
+    },
+    {
+      "structureId": "bodymate.bone.fj3192",
+      "sourceMeshId": "FJ3192",
+      "canonicalName": "Distal phalanx of right big toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 271,
+      "triangles": 404
+    },
+    {
+      "structureId": "bodymate.bone.fj3193",
+      "sourceMeshId": "FJ3193",
+      "canonicalName": "Distal phalanx of right index finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 187,
+      "triangles": 208
+    },
+    {
+      "structureId": "bodymate.bone.fj3194",
+      "sourceMeshId": "FJ3194",
+      "canonicalName": "Distal phalanx of right little finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 138,
+      "triangles": 184
+    },
+    {
+      "structureId": "bodymate.bone.fj3195",
+      "sourceMeshId": "FJ3195",
+      "canonicalName": "Distal phalanx of right little toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 178,
+      "triangles": 210
+    },
+    {
+      "structureId": "bodymate.bone.fj3196",
+      "sourceMeshId": "FJ3196",
+      "canonicalName": "Distal phalanx of right middle finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 141,
+      "triangles": 170
+    },
+    {
+      "structureId": "bodymate.bone.fj3197",
+      "sourceMeshId": "FJ3197",
+      "canonicalName": "Distal phalanx of right ring finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 114,
+      "triangles": 112
+    },
+    {
+      "structureId": "bodymate.bone.fj3198",
+      "sourceMeshId": "FJ3198",
+      "canonicalName": "Distal phalanx of right thumb",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 181,
+      "triangles": 228
+    },
+    {
+      "structureId": "bodymate.bone.fj3199",
+      "sourceMeshId": "FJ3199",
+      "canonicalName": "Ethmoid",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 5334,
+      "triangles": 8618
+    },
+    {
+      "structureId": "bodymate.bone.fj3200",
+      "sourceMeshId": "FJ3200",
+      "canonicalName": "Frontal bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 3315,
+      "triangles": 5112
+    },
+    {
+      "structureId": "bodymate.bone.fj3201",
+      "sourceMeshId": "FJ3201",
+      "canonicalName": "Hyoid bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 604,
+      "triangles": 1036
+    },
+    {
+      "structureId": "bodymate.bone.fj3202",
+      "sourceMeshId": "FJ3202",
+      "canonicalName": "Intervertebral disk of axis",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 996,
+      "triangles": 1872
+    },
+    {
+      "structureId": "bodymate.bone.fj3203",
+      "sourceMeshId": "FJ3203",
+      "canonicalName": "Intervertebral disk of fourth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 999,
+      "triangles": 1310
+    },
+    {
+      "structureId": "bodymate.bone.fj3204",
+      "sourceMeshId": "FJ3204",
+      "canonicalName": "Intervertebral disk of fifth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1280,
+      "triangles": 1530
+    },
+    {
+      "structureId": "bodymate.bone.fj3205",
+      "sourceMeshId": "FJ3205",
+      "canonicalName": "Intervertebral disk of sixth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1831,
+      "triangles": 2104
+    },
+    {
+      "structureId": "bodymate.bone.fj3206",
+      "sourceMeshId": "FJ3206",
+      "canonicalName": "Intervertebral disk of seventh thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1813,
+      "triangles": 2146
+    },
+    {
+      "structureId": "bodymate.bone.fj3207",
+      "sourceMeshId": "FJ3207",
+      "canonicalName": "Intervertebral disk of eighth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 2675,
+      "triangles": 2548
+    },
+    {
+      "structureId": "bodymate.bone.fj3208",
+      "sourceMeshId": "FJ3208",
+      "canonicalName": "Intervertebral disk of ninth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 2552,
+      "triangles": 2420
+    },
+    {
+      "structureId": "bodymate.bone.fj3209",
+      "sourceMeshId": "FJ3209",
+      "canonicalName": "Intervertebral disk of tenth thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 2554,
+      "triangles": 2456
+    },
+    {
+      "structureId": "bodymate.bone.fj3210",
+      "sourceMeshId": "FJ3210",
+      "canonicalName": "Intervertebral disk of eleventh thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 2892,
+      "triangles": 2648
+    },
+    {
+      "structureId": "bodymate.bone.fj3211",
+      "sourceMeshId": "FJ3211",
+      "canonicalName": "Intervertebral disk",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 3614,
+      "triangles": 2852
+    },
+    {
+      "structureId": "bodymate.bone.fj3212",
+      "sourceMeshId": "FJ3212",
+      "canonicalName": "Intervertebral disk of first lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 3399,
+      "triangles": 2882
+    },
+    {
+      "structureId": "bodymate.bone.fj3213",
+      "sourceMeshId": "FJ3213",
+      "canonicalName": "Intervertebral disk of third cervical vertebra",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 582,
+      "triangles": 728
+    },
+    {
+      "structureId": "bodymate.bone.fj3214",
+      "sourceMeshId": "FJ3214",
+      "canonicalName": "Intervertebral disk of second lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 2955,
+      "triangles": 2604
+    },
+    {
+      "structureId": "bodymate.bone.fj3215",
+      "sourceMeshId": "FJ3215",
+      "canonicalName": "Intervertebral disk of third lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 3750,
+      "triangles": 2922
+    },
+    {
+      "structureId": "bodymate.bone.fj3216",
+      "sourceMeshId": "FJ3216",
+      "canonicalName": "Intervertebral disk of fourth lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 3137,
+      "triangles": 2710
+    },
+    {
+      "structureId": "bodymate.bone.fj3217",
+      "sourceMeshId": "FJ3217",
+      "canonicalName": "Intervertebral disk of fifth lumbar vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1765,
+      "triangles": 2048
+    },
+    {
+      "structureId": "bodymate.bone.fj3218",
+      "sourceMeshId": "FJ3218",
+      "canonicalName": "Intervertebral disk of fourth cervical vertebra",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 626,
+      "triangles": 840
+    },
+    {
+      "structureId": "bodymate.bone.fj3219",
+      "sourceMeshId": "FJ3219",
+      "canonicalName": "Intervertebral disk of fifth cervical vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 629,
+      "triangles": 864
+    },
+    {
+      "structureId": "bodymate.bone.fj3220",
+      "sourceMeshId": "FJ3220",
+      "canonicalName": "Intervertebral disk of sixth cervical vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 850,
+      "triangles": 834
+    },
+    {
+      "structureId": "bodymate.bone.fj3221",
+      "sourceMeshId": "FJ3221",
+      "canonicalName": "Intervertebral disk of seventh cervical vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 828,
+      "triangles": 956
+    },
+    {
+      "structureId": "bodymate.bone.fj3222",
+      "sourceMeshId": "FJ3222",
+      "canonicalName": "Intervertebral disk of first thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 950,
+      "triangles": 1062
+    },
+    {
+      "structureId": "bodymate.bone.fj3223",
+      "sourceMeshId": "FJ3223",
+      "canonicalName": "Intervertebral disk of second thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1128,
+      "triangles": 1230
+    },
+    {
+      "structureId": "bodymate.bone.fj3224",
+      "sourceMeshId": "FJ3224",
+      "canonicalName": "Intervertebral disk of third thoracic vertebra",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1410,
+      "triangles": 1388
+    },
+    {
+      "structureId": "bodymate.bone.fj3225",
+      "sourceMeshId": "FJ3225",
+      "canonicalName": "Left tenth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 754,
+      "triangles": 1500
+    },
+    {
+      "structureId": "bodymate.bone.fj3226",
+      "sourceMeshId": "FJ3226",
+      "canonicalName": "Left eleventh rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 537,
+      "triangles": 1070
+    },
+    {
+      "structureId": "bodymate.bone.fj3227",
+      "sourceMeshId": "FJ3227",
+      "canonicalName": "Left twelfth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 367,
+      "triangles": 730
+    },
+    {
+      "structureId": "bodymate.bone.fj3228",
+      "sourceMeshId": "FJ3228",
+      "canonicalName": "Left first rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 507,
+      "triangles": 1010
+    },
+    {
+      "structureId": "bodymate.bone.fj3229",
+      "sourceMeshId": "FJ3229",
+      "canonicalName": "Left second rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 656,
+      "triangles": 1230
+    },
+    {
+      "structureId": "bodymate.bone.fj3230",
+      "sourceMeshId": "FJ3230",
+      "canonicalName": "Left third rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 802,
+      "triangles": 1594
+    },
+    {
+      "structureId": "bodymate.bone.fj3231",
+      "sourceMeshId": "FJ3231",
+      "canonicalName": "Left fourth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 981,
+      "triangles": 1946
+    },
+    {
+      "structureId": "bodymate.bone.fj3232",
+      "sourceMeshId": "FJ3232",
+      "canonicalName": "Left fifth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1095,
+      "triangles": 2136
+    },
+    {
+      "structureId": "bodymate.bone.fj3233",
+      "sourceMeshId": "FJ3233",
+      "canonicalName": "Left sixth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1147,
+      "triangles": 2258
+    },
+    {
+      "structureId": "bodymate.bone.fj3234",
+      "sourceMeshId": "FJ3234",
+      "canonicalName": "Left seventh rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 1122,
+      "triangles": 2206
+    },
+    {
+      "structureId": "bodymate.bone.fj3235",
+      "sourceMeshId": "FJ3235",
+      "canonicalName": "Left eighth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 936,
+      "triangles": 1832
+    },
+    {
+      "structureId": "bodymate.bone.fj3236",
+      "sourceMeshId": "FJ3236",
+      "canonicalName": "Left ninth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 843,
+      "triangles": 1666
+    },
+    {
+      "structureId": "bodymate.bone.fj3237",
+      "sourceMeshId": "FJ3237",
+      "canonicalName": "Left clavicle",
+      "kind": "bone",
+      "region": "shoulder",
+      "side": "left",
+      "vertexCount": 426,
+      "triangles": 826
+    },
+    {
+      "structureId": "bodymate.bone.fj3239",
+      "sourceMeshId": "FJ3239",
+      "canonicalName": "Left first costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 391,
+      "triangles": 594
+    },
+    {
+      "structureId": "bodymate.bone.fj3240",
+      "sourceMeshId": "FJ3240",
+      "canonicalName": "Left first metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 293,
+      "triangles": 556
+    },
+    {
+      "structureId": "bodymate.bone.fj3241",
+      "sourceMeshId": "FJ3241",
+      "canonicalName": "Left first metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 497,
+      "triangles": 944
+    },
+    {
+      "structureId": "bodymate.bone.fj3242",
+      "sourceMeshId": "FJ3242",
+      "canonicalName": "Left second costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 309,
+      "triangles": 546
+    },
+    {
+      "structureId": "bodymate.bone.fj3243",
+      "sourceMeshId": "FJ3243",
+      "canonicalName": "Left second metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 328,
+      "triangles": 592
+    },
+    {
+      "structureId": "bodymate.bone.fj3244",
+      "sourceMeshId": "FJ3244",
+      "canonicalName": "Left second metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 401,
+      "triangles": 618
+    },
+    {
+      "structureId": "bodymate.bone.fj3245",
+      "sourceMeshId": "FJ3245",
+      "canonicalName": "Left third costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 306,
+      "triangles": 560
+    },
+    {
+      "structureId": "bodymate.bone.fj3246",
+      "sourceMeshId": "FJ3246",
+      "canonicalName": "Left third metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 328,
+      "triangles": 586
+    },
+    {
+      "structureId": "bodymate.bone.fj3247",
+      "sourceMeshId": "FJ3247",
+      "canonicalName": "Left third metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 367,
+      "triangles": 628
+    },
+    {
+      "structureId": "bodymate.bone.fj3248",
+      "sourceMeshId": "FJ3248",
+      "canonicalName": "Left fourth costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 318,
+      "triangles": 564
+    },
+    {
+      "structureId": "bodymate.bone.fj3249",
+      "sourceMeshId": "FJ3249",
+      "canonicalName": "Left fourth metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 267,
+      "triangles": 432
+    },
+    {
+      "structureId": "bodymate.bone.fj3250",
+      "sourceMeshId": "FJ3250",
+      "canonicalName": "Left fourth metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 353,
+      "triangles": 610
+    },
+    {
+      "structureId": "bodymate.bone.fj3251",
+      "sourceMeshId": "FJ3251",
+      "canonicalName": "Left fifth costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 365,
+      "triangles": 642
+    },
+    {
+      "structureId": "bodymate.bone.fj3252",
+      "sourceMeshId": "FJ3252",
+      "canonicalName": "Left fifth metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 265,
+      "triangles": 468
+    },
+    {
+      "structureId": "bodymate.bone.fj3253",
+      "sourceMeshId": "FJ3253",
+      "canonicalName": "Left fifth metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 366,
+      "triangles": 702
+    },
+    {
+      "structureId": "bodymate.bone.fj3254",
+      "sourceMeshId": "FJ3254",
+      "canonicalName": "Left sixth costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 350,
+      "triangles": 616
+    },
+    {
+      "structureId": "bodymate.bone.fj3255",
+      "sourceMeshId": "FJ3255",
+      "canonicalName": "Left seventh costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "left",
+      "vertexCount": 523,
+      "triangles": 768
+    },
+    {
+      "structureId": "bodymate.bone.fj3256",
+      "sourceMeshId": "FJ3256",
+      "canonicalName": "Left calcaneus",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 632,
+      "triangles": 1122
+    },
+    {
+      "structureId": "bodymate.bone.fj3257",
+      "sourceMeshId": "FJ3257",
+      "canonicalName": "Left capitate",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 230,
+      "triangles": 388
+    },
+    {
+      "structureId": "bodymate.bone.fj3258",
+      "sourceMeshId": "FJ3258",
+      "canonicalName": "Left cuboid bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 449,
+      "triangles": 806
+    },
+    {
+      "structureId": "bodymate.bone.fj3259",
+      "sourceMeshId": "FJ3259",
+      "canonicalName": "Left femur",
+      "kind": "bone",
+      "region": "thigh",
+      "side": "left",
+      "vertexCount": 459,
+      "triangles": 884
+    },
+    {
+      "structureId": "bodymate.bone.fj3260",
+      "sourceMeshId": "FJ3260",
+      "canonicalName": "Left fibula",
+      "kind": "bone",
+      "region": "shin",
+      "side": "left",
+      "vertexCount": 149,
+      "triangles": 278
+    },
+    {
+      "structureId": "bodymate.bone.fj3261",
+      "sourceMeshId": "FJ3261",
+      "canonicalName": "Left hamate",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 274,
+      "triangles": 440
+    },
+    {
+      "structureId": "bodymate.bone.fj3262",
+      "sourceMeshId": "FJ3262",
+      "canonicalName": "Left humerus",
+      "kind": "bone",
+      "region": "upperArm",
+      "side": "left",
+      "vertexCount": 586,
+      "triangles": 962
+    },
+    {
+      "structureId": "bodymate.bone.fj3264",
+      "sourceMeshId": "FJ3264",
+      "canonicalName": "Left intermediate cuneiform bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 291,
+      "triangles": 440
+    },
+    {
+      "structureId": "bodymate.bone.fj3266",
+      "sourceMeshId": "FJ3266",
+      "canonicalName": "Sesamoid bone of left foot",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 78,
+      "triangles": 100
+    },
+    {
+      "structureId": "bodymate.bone.fj3267",
+      "sourceMeshId": "FJ3267",
+      "canonicalName": "Left lateral cuneiform bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 389,
+      "triangles": 648
+    },
+    {
+      "structureId": "bodymate.bone.fj3268",
+      "sourceMeshId": "FJ3268",
+      "canonicalName": "Left lunate",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 184,
+      "triangles": 308
+    },
+    {
+      "structureId": "bodymate.bone.fj3269",
+      "sourceMeshId": "FJ3269",
+      "canonicalName": "Left maxilla",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 2678,
+      "triangles": 3598
+    },
+    {
+      "structureId": "bodymate.bone.fj3270",
+      "sourceMeshId": "FJ3270",
+      "canonicalName": "Sesamoid bone of left foot",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 95,
+      "triangles": 142
+    },
+    {
+      "structureId": "bodymate.bone.fj3271",
+      "sourceMeshId": "FJ3271",
+      "canonicalName": "Left medial cuneiform bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 513,
+      "triangles": 872
+    },
+    {
+      "structureId": "bodymate.bone.fj3272",
+      "sourceMeshId": "FJ3272",
+      "canonicalName": "Left nasal bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 236,
+      "triangles": 388
+    },
+    {
+      "structureId": "bodymate.bone.fj3273",
+      "sourceMeshId": "FJ3273",
+      "canonicalName": "Left palatine bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 986,
+      "triangles": 1606
+    },
+    {
+      "structureId": "bodymate.bone.fj3274",
+      "sourceMeshId": "FJ3274",
+      "canonicalName": "Left parietal bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 2927,
+      "triangles": 3732
+    },
+    {
+      "structureId": "bodymate.bone.fj3275",
+      "sourceMeshId": "FJ3275",
+      "canonicalName": "Left patella",
+      "kind": "bone",
+      "region": "thigh",
+      "side": "left",
+      "vertexCount": 177,
+      "triangles": 304
+    },
+    {
+      "structureId": "bodymate.bone.fj3276",
+      "sourceMeshId": "FJ3276",
+      "canonicalName": "Left pisiform",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 116,
+      "triangles": 210
+    },
+    {
+      "structureId": "bodymate.bone.fj3277",
+      "sourceMeshId": "FJ3277",
+      "canonicalName": "Left radius",
+      "kind": "bone",
+      "region": "forearm",
+      "side": "left",
+      "vertexCount": 250,
+      "triangles": 406
+    },
+    {
+      "structureId": "bodymate.bone.fj3278",
+      "sourceMeshId": "FJ3278",
+      "canonicalName": "Left scaphoid",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 172,
+      "triangles": 304
+    },
+    {
+      "structureId": "bodymate.bone.fj3279",
+      "sourceMeshId": "FJ3279",
+      "canonicalName": "Left scapula",
+      "kind": "bone",
+      "region": "shoulder",
+      "side": "left",
+      "vertexCount": 3097,
+      "triangles": 6180
+    },
+    {
+      "structureId": "bodymate.bone.fj3280",
+      "sourceMeshId": "FJ3280",
+      "canonicalName": "Left talus",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 666,
+      "triangles": 1144
+    },
+    {
+      "structureId": "bodymate.bone.fj3281",
+      "sourceMeshId": "FJ3281",
+      "canonicalName": "Left temporal bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 1835,
+      "triangles": 2828
+    },
+    {
+      "structureId": "bodymate.bone.fj3282",
+      "sourceMeshId": "FJ3282",
+      "canonicalName": "Left tibia",
+      "kind": "bone",
+      "region": "shin",
+      "side": "left",
+      "vertexCount": 331,
+      "triangles": 620
+    },
+    {
+      "structureId": "bodymate.bone.fj3283",
+      "sourceMeshId": "FJ3283",
+      "canonicalName": "Left trapezium",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 222,
+      "triangles": 348
+    },
+    {
+      "structureId": "bodymate.bone.fj3284",
+      "sourceMeshId": "FJ3284",
+      "canonicalName": "Left trapezoid",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 278,
+      "triangles": 396
+    },
+    {
+      "structureId": "bodymate.bone.fj3285",
+      "sourceMeshId": "FJ3285",
+      "canonicalName": "Left triquetral",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 178,
+      "triangles": 300
+    },
+    {
+      "structureId": "bodymate.bone.fj3286",
+      "sourceMeshId": "FJ3286",
+      "canonicalName": "Left ulna",
+      "kind": "bone",
+      "region": "forearm",
+      "side": "left",
+      "vertexCount": 283,
+      "triangles": 434
+    },
+    {
+      "structureId": "bodymate.bone.fj3287",
+      "sourceMeshId": "FJ3287",
+      "canonicalName": "Left zygomatic bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "left",
+      "vertexCount": 721,
+      "triangles": 1056
+    },
+    {
+      "structureId": "bodymate.bone.fj3288",
+      "sourceMeshId": "FJ3288",
+      "canonicalName": "Left hip bone",
+      "kind": "bone",
+      "region": "pelvis",
+      "side": "left",
+      "vertexCount": 986,
+      "triangles": 1808
+    },
+    {
+      "structureId": "bodymate.bone.fj3289",
+      "sourceMeshId": "FJ3289",
+      "canonicalName": "Mandible",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 1207,
+      "triangles": 2348
+    },
+    {
+      "structureId": "bodymate.bone.fj3290",
+      "sourceMeshId": "FJ3290",
+      "canonicalName": "Manubrium",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "midline",
+      "vertexCount": 1094,
+      "triangles": 1892
+    },
+    {
+      "structureId": "bodymate.bone.fj3291",
+      "sourceMeshId": "FJ3291",
+      "canonicalName": "Middle phalanx of left ring finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 208,
+      "triangles": 326
+    },
+    {
+      "structureId": "bodymate.bone.fj3292",
+      "sourceMeshId": "FJ3292",
+      "canonicalName": "Middle phalanx of right ring finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 214,
+      "triangles": 306
+    },
+    {
+      "structureId": "bodymate.bone.fj3293",
+      "sourceMeshId": "FJ3293",
+      "canonicalName": "Middle phalanx of left second toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 196,
+      "triangles": 322
+    },
+    {
+      "structureId": "bodymate.bone.fj3294",
+      "sourceMeshId": "FJ3294",
+      "canonicalName": "Middle phalanx of left third toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 181,
+      "triangles": 288
+    },
+    {
+      "structureId": "bodymate.bone.fj3295",
+      "sourceMeshId": "FJ3295",
+      "canonicalName": "Middle phalanx of left fourth toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 181,
+      "triangles": 280
+    },
+    {
+      "structureId": "bodymate.bone.fj3296",
+      "sourceMeshId": "FJ3296",
+      "canonicalName": "Middle phalanx of left index finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 184,
+      "triangles": 300
+    },
+    {
+      "structureId": "bodymate.bone.fj3297",
+      "sourceMeshId": "FJ3297",
+      "canonicalName": "Middle phalanx of left little finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 190,
+      "triangles": 252
+    },
+    {
+      "structureId": "bodymate.bone.fj3298",
+      "sourceMeshId": "FJ3298",
+      "canonicalName": "Middle phalanx of left little toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 142,
+      "triangles": 224
+    },
+    {
+      "structureId": "bodymate.bone.fj3299",
+      "sourceMeshId": "FJ3299",
+      "canonicalName": "Middle phalanx of left middle finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 220,
+      "triangles": 366
+    },
+    {
+      "structureId": "bodymate.bone.fj3300",
+      "sourceMeshId": "FJ3300",
+      "canonicalName": "Middle phalanx of right second toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 189,
+      "triangles": 258
+    },
+    {
+      "structureId": "bodymate.bone.fj3301",
+      "sourceMeshId": "FJ3301",
+      "canonicalName": "Middle phalanx of right third toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 190,
+      "triangles": 292
+    },
+    {
+      "structureId": "bodymate.bone.fj3302",
+      "sourceMeshId": "FJ3302",
+      "canonicalName": "Middle phalanx of right fourth toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 216,
+      "triangles": 342
+    },
+    {
+      "structureId": "bodymate.bone.fj3303",
+      "sourceMeshId": "FJ3303",
+      "canonicalName": "Middle phalanx of right index finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 186,
+      "triangles": 256
+    },
+    {
+      "structureId": "bodymate.bone.fj3304",
+      "sourceMeshId": "FJ3304",
+      "canonicalName": "Middle phalanx of right little finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 168,
+      "triangles": 206
+    },
+    {
+      "structureId": "bodymate.bone.fj3305",
+      "sourceMeshId": "FJ3305",
+      "canonicalName": "Middle phalanx of right little toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 102,
+      "triangles": 136
+    },
+    {
+      "structureId": "bodymate.bone.fj3306",
+      "sourceMeshId": "FJ3306",
+      "canonicalName": "Middle phalanx of right middle finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 221,
+      "triangles": 330
+    },
+    {
+      "structureId": "bodymate.bone.fj3307",
+      "sourceMeshId": "FJ3307",
+      "canonicalName": "Navicular bone of left foot",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 396,
+      "triangles": 624
+    },
+    {
+      "structureId": "bodymate.bone.fj3308",
+      "sourceMeshId": "FJ3308",
+      "canonicalName": "Navicular bone of right foot",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 404,
+      "triangles": 618
+    },
+    {
+      "structureId": "bodymate.bone.fj3309",
+      "sourceMeshId": "FJ3309",
+      "canonicalName": "Occipital bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 2938,
+      "triangles": 4912
+    },
+    {
+      "structureId": "bodymate.bone.fj3310",
+      "sourceMeshId": "FJ3310",
+      "canonicalName": "Proximal phalanx of right big toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 272,
+      "triangles": 468
+    },
+    {
+      "structureId": "bodymate.bone.fj3311",
+      "sourceMeshId": "FJ3311",
+      "canonicalName": "Proximal phalanx of left third toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 237,
+      "triangles": 388
+    },
+    {
+      "structureId": "bodymate.bone.fj3312",
+      "sourceMeshId": "FJ3312",
+      "canonicalName": "Proximal phalanx of left fourth toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 245,
+      "triangles": 418
+    },
+    {
+      "structureId": "bodymate.bone.fj3313",
+      "sourceMeshId": "FJ3313",
+      "canonicalName": "Proximal phalanx of left index finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 218,
+      "triangles": 384
+    },
+    {
+      "structureId": "bodymate.bone.fj3314",
+      "sourceMeshId": "FJ3314",
+      "canonicalName": "Proximal phalanx of left little finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 162,
+      "triangles": 270
+    },
+    {
+      "structureId": "bodymate.bone.fj3315",
+      "sourceMeshId": "FJ3315",
+      "canonicalName": "Proximal phalanx of left little toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 226,
+      "triangles": 386
+    },
+    {
+      "structureId": "bodymate.bone.fj3316",
+      "sourceMeshId": "FJ3316",
+      "canonicalName": "Proximal phalanx of left middle finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 253,
+      "triangles": 440
+    },
+    {
+      "structureId": "bodymate.bone.fj3317",
+      "sourceMeshId": "FJ3317",
+      "canonicalName": "Proximal phalanx of left ring finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 200,
+      "triangles": 366
+    },
+    {
+      "structureId": "bodymate.bone.fj3318",
+      "sourceMeshId": "FJ3318",
+      "canonicalName": "Proximal phalanx of left thumb",
+      "kind": "bone",
+      "region": "hand",
+      "side": "left",
+      "vertexCount": 197,
+      "triangles": 336
+    },
+    {
+      "structureId": "bodymate.bone.fj3319",
+      "sourceMeshId": "FJ3319",
+      "canonicalName": "Proximal phalanx of right second toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 225,
+      "triangles": 392
+    },
+    {
+      "structureId": "bodymate.bone.fj3320",
+      "sourceMeshId": "FJ3320",
+      "canonicalName": "Proximal phalanx of right third toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 264,
+      "triangles": 398
+    },
+    {
+      "structureId": "bodymate.bone.fj3321",
+      "sourceMeshId": "FJ3321",
+      "canonicalName": "Proximal phalanx of right fourth toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 244,
+      "triangles": 418
+    },
+    {
+      "structureId": "bodymate.bone.fj3322",
+      "sourceMeshId": "FJ3322",
+      "canonicalName": "Proximal phalanx of right index finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 213,
+      "triangles": 360
+    },
+    {
+      "structureId": "bodymate.bone.fj3323",
+      "sourceMeshId": "FJ3323",
+      "canonicalName": "Proximal phalanx of right little finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 186,
+      "triangles": 312
+    },
+    {
+      "structureId": "bodymate.bone.fj3324",
+      "sourceMeshId": "FJ3324",
+      "canonicalName": "Proximal phalanx of right little toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 228,
+      "triangles": 386
+    },
+    {
+      "structureId": "bodymate.bone.fj3325",
+      "sourceMeshId": "FJ3325",
+      "canonicalName": "Proximal phalanx of right middle finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 266,
+      "triangles": 448
+    },
+    {
+      "structureId": "bodymate.bone.fj3326",
+      "sourceMeshId": "FJ3326",
+      "canonicalName": "Proximal phalanx of right ring finger",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 202,
+      "triangles": 364
+    },
+    {
+      "structureId": "bodymate.bone.fj3327",
+      "sourceMeshId": "FJ3327",
+      "canonicalName": "Proximal phalanx of right thumb",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 196,
+      "triangles": 316
+    },
+    {
+      "structureId": "bodymate.bone.fj3328",
+      "sourceMeshId": "FJ3328",
+      "canonicalName": "Proximal phalanx of left second toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 230,
+      "triangles": 374
+    },
+    {
+      "structureId": "bodymate.bone.fj3329",
+      "sourceMeshId": "FJ3329",
+      "canonicalName": "Proximal phalanx of left big toe",
+      "kind": "bone",
+      "region": "foot",
+      "side": "left",
+      "vertexCount": 310,
+      "triangles": 502
+    },
+    {
+      "structureId": "bodymate.bone.fj3330",
+      "sourceMeshId": "FJ3330",
+      "canonicalName": "Right tenth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 754,
+      "triangles": 1500
+    },
+    {
+      "structureId": "bodymate.bone.fj3331",
+      "sourceMeshId": "FJ3331",
+      "canonicalName": "Right eleventh rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 538,
+      "triangles": 1070
+    },
+    {
+      "structureId": "bodymate.bone.fj3332",
+      "sourceMeshId": "FJ3332",
+      "canonicalName": "Right twelfth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 372,
+      "triangles": 740
+    },
+    {
+      "structureId": "bodymate.bone.fj3333",
+      "sourceMeshId": "FJ3333",
+      "canonicalName": "Right first costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 401,
+      "triangles": 616
+    },
+    {
+      "structureId": "bodymate.bone.fj3334",
+      "sourceMeshId": "FJ3334",
+      "canonicalName": "Right first rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 519,
+      "triangles": 1032
+    },
+    {
+      "structureId": "bodymate.bone.fj3335",
+      "sourceMeshId": "FJ3335",
+      "canonicalName": "Right second costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 346,
+      "triangles": 596
+    },
+    {
+      "structureId": "bodymate.bone.fj3336",
+      "sourceMeshId": "FJ3336",
+      "canonicalName": "Right second rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 648,
+      "triangles": 1230
+    },
+    {
+      "structureId": "bodymate.bone.fj3337",
+      "sourceMeshId": "FJ3337",
+      "canonicalName": "Right third costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 355,
+      "triangles": 590
+    },
+    {
+      "structureId": "bodymate.bone.fj3338",
+      "sourceMeshId": "FJ3338",
+      "canonicalName": "Right third rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 800,
+      "triangles": 1594
+    },
+    {
+      "structureId": "bodymate.bone.fj3339",
+      "sourceMeshId": "FJ3339",
+      "canonicalName": "Right fourth costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 332,
+      "triangles": 580
+    },
+    {
+      "structureId": "bodymate.bone.fj3340",
+      "sourceMeshId": "FJ3340",
+      "canonicalName": "Right fourth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 979,
+      "triangles": 1942
+    },
+    {
+      "structureId": "bodymate.bone.fj3341",
+      "sourceMeshId": "FJ3341",
+      "canonicalName": "Right fifth costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 358,
+      "triangles": 596
+    },
+    {
+      "structureId": "bodymate.bone.fj3342",
+      "sourceMeshId": "FJ3342",
+      "canonicalName": "Right fifth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1093,
+      "triangles": 2136
+    },
+    {
+      "structureId": "bodymate.bone.fj3343",
+      "sourceMeshId": "FJ3343",
+      "canonicalName": "Right sixth costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 444,
+      "triangles": 642
+    },
+    {
+      "structureId": "bodymate.bone.fj3344",
+      "sourceMeshId": "FJ3344",
+      "canonicalName": "Right sixth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1147,
+      "triangles": 2254
+    },
+    {
+      "structureId": "bodymate.bone.fj3345",
+      "sourceMeshId": "FJ3345",
+      "canonicalName": "Right seventh costal cartilage",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 514,
+      "triangles": 618
+    },
+    {
+      "structureId": "bodymate.bone.fj3346",
+      "sourceMeshId": "FJ3346",
+      "canonicalName": "Right seventh rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 1122,
+      "triangles": 2206
+    },
+    {
+      "structureId": "bodymate.bone.fj3347",
+      "sourceMeshId": "FJ3347",
+      "canonicalName": "Right eighth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 928,
+      "triangles": 1832
+    },
+    {
+      "structureId": "bodymate.bone.fj3348",
+      "sourceMeshId": "FJ3348",
+      "canonicalName": "Right ninth rib",
+      "kind": "bone",
+      "region": "trunk",
+      "side": "right",
+      "vertexCount": 842,
+      "triangles": 1666
+    },
+    {
+      "structureId": "bodymate.bone.fj3349",
+      "sourceMeshId": "FJ3349",
+      "canonicalName": "Right radius",
+      "kind": "bone",
+      "region": "forearm",
+      "side": "right",
+      "vertexCount": 249,
+      "triangles": 408
+    },
+    {
+      "structureId": "bodymate.bone.fj3350",
+      "sourceMeshId": "FJ3350",
+      "canonicalName": "Right first metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 287,
+      "triangles": 526
+    },
+    {
+      "structureId": "bodymate.bone.fj3351",
+      "sourceMeshId": "FJ3351",
+      "canonicalName": "Right first metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 492,
+      "triangles": 908
+    },
+    {
+      "structureId": "bodymate.bone.fj3352",
+      "sourceMeshId": "FJ3352",
+      "canonicalName": "Right second metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 347,
+      "triangles": 610
+    },
+    {
+      "structureId": "bodymate.bone.fj3353",
+      "sourceMeshId": "FJ3353",
+      "canonicalName": "Right second metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 434,
+      "triangles": 612
+    },
+    {
+      "structureId": "bodymate.bone.fj3354",
+      "sourceMeshId": "FJ3354",
+      "canonicalName": "Right third metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 345,
+      "triangles": 586
+    },
+    {
+      "structureId": "bodymate.bone.fj3355",
+      "sourceMeshId": "FJ3355",
+      "canonicalName": "Right third metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 381,
+      "triangles": 620
+    },
+    {
+      "structureId": "bodymate.bone.fj3356",
+      "sourceMeshId": "FJ3356",
+      "canonicalName": "Right fourth metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 280,
+      "triangles": 422
+    },
+    {
+      "structureId": "bodymate.bone.fj3357",
+      "sourceMeshId": "FJ3357",
+      "canonicalName": "Right fourth metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 333,
+      "triangles": 554
+    },
+    {
+      "structureId": "bodymate.bone.fj3358",
+      "sourceMeshId": "FJ3358",
+      "canonicalName": "Right fifth metacarpal bone",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 236,
+      "triangles": 428
+    },
+    {
+      "structureId": "bodymate.bone.fj3359",
+      "sourceMeshId": "FJ3359",
+      "canonicalName": "Right fifth metatarsal bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 371,
+      "triangles": 670
+    },
+    {
+      "structureId": "bodymate.bone.fj3360",
+      "sourceMeshId": "FJ3360",
+      "canonicalName": "Right calcaneus",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 641,
+      "triangles": 1076
+    },
+    {
+      "structureId": "bodymate.bone.fj3361",
+      "sourceMeshId": "FJ3361",
+      "canonicalName": "Right capitate",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 245,
+      "triangles": 406
+    },
+    {
+      "structureId": "bodymate.bone.fj3362",
+      "sourceMeshId": "FJ3362",
+      "canonicalName": "Right clavicle",
+      "kind": "bone",
+      "region": "shoulder",
+      "side": "right",
+      "vertexCount": 420,
+      "triangles": 820
+    },
+    {
+      "structureId": "bodymate.bone.fj3364",
+      "sourceMeshId": "FJ3364",
+      "canonicalName": "Right cuboid bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 488,
+      "triangles": 822
+    },
+    {
+      "structureId": "bodymate.bone.fj3365",
+      "sourceMeshId": "FJ3365",
+      "canonicalName": "Right femur",
+      "kind": "bone",
+      "region": "thigh",
+      "side": "right",
+      "vertexCount": 480,
+      "triangles": 930
+    },
+    {
+      "structureId": "bodymate.bone.fj3366",
+      "sourceMeshId": "FJ3366",
+      "canonicalName": "Right fibula",
+      "kind": "bone",
+      "region": "shin",
+      "side": "right",
+      "vertexCount": 162,
+      "triangles": 298
+    },
+    {
+      "structureId": "bodymate.bone.fj3367",
+      "sourceMeshId": "FJ3367",
+      "canonicalName": "Right hamate",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 316,
+      "triangles": 490
+    },
+    {
+      "structureId": "bodymate.bone.fj3368",
+      "sourceMeshId": "FJ3368",
+      "canonicalName": "Right humerus",
+      "kind": "bone",
+      "region": "upperArm",
+      "side": "right",
+      "vertexCount": 794,
+      "triangles": 1070
+    },
+    {
+      "structureId": "bodymate.bone.fj3370",
+      "sourceMeshId": "FJ3370",
+      "canonicalName": "Right intermediate cuneiform bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 278,
+      "triangles": 430
+    },
+    {
+      "structureId": "bodymate.bone.fj3372",
+      "sourceMeshId": "FJ3372",
+      "canonicalName": "Sesamoid bone of right foot",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 73,
+      "triangles": 80
+    },
+    {
+      "structureId": "bodymate.bone.fj3373",
+      "sourceMeshId": "FJ3373",
+      "canonicalName": "Right lateral cuneiform bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 380,
+      "triangles": 600
+    },
+    {
+      "structureId": "bodymate.bone.fj3374",
+      "sourceMeshId": "FJ3374",
+      "canonicalName": "Right lunate",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 191,
+      "triangles": 324
+    },
+    {
+      "structureId": "bodymate.bone.fj3375",
+      "sourceMeshId": "FJ3375",
+      "canonicalName": "Right maxilla",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 2591,
+      "triangles": 3660
+    },
+    {
+      "structureId": "bodymate.bone.fj3376",
+      "sourceMeshId": "FJ3376",
+      "canonicalName": "Sesamoid bone of right foot",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 103,
+      "triangles": 156
+    },
+    {
+      "structureId": "bodymate.bone.fj3377",
+      "sourceMeshId": "FJ3377",
+      "canonicalName": "Right medial cuneiform bone",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 553,
+      "triangles": 838
+    },
+    {
+      "structureId": "bodymate.bone.fj3378",
+      "sourceMeshId": "FJ3378",
+      "canonicalName": "Right nasal bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 253,
+      "triangles": 392
+    },
+    {
+      "structureId": "bodymate.bone.fj3379",
+      "sourceMeshId": "FJ3379",
+      "canonicalName": "Right palatine bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 994,
+      "triangles": 1486
+    },
+    {
+      "structureId": "bodymate.bone.fj3380",
+      "sourceMeshId": "FJ3380",
+      "canonicalName": "Right parietal bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 2734,
+      "triangles": 3694
+    },
+    {
+      "structureId": "bodymate.bone.fj3381",
+      "sourceMeshId": "FJ3381",
+      "canonicalName": "Right patella",
+      "kind": "bone",
+      "region": "thigh",
+      "side": "right",
+      "vertexCount": 176,
+      "triangles": 304
+    },
+    {
+      "structureId": "bodymate.bone.fj3382",
+      "sourceMeshId": "FJ3382",
+      "canonicalName": "Right pisiform",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 110,
+      "triangles": 190
+    },
+    {
+      "structureId": "bodymate.bone.fj3383",
+      "sourceMeshId": "FJ3383",
+      "canonicalName": "Right scaphoid",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 185,
+      "triangles": 302
+    },
+    {
+      "structureId": "bodymate.bone.fj3384",
+      "sourceMeshId": "FJ3384",
+      "canonicalName": "Right scapula",
+      "kind": "bone",
+      "region": "shoulder",
+      "side": "right",
+      "vertexCount": 2896,
+      "triangles": 5756
+    },
+    {
+      "structureId": "bodymate.bone.fj3385",
+      "sourceMeshId": "FJ3385",
+      "canonicalName": "Right talus",
+      "kind": "bone",
+      "region": "foot",
+      "side": "right",
+      "vertexCount": 709,
+      "triangles": 1184
+    },
+    {
+      "structureId": "bodymate.bone.fj3386",
+      "sourceMeshId": "FJ3386",
+      "canonicalName": "Right temporal bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 1976,
+      "triangles": 2906
+    },
+    {
+      "structureId": "bodymate.bone.fj3387",
+      "sourceMeshId": "FJ3387",
+      "canonicalName": "Right tibia",
+      "kind": "bone",
+      "region": "shin",
+      "side": "right",
+      "vertexCount": 334,
+      "triangles": 634
+    },
+    {
+      "structureId": "bodymate.bone.fj3388",
+      "sourceMeshId": "FJ3388",
+      "canonicalName": "Right trapezium",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 272,
+      "triangles": 424
+    },
+    {
+      "structureId": "bodymate.bone.fj3389",
+      "sourceMeshId": "FJ3389",
+      "canonicalName": "Right trapezoid",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 267,
+      "triangles": 354
+    },
+    {
+      "structureId": "bodymate.bone.fj3390",
+      "sourceMeshId": "FJ3390",
+      "canonicalName": "Right triquetral",
+      "kind": "bone",
+      "region": "hand",
+      "side": "right",
+      "vertexCount": 139,
+      "triangles": 170
+    },
+    {
+      "structureId": "bodymate.bone.fj3391",
+      "sourceMeshId": "FJ3391",
+      "canonicalName": "Right ulna",
+      "kind": "bone",
+      "region": "forearm",
+      "side": "right",
+      "vertexCount": 305,
+      "triangles": 482
+    },
+    {
+      "structureId": "bodymate.bone.fj3392",
+      "sourceMeshId": "FJ3392",
+      "canonicalName": "Right zygomatic bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "right",
+      "vertexCount": 717,
+      "triangles": 1146
+    },
+    {
+      "structureId": "bodymate.bone.fj3393",
+      "sourceMeshId": "FJ3393",
+      "canonicalName": "Sacrum",
+      "kind": "bone",
+      "region": "pelvis",
+      "side": "midline",
+      "vertexCount": 2771,
+      "triangles": 5058
+    },
+    {
+      "structureId": "bodymate.bone.fj3394",
+      "sourceMeshId": "FJ3394",
+      "canonicalName": "Sphenoid bone",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 2791,
+      "triangles": 4238
+    },
+    {
+      "structureId": "bodymate.bone.fj3395",
+      "sourceMeshId": "FJ3395",
+      "canonicalName": "Vomer",
+      "kind": "bone",
+      "region": "head",
+      "side": "midline",
+      "vertexCount": 820,
+      "triangles": 1586
+    }
+  ],
+  "notes": "Derived educational animation rig. Original geometry retained. Atlas muscle system misclassifications corrected for fibularis, tibialis, subscapularis and levator scapulae. Hand digits share a wrist and foot digits share the foot. Not a measured biomechanical simulation."
+}

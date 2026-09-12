@@ -28,8 +28,8 @@ export function coachTransitionPlan({ from, to, reducedMotion }) {
 }
 
 export function coachBubblePlan({ coachScreen, viewport, selectedLabelScreen }) {
-  const mobile = viewport.width <= 480, width = Math.min(mobile ? 145 : 190, viewport.width - 24), height = mobile ? 46 : 62;
-  let x = clamp(coachScreen.x + 18, 12, viewport.width - width - 12);
+  const mobile = viewport.width <= 480, width = Math.min(mobile ? 145 : 190, viewport.width - 24), height = mobile ? 72 : 96;
+  let x = clamp(coachScreen.x - width * .5, 12, viewport.width - width - 12);
   let y = clamp(coachScreen.y - height - 16, 12, viewport.height - height - 12);
   if (selectedLabelScreen && Math.abs(y - selectedLabelScreen.y) < 30 && Math.abs(x - selectedLabelScreen.x) < width) y = clamp(selectedLabelScreen.y + 52, 12, viewport.height - height - 12);
   return Object.freeze({ x, y, width, height });

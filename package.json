@@ -4,8 +4,8 @@
   "private": true,
   "description": "Offline anatomy exploration whitebox",
   "scripts": {
-    "build": "node scripts/build-moonbit.mjs && node scripts/build-moonbit-registry.mjs && node scripts/build-anatomy-registry-runtime.mjs && node scripts/build-coach-query-runtime.mjs && node scripts/build-root-scm-runtime.mjs",
-    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/public-scm-asset.test.mjs test/moonbit-ci-install.test.mjs test/root-scm-integration.test.mjs test/anatomy-registry.test.mjs test/neck-presentation.test.mjs test/coach-c-spatial.test.mjs test/coach-c-structure-finder.test.mjs",
+    "build": "node scripts/build-moonbit.mjs && node scripts/build-moonbit-registry.mjs && node scripts/build-anatomy-registry-runtime.mjs && node scripts/build-coach-query-runtime.mjs && node scripts/build-root-scm-runtime.mjs && node scripts/build-human-atlas-full.mjs && node scripts/build-rigged-body.mjs && node scripts/build-full-muscle-runtime.mjs",
+    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/public-scm-asset.test.mjs test/moonbit-ci-install.test.mjs test/root-scm-integration.test.mjs test/anatomy-registry.test.mjs test/neck-presentation.test.mjs test/coach-c-spatial.test.mjs test/coach-c-structure-finder.test.mjs test/full-muscle-atlas.test.mjs test/full-body-rig.test.mjs test/motion-parameters.test.mjs test/visual-lab.test.mjs test/head-surface.test.mjs",
     "check": "npm run verify && node scripts/check-generated.mjs && node scripts/audit-repository-hygiene.mjs",
     "moonbit:stats": "node scripts/moonbit-stats.mjs",
     "spike:verify-local": "node scripts/verify-local-neck-asset.mjs",
@@ -14,9 +14,14 @@
     "anatomy:build-scm": "node scripts/anatomy-build-scm.mjs",
     "anatomy:rebuild-scm": "node scripts/anatomy-rebuild-scm.mjs",
     "anatomy:rebuild-human-atlas-neck": "node scripts/rebuild-human-atlas-neck.mjs",
+    "anatomy:rebuild-human-atlas-full": "node scripts/rebuild-human-atlas-full.mjs",
     "anatomy:list-human-atlas": "node scripts/list-human-atlas-structures.mjs",
     "anatomy:serve-scm": "node scripts/serve-public-scm.mjs",
-    "root-scm:build-runtime": "node scripts/build-root-scm-runtime.mjs"
+    "root-scm:build-runtime": "node scripts/build-root-scm-runtime.mjs",
+    "full-muscle:build-runtime": "node scripts/build-full-muscle-runtime.mjs",
+    "anatomy:build-rig": "node scripts/build-rigged-body.mjs && node scripts/build-full-muscle-runtime.mjs",
+    "anatomy:test-rig": "node --test test/full-body-rig.test.mjs test/motion-parameters.test.mjs",
+    "anatomy:test-parameters": "node --test test/motion-parameters.test.mjs"
   },
   "dependencies": {
     "@gltf-transform/core": "4.5.0",

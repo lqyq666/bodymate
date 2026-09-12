@@ -7,3 +7,4 @@ src/anatomy/neck-registry.mjs linguist-generated=true
 assets/runtime/anatomy-registry.js linguist-generated=true
 assets/runtime/coach-query-runtime.js linguist-generated=true
 assets/runtime/root-scm-runtime.js linguist-generated=true
+assets/runtime/full-muscle-runtime.js linguist-generated=true whitespace=-trailing-space

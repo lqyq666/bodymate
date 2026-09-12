@@ -19,15 +19,22 @@ export function rankedLabelEntries(entries, selectedId, cap, highlightedIds = []
   }).slice(0, cap);
 }
 
-export function layoutLabelPlans(entries, { width, height, project, minGap = 26 }) {
-  const laneY = { left: 18, right: 18 };
-  return entries.map(({ entry, anchor }, index) => {
+export function layoutLabelPlans(entries, { width, height, project, minGap = 44 }) {
+  const counts = { left: 0, right: 0 };
+  const plans = entries.map(({ entry, anchor }, index) => {
     const projected = project(anchor);
     const visible = projected.z >= -1 && projected.z <= 1;
-    const lane = entry.side === 'left' ? 'left' : 'right';
-    const desiredY = Math.max(20, Math.min(height - 20, projected.y));
-    const y = Math.max(desiredY, laneY[lane]);
-    laneY[lane] = y + minGap;
-    return Object.freeze({ entry, anchor, selected: index === 0, lane, x: lane === 'left' ? Math.max(70, width * 0.24) : Math.min(width - 70, width * 0.76), y: Math.min(height - 20, y), leader: { x: projected.x, y: projected.y }, visible });
+    let lane = projected.x < width * .5 ? 'left' : 'right';
+    if (counts[lane] >= Math.ceil(entries.length / 2)) lane = lane === 'left' ? 'right' : 'left';
+    counts[lane] += 1;
+    const desiredY = Math.max(40, Math.min(height - 40, projected.y - (lane === 'right' ? height * .22 : 0)));
+    return { entry, anchor, selected: index === 0, lane, x: lane === 'left' ? Math.max(70, width * .13) : Math.min(width - 70, width * .87), y: desiredY, leader: { x: projected.x, y: projected.y }, visible };
   });
+  for (const lane of ['left', 'right']) {
+    const members = plans.filter((plan) => plan.lane === lane).sort((a, b) => a.y - b.y);
+    for (let index = 0; index < members.length; index += 1) members[index].y = Math.max(members[index].y, index ? members[index - 1].y + minGap : 40);
+    const overflow = (members.at(-1)?.y || 0) - (height - 40);
+    if (overflow > 0) for (const member of members) member.y -= overflow;
+  }
+  return plans.map(Object.freeze);
 }
