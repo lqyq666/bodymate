@@ -93,6 +93,37 @@ fn query_result_wire(result : QueryResult) -> String {
   "ok|query-v1|\{classification}|\{resolution}|\{action_text(action.kind)}|\{action.structure_id}|\{action.region}|\{action.confidence}|\{candidates}|\{result.message_code}"
 }
 
+fn classification_text(classification : QueryClassification) -> String {
+  match classification { StructureLookup => "STRUCTURE_LOOKUP"; DomainCommand => "DOMAIN_COMMAND"; UnsupportedHealthQuery => "UNSUPPORTED_HEALTH_QUERY"; UnknownQuery => "UNKNOWN" }
+}
+
+fn resolution_text(resolution : Resolution) -> String {
+  match resolution { Exact => "EXACT"; Ambiguous => "AMBIGUOUS"; NoMatch => "NO_MATCH" }
+}
+
+fn ids_wire(ids : Array[String]) -> String {
+  let mut output = ""
+  for index = 0; index < ids.length(); index = index + 1 {
+    if index > 0 { output = output + "," }
+    output = output + ids[index]
+  }
+  output
+}
+
+fn structure_set_wire(structure_set : StructureSet) -> String {
+  let ids : Array[String] = []
+  for item in structure_set.members { ids.push(item.structure_id) }
+  ids_wire(ids)
+}
+
+fn query_result_wire_v2(result : QueryResult, structure_set : StructureSet?) -> String {
+  let action = match result.action { Some(value) => value; None => { kind: UnknownAction, structure_id: "", region: "", confidence: 0.0 } }
+  let set_id = match structure_set { Some(value) => value.id; None => "" }
+  let set_label = match structure_set { Some(value) => value.label; None => "" }
+  let members = match structure_set { Some(value) => structure_set_wire(value); None => ids_wire(result.candidate_ids) }
+  "ok|query-v2|\{classification_text(result.classification)}|\{resolution_text(result.resolution)}|\{action_text(action.kind)}|\{action.structure_id}|\{set_id}|\{set_label}|\{action.region}|\{action.confidence}|\{members}|\{result.message_code}"
+}
+
 fn resolve_query(text : String) -> QueryResult {
   let input = lower(text)
   if input == "" { return { classification: UnknownQuery, resolution: NoMatch, action: None, candidate_ids: [], message_code: "empty" } }
@@ -115,4 +146,28 @@ fn resolve_query(text : String) -> QueryResult {
   let ids = ranked_candidates(candidates, side)
   if ids.length() > 0 { return { classification: StructureLookup, resolution: Ambiguous, action: Some({ kind: FindStructure, structure_id: "", region: "", confidence: 0.72 }), candidate_ids: ids, message_code: "ambiguous" } }
   { classification: StructureLookup, resolution: NoMatch, action: None, candidate_ids: [], message_code: "uncovered" }
+}
+
+///| V2 resolves family-level anatomy language to a domain-derived structure set.
+fn resolve_query_v2(text : String) -> String {
+  let input = lower(text)
+  if input == "" { return query_result_wire_v2({ classification: UnknownQuery, resolution: NoMatch, action: None, candidate_ids: [], message_code: "empty" }, None) }
+  if has_health_signal(input) { return query_result_wire_v2({ classification: UnsupportedHealthQuery, resolution: NoMatch, action: None, candidate_ids: [], message_code: "health" }, None) }
+  match command_for(input) {
+    Some(action) => return query_result_wire_v2({ classification: DomainCommand, resolution: Exact, action: Some(action), candidate_ids: [], message_code: if action.kind == IsolateSelected { "isolate" } else { "restore" } }, None)
+    None => ()
+  }
+  let side = input_side(input)
+  let families = family_matches(input)
+  match exact_entry(input, side, families) {
+    Some(entry) => return query_result_wire_v2({ classification: StructureLookup, resolution: Exact, action: Some({ kind: SelectStructure, structure_id: entry.structure_id, region: "", confidence: 1.0 }), candidate_ids: [entry.structure_id], message_code: "exact" }, None)
+    None => ()
+  }
+  if families.length() == 1 {
+    match structure_set_for(families[0], side) {
+      Some(set) => return query_result_wire_v2({ classification: StructureLookup, resolution: Exact, action: Some({ kind: HighlightStructureSet, structure_id: set.id, region: "", confidence: 1.0 }), candidate_ids: [], message_code: "structure_set" }, Some(set))
+      None => ()
+    }
+  }
+  query_result_wire_v2(resolve_query(input), None)
 }

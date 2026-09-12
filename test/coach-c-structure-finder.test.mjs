@@ -37,9 +37,9 @@ test('MoonBit normalizes sides and produces deterministic safe candidate groups'
   const rightNeck = resolve(context, 'right neck side');
   assert.equal(rightNeck.resolution, 'AMBIGUOUS');
   assert.ok(rightNeck.candidates.every((candidate) => candidate.side === 'right'));
-  assert.equal(resolve(context, 'SCM').candidates.length, 2);
-  assert.equal(resolve(context, '右侧斜角肌').candidates.length, 3);
-  assert.equal(resolve(context, 'scalene').candidates.length, 6);
+  assert.equal(resolve(context, 'SCM').structureSet.members.length, 2);
+  assert.equal(resolve(context, '右侧斜角肌').structureSet.members.length, 3);
+  assert.equal(resolve(context, 'scalene').structureSet.members.length, 6);
   assert.equal(resolve(context, '脖子侧面').resolution, 'AMBIGUOUS');
 });
 
@@ -67,8 +67,16 @@ test('accepted actions execute in MoonBit before the JavaScript presentation cal
   assert.match(snapshot(context), /\|false\|false\|/);
 });
 
-test('ambiguous candidates do not mutate MoonBit until a user selection action is accepted', () => {
+test('structure-set query does not mutate MoonBit until its accepted action is executed', () => {
   const context = core(), outcome = resolve(context, '右侧斜角肌'), before = snapshot(context);
+  assert.equal(outcome.action.action, 'HIGHLIGHT_STRUCTURE_SET');
+  assert.equal(snapshot(context), before);
+  assert.equal(executeCoachAction(outcome.action, { core: context }), true);
+  assert.match(context.bodymate_domain_snapshot_v3(), /structure_set\|bodymate\.neck\.set\.scalene\.right/);
+});
+
+test('ambiguous candidates do not mutate MoonBit until a user selection action is accepted', () => {
+  const context = core(), outcome = resolve(context, '右边脖子'), before = snapshot(context);
   assert.equal(outcome.action.action, 'FIND_STRUCTURE');
   assert.equal(snapshot(context), before);
   const selected = { schemaVersion: 1, action: 'SELECT_STRUCTURE', structureId: outcome.candidates[0].structureId, confidence: 1, source: 'moonbit-domain' };
@@ -77,13 +85,13 @@ test('ambiguous candidates do not mutate MoonBit until a user selection action i
 });
 
 test('thin JS adapter has no resolver tables or action transition switch', () => {
-  assert.match(source, /bodymate_domain_resolve_query_v1/);
+  assert.match(source, /bodymate_domain_resolve_query_v2/);
   assert.match(source, /bodymate_domain_execute_action_v1/);
   assert.doesNotMatch(source, /searchHints|familyFor|healthResult|sideFor|candidate ranking/i);
   assert.doesNotMatch(source, /document\.|fetch\s*\(/);
   assert.match(bridge, /executeCoachAction/);
   assert.match(html, /assets\/runtime\/coach-query-runtime\.js/);
-  assert.match(runtime, /BodyMateCoachQuery|bodymate_domain_resolve_query_v1/);
+  assert.match(runtime, /BodyMateCoachQuery|bodymate_domain_resolve_query_v2/);
 });
 
 test('offline runtime, frozen Human Atlas GLB, and fourteen anatomy nodes remain unchanged', () => {

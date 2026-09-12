@@ -38,7 +38,23 @@ pub enum ActionKind {
   IsolateSelected
   RestoreContext
   ShowRegion
+  HighlightStructureSet
+  ClearStructureSet
   UnknownAction
+} derive(Eq)
+
+///| Visual emphasis is a domain intent, not a renderer palette.
+pub enum HighlightRole {
+  Focus
+  Primary
+  Secondary
+  Context
+} derive(Eq)
+
+///| The selected structure and a many-member highlight have distinct meanings.
+pub enum HighlightMode {
+  NoHighlight
+  StructureSet
 } derive(Eq)
 
 ///| Canonical metadata for one independently named public anatomy mesh.
@@ -75,6 +91,20 @@ pub struct QueryResult {
   message_code : String
 }
 
+///| A stable product grouping derived from canonical registry entries.
+pub struct StructureSet {
+  id : String
+  label : String
+  members : Array[HighlightedStructure]
+}
+
+///| One member in a highlighted structure set.
+pub struct HighlightedStructure {
+  structure_id : String
+  role : HighlightRole
+  weight : Int
+}
+
 ///| A deterministic, bounded audit event. It is not analytics.
 pub struct DomainEvent {
   revision : Int
@@ -84,6 +114,8 @@ pub struct DomainEvent {
   previous_selected : String
   region : String
   result : String
+  structure_set_id : String
+  member_count : Int
 }
 
 ///| Mutable runtime state; all mutations remain inside MoonBit.
@@ -94,6 +126,9 @@ pub struct DomainState {
   mut layer : Layer
   mut isolated : Bool
   mut overview : Bool
+  mut highlight_mode : HighlightMode
+  mut active_structure_set : StructureSet?
+  mut highlighted : Array[HighlightedStructure]
   mut revision : Int
   mut events : Array[DomainEvent]
 }

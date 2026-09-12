@@ -6,13 +6,13 @@ export function labelAnchorFromBounds(bounds) {
 
 export function labelCapForViewport(width) { return width <= 480 ? 3 : 5; }
 
-export function rankedLabelEntries(entries, selectedId, cap) {
+export function rankedLabelEntries(entries, selectedId, cap, highlightedIds = []) {
   const selected = entries.find(({ entry }) => entry.structureId === selectedId) || entries[0];
   if (!selected) return [];
   return [...entries].sort((one, two) => {
     if (one === selected) return -1;
     if (two === selected) return 1;
-    const score = (candidate) => [candidate.entry.side === selected.entry.side ? 0 : 1, candidate.entry.uiGroup === selected.entry.uiGroup ? 0 : 1, distance(candidate.anchor, selected.anchor), candidate.entry.structureId];
+    const score = (candidate) => [highlightedIds.includes(candidate.entry.structureId) ? 0 : 1, candidate.entry.side === selected.entry.side ? 0 : 1, candidate.entry.uiGroup === selected.entry.uiGroup ? 0 : 1, distance(candidate.anchor, selected.anchor), candidate.entry.structureId];
     const oneScore = score(one), twoScore = score(two);
     for (let index = 0; index < oneScore.length; index += 1) if (oneScore[index] !== twoScore[index]) return oneScore[index] < twoScore[index] ? -1 : 1;
     return 0;

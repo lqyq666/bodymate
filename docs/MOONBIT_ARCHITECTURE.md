@@ -2,9 +2,9 @@
 
 ## Why MoonBit owns this boundary
 
-BodyMate has one mutable interaction truth: what anatomical region is active, which stable structure is selected, which layer is shown, whether the context is isolated, whether the view is overview, and which revision produced that state. Keeping that truth in the embedded MoonBit engine prevents the renderer, the natural-language adapter, and future bridges from creating competing selection state.
+BodyMate has one mutable interaction truth: what anatomical region is active, which stable structure is selected, which layer is shown, whether the context is isolated, whether the view is overview, which structure set is highlighted, and which revision produced that state. Keeping that truth in the embedded MoonBit engine prevents the renderer, the natural-language adapter, and future bridges from creating competing selection state.
 
-MoonBit owns the canonical 14-entry neck registry, validated state transitions, the five-action allowlist, deterministic query resolution, side and family matching, safe health-query rejection, bounded domain events, and versioned snapshots. JavaScript owns DOM events, Three.js loading/raycasting/materials/camera, rendering, browser controls, and UI copy.
+MoonBit owns the canonical 14-entry neck registry, derived structure sets, validated state transitions, the seven-action allowlist, deterministic query resolution, side and family matching, safe health-query rejection, bounded domain events, and versioned snapshots. JavaScript owns DOM events, Three.js loading/raycasting/materials/camera, rendering, browser controls, and UI copy.
 
 The canonical registry is projected rather than re-authored:
 
@@ -22,13 +22,15 @@ This keeps BodyMate stable IDs separate from source mesh IDs while preserving th
 
 ```text
 real mesh click / Coach C query / button
-  -> BodyMate stable structure ID or approved action
+  -> BodyMate stable structure ID, or MoonBit-derived structure-set ID / approved action
   -> MoonBit action validation and execution
   -> validated versioned snapshot + bounded event
   -> JavaScript renderer applies selection, isolation, focus, and UI
 ```
 
-`FIND_STRUCTURE`, `SELECT_STRUCTURE`, `ISOLATE_SELECTED`, `RESTORE_CONTEXT`, and `SHOW_REGION` are the complete v1 action allowlist. Query resolution never mutates state. An ambiguous result returns ranked candidates; an unsupported health query returns no action and does not diagnose or treat.
+`FIND_STRUCTURE`, `SELECT_STRUCTURE`, `ISOLATE_SELECTED`, `RESTORE_CONTEXT`, `SHOW_REGION`, `HIGHLIGHT_STRUCTURE_SET`, and `CLEAR_STRUCTURE_SET` are the allowlist. Query resolution never mutates state. `selected` remains exactly one focus structure; `highlighted` may contain zero or more members. A structure set is derived only from canonical registry entries, has unique member IDs, and has a deterministic focus member. `ISOLATE_SELECTED` still renders only that focus member. Selecting a structure, showing a region, or resetting overview clears an active set.
+
+The V2 resolver returns a set for family requests such as `右侧斜角肌`, `左侧斜角肌`, `斜角肌`, and `SCM`; exact full Chinese names still select one structure, while broad location language such as `右边脖子` remains ambiguous. JavaScript receives set members from the MoonBit wire and never maintains a family-to-ID table.
 
 ## Public bridge
 
@@ -37,11 +39,13 @@ The embedded IIFE exports legacy `bodymate_core_*` compatibility calls plus thes
 - `bodymate_domain_registry_v1()`
 - `bodymate_domain_reset()`
 - `bodymate_domain_snapshot_v2()`
+- `bodymate_domain_snapshot_v3()`
 - `bodymate_domain_events_v1()`
 - `bodymate_domain_resolve_query_v1(text)`
+- `bodymate_domain_resolve_query_v2(text)`
 - `bodymate_domain_execute_action_v1(kind, structureId, region)`
 
-Wire payloads are deliberately versioned text contracts. `window.__bodymate.domainDebug()` exposes the latest read-only snapshot/event payloads for local development without giving JavaScript a mutation backdoor.
+V3 adds `highlightMode`, set ID/label, and ordered member `structureId^role^weight` records while V2 remains available for compatibility. Events remain bounded to 32 records and include set ID/member count for highlight and clear transitions. Wire payloads are deliberately versioned text contracts. `window.__bodymate.domainDebug()` exposes the latest read-only snapshot/event payloads for local development without giving JavaScript a mutation backdoor.
 
 ## Reproducibility and failure behavior
 

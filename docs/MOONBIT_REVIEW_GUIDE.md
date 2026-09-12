@@ -2,7 +2,7 @@
 
 ## Review question
 
-Does the product have one authoritative, deterministic domain engine for the 14 real neck structures, rather than independent JavaScript resolver tables and state transitions?
+Does the product have one authoritative, deterministic domain engine for the 14 real neck structures and their multi-highlight sets, rather than independent JavaScript resolver tables and state transitions?
 
 ## Files to inspect
 
@@ -16,11 +16,13 @@ Does the product have one authoritative, deterministic domain engine for the 14 
 ## Example to replay
 
 1. Query `右侧斜角肌`.
-2. MoonBit returns `AMBIGUOUS`, `FIND_STRUCTURE`, and the three right scalene stable IDs.
-3. Nothing is selected until the user chooses a candidate.
-4. Candidate selection invokes `SELECT_STRUCTURE` in MoonBit.
-5. The accepted snapshot causes the browser renderer to highlight/focus that exact real mesh.
-6. `ISOLATE_SELECTED` and `RESTORE_CONTEXT` alter MoonBit state first; renderer visibility follows the snapshot.
+2. MoonBit returns `EXACT`, `HIGHLIGHT_STRUCTURE_SET`, the set ID `bodymate.neck.set.scalene.right`, and the three right scalene stable IDs.
+3. Nothing mutates until that action is executed through MoonBit.
+4. MoonBit selects anterior scalene as deterministic focus and retains all three highlighted members.
+5. The accepted V3 snapshot causes the browser renderer to strongly highlight/focus that mesh and softly highlight the other two real meshes.
+6. `ISOLATE_SELECTED` renders the focus mesh only; `RESTORE_CONTEXT` restores the group; selecting one exact muscle clears the set.
+
+Also replay `右边脖子` (still ambiguous) and `右侧胸锁乳突肌` (still an exact single-structure selection).
 
 ## Required commands
 

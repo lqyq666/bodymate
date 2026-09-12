@@ -38,9 +38,9 @@ test('embedded MoonBit IIFE exports and executes the interaction contract', () =
   assert.equal(core.bodymate_core_snapshot(), 'ok|chest|pec_r|muscle|false|false|5');
 });
 
-test('MoonBit owns the canonical neck registry, resolver, action transitions, and bounded event wire', () => {
+test('MoonBit owns the canonical neck registry, structure sets, resolver, action transitions, and bounded event wire', () => {
   const core = loadCore();
-  for (const name of ['bodymate_domain_registry_v1', 'bodymate_domain_reset', 'bodymate_domain_snapshot_v2', 'bodymate_domain_events_v1', 'bodymate_domain_resolve_query_v1', 'bodymate_domain_execute_action_v1']) {
+  for (const name of ['bodymate_domain_registry_v1', 'bodymate_domain_reset', 'bodymate_domain_snapshot_v2', 'bodymate_domain_snapshot_v3', 'bodymate_domain_events_v1', 'bodymate_domain_resolve_query_v1', 'bodymate_domain_resolve_query_v2', 'bodymate_domain_execute_action_v1']) {
     assert.equal(typeof core[name], 'function', `missing ${name}`);
   }
   assert.match(core.bodymate_domain_reset(), /^ok\|/);
@@ -53,4 +53,9 @@ test('MoonBit owns the canonical neck registry, resolver, action transitions, an
   const snapshot = core.bodymate_domain_snapshot_v2();
   assert.match(snapshot, /^ok\|snapshot-v2\|2\|neck\|bodymate\.neck\.sternocleidomastoid\.right\|muscle\|true\|false\|/);
   assert.match(core.bodymate_domain_events_v1(), /^ok\|events-v1\|/);
+  const setQuery = core.bodymate_domain_resolve_query_v2('右侧斜角肌');
+  assert.match(setQuery, /^ok\|query-v2\|STRUCTURE_LOOKUP\|EXACT\|HIGHLIGHT_STRUCTURE_SET\|bodymate\.neck\.set\.scalene\.right/);
+  assert.match(core.bodymate_domain_execute_action_v1('HIGHLIGHT_STRUCTURE_SET', 'bodymate.neck.set.scalene.right', ''), /^ok\|neck\|bodymate\.neck\.scalene\.anterior\.right\|/);
+  assert.match(core.bodymate_domain_snapshot_v3(), /^ok\|snapshot-v3\|3\|neck\|bodymate\.neck\.scalene\.anterior\.right\|muscle\|false\|false\|/);
+  assert.match(core.bodymate_domain_events_v1(), /StructureSetHighlighted\^HIGHLIGHT_STRUCTURE_SET/);
 });

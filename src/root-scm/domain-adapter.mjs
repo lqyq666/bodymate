@@ -33,3 +33,19 @@ export function selectPresentationStructure(core, id) {
 export function focusPlanFromBounds(bounds, direction = [1, .48, 1]) {
   return selectedFocusPlan(bounds, direction);
 }
+
+export function parseDomainSnapshotV3(reply) {
+  const fields = String(reply).split('|');
+  if (fields.length !== 13 || fields[0] !== 'ok' || fields[1] !== 'snapshot-v3' || fields[2] !== '3') return null;
+  const [, , , region, selected, layer, isolated, overview, revisionRaw, highlightMode, highlightSetId, highlightSetLabel, highlightedWire] = fields;
+  const revision = Number(revisionRaw);
+  if (!region || !selected || !['muscle', 'fascia'].includes(layer) || !['true', 'false'].includes(isolated) || !['true', 'false'].includes(overview) || !Number.isSafeInteger(revision) || revision < 0 || !['none', 'structure_set'].includes(highlightMode)) return null;
+  const highlighted = highlightedWire ? highlightedWire.split('~').map((item) => {
+    const [structureId, role, weightRaw] = item.split('^'), weight = Number(weightRaw);
+    return structureId && ['focus', 'primary', 'secondary', 'context'].includes(role) && Number.isSafeInteger(weight) ? Object.freeze({ structureId, role, weight }) : null;
+  }) : [];
+  if (highlighted.includes(null) || highlighted.some((item) => !entryForPresentationId(item.structureId)) || new Set(highlighted.map((item) => item.structureId)).size !== highlighted.length) return null;
+  if (highlightMode === 'none' && (highlightSetId || highlightSetLabel || highlighted.length)) return null;
+  if (highlightMode === 'structure_set' && (!highlightSetId || !highlightSetLabel || !highlighted.length || highlighted[0].structureId !== selected || highlighted[0].role !== 'focus')) return null;
+  return Object.freeze({ region, selected, layer, isolated: isolated === 'true', overview: overview === 'true', revision, highlightMode, highlightSetId, highlightSetLabel, highlighted: Object.freeze(highlighted) });
+}
