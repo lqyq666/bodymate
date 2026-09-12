@@ -711,6 +711,9 @@
     this.url = param0;
     this.scope = param1;
   }
+  function _M0TPB8MutLocalGdE(param0) {
+    this.val = param0;
+  }
   const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger = { method_0: _M0IPB13StringBuilderPB6Logger13write__string, method_1: _M0IP016_24default__implPB6Logger16write__substringGRPB13StringBuilderE, method_2: _M0IPB13StringBuilderPB6Logger11write__view, method_3: _M0IPB13StringBuilderPB6Logger11write__char, method_4: _M0IP016_24default__implPB6Logger28write__string__interpolationGRPB13StringBuilderE, method_5: _M0IP016_24default__implPB6Logger5writeGRPB13StringBuilderE };
   const _M0MPC16string10StringView4trimN7_2abindS6760 = "\t\n\r ";
   const _M0MPC16string6String4trimN7_2abindS6861 = "\t\n\r ";
@@ -9564,91 +9567,94 @@
     }
     return $panic();
   }
+  function _M0FPC14math3sin(_tmp) {
+    return Math.sin(_tmp);
+  }
   function _M0FPC14math3cos(_tmp) {
     return Math.cos(_tmp);
   }
-  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_608, _x_609) {
-    if (_x_608 === 0) {
-      if (_x_609 === 0) {
+  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_626, _x_627) {
+    if (_x_626 === 0) {
+      if (_x_627 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_609 === 1) {
+      if (_x_627 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_604, _x_605) {
-    switch (_x_604) {
+  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_622, _x_623) {
+    switch (_x_622) {
       case 0: {
-        if (_x_605 === 0) {
+        if (_x_623 === 0) {
           return true;
         } else {
           return false;
         }
       }
       case 1: {
-        if (_x_605 === 1) {
+        if (_x_623 === 1) {
           return true;
         } else {
           return false;
         }
       }
       case 2: {
-        if (_x_605 === 2) {
+        if (_x_623 === 2) {
           return true;
         } else {
           return false;
         }
       }
       case 3: {
-        if (_x_605 === 3) {
+        if (_x_623 === 3) {
           return true;
         } else {
           return false;
         }
       }
       case 4: {
-        if (_x_605 === 4) {
+        if (_x_623 === 4) {
           return true;
         } else {
           return false;
         }
       }
       case 5: {
-        if (_x_605 === 5) {
+        if (_x_623 === 5) {
           return true;
         } else {
           return false;
         }
       }
       case 6: {
-        if (_x_605 === 6) {
+        if (_x_623 === 6) {
           return true;
         } else {
           return false;
         }
       }
       case 7: {
-        if (_x_605 === 7) {
+        if (_x_623 === 7) {
           return true;
         } else {
           return false;
         }
       }
       case 8: {
-        if (_x_605 === 8) {
+        if (_x_623 === 8) {
           return true;
         } else {
           return false;
         }
       }
       default: {
-        if (_x_605 === 9) {
+        if (_x_623 === 9) {
           return true;
         } else {
           return false;
@@ -9656,30 +9662,30 @@
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_600, _x_601) {
-    if (_x_600 === 0) {
-      if (_x_601 === 0) {
+  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_618, _x_619) {
+    if (_x_618 === 0) {
+      if (_x_619 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_601 === 1) {
+      if (_x_619 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_580, _x_581) {
-    if (_x_580 === 0) {
-      if (_x_581 === 0) {
+  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_598, _x_599) {
+    if (_x_598 === 0) {
+      if (_x_599 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_581 === 1) {
+      if (_x_599 === 1) {
         return true;
       } else {
         return false;
@@ -14221,7 +14227,46 @@
     const bounded_phase = phase < 0 ? 0 : phase > 1 ? 1 : phase;
     const depth = 0.5 - 0.5 * _M0FPC14math3cos(bounded_phase * 3.1415926535897931 * 2);
     const excursion = id === "squat" ? depth * _M0FP37lqyq6668bodymate4core16parameter__value(p, "squatDepth", 100) / 100 : depth;
-    return `ok|pose-intent-v1|depth=${String(depth)},excursion=${String(excursion)},handWidth=${String(_M0FP37lqyq6668bodymate4core16parameter__value(p, "handWidth", 1.5))},elbowAngle=${String(_M0FP37lqyq6668bodymate4core16parameter__value(p, "elbowAngle", 45))},stanceWidth=${String(_M0FP37lqyq6668bodymate4core16parameter__value(p, "stanceWidth", 1.2))},toeAngle=${String(_M0FP37lqyq6668bodymate4core16parameter__value(p, "toeAngle", 20))}`;
+    const hand_width = _M0FP37lqyq6668bodymate4core16parameter__value(p, "handWidth", 1.5);
+    const elbow_angle = _M0FP37lqyq6668bodymate4core16parameter__value(p, "elbowAngle", 45);
+    const stance_width = _M0FP37lqyq6668bodymate4core16parameter__value(p, "stanceWidth", 1.2);
+    const toe_angle = _M0FP37lqyq6668bodymate4core16parameter__value(p, "toeAngle", 20);
+    const root_y = new _M0TPB8MutLocalGdE(0.91);
+    const root_z = new _M0TPB8MutLocalGdE(-0.025);
+    const torso_x = new _M0TPB8MutLocalGdE(0);
+    const wrist_x = new _M0TPB8MutLocalGdE(0);
+    const wrist_y = new _M0TPB8MutLocalGdE(0);
+    const wrist_z = new _M0TPB8MutLocalGdE(0);
+    const ankle_x = new _M0TPB8MutLocalGdE(0);
+    const upper_arm_x = new _M0TPB8MutLocalGdE(0);
+    const forearm_x = new _M0TPB8MutLocalGdE(0);
+    if (id === "push_up") {
+      torso_x.val = 1.31 + 0.2 * depth;
+      root_y.val = 0.171 + 0.828 * _M0FPC14math3cos(torso_x.val);
+      root_z.val = -0.025 + 0.828 * _M0FPC14math3sin(torso_x.val);
+      wrist_x.val = 0.33 * hand_width / 2;
+      wrist_y.val = 0.031;
+      wrist_z.val = 1.285;
+    } else {
+      if (id === "squat") {
+        const span = 0.29 * stance_width / 2;
+        const thigh = Math.sqrt(0.18357199999999999);
+        const shin = Math.sqrt(0.14306900000000003);
+        const leg_length = thigh + shin - 0.008;
+        const standing_height = 0.104 + Math.sqrt(leg_length * leg_length - (span - 0.057) * (span - 0.057) - 9e-006);
+        root_y.val = standing_height - 0.3 * excursion;
+        root_z.val = -0.025 - 0.17 * excursion;
+        torso_x.val = 0.32 * excursion;
+        wrist_x.val = 0.255;
+        wrist_y.val = root_y.val + 0.28 + 0.04 * depth;
+        wrist_z.val = 0.38 + 0.07 * depth;
+        ankle_x.val = span;
+      } else {
+        upper_arm_x.val = -0.07;
+        forearm_x.val = -0.07 - 2.05 * depth;
+      }
+    }
+    return `ok|pose-intent-v1|depth=${String(depth)},excursion=${String(excursion)},rootY=${String(root_y.val)},rootZ=${String(root_z.val)},torsoX=${String(torso_x.val)},handWidth=${String(hand_width)},elbowAngle=${String(elbow_angle)},wristX=${String(wrist_x.val)},wristY=${String(wrist_y.val)},wristZ=${String(wrist_z.val)},stanceWidth=${String(stance_width)},toeAngle=${String(toe_angle)},ankleX=${String(ankle_x.val)},upperArmX=${String(upper_arm_x.val)},forearmX=${String(forearm_x.val)}`;
   }
   globalThis.bodymate_domain_registry_v1 = _M0FP37lqyq6668bodymate4core20domain__registry__v1;
   globalThis.bodymate_domain_reset = _M0FP37lqyq6668bodymate4core13domain__reset;
