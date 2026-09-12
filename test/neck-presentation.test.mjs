@@ -26,7 +26,7 @@ test('Human Atlas neck asset remains frozen at fourteen mapped mesh nodes', asyn
   assert.deepEqual(nodes.map((node) => node.getName()).sort(), neckRegistry.map((entry) => entry.structureId).sort());
 });
 
-test('material plans keep real anatomy context opaque while only the selected mesh is blue', () => {
+test('material plans keep real anatomy context opaque with MoonBit-derived multi-highlight roles', () => {
   const selected = neckRegistry[0].structureId;
   const active = materialPlanForSnapshot({ selected, isolated: false, overview: false }, selected);
   const context = materialPlanForSnapshot({ selected, isolated: false, overview: false }, neckRegistry[1].structureId);
@@ -37,6 +37,9 @@ test('material plans keep real anatomy context opaque while only the selected me
   assert.equal(active.opacity, 1);
   assert.equal(context.opacity, 1);
   assert.equal(materialPlanForSnapshot({ selected, isolated: true, overview: false }, neckRegistry[1].structureId).visible, false);
+  const highlighted = materialPlanForSnapshot({ selected, isolated: false, overview: false, highlightMode: 'structure_set', highlighted: [{ structureId: selected, role: 'focus', weight: 100 }, { structureId: neckRegistry[1].structureId, role: 'secondary', weight: 80 }] }, neckRegistry[1].structureId);
+  assert.equal(highlighted.color, '#B9D7F3');
+  assert.equal(highlighted.highlighted, true);
 });
 
 test('focus retains the supplied viewing direction and restore framing comes from real combined bounds', () => {
@@ -53,8 +56,9 @@ test('focus retains the supplied viewing direction and restore framing comes fro
 test('real-bound labels are deterministic, selected-first, lane-spaced, and responsive to viewport caps', () => {
   const selected = neckRegistry[0];
   const entries = neckRegistry.map((entry, index) => ({ entry, anchor: labelAnchorFromBounds(boundsFor(manifest.entries[index])) }));
-  const ranked = rankedLabelEntries(entries, selected.structureId, 5);
+  const ranked = rankedLabelEntries(entries, selected.structureId, 5, [selected.structureId, neckRegistry[4].structureId]);
   assert.equal(ranked[0].entry.structureId, selected.structureId);
+  assert.equal(ranked[1].entry.structureId, neckRegistry[4].structureId);
   assert.equal(ranked.length, 5);
   assert.equal(labelCapForViewport(1440), 5);
   assert.equal(labelCapForViewport(390), 3);
@@ -91,5 +95,6 @@ test('right card is registry-driven and the adapter leaves focus intent with the
   assert.match(adapter, /sideName\(entry\.side\)/);
   assert.match(adapter, /用于结构位置与形态认知/);
   assert.match(adapter, /viewer\.applySnapshot\(snapshot\)/);
+  assert.match(adapter, /高亮集合/);
   assert.doesNotMatch(adapter, /viewer\.focusSelected\(\)/);
 });

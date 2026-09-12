@@ -21,6 +21,21 @@ pub fn domain_reset() -> String { reset_to_canonical() }
 #export_name("bodymate_domain_snapshot_v2")
 pub fn domain_snapshot_v2() -> String { "ok|snapshot-v2|2|\{state.region}|\{state.selected}|\{layer_text(state.layer)}|\{state.isolated}|\{state.overview}|\{state.revision}" }
 
+///| V3 adds domain-owned multi-highlight state while retaining v2 compatibility.
+#export_name("bodymate_domain_snapshot_v3")
+pub fn domain_snapshot_v3() -> String {
+  let set_id = match state.active_structure_set { Some(value) => value.id; None => "" }
+  let set_label = match state.active_structure_set { Some(value) => value.label; None => "" }
+  let mut members = ""
+  for index = 0; index < state.highlighted.length(); index = index + 1 {
+    let item = state.highlighted[index]
+    let role = match item.role { Focus => "focus"; Primary => "primary"; Secondary => "secondary"; Context => "context" }
+    if index > 0 { members = members + "~" }
+    members = members + "\{item.structure_id}^\{role}^\{item.weight}"
+  }
+  "ok|snapshot-v3|3|\{state.region}|\{state.selected}|\{layer_text(state.layer)}|\{state.isolated}|\{state.overview}|\{state.revision}|\{highlight_mode_text(state.highlight_mode)}|\{set_id}|\{set_label}|\{members}"
+}
+
 ///| Read-only bounded event representation.
 #export_name("bodymate_domain_events_v1")
 pub fn domain_events_v1() -> String { events_wire() }
@@ -28,6 +43,10 @@ pub fn domain_events_v1() -> String { events_wire() }
 ///| Deterministic resolver export. It never mutates state.
 #export_name("bodymate_domain_resolve_query_v1")
 pub fn domain_resolve_query_v1(text : String) -> String { query_result_wire(resolve_query(text)) }
+
+///| Structure-set aware resolver export for product integrations.
+#export_name("bodymate_domain_resolve_query_v2")
+pub fn domain_resolve_query_v2(text : String) -> String { resolve_query_v2(text) }
 
 ///| The sole richer action transition entry point for browser/controller flows.
 #export_name("bodymate_domain_execute_action_v1")

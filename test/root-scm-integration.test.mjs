@@ -5,7 +5,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 import { NodeIO } from '@gltf-transform/core';
 import { canonicalScmId, entryForPresentationId, legacyPresentationIdForCoreId, rootScmRegistry } from '../src/root-scm/registry.mjs';
-import { focusPlanFromBounds, parseCoreSnapshot, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
+import { focusPlanFromBounds, parseCoreSnapshot, parseDomainSnapshotV3, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
 
 const root = new URL('../', import.meta.url);
 const html = await readFile(new URL('index.html', root), 'utf8');
@@ -44,6 +44,17 @@ test('root domain adapter registers the canonical SCM once without registering t
   const before = snapshot(runtime);
   assert.equal(selectPresentationStructure(runtime, 'unknown-legacy-node'), null);
   assert.equal(snapshot(runtime), before);
+});
+
+test('root domain adapter only accepts a complete MoonBit v3 multi-highlight snapshot', () => {
+  const runtime = core();
+  runtime.bodymate_domain_reset();
+  runtime.bodymate_domain_execute_action_v1('HIGHLIGHT_STRUCTURE_SET', 'bodymate.neck.set.scalene.right', '');
+  const snapshot = parseDomainSnapshotV3(runtime.bodymate_domain_snapshot_v3());
+  assert.equal(snapshot?.highlightMode, 'structure_set');
+  assert.equal(snapshot?.highlighted.length, 3);
+  assert.equal(snapshot?.highlighted[0].role, 'focus');
+  assert.equal(parseDomainSnapshotV3('ok|snapshot-v3|3|neck|bodymate.neck.scalene.anterior.right|muscle|false|false|1|structure_set|set|label|bodymate.unknown^focus^100'), null);
 });
 
 test('each Human Atlas muscle selects its canonical ID through MoonBit with one active selection', () => {

@@ -36,3 +36,48 @@ fn family_for(entry : Structure) -> String {
   else if entry.structure_id.contains(".splenius.") { "splenius" }
   else { "other" }
 }
+
+fn side_suffix(side : Side?) -> String {
+  match side {
+    Some(Left) => ".left"
+    Some(Right) => ".right"
+    None => ""
+  }
+}
+
+fn family_label(family : String, side : Side?) -> String {
+  let prefix = match side { Some(Left) => "左侧"; Some(Right) => "右侧"; None => "双侧" }
+  let name = if family == "scm" { "胸锁乳突肌" }
+    else if family == "trapezius" { "斜方肌上部" }
+    else if family == "levator" { "肩胛提肌" }
+    else if family == "scalene" { "斜角肌群" }
+    else if family == "splenius" { "头夹肌" }
+    else { "结构" }
+  prefix + name
+}
+
+///| Derives all product structure-set members from the frozen canonical registry.
+fn structure_set_for(family : String, side : Side?) -> StructureSet? {
+  let members : Array[HighlightedStructure] = []
+  for entry in canonical_registry {
+    let side_matches = match side { Some(expected) => entry.side == expected; None => true }
+    if family_for(entry) == family && side_matches {
+      let role = if members.length() == 0 { Focus } else if members.length() == 1 { Primary } else { Secondary }
+      members.push({ structure_id: entry.structure_id, role, weight: 100 - members.length() * 10 })
+    }
+  }
+  if members.length() == 0 { None }
+  else { Some({ id: "bodymate.neck.set." + family + side_suffix(side), label: family_label(family, side), members }) }
+}
+
+fn structure_set_by_id(id : String) -> StructureSet? {
+  for family in ["scm", "trapezius", "levator", "scalene", "splenius"] {
+    for side in [None, Some(Right), Some(Left)] {
+      match structure_set_for(family, side) {
+        Some(value) => if value.id == id { return Some(value) }
+        None => ()
+      }
+    }
+  }
+  None
+}

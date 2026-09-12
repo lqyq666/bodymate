@@ -1,4 +1,4 @@
-let state : DomainState = { entries: [], region: "", selected: "", layer: Muscle, isolated: false, overview: true, revision: 0, events: [] }
+let state : DomainState = { entries: [], region: "", selected: "", layer: Muscle, isolated: false, overview: true, highlight_mode: NoHighlight, active_structure_set: None, highlighted: [], revision: 0, events: [] }
 
 fn layer_text(layer : Layer) -> String {
   match layer {
@@ -19,6 +19,9 @@ fn group_text(group : StructureGroup) -> String {
     Shoulder => "shoulder"
   }
 }
+fn highlight_mode_text(mode : HighlightMode) -> String {
+  match mode { NoHighlight => "none"; StructureSet => "structure_set" }
+}
 
 fn reset_to_canonical() -> String {
   state.entries = canonical_entries()
@@ -27,6 +30,9 @@ fn reset_to_canonical() -> String {
   state.layer = Muscle
   state.isolated = false
   state.overview = true
+  state.highlight_mode = NoHighlight
+  state.active_structure_set = None
+  state.highlighted = []
   state.revision = 0
   state.events = []
   snapshot()
@@ -39,6 +45,9 @@ fn clear_legacy_state() -> String {
   state.layer = Muscle
   state.isolated = false
   state.overview = true
+  state.highlight_mode = NoHighlight
+  state.active_structure_set = None
+  state.highlighted = []
   state.revision = 0
   state.events = []
   snapshot()
@@ -63,16 +72,77 @@ fn first_in(region : String, layer : Layer) -> Structure? {
   fallback
 }
 
+fn drop_active_structure_set() -> StructureSet? {
+  let previous = state.active_structure_set
+  state.highlight_mode = NoHighlight
+  state.active_structure_set = None
+  state.highlighted = []
+  previous
+}
+
+fn note_dropped_structure_set(previous : StructureSet?, action : String, previous_selected : String) -> Unit {
+  match previous {
+    Some(value) => record_structure_set_event("StructureSetCleared", action, previous_selected, "accepted", value.id, value.members.length())
+    None => ()
+  }
+}
+
 fn select_entry(entry : Structure, action : String) -> String {
   let previous = state.selected
+  let previous_set = drop_active_structure_set()
   state.region = entry.region
   state.selected = entry.structure_id
   state.layer = entry.layer
   state.isolated = false
   state.overview = false
   bump()
+  note_dropped_structure_set(previous_set, action, previous)
   record_event("StructureSelected", action, previous, "accepted")
   snapshot()
+}
+
+fn valid_structure_set(set : StructureSet) -> Bool {
+  if set.members.length() == 0 { return false }
+  let ids : Array[String] = []
+  for item in set.members {
+    if ids.contains(item.structure_id) || canonical_by_id(item.structure_id) is None { return false }
+    ids.push(item.structure_id)
+  }
+  true
+}
+
+fn highlight_structure_set_internal(id : String, action : String) -> String {
+  match structure_set_by_id(id) {
+    None => { record_event("ActionRejected", action, state.selected, "unknown_structure_set"); fail("unknown_structure_set") }
+    Some(set) => if !valid_structure_set(set) { record_event("ActionRejected", action, state.selected, "invalid_structure_set"); fail("invalid_structure_set") } else {
+      let previous = state.selected
+      let focus = set.members[0]
+      match find_entry(focus.structure_id) {
+        None => { record_event("ActionRejected", action, previous, "unregistered_structure_set"); fail("unregistered_structure_set") }
+        Some(entry) => {
+          state.region = entry.region
+          state.selected = focus.structure_id
+          state.layer = entry.layer
+          state.isolated = false
+          state.overview = false
+          state.highlight_mode = StructureSet
+          state.active_structure_set = Some(set)
+          state.highlighted = set.members
+          bump()
+          record_structure_set_event("StructureSetHighlighted", action, previous, "accepted", set.id, set.members.length())
+          snapshot()
+        }
+      }
+    }
+  }
+}
+
+fn clear_structure_set_internal(action : String) -> String {
+  let previous = state.selected
+  match drop_active_structure_set() {
+    None => snapshot()
+    Some(set) => { bump(); record_structure_set_event("StructureSetCleared", action, previous, "accepted", set.id, set.members.length()); snapshot() }
+  }
 }
 
 fn select_region_internal(region : String, layer : Layer, action : String) -> String {
@@ -121,9 +191,12 @@ fn restore_internal(action : String) -> String {
 }
 
 fn reset_overview_internal(action : String) -> String {
+  let previous = state.selected
+  let previous_set = drop_active_structure_set()
   state.isolated = false
   state.overview = true
   bump()
+  note_dropped_structure_set(previous_set, action, previous)
   record_event("OverviewReset", action, state.selected, "accepted")
   snapshot()
 }

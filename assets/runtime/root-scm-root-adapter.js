@@ -25,6 +25,12 @@
   registrySource.id = 'selection-source';
   Object.assign(registrySource.style, { display: 'block', marginTop: '4px', color: '#718aa4', fontSize: '10px', lineHeight: '1.5' });
   summary?.append(registryEnglish, registrySource);
+  const structureSet = document.createElement('section');
+  structureSet.id = 'structure-set-summary';
+  Object.assign(structureSet.style, { display: 'none', marginTop: '7px', paddingTop: '6px', borderTop: '1px solid #dce8f2', color: '#52779e', font: '600 10px/1.45 system-ui,sans-serif' });
+  const structureSetTitle = document.createElement('strong'), structureSetMembers = document.createElement('small');
+  Object.assign(structureSetMembers.style, { display: 'block', marginTop: '3px', color: '#718aa4', fontSize: '9px', fontWeight: '500' });
+  structureSet.append(structureSetTitle, structureSetMembers); summary?.append(structureSet);
   const groupName = (group) => group === 'shoulder' ? '肩带' : '颈部';
   const sideName = (side) => side === 'left' ? '左侧' : '右侧';
   const restoreLegacy = (error) => {
@@ -45,7 +51,7 @@
     attribution.hidden = !active;
     if (!active) {
       if (tag) tag.textContent = legacyTag;
-      registryEnglish.hidden = true; registrySource.hidden = true;
+      registryEnglish.hidden = true; registrySource.hidden = true; structureSet.style.display = 'none';
       if (failed && entry && !snapshot.whole) document.querySelector('#selection-meta').textContent = '真实 SCM 资源未能初始化，当前显示交互白模。';
       return;
     }
@@ -54,6 +60,9 @@
     document.querySelector('#selection-meta').textContent = `${groupName(entry.uiGroup)} · ${sideName(entry.side)}`;
     registryEnglish.hidden = false; registryEnglish.textContent = entry.canonicalName.toUpperCase();
     registrySource.hidden = false; registrySource.textContent = `${entry.sourceProvider} · 真实公开解剖网格，用于结构位置与形态认知。`;
+    const members = snapshot.highlightMode === 'structure_set' ? (snapshot.highlighted || []).map((item) => anatomyEntryFor(item.structureId)).filter(Boolean) : [];
+    structureSet.style.display = members.length ? 'block' : 'none';
+    if (members.length) { structureSetTitle.textContent = `高亮集合 · ${snapshot.highlightSetLabel}（${members.length}）`; structureSetMembers.textContent = members.map((member) => member.displayNameZh).join(' · '); }
     if (tag) tag.textContent = '真实公开解剖资产 · CC BY 4.0 · 非医学诊断';
   };
   globalThis.__rootScmQueryFeedback = (feedback) => viewer?.setQueryFeedback?.(feedback);
