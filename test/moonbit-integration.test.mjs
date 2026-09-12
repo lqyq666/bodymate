@@ -40,7 +40,7 @@ test('embedded MoonBit IIFE exports and executes the interaction contract', () =
 
 test('MoonBit owns the canonical neck registry, structure sets, resolver, action transitions, and bounded event wire', () => {
   const core = loadCore();
-  for (const name of ['bodymate_domain_registry_v1', 'bodymate_domain_reset', 'bodymate_domain_snapshot_v2', 'bodymate_domain_snapshot_v3', 'bodymate_domain_events_v1', 'bodymate_domain_resolve_query_v1', 'bodymate_domain_resolve_query_v2', 'bodymate_domain_execute_action_v1']) {
+  for (const name of ['bodymate_domain_registry_v1', 'bodymate_domain_reset', 'bodymate_domain_snapshot_v2', 'bodymate_domain_snapshot_v3', 'bodymate_domain_snapshot_v4', 'bodymate_domain_events_v1', 'bodymate_domain_events_v2', 'bodymate_domain_evidence_v1', 'bodymate_domain_resolve_query_v1', 'bodymate_domain_resolve_query_v2', 'bodymate_domain_resolve_query_v3', 'bodymate_domain_execute_action_v1']) {
     assert.equal(typeof core[name], 'function', `missing ${name}`);
   }
   assert.match(core.bodymate_domain_reset(), /^ok\|/);
@@ -58,4 +58,21 @@ test('MoonBit owns the canonical neck registry, structure sets, resolver, action
   assert.match(core.bodymate_domain_execute_action_v1('HIGHLIGHT_STRUCTURE_SET', 'bodymate.neck.set.scalene.right', ''), /^ok\|neck\|bodymate\.neck\.scalene\.anterior\.right\|/);
   assert.match(core.bodymate_domain_snapshot_v3(), /^ok\|snapshot-v3\|3\|neck\|bodymate\.neck\.scalene\.anterior\.right\|muscle\|false\|false\|/);
   assert.match(core.bodymate_domain_events_v1(), /StructureSetHighlighted\^HIGHLIGHT_STRUCTURE_SET/);
+});
+
+test('MoonBit resolves evidence-backed movements into a V4 StructureSet without JavaScript mappings', () => {
+  const core = loadCore();
+  core.bodymate_domain_reset();
+  const query = core.bodymate_domain_resolve_query_v3('耸肩涉及哪些肌肉');
+  assert.match(query, /^ok\|query-v3\|MOVEMENT_LOOKUP\|EXACT\|SHOW_MOVEMENT_MAPPING\|shoulder_girdle_elevation\|/);
+  assert.match(query, /bodymate\.neck\.trapezius\.upper\.right\^main_contributor\^ev\.scapula\.elevation/);
+  const before = core.bodymate_domain_snapshot_v4();
+  assert.equal(core.bodymate_domain_execute_action_v1('SHOW_MOVEMENT_MAPPING', 'not-a-movement', ''), 'error|unknown_movement');
+  assert.equal(core.bodymate_domain_snapshot_v4(), before);
+  assert.match(core.bodymate_domain_execute_action_v1('SHOW_MOVEMENT_MAPPING', 'shoulder_girdle_elevation', ''), /^ok\|neck\|bodymate\.neck\.trapezius\.upper\.right\|/);
+  const snapshot = core.bodymate_domain_snapshot_v4();
+  assert.match(snapshot, /^ok\|snapshot-v4\|4\|neck\|bodymate\.neck\.trapezius\.upper\.right\|muscle\|false\|false\|1\|structure_set\|bodymate\.movement\.set\.shoulder_girdle_elevation\|/);
+  assert.match(snapshot, /shoulder_girdle_elevation\|肩胛带上提 \/ 耸肩\|Shoulder Girdle Elevation\|/);
+  assert.match(snapshot, /bodymate\.neck\.levator-scapulae\.left\^contributor\^ev\.scapula\.elevation/);
+  assert.match(core.bodymate_domain_events_v2(), /MovementMappingShown\^SHOW_MOVEMENT_MAPPING/);
 });

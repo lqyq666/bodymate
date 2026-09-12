@@ -36,9 +36,65 @@ pub fn domain_snapshot_v3() -> String {
   "ok|snapshot-v3|3|\{state.region}|\{state.selected}|\{layer_text(state.layer)}|\{state.isolated}|\{state.overview}|\{state.revision}|\{highlight_mode_text(state.highlight_mode)}|\{set_id}|\{set_label}|\{members}"
 }
 
+fn movement_mapping_wire(mapping : MovementMapping?) -> String {
+  match mapping {
+    None => ""
+    Some(value) => {
+      let mut output = ""
+      for index = 0; index < value.mappings.length(); index = index + 1 {
+        let item = value.mappings[index]
+        let mut evidence_ids = ""
+        for evidence_index = 0; evidence_index < item.evidence_ids.length(); evidence_index = evidence_index + 1 {
+          if evidence_index > 0 { evidence_ids = evidence_ids + "," }
+          evidence_ids = evidence_ids + item.evidence_ids[evidence_index]
+        }
+        if index > 0 { output = output + "~" }
+        output = output + "\{item.structure_id}^\{participation_role_text(item.role)}^\{evidence_ids}"
+      }
+      output
+    }
+  }
+}
+
+///| V4 adds active evidence-backed movement state while retaining v2/v3 compatibility.
+#export_name("bodymate_domain_snapshot_v4")
+pub fn domain_snapshot_v4() -> String {
+  let set_id = match state.active_structure_set { Some(value) => value.id; None => "" }
+  let set_label = match state.active_structure_set { Some(value) => value.label; None => "" }
+  let mut highlighted = ""
+  for index = 0; index < state.highlighted.length(); index = index + 1 {
+    let item = state.highlighted[index]
+    let role = match item.role { Focus => "focus"; Primary => "primary"; Secondary => "secondary"; Context => "context" }
+    if index > 0 { highlighted = highlighted + "~" }
+    highlighted = highlighted + "\{item.structure_id}^\{role}^\{item.weight}"
+  }
+  let movement_id = match state.active_movement { Some(value) => value.id; None => "" }
+  let movement_label = match state.active_movement { Some(value) => value.display_name_zh; None => "" }
+  let movement_name = match state.active_movement { Some(value) => value.canonical_name; None => "" }
+  let coverage = match state.active_movement { Some(value) => value.coverage_note; None => "" }
+  let mapping = match state.active_movement { Some(value) => movement_mapping_by_id(value.id); None => None }
+  "ok|snapshot-v4|4|\{state.region}|\{state.selected}|\{layer_text(state.layer)}|\{state.isolated}|\{state.overview}|\{state.revision}|\{highlight_mode_text(state.highlight_mode)}|\{set_id}|\{set_label}|\{highlighted}|\{movement_id}|\{movement_label}|\{movement_name}|\{movement_mapping_wire(mapping)}|\{coverage}"
+}
+
 ///| Read-only bounded event representation.
 #export_name("bodymate_domain_events_v1")
 pub fn domain_events_v1() -> String { events_wire() }
+
+///| V2 event wire includes movement IDs for evidence-mapping audit replay.
+#export_name("bodymate_domain_events_v2")
+pub fn domain_events_v2() -> String { events_wire_v2() }
+
+///| Bundled movement evidence metadata; consumers must not fetch these URLs at runtime.
+#export_name("bodymate_domain_evidence_v1")
+pub fn domain_evidence_v1() -> String {
+  let mut output = "ok|evidence-v1|"
+  for index = 0; index < evidence_catalog.length(); index = index + 1 {
+    let evidence = evidence_catalog[index]
+    if index > 0 { output = output + "~" }
+    output = output + "\{evidence.id}^\{evidence.source_title}^\{evidence.source_url}^\{evidence.note}"
+  }
+  output
+}
 
 ///| Deterministic resolver export. It never mutates state.
 #export_name("bodymate_domain_resolve_query_v1")
@@ -47,6 +103,10 @@ pub fn domain_resolve_query_v1(text : String) -> String { query_result_wire(reso
 ///| Structure-set aware resolver export for product integrations.
 #export_name("bodymate_domain_resolve_query_v2")
 pub fn domain_resolve_query_v2(text : String) -> String { resolve_query_v2(text) }
+
+///| Movement-aware resolver export; it retains v2 for compatibility.
+#export_name("bodymate_domain_resolve_query_v3")
+pub fn domain_resolve_query_v3(text : String) -> String { resolve_query_v3(text) }
 
 ///| The sole richer action transition entry point for browser/controller flows.
 #export_name("bodymate_domain_execute_action_v1")

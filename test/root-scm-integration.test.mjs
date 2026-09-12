@@ -5,7 +5,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 import { NodeIO } from '@gltf-transform/core';
 import { canonicalScmId, entryForPresentationId, legacyPresentationIdForCoreId, rootScmRegistry } from '../src/root-scm/registry.mjs';
-import { focusPlanFromBounds, parseCoreSnapshot, parseDomainSnapshotV3, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
+import { focusPlanFromBounds, parseCoreSnapshot, parseDomainSnapshotV3, parseDomainSnapshotV4, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
 
 const root = new URL('../', import.meta.url);
 const html = await readFile(new URL('index.html', root), 'utf8');
@@ -55,6 +55,18 @@ test('root domain adapter only accepts a complete MoonBit v3 multi-highlight sna
   assert.equal(snapshot?.highlighted.length, 3);
   assert.equal(snapshot?.highlighted[0].role, 'focus');
   assert.equal(parseDomainSnapshotV3('ok|snapshot-v3|3|neck|bodymate.neck.scalene.anterior.right|muscle|false|false|1|structure_set|set|label|bodymate.unknown^focus^100'), null);
+});
+
+test('root domain adapter only accepts an evidence-complete MoonBit v4 movement snapshot', () => {
+  const runtime = core();
+  runtime.bodymate_domain_reset();
+  runtime.bodymate_domain_execute_action_v1('SHOW_MOVEMENT_MAPPING', 'shoulder_girdle_elevation', '');
+  const movement = parseDomainSnapshotV4(runtime.bodymate_domain_snapshot_v4());
+  assert.equal(movement?.activeMovementId, 'shoulder_girdle_elevation');
+  assert.equal(movement?.movementMappings.length, 4);
+  assert.equal(movement?.movementMappings.filter((item) => item.role === 'main_contributor').length, 2);
+  assert.equal(movement?.movementMappings.every((item) => item.evidenceIds.length > 0), true);
+  assert.equal(parseDomainSnapshotV4('ok|snapshot-v4|4|neck|bodymate.neck.trapezius.upper.right|muscle|false|false|1|structure_set|set|label|bodymate.neck.trapezius.upper.right^focus^100|movement|label|name|bodymate.neck.unknown^contributor^evidence|note'), null);
 });
 
 test('each Human Atlas muscle selects its canonical ID through MoonBit with one active selection', () => {
@@ -116,6 +128,8 @@ test('root retains legacy views and restores the legacy presentation on real-vie
   assert.match(adapter, /overlays\.forEach\(\(node\) => \{ node\.style\.visibility = ''; \}\)/);
   assert.match(adapter, /Human Atlas \/ BodyParts3D 4\.0/);
   assert.match(adapter, /assets\/anatomy\/human-atlas\/ATTRIBUTION\.md/);
+  assert.match(adapter, /bodymate_domain_evidence_v1/);
+  assert.doesNotMatch(adapter, /\bfetch\s*\(/);
 });
 
 test('forced real-viewer failure keeps isolate and restore snapshots on the legacy canvas with the placeholder tag', async () => {

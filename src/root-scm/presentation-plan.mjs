@@ -2,12 +2,14 @@ export const FROZEN_HUMAN_ATLAS_NECK_SHA = 'FA6A0CFDDF1DA59367EA8EB72DB77770A08A
 
 export const selectedMaterial = Object.freeze({ color: '#83B9F4', emissive: '#163D6D', emissiveIntensity: 0.09, opacity: 1, roughness: 0.68, metalness: 0.01 });
 export const highlightedMaterial = Object.freeze({ color: '#B9D7F3', emissive: '#0E3158', emissiveIntensity: 0.035, opacity: 1, roughness: 0.72, metalness: 0.01 });
+export const primaryHighlightedMaterial = Object.freeze({ color: '#9BC8F1', emissive: '#123B67', emissiveIntensity: 0.055, opacity: 1, roughness: 0.70, metalness: 0.01 });
 export const contextMaterial = Object.freeze({ color: '#E7EDF1', emissive: '#000000', emissiveIntensity: 0, opacity: 1, roughness: 0.76, metalness: 0.01 });
 
 export function materialPlanForSnapshot(snapshot, structureId) {
   const selected = snapshot?.selected === structureId && !snapshot?.overview;
-  const highlighted = !selected && !snapshot?.overview && snapshot?.highlightMode === 'structure_set' && snapshot.highlighted?.some((item) => item.structureId === structureId);
-  return Object.freeze({ ...(selected ? selectedMaterial : highlighted ? highlightedMaterial : contextMaterial), selected, highlighted, visible: !snapshot?.isolated || selected });
+  const highlight = !selected && !snapshot?.overview && snapshot?.highlightMode === 'structure_set' ? snapshot.highlighted?.find((item) => item.structureId === structureId) : null;
+  const highlighted = Boolean(highlight);
+  return Object.freeze({ ...(selected ? selectedMaterial : highlight?.role === 'primary' ? primaryHighlightedMaterial : highlighted ? highlightedMaterial : contextMaterial), selected, highlighted, highlightRole: highlight?.role || '', visible: !snapshot?.isolated || selected });
 }
 
 export function boundsCenter(bounds) {

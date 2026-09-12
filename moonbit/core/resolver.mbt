@@ -72,6 +72,8 @@ fn ranked_candidates(entries : Array[Structure], side : Side?) -> Array[String] 
 fn query_result_wire(result : QueryResult) -> String {
   let classification = match result.classification {
     StructureLookup => "STRUCTURE_LOOKUP"
+    StructureSetLookup => "STRUCTURE_SET_LOOKUP"
+    MovementLookup => "MOVEMENT_LOOKUP"
     DomainCommand => "DOMAIN_COMMAND"
     UnsupportedHealthQuery => "UNSUPPORTED_HEALTH_QUERY"
     UnknownQuery => "UNKNOWN"
@@ -94,7 +96,7 @@ fn query_result_wire(result : QueryResult) -> String {
 }
 
 fn classification_text(classification : QueryClassification) -> String {
-  match classification { StructureLookup => "STRUCTURE_LOOKUP"; DomainCommand => "DOMAIN_COMMAND"; UnsupportedHealthQuery => "UNSUPPORTED_HEALTH_QUERY"; UnknownQuery => "UNKNOWN" }
+  match classification { StructureLookup => "STRUCTURE_LOOKUP"; StructureSetLookup => "STRUCTURE_SET_LOOKUP"; MovementLookup => "MOVEMENT_LOOKUP"; DomainCommand => "DOMAIN_COMMAND"; UnsupportedHealthQuery => "UNSUPPORTED_HEALTH_QUERY"; UnknownQuery => "UNKNOWN" }
 }
 
 fn resolution_text(resolution : Resolution) -> String {
@@ -170,4 +172,80 @@ fn resolve_query_v2(text : String) -> String {
     }
   }
   query_result_wire_v2(resolve_query(input), None)
+}
+
+fn action_for_wire(result : QueryResult) -> DomainAction {
+  match result.action { Some(value) => value; None => { kind: UnknownAction, structure_id: "", region: "", confidence: 0.0 } }
+}
+
+fn highlighted_members_wire(set : StructureSet?) -> String {
+  match set {
+    None => ""
+    Some(value) => {
+      let mut output = ""
+      for index = 0; index < value.members.length(); index = index + 1 {
+        let item = value.members[index]
+        let role = match item.role { Focus => "focus"; Primary => "primary"; Secondary => "secondary"; Context => "context" }
+        if index > 0 { output = output + "~" }
+        output = output + "\{item.structure_id}^\{role}^\{item.weight}"
+      }
+      output
+    }
+  }
+}
+
+fn mapped_members_wire(mapping : MovementMapping) -> String {
+  let mut output = ""
+  for index = 0; index < mapping.mappings.length(); index = index + 1 {
+    let item = mapping.mappings[index]
+    let mut evidence_ids = ""
+    for evidence_index = 0; evidence_index < item.evidence_ids.length(); evidence_index = evidence_index + 1 {
+      if evidence_index > 0 { evidence_ids = evidence_ids + "," }
+      evidence_ids = evidence_ids + item.evidence_ids[evidence_index]
+    }
+    if index > 0 { output = output + "~" }
+    output = output + "\{item.structure_id}^\{participation_role_text(item.role)}^\{evidence_ids}"
+  }
+  output
+}
+
+///| V3 wire carries either a structure result or a movement mapping without JS inference.
+fn query_result_wire_v3(result : QueryResult, label : String, canonical_name : String, coverage_note : String, members : String) -> String {
+  let action = action_for_wire(result)
+  "ok|query-v3|\{classification_text(result.classification)}|\{resolution_text(result.resolution)}|\{action_text(action.kind)}|\{action.structure_id}|\{label}|\{action.region}|\{action.confidence}|\{result.message_code}|\{canonical_name}|\{coverage_note}|\{members}"
+}
+
+///| V3 extends the resolver with evidence-backed movement lookup and preserves health priority.
+fn resolve_query_v3(text : String) -> String {
+  let input = lower(text)
+  if input == "" { return query_result_wire_v3({ classification: UnknownQuery, resolution: NoMatch, action: None, candidate_ids: [], message_code: "empty" }, "", "", "", "") }
+  if has_health_signal(input) { return query_result_wire_v3({ classification: UnsupportedHealthQuery, resolution: NoMatch, action: None, candidate_ids: [], message_code: "health" }, "", "", "", "") }
+  match command_for(input) {
+    Some(action) => return query_result_wire_v3({ classification: DomainCommand, resolution: Exact, action: Some(action), candidate_ids: [], message_code: if action.kind == IsolateSelected { "isolate" } else { "restore" } }, "", "", "", "")
+    None => ()
+  }
+  if valid_movement_catalog() {
+    match movement_for_query(input) {
+      Some(movement) => match movement_mapping_by_id(movement.id) {
+        Some(mapping) => return query_result_wire_v3({ classification: MovementLookup, resolution: Exact, action: Some({ kind: ShowMovementMapping, structure_id: movement.id, region: "", confidence: 1.0 }), candidate_ids: [], message_code: "movement" }, movement.display_name_zh, movement.canonical_name, movement.coverage_note, mapped_members_wire(mapping))
+        None => ()
+      }
+      None => ()
+    }
+  }
+  let side = input_side(input)
+  let families = family_matches(input)
+  match exact_entry(input, side, families) {
+    Some(entry) => return query_result_wire_v3({ classification: StructureLookup, resolution: Exact, action: Some({ kind: SelectStructure, structure_id: entry.structure_id, region: "", confidence: 1.0 }), candidate_ids: [entry.structure_id], message_code: "exact" }, "", "", "", "\{entry.structure_id}^^")
+    None => ()
+  }
+  if families.length() == 1 {
+    match structure_set_for(families[0], side) {
+      Some(set) => return query_result_wire_v3({ classification: StructureSetLookup, resolution: Exact, action: Some({ kind: HighlightStructureSet, structure_id: set.id, region: "", confidence: 1.0 }), candidate_ids: [], message_code: "structure_set" }, set.label, "", "", highlighted_members_wire(Some(set)))
+      None => ()
+    }
+  }
+  let fallback = resolve_query(input)
+  let members = ids_wire(fallback.candidate_ids)
+  query_result_wire_v3(fallback, "", "", "", members)
 }

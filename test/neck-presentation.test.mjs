@@ -40,6 +40,8 @@ test('material plans keep real anatomy context opaque with MoonBit-derived multi
   const highlighted = materialPlanForSnapshot({ selected, isolated: false, overview: false, highlightMode: 'structure_set', highlighted: [{ structureId: selected, role: 'focus', weight: 100 }, { structureId: neckRegistry[1].structureId, role: 'secondary', weight: 80 }] }, neckRegistry[1].structureId);
   assert.equal(highlighted.color, '#B9D7F3');
   assert.equal(highlighted.highlighted, true);
+  const primary = materialPlanForSnapshot({ selected, isolated: false, overview: false, highlightMode: 'structure_set', highlighted: [{ structureId: selected, role: 'focus', weight: 100 }, { structureId: neckRegistry[1].structureId, role: 'primary', weight: 80 }] }, neckRegistry[1].structureId);
+  assert.equal(primary.color, '#9BC8F1');
 });
 
 test('focus retains the supplied viewing direction and restore framing comes from real combined bounds', () => {

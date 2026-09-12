@@ -188,7 +188,7 @@ function buildAnatomy(){
     this.source_chunk = param11;
     this.is_default = param12;
   }
-  function _M0TP37lqyq6668bodymate4core11DomainState(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
+  function _M0TP37lqyq6668bodymate4core11DomainState(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
     this.entries = param0;
     this.region = param1;
     this.selected = param2;
@@ -198,8 +198,32 @@ function buildAnatomy(){
     this.highlight_mode = param6;
     this.active_structure_set = param7;
     this.highlighted = param8;
-    this.revision = param9;
-    this.events = param10;
+    this.active_movement = param9;
+    this.revision = param10;
+    this.events = param11;
+  }
+  function _M0TP37lqyq6668bodymate4core15MovementMapping(param0, param1) {
+    this.movement_id = param0;
+    this.mappings = param1;
+  }
+  function _M0TP37lqyq6668bodymate4core24MovementStructureMapping(param0, param1, param2) {
+    this.structure_id = param0;
+    this.role = param1;
+    this.evidence_ids = param2;
+  }
+  function _M0TP37lqyq6668bodymate4core11EvidenceRef(param0, param1, param2, param3) {
+    this.id = param0;
+    this.source_title = param1;
+    this.source_url = param2;
+    this.note = param3;
+  }
+  function _M0TP37lqyq6668bodymate4core8Movement(param0, param1, param2, param3, param4, param5) {
+    this.id = param0;
+    this.display_name_zh = param1;
+    this.canonical_name = param2;
+    this.aliases = param3;
+    this.movement_group = param4;
+    this.coverage_note = param5;
   }
   class $PanicError extends Error {}
   function $panic() {
@@ -257,7 +281,7 @@ function buildAnatomy(){
     this.label = param1;
     this.members = param2;
   }
-  function _M0TP37lqyq6668bodymate4core11DomainEvent(param0, param1, param2, param3, param4, param5, param6, param7, param8) {
+  function _M0TP37lqyq6668bodymate4core11DomainEvent(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9) {
     this.revision = param0;
     this.kind = param1;
     this.action = param2;
@@ -267,11 +291,15 @@ function buildAnatomy(){
     this.result = param6;
     this.structure_set_id = param7;
     this.member_count = param8;
+    this.movement_id = param9;
   }
   const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger = { method_0: _M0IPB13StringBuilderPB6Logger13write__string, method_1: _M0IP016_24default__implPB6Logger16write__substringGRPB13StringBuilderE, method_2: _M0IPB13StringBuilderPB6Logger11write__view, method_3: _M0IPB13StringBuilderPB6Logger11write__char, method_4: _M0IP016_24default__implPB6Logger28write__string__interpolationGRPB13StringBuilderE, method_5: _M0IP016_24default__implPB6Logger5writeGRPB13StringBuilderE };
   const _M0MPC16string6String4trimN7_2abindS6861 = "\t\n\r ";
   const _M0FP37lqyq6668bodymate4core19canonical__registry = [new _M0TP37lqyq6668bodymate4core9Structure("scm_r", "bodymate.neck.sternocleidomastoid.right", "右侧胸锁乳突肌", "right sternocleidomastoid", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1595", "FMA13408", "body-5.bin", true), new _M0TP37lqyq6668bodymate4core9Structure("scm_l", "bodymate.neck.sternocleidomastoid.left", "左侧胸锁乳突肌", "left sternocleidomastoid", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1573", "FMA13409", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("trapezius_r", "bodymate.neck.trapezius.upper.right", "右侧斜方肌上部", "descending part of right trapezius", "neck", 0, 1, 1, "Human Atlas / BodyParts3D 4.0", "FJ1521", "FMA33586", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("trapezius_l", "bodymate.neck.trapezius.upper.left", "左侧斜方肌上部", "descending part of left trapezius", "neck", 0, 0, 1, "Human Atlas / BodyParts3D 4.0", "FJ1521M", "FMA33587", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("levator_r", "bodymate.neck.levator-scapulae.right", "右侧肩胛提肌", "right levator scapulae", "neck", 0, 1, 1, "Human Atlas / BodyParts3D 4.0", "FJ1532", "FMA32540", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("levator_l", "bodymate.neck.levator-scapulae.left", "左侧肩胛提肌", "left levator scapulae", "neck", 0, 0, 1, "Human Atlas / BodyParts3D 4.0", "FJ1532M", "FMA32541", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_anterior_r", "bodymate.neck.scalene.anterior.right", "右侧前斜角肌", "right scalenus anterior", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1592", "FMA13392", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_anterior_l", "bodymate.neck.scalene.anterior.left", "左侧前斜角肌", "left scalenus anterior", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1570", "FMA13393", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_medius_r", "bodymate.neck.scalene.medius.right", "右侧中斜角肌", "right scalenus medius", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1593", "FMA13390", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_medius_l", "bodymate.neck.scalene.medius.left", "左侧中斜角肌", "left scalenus medius", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1571", "FMA13391", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_posterior_r", "bodymate.neck.scalene.posterior.right", "右侧后斜角肌", "right scalenus posterior", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1594", "FMA13388", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_posterior_l", "bodymate.neck.scalene.posterior.left", "左侧后斜角肌", "left scalenus posterior", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1572", "FMA13389", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("splenius_capitis_r", "bodymate.neck.splenius.capitis.right", "右侧头夹肌", "right splenius capitis", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1545", "FMA22728", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("splenius_capitis_l", "bodymate.neck.splenius.capitis.left", "左侧头夹肌", "left splenius capitis", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1545M", "FMA22729", "body-4.bin", false)];
-  const _M0FP37lqyq6668bodymate4core5state = new _M0TP37lqyq6668bodymate4core11DomainState([], "", "", 0, false, true, 0, undefined, [], 0, []);
+  const _M0FP37lqyq6668bodymate4core5state = new _M0TP37lqyq6668bodymate4core11DomainState([], "", "", 0, false, true, 0, undefined, [], undefined, 0, []);
+  const _M0FP37lqyq6668bodymate4core18movement__mappings = [new _M0TP37lqyq6668bodymate4core15MovementMapping("shoulder_girdle_elevation", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.right", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.left", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.right", 1, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.left", 1, ["ev.scapula.elevation"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_right", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.right", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_left", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.left", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_flexion", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"])])];
+  const _M0FP37lqyq6668bodymate4core17evidence__catalog = [new _M0TP37lqyq6668bodymate4core11EvidenceRef("ev.scapula.elevation", "NCBI Bookshelf / StatPearls: Anatomy, Thorax, Scapula", "https://www.ncbi.nlm.nih.gov/books/NBK538319/", "Identifies upper trapezius and levator scapulae for scapular elevation."), new _M0TP37lqyq6668bodymate4core11EvidenceRef("ev.neck.rotation-flexion", "OpenStax Anatomy and Physiology 2e: 11.3 Axial Muscles of the Head, Neck, and Back", "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-3-axial-muscles-of-the-head-neck-and-back", "Describes opposite-side SCM rotation, bilateral SCM flexion, and same-side splenius capitis rotation.")];
+  const _M0FP37lqyq6668bodymate4core17movement__catalog = [new _M0TP37lqyq6668bodymate4core8Movement("shoulder_girdle_elevation", "肩胛带上提 / 耸肩", "Shoulder Girdle Elevation", ["耸肩", "shrug", "肩膀往上提"], 1, "当前模型覆盖上斜方肌与肩胛提肌；不代表全部参与结构。"), new _M0TP37lqyq6668bodymate4core8Movement("cervical_rotation_right", "颈部向右旋转", "Right Cervical Rotation", ["向右转头", "头转右边", "rotate neck right"], 0, "当前模型仅覆盖有证据支持的胸锁乳突肌与头夹肌；不代表完整旋转肌群。"), new _M0TP37lqyq6668bodymate4core8Movement("cervical_rotation_left", "颈部向左旋转", "Left Cervical Rotation", ["向左转头", "头转左边", "rotate neck left"], 0, "当前模型仅覆盖有证据支持的胸锁乳突肌与头夹肌；不代表完整旋转肌群。"), new _M0TP37lqyq6668bodymate4core8Movement("cervical_flexion", "颈部屈曲 / 低头", "Cervical Flexion", ["低头", "neck flexion"], 0, "当前模型仅覆盖双侧胸锁乳突肌；不代表全部颈部屈肌。")];
   const _M0MPC16string10StringView4findN6constrS9865 = 0;
   function _M0FPC15abort5abortGRPC16string10StringViewE(msg) {
     return $panic();
@@ -345,6 +373,9 @@ function buildAnatomy(){
   }
   function _M0MPC16uint166UInt168to__uint(self) {
     return self;
+  }
+  function _M0IP016_24default__implPB2Eq10not__equalGsE(x, y) {
+    return !(x === y);
   }
   function _M0IP016_24default__implPB6Logger28write__string__interpolationGRPB13StringBuilderE(self, show) {
     show.method_table.method_0(show.self, { self: self, method_table: _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger });
@@ -1165,74 +1196,81 @@ function buildAnatomy(){
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_221, _x_222) {
-    if (_x_221 === 0) {
-      if (_x_222 === 0) {
+  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_359, _x_360) {
+    if (_x_359 === 0) {
+      if (_x_360 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_222 === 1) {
+      if (_x_360 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_217, _x_218) {
-    switch (_x_217) {
+  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_355, _x_356) {
+    switch (_x_355) {
       case 0: {
-        if (_x_218 === 0) {
+        if (_x_356 === 0) {
           return true;
         } else {
           return false;
         }
       }
       case 1: {
-        if (_x_218 === 1) {
+        if (_x_356 === 1) {
           return true;
         } else {
           return false;
         }
       }
       case 2: {
-        if (_x_218 === 2) {
+        if (_x_356 === 2) {
           return true;
         } else {
           return false;
         }
       }
       case 3: {
-        if (_x_218 === 3) {
+        if (_x_356 === 3) {
           return true;
         } else {
           return false;
         }
       }
       case 4: {
-        if (_x_218 === 4) {
+        if (_x_356 === 4) {
           return true;
         } else {
           return false;
         }
       }
       case 5: {
-        if (_x_218 === 5) {
+        if (_x_356 === 5) {
           return true;
         } else {
           return false;
         }
       }
       case 6: {
-        if (_x_218 === 6) {
+        if (_x_356 === 6) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      case 7: {
+        if (_x_356 === 7) {
           return true;
         } else {
           return false;
         }
       }
       default: {
-        if (_x_218 === 7) {
+        if (_x_356 === 8) {
           return true;
         } else {
           return false;
@@ -1240,15 +1278,30 @@ function buildAnatomy(){
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_213, _x_214) {
-    if (_x_213 === 0) {
-      if (_x_214 === 0) {
+  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_351, _x_352) {
+    if (_x_351 === 0) {
+      if (_x_352 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_214 === 1) {
+      if (_x_352 === 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_331, _x_332) {
+    if (_x_331 === 0) {
+      if (_x_332 === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (_x_332 === 1) {
         return true;
       } else {
         return false;
@@ -1366,6 +1419,7 @@ function buildAnatomy(){
     _M0FP37lqyq6668bodymate4core5state.highlight_mode = 0;
     _M0FP37lqyq6668bodymate4core5state.active_structure_set = undefined;
     _M0FP37lqyq6668bodymate4core5state.highlighted = [];
+    _M0FP37lqyq6668bodymate4core5state.active_movement = undefined;
     _M0FP37lqyq6668bodymate4core5state.revision = 0;
     _M0FP37lqyq6668bodymate4core5state.events = [];
     return _M0FP37lqyq6668bodymate4core8snapshot();
@@ -1496,6 +1550,278 @@ function buildAnatomy(){
     _M0MPB13StringBuilder13write__objectGsE(_string_builder, members.val);
     return _M0MPB13StringBuilder10to__string(_string_builder);
   }
+  function _M0FP37lqyq6668bodymate4core25participation__role__text(role) {
+    if (role === 0) {
+      return "main_contributor";
+    } else {
+      return "contributor";
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core23movement__mapping__wire(mapping) {
+    let value;
+    _L: {
+      if (mapping === undefined) {
+        return "";
+      } else {
+        const _Some = mapping;
+        const _value = _Some;
+        value = _value;
+        break _L;
+      }
+    }
+    const output = new _M0TPB8MutLocalGsE("");
+    let _tmp = 0;
+    while (true) {
+      const index = _tmp;
+      if (index < value.mappings.length) {
+        const item = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(value.mappings, index);
+        const evidence_ids = new _M0TPB8MutLocalGsE("");
+        let _tmp$2 = 0;
+        while (true) {
+          const evidence_index = _tmp$2;
+          if (evidence_index < item.evidence_ids.length) {
+            if (evidence_index > 0) {
+              evidence_ids.val = `${evidence_ids.val},`;
+            }
+            evidence_ids.val = `${evidence_ids.val}${_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(item.evidence_ids, evidence_index)}`;
+            _tmp$2 = evidence_index + 1 | 0;
+            continue;
+          } else {
+            break;
+          }
+        }
+        if (index > 0) {
+          output.val = `${output.val}~`;
+        }
+        const _tmp$3 = output.val;
+        const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(2);
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, item.structure_id);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core25participation__role__text(item.role));
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, evidence_ids.val);
+        output.val = `${_tmp$3}${_M0MPB13StringBuilder10to__string(_string_builder)}`;
+        _tmp = index + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return output.val;
+  }
+  function _M0FP37lqyq6668bodymate4core25movement__mapping__by__id(id) {
+    const _bind = _M0FP37lqyq6668bodymate4core18movement__mappings.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const mapping = _M0FP37lqyq6668bodymate4core18movement__mappings[_];
+        if (mapping.movement_id === id) {
+          return mapping;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate4core20domain__snapshot__v4() {
+    let set_id;
+    let value;
+    _L: {
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate4core5state.active_structure_set;
+        if (_bind === undefined) {
+          set_id = "";
+        } else {
+          const _Some = _bind;
+          const _value = _Some;
+          value = _value;
+          break _L$2;
+        }
+        break _L;
+      }
+      set_id = value.id;
+    }
+    let set_label;
+    let value$2;
+    _L$2: {
+      _L$3: {
+        const _bind = _M0FP37lqyq6668bodymate4core5state.active_structure_set;
+        if (_bind === undefined) {
+          set_label = "";
+        } else {
+          const _Some = _bind;
+          const _value = _Some;
+          value$2 = _value;
+          break _L$3;
+        }
+        break _L$2;
+      }
+      set_label = value$2.label;
+    }
+    const highlighted = new _M0TPB8MutLocalGsE("");
+    let _tmp = 0;
+    while (true) {
+      const index = _tmp;
+      if (index < _M0FP37lqyq6668bodymate4core5state.highlighted.length) {
+        const item = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.highlighted, index);
+        const _bind = item.role;
+        let role;
+        switch (_bind) {
+          case 0: {
+            role = "focus";
+            break;
+          }
+          case 1: {
+            role = "primary";
+            break;
+          }
+          case 2: {
+            role = "secondary";
+            break;
+          }
+          default: {
+            role = "context";
+          }
+        }
+        if (index > 0) {
+          highlighted.val = `${highlighted.val}~`;
+        }
+        const _tmp$2 = highlighted.val;
+        const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(2);
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, item.structure_id);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, role);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGiE(_string_builder, item.weight);
+        highlighted.val = `${_tmp$2}${_M0MPB13StringBuilder10to__string(_string_builder)}`;
+        _tmp = index + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    let movement_id;
+    let value$3;
+    _L$3: {
+      _L$4: {
+        const _bind = _M0FP37lqyq6668bodymate4core5state.active_movement;
+        if (_bind === undefined) {
+          movement_id = "";
+        } else {
+          const _Some = _bind;
+          const _value = _Some;
+          value$3 = _value;
+          break _L$4;
+        }
+        break _L$3;
+      }
+      movement_id = value$3.id;
+    }
+    let movement_label;
+    let value$4;
+    _L$4: {
+      _L$5: {
+        const _bind = _M0FP37lqyq6668bodymate4core5state.active_movement;
+        if (_bind === undefined) {
+          movement_label = "";
+        } else {
+          const _Some = _bind;
+          const _value = _Some;
+          value$4 = _value;
+          break _L$5;
+        }
+        break _L$4;
+      }
+      movement_label = value$4.display_name_zh;
+    }
+    let movement_name;
+    let value$5;
+    _L$5: {
+      _L$6: {
+        const _bind = _M0FP37lqyq6668bodymate4core5state.active_movement;
+        if (_bind === undefined) {
+          movement_name = "";
+        } else {
+          const _Some = _bind;
+          const _value = _Some;
+          value$5 = _value;
+          break _L$6;
+        }
+        break _L$5;
+      }
+      movement_name = value$5.canonical_name;
+    }
+    let coverage;
+    let value$6;
+    _L$6: {
+      _L$7: {
+        const _bind = _M0FP37lqyq6668bodymate4core5state.active_movement;
+        if (_bind === undefined) {
+          coverage = "";
+        } else {
+          const _Some = _bind;
+          const _value = _Some;
+          value$6 = _value;
+          break _L$7;
+        }
+        break _L$6;
+      }
+      coverage = value$6.coverage_note;
+    }
+    let mapping;
+    let value$7;
+    _L$7: {
+      _L$8: {
+        const _bind = _M0FP37lqyq6668bodymate4core5state.active_movement;
+        if (_bind === undefined) {
+          mapping = undefined;
+        } else {
+          const _Some = _bind;
+          const _value = _Some;
+          value$7 = _value;
+          break _L$8;
+        }
+        break _L$7;
+      }
+      mapping = _M0FP37lqyq6668bodymate4core25movement__mapping__by__id(value$7.id);
+    }
+    const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(31);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "ok|snapshot-v4|4|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core5state.region);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core5state.selected);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core11layer__text(_M0FP37lqyq6668bodymate4core5state.layer));
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGbE(_string_builder, _M0FP37lqyq6668bodymate4core5state.isolated);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGbE(_string_builder, _M0FP37lqyq6668bodymate4core5state.overview);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGiE(_string_builder, _M0FP37lqyq6668bodymate4core5state.revision);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core21highlight__mode__text(_M0FP37lqyq6668bodymate4core5state.highlight_mode));
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, set_id);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, set_label);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, highlighted.val);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, movement_id);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, movement_label);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, movement_name);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core23movement__mapping__wire(mapping));
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, coverage);
+    return _M0MPB13StringBuilder10to__string(_string_builder);
+  }
   function _M0FP37lqyq6668bodymate4core11event__wire(event) {
     const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(8);
     _M0MPB13StringBuilder13write__objectGiE(_string_builder, event.revision);
@@ -1538,6 +1864,78 @@ function buildAnatomy(){
   function _M0FP37lqyq6668bodymate4core18domain__events__v1() {
     return _M0FP37lqyq6668bodymate4core12events__wire();
   }
+  function _M0FP37lqyq6668bodymate4core15event__wire__v2(event) {
+    const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(9);
+    _M0MPB13StringBuilder13write__objectGiE(_string_builder, event.revision);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.kind);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.action);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.selected);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.previous_selected);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.region);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.result);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.structure_set_id);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGiE(_string_builder, event.member_count);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, event.movement_id);
+    return _M0MPB13StringBuilder10to__string(_string_builder);
+  }
+  function _M0FP37lqyq6668bodymate4core16events__wire__v2() {
+    const output = new _M0TPB8MutLocalGsE("ok|events-v2|");
+    let _tmp = 0;
+    while (true) {
+      const index = _tmp;
+      if (index < _M0FP37lqyq6668bodymate4core5state.events.length) {
+        if (index > 0) {
+          output.val = `${output.val}~`;
+        }
+        output.val = `${output.val}${_M0FP37lqyq6668bodymate4core15event__wire__v2(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.events, index))}`;
+        _tmp = index + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return output.val;
+  }
+  function _M0FP37lqyq6668bodymate4core18domain__events__v2() {
+    return _M0FP37lqyq6668bodymate4core16events__wire__v2();
+  }
+  function _M0FP37lqyq6668bodymate4core20domain__evidence__v1() {
+    const output = new _M0TPB8MutLocalGsE("ok|evidence-v1|");
+    let _tmp = 0;
+    while (true) {
+      const index = _tmp;
+      if (index < _M0FP37lqyq6668bodymate4core17evidence__catalog.length) {
+        const evidence = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core17evidence__catalog, index);
+        if (index > 0) {
+          output.val = `${output.val}~`;
+        }
+        const _tmp$2 = output.val;
+        const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(3);
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, evidence.id);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, evidence.source_title);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, evidence.source_url);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, evidence.note);
+        output.val = `${_tmp$2}${_M0MPB13StringBuilder10to__string(_string_builder)}`;
+        _tmp = index + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return output.val;
+  }
   function _M0FP37lqyq6668bodymate4core12action__text(kind) {
     switch (kind) {
       case 0: {
@@ -1561,6 +1959,9 @@ function buildAnatomy(){
       case 6: {
         return "CLEAR_STRUCTURE_SET";
       }
+      case 7: {
+        return "SHOW_MOVEMENT_MAPPING";
+      }
       default: {
         return "UNKNOWN";
       }
@@ -1575,10 +1976,18 @@ function buildAnatomy(){
         break;
       }
       case 1: {
-        classification = "DOMAIN_COMMAND";
+        classification = "STRUCTURE_SET_LOOKUP";
         break;
       }
       case 2: {
+        classification = "MOVEMENT_LOOKUP";
+        break;
+      }
+      case 3: {
+        classification = "DOMAIN_COMMAND";
+        break;
+      }
+      case 4: {
         classification = "UNSUPPORTED_HEALTH_QUERY";
         break;
       }
@@ -1604,7 +2013,7 @@ function buildAnatomy(){
     let action;
     const _bind$3 = result.action;
     if (_bind$3 === undefined) {
-      action = new _M0TP37lqyq6668bodymate4core12DomainAction(7, "", "", 0);
+      action = new _M0TP37lqyq6668bodymate4core12DomainAction(8, "", "", 0);
     } else {
       const _Some = _bind$3;
       const _value = _Some;
@@ -1993,10 +2402,10 @@ function buildAnatomy(){
   function _M0FP37lqyq6668bodymate4core14resolve__query(text) {
     const input = _M0FP37lqyq6668bodymate4core5lower(text);
     if (input === "") {
-      return new _M0TP37lqyq6668bodymate4core11QueryResult(3, 2, undefined, [], "empty");
+      return new _M0TP37lqyq6668bodymate4core11QueryResult(5, 2, undefined, [], "empty");
     }
     if (_M0FP37lqyq6668bodymate4core19has__health__signal(input)) {
-      return new _M0TP37lqyq6668bodymate4core11QueryResult(2, 2, undefined, [], "health");
+      return new _M0TP37lqyq6668bodymate4core11QueryResult(4, 2, undefined, [], "health");
     }
     let action;
     _L: {
@@ -2011,7 +2420,7 @@ function buildAnatomy(){
         }
         break _L;
       }
-      return new _M0TP37lqyq6668bodymate4core11QueryResult(1, 0, action, [], _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(action.kind, 2) ? "isolate" : "restore");
+      return new _M0TP37lqyq6668bodymate4core11QueryResult(3, 0, action, [], _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(action.kind, 2) ? "isolate" : "restore");
     }
     const side = _M0FP37lqyq6668bodymate4core11input__side(input);
     const families = _M0FP37lqyq6668bodymate4core15family__matches(input);
@@ -2164,9 +2573,15 @@ function buildAnatomy(){
         return "STRUCTURE_LOOKUP";
       }
       case 1: {
-        return "DOMAIN_COMMAND";
+        return "STRUCTURE_SET_LOOKUP";
       }
       case 2: {
+        return "MOVEMENT_LOOKUP";
+      }
+      case 3: {
+        return "DOMAIN_COMMAND";
+      }
+      case 4: {
         return "UNSUPPORTED_HEALTH_QUERY";
       }
       default: {
@@ -2227,7 +2642,7 @@ function buildAnatomy(){
     let action;
     const _bind = result.action;
     if (_bind === undefined) {
-      action = new _M0TP37lqyq6668bodymate4core12DomainAction(7, "", "", 0);
+      action = new _M0TP37lqyq6668bodymate4core12DomainAction(8, "", "", 0);
     } else {
       const _Some = _bind;
       const _value = _Some;
@@ -2372,10 +2787,10 @@ function buildAnatomy(){
   function _M0FP37lqyq6668bodymate4core18resolve__query__v2(text) {
     const input = _M0FP37lqyq6668bodymate4core5lower(text);
     if (input === "") {
-      return _M0FP37lqyq6668bodymate4core23query__result__wire__v2(new _M0TP37lqyq6668bodymate4core11QueryResult(3, 2, undefined, [], "empty"), undefined);
+      return _M0FP37lqyq6668bodymate4core23query__result__wire__v2(new _M0TP37lqyq6668bodymate4core11QueryResult(5, 2, undefined, [], "empty"), undefined);
     }
     if (_M0FP37lqyq6668bodymate4core19has__health__signal(input)) {
-      return _M0FP37lqyq6668bodymate4core23query__result__wire__v2(new _M0TP37lqyq6668bodymate4core11QueryResult(2, 2, undefined, [], "health"), undefined);
+      return _M0FP37lqyq6668bodymate4core23query__result__wire__v2(new _M0TP37lqyq6668bodymate4core11QueryResult(4, 2, undefined, [], "health"), undefined);
     }
     let action;
     _L: {
@@ -2390,7 +2805,7 @@ function buildAnatomy(){
         }
         break _L;
       }
-      return _M0FP37lqyq6668bodymate4core23query__result__wire__v2(new _M0TP37lqyq6668bodymate4core11QueryResult(1, 0, action, [], _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(action.kind, 2) ? "isolate" : "restore"), undefined);
+      return _M0FP37lqyq6668bodymate4core23query__result__wire__v2(new _M0TP37lqyq6668bodymate4core11QueryResult(3, 0, action, [], _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(action.kind, 2) ? "isolate" : "restore"), undefined);
     }
     const side = _M0FP37lqyq6668bodymate4core11input__side(input);
     const families = _M0FP37lqyq6668bodymate4core15family__matches(input);
@@ -2431,8 +2846,463 @@ function buildAnatomy(){
   function _M0FP37lqyq6668bodymate4core26domain__resolve__query__v2(text) {
     return _M0FP37lqyq6668bodymate4core18resolve__query__v2(text);
   }
+  function _M0FP37lqyq6668bodymate4core26highlighted__members__wire(set) {
+    let value;
+    _L: {
+      if (set === undefined) {
+        return "";
+      } else {
+        const _Some = set;
+        const _value = _Some;
+        value = _value;
+        break _L;
+      }
+    }
+    const output = new _M0TPB8MutLocalGsE("");
+    let _tmp = 0;
+    while (true) {
+      const index = _tmp;
+      if (index < value.members.length) {
+        const item = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(value.members, index);
+        const _bind = item.role;
+        let role;
+        switch (_bind) {
+          case 0: {
+            role = "focus";
+            break;
+          }
+          case 1: {
+            role = "primary";
+            break;
+          }
+          case 2: {
+            role = "secondary";
+            break;
+          }
+          default: {
+            role = "context";
+          }
+        }
+        if (index > 0) {
+          output.val = `${output.val}~`;
+        }
+        const _tmp$2 = output.val;
+        const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(2);
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, item.structure_id);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, role);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGiE(_string_builder, item.weight);
+        output.val = `${_tmp$2}${_M0MPB13StringBuilder10to__string(_string_builder)}`;
+        _tmp = index + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return output.val;
+  }
+  function _M0FP37lqyq6668bodymate4core21mapped__members__wire(mapping) {
+    const output = new _M0TPB8MutLocalGsE("");
+    let _tmp = 0;
+    while (true) {
+      const index = _tmp;
+      if (index < mapping.mappings.length) {
+        const item = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(mapping.mappings, index);
+        const evidence_ids = new _M0TPB8MutLocalGsE("");
+        let _tmp$2 = 0;
+        while (true) {
+          const evidence_index = _tmp$2;
+          if (evidence_index < item.evidence_ids.length) {
+            if (evidence_index > 0) {
+              evidence_ids.val = `${evidence_ids.val},`;
+            }
+            evidence_ids.val = `${evidence_ids.val}${_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(item.evidence_ids, evidence_index)}`;
+            _tmp$2 = evidence_index + 1 | 0;
+            continue;
+          } else {
+            break;
+          }
+        }
+        if (index > 0) {
+          output.val = `${output.val}~`;
+        }
+        const _tmp$3 = output.val;
+        const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(2);
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, item.structure_id);
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core25participation__role__text(item.role));
+        _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^");
+        _M0MPB13StringBuilder13write__objectGsE(_string_builder, evidence_ids.val);
+        output.val = `${_tmp$3}${_M0MPB13StringBuilder10to__string(_string_builder)}`;
+        _tmp = index + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return output.val;
+  }
+  function _M0FP37lqyq6668bodymate4core20movement__for__query(text) {
+    const input = _M0MPC16string6String4trim(_M0MPC16string6String9to__lower(text), undefined);
+    const _bind = _M0FP37lqyq6668bodymate4core17movement__catalog.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const movement = _M0FP37lqyq6668bodymate4core17movement__catalog[_];
+        const _bind$2 = movement.aliases;
+        const _bind$3 = _bind$2.length;
+        let _tmp$2 = 0;
+        while (true) {
+          const _$2 = _tmp$2;
+          if (_$2 < _bind$3) {
+            const query_alias = _bind$2[_$2];
+            const _bind$4 = _M0MPC16string6String9to__lower(query_alias);
+            if (_M0MPC16string10StringView8contains(input, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
+              return movement;
+            }
+            _tmp$2 = _$2 + 1 | 0;
+            continue;
+          } else {
+            break;
+          }
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate4core17action__for__wire(result) {
+    const _bind = result.action;
+    if (_bind === undefined) {
+      return new _M0TP37lqyq6668bodymate4core12DomainAction(8, "", "", 0);
+    } else {
+      const _Some = _bind;
+      const _value = _Some;
+      return _value;
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core23query__result__wire__v3(result, label, canonical_name, coverage_note, members) {
+    const action = _M0FP37lqyq6668bodymate4core17action__for__wire(result);
+    const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(22);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "ok|query-v3|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core20classification__text(result.classification));
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core16resolution__text(result.resolution));
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, _M0FP37lqyq6668bodymate4core12action__text(action.kind));
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, action.structure_id);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, label);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, action.region);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGdE(_string_builder, action.confidence);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, result.message_code);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, canonical_name);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, coverage_note);
+    _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "|");
+    _M0MPB13StringBuilder13write__objectGsE(_string_builder, members);
+    return _M0MPB13StringBuilder10to__string(_string_builder);
+  }
+  function _M0FP37lqyq6668bodymate4core17canonical__by__id(id) {
+    const _bind = _M0FP37lqyq6668bodymate4core19canonical__registry.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const entry = _M0FP37lqyq6668bodymate4core19canonical__registry[_];
+        if (entry.structure_id === id) {
+          return entry;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate4core16evidence__by__id(id) {
+    const _bind = _M0FP37lqyq6668bodymate4core17evidence__catalog.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const evidence = _M0FP37lqyq6668bodymate4core17evidence__catalog[_];
+        if (evidence.id === id) {
+          return evidence;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate4core16movement__by__id(id) {
+    const _bind = _M0FP37lqyq6668bodymate4core17movement__catalog.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const movement = _M0FP37lqyq6668bodymate4core17movement__catalog[_];
+        if (movement.id === id) {
+          return movement;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate4core24valid__movement__mapping(mapping) {
+    _L: {
+      _L$2: {
+        if (mapping.mappings.length === 0) {
+          break _L$2;
+        } else {
+          const _bind = _M0FP37lqyq6668bodymate4core16movement__by__id(mapping.movement_id);
+          if (_bind === undefined) {
+            break _L$2;
+          }
+        }
+        break _L;
+      }
+      return false;
+    }
+    const ids = [];
+    const _bind = mapping.mappings;
+    const _bind$2 = _bind.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind$2) {
+        const item = _bind[_];
+        _L$2: {
+          _L$3: {
+            if (item.structure_id === "") {
+              break _L$3;
+            } else {
+              if (_M0MPC15array5Array8containsGsE(ids, item.structure_id)) {
+                break _L$3;
+              } else {
+                const _bind$3 = _M0FP37lqyq6668bodymate4core17canonical__by__id(item.structure_id);
+                if (_bind$3 === undefined) {
+                  break _L$3;
+                } else {
+                  if (item.evidence_ids.length === 0) {
+                    break _L$3;
+                  }
+                }
+              }
+            }
+            break _L$2;
+          }
+          return false;
+        }
+        const _bind$3 = item.evidence_ids;
+        const _bind$4 = _bind$3.length;
+        let _tmp$2 = 0;
+        while (true) {
+          const _$2 = _tmp$2;
+          if (_$2 < _bind$4) {
+            const evidence_id = _bind$3[_$2];
+            const _bind$5 = _M0FP37lqyq6668bodymate4core16evidence__by__id(evidence_id);
+            if (_bind$5 === undefined) {
+              return false;
+            }
+            _tmp$2 = _$2 + 1 | 0;
+            continue;
+          } else {
+            break;
+          }
+        }
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(ids, item.structure_id);
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return true;
+  }
+  function _M0FP37lqyq6668bodymate4core24valid__movement__catalog() {
+    const movement_ids = [];
+    const aliases = [];
+    const _bind = _M0FP37lqyq6668bodymate4core17movement__catalog.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const movement = _M0FP37lqyq6668bodymate4core17movement__catalog[_];
+        if (movement.id === "" || (_M0MPC15array5Array8containsGsE(movement_ids, movement.id) || movement.aliases.length === 0)) {
+          return false;
+        }
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(movement_ids, movement.id);
+        const _bind$2 = movement.aliases;
+        const _bind$3 = _bind$2.length;
+        let _tmp$2 = 0;
+        while (true) {
+          const _$2 = _tmp$2;
+          if (_$2 < _bind$3) {
+            const query_alias = _bind$2[_$2];
+            const normalized = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string6String9to__lower(query_alias), undefined));
+            if (normalized === "" || _M0MPC15array5Array8containsGsE(aliases, normalized)) {
+              return false;
+            }
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(aliases, normalized);
+            _tmp$2 = _$2 + 1 | 0;
+            continue;
+          } else {
+            break;
+          }
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    if (_M0FP37lqyq6668bodymate4core18movement__mappings.length !== _M0FP37lqyq6668bodymate4core17movement__catalog.length) {
+      return false;
+    }
+    const mapping_ids = [];
+    const _bind$2 = _M0FP37lqyq6668bodymate4core18movement__mappings.length;
+    let _tmp$2 = 0;
+    while (true) {
+      const _ = _tmp$2;
+      if (_ < _bind$2) {
+        const mapping = _M0FP37lqyq6668bodymate4core18movement__mappings[_];
+        if (_M0MPC15array5Array8containsGsE(mapping_ids, mapping.movement_id) || !_M0FP37lqyq6668bodymate4core24valid__movement__mapping(mapping)) {
+          return false;
+        }
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(mapping_ids, mapping.movement_id);
+        _tmp$2 = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return true;
+  }
+  function _M0FP37lqyq6668bodymate4core18resolve__query__v3(text) {
+    const input = _M0FP37lqyq6668bodymate4core5lower(text);
+    if (input === "") {
+      return _M0FP37lqyq6668bodymate4core23query__result__wire__v3(new _M0TP37lqyq6668bodymate4core11QueryResult(5, 2, undefined, [], "empty"), "", "", "", "");
+    }
+    if (_M0FP37lqyq6668bodymate4core19has__health__signal(input)) {
+      return _M0FP37lqyq6668bodymate4core23query__result__wire__v3(new _M0TP37lqyq6668bodymate4core11QueryResult(4, 2, undefined, [], "health"), "", "", "", "");
+    }
+    let action;
+    _L: {
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate4core12command__for(input);
+        if (_bind === undefined) {
+        } else {
+          const _Some = _bind;
+          const _action = _Some;
+          action = _action;
+          break _L$2;
+        }
+        break _L;
+      }
+      return _M0FP37lqyq6668bodymate4core23query__result__wire__v3(new _M0TP37lqyq6668bodymate4core11QueryResult(3, 0, action, [], _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(action.kind, 2) ? "isolate" : "restore"), "", "", "", "");
+    }
+    if (_M0FP37lqyq6668bodymate4core24valid__movement__catalog()) {
+      let movement;
+      _L$2: {
+        _L$3: {
+          const _bind = _M0FP37lqyq6668bodymate4core20movement__for__query(input);
+          if (_bind === undefined) {
+          } else {
+            const _Some = _bind;
+            const _movement = _Some;
+            movement = _movement;
+            break _L$3;
+          }
+          break _L$2;
+        }
+        let mapping;
+        _L$4: {
+          _L$5: {
+            const _bind = _M0FP37lqyq6668bodymate4core25movement__mapping__by__id(movement.id);
+            if (_bind === undefined) {
+            } else {
+              const _Some = _bind;
+              const _mapping = _Some;
+              mapping = _mapping;
+              break _L$5;
+            }
+            break _L$4;
+          }
+          return _M0FP37lqyq6668bodymate4core23query__result__wire__v3(new _M0TP37lqyq6668bodymate4core11QueryResult(2, 0, new _M0TP37lqyq6668bodymate4core12DomainAction(7, movement.id, "", 1), [], "movement"), movement.display_name_zh, movement.canonical_name, movement.coverage_note, _M0FP37lqyq6668bodymate4core21mapped__members__wire(mapping));
+        }
+      }
+    }
+    const side = _M0FP37lqyq6668bodymate4core11input__side(input);
+    const families = _M0FP37lqyq6668bodymate4core15family__matches(input);
+    let entry;
+    _L$2: {
+      _L$3: {
+        const _bind = _M0FP37lqyq6668bodymate4core12exact__entry(input, side, families);
+        if (_bind === undefined) {
+        } else {
+          const _Some = _bind;
+          const _entry = _Some;
+          entry = _entry;
+          break _L$3;
+        }
+        break _L$2;
+      }
+      const _tmp = new _M0TP37lqyq6668bodymate4core11QueryResult(0, 0, new _M0TP37lqyq6668bodymate4core12DomainAction(1, entry.structure_id, "", 1), [entry.structure_id], "exact");
+      const _string_builder = _M0MPB13StringBuilder21StringBuilder_2einner(2);
+      _M0MPB13StringBuilder13write__objectGsE(_string_builder, entry.structure_id);
+      _M0IPB13StringBuilderPB6Logger13write__string(_string_builder, "^^");
+      return _M0FP37lqyq6668bodymate4core23query__result__wire__v3(_tmp, "", "", "", _M0MPB13StringBuilder10to__string(_string_builder));
+    }
+    if (families.length === 1) {
+      let set;
+      _L$3: {
+        _L$4: {
+          const _bind = _M0FP37lqyq6668bodymate4core19structure__set__for(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(families, 0), side);
+          if (_bind === undefined) {
+          } else {
+            const _Some = _bind;
+            const _set = _Some;
+            set = _set;
+            break _L$4;
+          }
+          break _L$3;
+        }
+        return _M0FP37lqyq6668bodymate4core23query__result__wire__v3(new _M0TP37lqyq6668bodymate4core11QueryResult(1, 0, new _M0TP37lqyq6668bodymate4core12DomainAction(5, set.id, "", 1), [], "structure_set"), set.label, "", "", _M0FP37lqyq6668bodymate4core26highlighted__members__wire(set));
+      }
+    }
+    const fallback = _M0FP37lqyq6668bodymate4core14resolve__query(input);
+    const members = _M0FP37lqyq6668bodymate4core9ids__wire(fallback.candidate_ids);
+    return _M0FP37lqyq6668bodymate4core23query__result__wire__v3(fallback, "", "", "", members);
+  }
+  function _M0FP37lqyq6668bodymate4core26domain__resolve__query__v3(text) {
+    return _M0FP37lqyq6668bodymate4core18resolve__query__v3(text);
+  }
   function _M0FP37lqyq6668bodymate4core4bump() {
     _M0FP37lqyq6668bodymate4core5state.revision = _M0FP37lqyq6668bodymate4core5state.revision + 1 | 0;
+  }
+  function _M0FP37lqyq6668bodymate4core22drop__active__movement() {
+    const previous = _M0FP37lqyq6668bodymate4core5state.active_movement;
+    _M0FP37lqyq6668bodymate4core5state.active_movement = undefined;
+    return previous;
   }
   function _M0FP37lqyq6668bodymate4core28drop__active__structure__set() {
     const previous = _M0FP37lqyq6668bodymate4core5state.active_structure_set;
@@ -2440,6 +3310,55 @@ function buildAnatomy(){
     _M0FP37lqyq6668bodymate4core5state.active_structure_set = undefined;
     _M0FP37lqyq6668bodymate4core5state.highlighted = [];
     return previous;
+  }
+  function _M0FP37lqyq6668bodymate4core23record__movement__event(kind, action, previous_selected, result, movement_id, member_count, focus_id) {
+    if (_M0FP37lqyq6668bodymate4core5state.events.length >= 32) {
+      const retained = [];
+      let _tmp = 1;
+      while (true) {
+        const index = _tmp;
+        if (index < _M0FP37lqyq6668bodymate4core5state.events.length) {
+          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(retained, _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.events, index));
+          _tmp = index + 1 | 0;
+          continue;
+        } else {
+          break;
+        }
+      }
+      _M0FP37lqyq6668bodymate4core5state.events = retained;
+    }
+    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.events, new _M0TP37lqyq6668bodymate4core11DomainEvent(_M0FP37lqyq6668bodymate4core5state.revision, kind, action, focus_id === "" ? _M0FP37lqyq6668bodymate4core5state.selected : focus_id, previous_selected, _M0FP37lqyq6668bodymate4core5state.region, result, "", member_count, movement_id));
+  }
+  function _M0FP37lqyq6668bodymate4core23note__dropped__movement(previous, action, previous_selected) {
+    let value;
+    _L: {
+      if (previous === undefined) {
+        return;
+      } else {
+        const _Some = previous;
+        const _value = _Some;
+        value = _value;
+        break _L;
+      }
+    }
+    let member_count;
+    let mapping;
+    _L$2: {
+      _L$3: {
+        const _bind = _M0FP37lqyq6668bodymate4core25movement__mapping__by__id(value.id);
+        if (_bind === undefined) {
+          member_count = 0;
+        } else {
+          const _Some = _bind;
+          const _mapping = _Some;
+          mapping = _mapping;
+          break _L$3;
+        }
+        break _L$2;
+      }
+      member_count = mapping.mappings.length;
+    }
+    _M0FP37lqyq6668bodymate4core23record__movement__event("MovementMappingCleared", action, previous_selected, "accepted", value.id, member_count, "");
   }
   function _M0FP37lqyq6668bodymate4core29record__structure__set__event(kind, action, previous_selected, result, set_id, member_count) {
     if (_M0FP37lqyq6668bodymate4core5state.events.length >= 32) {
@@ -2457,15 +3376,22 @@ function buildAnatomy(){
       }
       _M0FP37lqyq6668bodymate4core5state.events = retained;
     }
-    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.events, new _M0TP37lqyq6668bodymate4core11DomainEvent(_M0FP37lqyq6668bodymate4core5state.revision, kind, action, _M0FP37lqyq6668bodymate4core5state.selected, previous_selected, _M0FP37lqyq6668bodymate4core5state.region, result, set_id, member_count));
+    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.events, new _M0TP37lqyq6668bodymate4core11DomainEvent(_M0FP37lqyq6668bodymate4core5state.revision, kind, action, _M0FP37lqyq6668bodymate4core5state.selected, previous_selected, _M0FP37lqyq6668bodymate4core5state.region, result, set_id, member_count, ""));
   }
   function _M0FP37lqyq6668bodymate4core31clear__structure__set__internal(action) {
     const previous = _M0FP37lqyq6668bodymate4core5state.selected;
+    const previous_movement = _M0FP37lqyq6668bodymate4core22drop__active__movement();
     let set;
     _L: {
       const _bind = _M0FP37lqyq6668bodymate4core28drop__active__structure__set();
       if (_bind === undefined) {
-        return _M0FP37lqyq6668bodymate4core8snapshot();
+        if (previous_movement === undefined) {
+          return _M0FP37lqyq6668bodymate4core8snapshot();
+        } else {
+          _M0FP37lqyq6668bodymate4core4bump();
+          _M0FP37lqyq6668bodymate4core23note__dropped__movement(previous_movement, action, previous);
+          return _M0FP37lqyq6668bodymate4core8snapshot();
+        }
       } else {
         const _Some = _bind;
         const _set = _Some;
@@ -2474,6 +3400,7 @@ function buildAnatomy(){
       }
     }
     _M0FP37lqyq6668bodymate4core4bump();
+    _M0FP37lqyq6668bodymate4core23note__dropped__movement(previous_movement, action, previous);
     _M0FP37lqyq6668bodymate4core29record__structure__set__event("StructureSetCleared", action, previous, "accepted", set.id, set.members.length);
     return _M0FP37lqyq6668bodymate4core8snapshot();
   }
@@ -2518,7 +3445,7 @@ function buildAnatomy(){
       }
       _M0FP37lqyq6668bodymate4core5state.events = retained;
     }
-    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.events, new _M0TP37lqyq6668bodymate4core11DomainEvent(_M0FP37lqyq6668bodymate4core5state.revision, kind, action, _M0FP37lqyq6668bodymate4core5state.selected, previous_selected, _M0FP37lqyq6668bodymate4core5state.region, result, "", 0));
+    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(_M0FP37lqyq6668bodymate4core5state.events, new _M0TP37lqyq6668bodymate4core11DomainEvent(_M0FP37lqyq6668bodymate4core5state.revision, kind, action, _M0FP37lqyq6668bodymate4core5state.selected, previous_selected, _M0FP37lqyq6668bodymate4core5state.region, result, "", 0, ""));
   }
   function _M0FP37lqyq6668bodymate4core22structure__set__by__id(id) {
     const _bind = ["scm", "trapezius", "levator", "scalene", "splenius"];
@@ -2557,24 +3484,6 @@ function buildAnatomy(){
           } else {
             break;
           }
-        }
-        _tmp = _ + 1 | 0;
-        continue;
-      } else {
-        break;
-      }
-    }
-    return undefined;
-  }
-  function _M0FP37lqyq6668bodymate4core17canonical__by__id(id) {
-    const _bind = _M0FP37lqyq6668bodymate4core19canonical__registry.length;
-    let _tmp = 0;
-    while (true) {
-      const _ = _tmp;
-      if (_ < _bind) {
-        const entry = _M0FP37lqyq6668bodymate4core19canonical__registry[_];
-        if (entry.structure_id === id) {
-          return entry;
         }
         _tmp = _ + 1 | 0;
         continue;
@@ -2638,6 +3547,7 @@ function buildAnatomy(){
       return _M0FP37lqyq6668bodymate4core4fail("invalid_structure_set");
     } else {
       const previous = _M0FP37lqyq6668bodymate4core5state.selected;
+      const previous_movement = _M0FP37lqyq6668bodymate4core22drop__active__movement();
       const focus = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(set.members, 0);
       let entry;
       _L$2: {
@@ -2661,6 +3571,7 @@ function buildAnatomy(){
       _M0FP37lqyq6668bodymate4core5state.active_structure_set = set;
       _M0FP37lqyq6668bodymate4core5state.highlighted = set.members;
       _M0FP37lqyq6668bodymate4core4bump();
+      _M0FP37lqyq6668bodymate4core23note__dropped__movement(previous_movement, action, previous);
       _M0FP37lqyq6668bodymate4core29record__structure__set__event("StructureSetHighlighted", action, previous, "accepted", set.id, set.members.length);
       return _M0FP37lqyq6668bodymate4core8snapshot();
     }
@@ -2727,6 +3638,7 @@ function buildAnatomy(){
   }
   function _M0FP37lqyq6668bodymate4core13select__entry(entry, action) {
     const previous = _M0FP37lqyq6668bodymate4core5state.selected;
+    const previous_movement = _M0FP37lqyq6668bodymate4core22drop__active__movement();
     const previous_set = _M0FP37lqyq6668bodymate4core28drop__active__structure__set();
     _M0FP37lqyq6668bodymate4core5state.region = entry.region;
     _M0FP37lqyq6668bodymate4core5state.selected = entry.structure_id;
@@ -2734,6 +3646,7 @@ function buildAnatomy(){
     _M0FP37lqyq6668bodymate4core5state.isolated = false;
     _M0FP37lqyq6668bodymate4core5state.overview = false;
     _M0FP37lqyq6668bodymate4core4bump();
+    _M0FP37lqyq6668bodymate4core23note__dropped__movement(previous_movement, action, previous);
     _M0FP37lqyq6668bodymate4core29note__dropped__structure__set(previous_set, action, previous);
     _M0FP37lqyq6668bodymate4core13record__event("StructureSelected", action, previous, "accepted");
     return _M0FP37lqyq6668bodymate4core8snapshot();
@@ -2770,6 +3683,219 @@ function buildAnatomy(){
     }
     return _M0FP37lqyq6668bodymate4core13select__entry(entry, action);
   }
+  function _M0FP37lqyq6668bodymate4core19movement__focus__id(mapping, current_selected) {
+    const _bind = mapping.mappings;
+    const _bind$2 = _bind.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind$2) {
+        const item = _bind[_];
+        if (item.structure_id === current_selected) {
+          return item.structure_id;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const _bind$3 = mapping.mappings;
+    const _bind$4 = _bind$3.length;
+    let _tmp$2 = 0;
+    while (true) {
+      const _ = _tmp$2;
+      if (_ < _bind$4) {
+        const item = _bind$3[_];
+        if (_M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(item.role, 0)) {
+          return item.structure_id;
+        }
+        _tmp$2 = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    let value;
+    _L: {
+      const _bind$5 = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(mapping.mappings, 0);
+      value = _bind$5;
+      break _L;
+    }
+    return value.structure_id;
+  }
+  function _M0FP37lqyq6668bodymate4core29movement__structure__set__for(id, current_selected) {
+    let movement;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate4core16movement__by__id(id);
+      if (_bind === undefined) {
+        return undefined;
+      } else {
+        const _Some = _bind;
+        const _movement = _Some;
+        movement = _movement;
+        break _L;
+      }
+    }
+    let mapping;
+    _L$2: {
+      const _bind = _M0FP37lqyq6668bodymate4core25movement__mapping__by__id(id);
+      if (_bind === undefined) {
+        return undefined;
+      } else {
+        const _Some = _bind;
+        const _mapping = _Some;
+        mapping = _mapping;
+        break _L$2;
+      }
+    }
+    if (!_M0FP37lqyq6668bodymate4core24valid__movement__mapping(mapping)) {
+      return undefined;
+    } else {
+      let focus_id;
+      _L$3: {
+        const _bind = _M0FP37lqyq6668bodymate4core19movement__focus__id(mapping, current_selected);
+        if (_bind === undefined) {
+          return undefined;
+        } else {
+          const _Some = _bind;
+          const _focus_id = _Some;
+          focus_id = _focus_id;
+          break _L$3;
+        }
+      }
+      const members = [];
+      const _bind = mapping.mappings;
+      const _bind$2 = _bind.length;
+      let _tmp = 0;
+      while (true) {
+        const _ = _tmp;
+        if (_ < _bind$2) {
+          const item = _bind[_];
+          if (item.structure_id === focus_id) {
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(members, new _M0TP37lqyq6668bodymate4core20HighlightedStructure(item.structure_id, 0, 100));
+          }
+          _tmp = _ + 1 | 0;
+          continue;
+        } else {
+          break;
+        }
+      }
+      const _bind$3 = mapping.mappings;
+      const _bind$4 = _bind$3.length;
+      let _tmp$2 = 0;
+      while (true) {
+        const _ = _tmp$2;
+        if (_ < _bind$4) {
+          const item = _bind$3[_];
+          if (_M0IP016_24default__implPB2Eq10not__equalGsE(item.structure_id, focus_id)) {
+            const _bind$5 = item.role;
+            let role;
+            if (_bind$5 === 0) {
+              role = 1;
+            } else {
+              role = 2;
+            }
+            const _bind$6 = item.role;
+            let weight;
+            if (_bind$6 === 0) {
+              weight = 80;
+            } else {
+              weight = 60;
+            }
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(members, new _M0TP37lqyq6668bodymate4core20HighlightedStructure(item.structure_id, role, weight));
+          }
+          _tmp$2 = _ + 1 | 0;
+          continue;
+        } else {
+          break;
+        }
+      }
+      return new _M0TP37lqyq6668bodymate4core12StructureSet(`bodymate.movement.set.${movement.id}`, movement.display_name_zh, members);
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core33show__movement__mapping__internal(id, action) {
+    if (!_M0FP37lqyq6668bodymate4core24valid__movement__catalog()) {
+      _M0FP37lqyq6668bodymate4core13record__event("ActionRejected", action, _M0FP37lqyq6668bodymate4core5state.selected, "invalid_movement_catalog");
+      return _M0FP37lqyq6668bodymate4core4fail("invalid_movement_catalog");
+    }
+    let movement;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate4core16movement__by__id(id);
+      if (_bind === undefined) {
+        _M0FP37lqyq6668bodymate4core13record__event("ActionRejected", action, _M0FP37lqyq6668bodymate4core5state.selected, "unknown_movement");
+        return _M0FP37lqyq6668bodymate4core4fail("unknown_movement");
+      } else {
+        const _Some = _bind;
+        const _movement = _Some;
+        movement = _movement;
+        break _L;
+      }
+    }
+    let mapping;
+    _L$2: {
+      const _bind = _M0FP37lqyq6668bodymate4core25movement__mapping__by__id(id);
+      if (_bind === undefined) {
+        _M0FP37lqyq6668bodymate4core13record__event("ActionRejected", action, _M0FP37lqyq6668bodymate4core5state.selected, "unknown_movement");
+        return _M0FP37lqyq6668bodymate4core4fail("unknown_movement");
+      } else {
+        const _Some = _bind;
+        const _mapping = _Some;
+        mapping = _mapping;
+        break _L$2;
+      }
+    }
+    let set;
+    _L$3: {
+      const _bind = _M0FP37lqyq6668bodymate4core29movement__structure__set__for(id, _M0FP37lqyq6668bodymate4core5state.selected);
+      if (_bind === undefined) {
+        _M0FP37lqyq6668bodymate4core13record__event("ActionRejected", action, _M0FP37lqyq6668bodymate4core5state.selected, "invalid_movement_mapping");
+        return _M0FP37lqyq6668bodymate4core4fail("invalid_movement_mapping");
+      } else {
+        const _Some = _bind;
+        const _set = _Some;
+        set = _set;
+        break _L$3;
+      }
+    }
+    if (!_M0FP37lqyq6668bodymate4core21valid__structure__set(set)) {
+      _M0FP37lqyq6668bodymate4core13record__event("ActionRejected", action, _M0FP37lqyq6668bodymate4core5state.selected, "invalid_movement_mapping");
+      return _M0FP37lqyq6668bodymate4core4fail("invalid_movement_mapping");
+    } else {
+      const previous = _M0FP37lqyq6668bodymate4core5state.selected;
+      let entry;
+      _L$4: {
+        const _bind = _M0FP37lqyq6668bodymate4core11find__entry(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(set.members, 0).structure_id);
+        if (_bind === undefined) {
+          _M0FP37lqyq6668bodymate4core13record__event("ActionRejected", action, previous, "unregistered_movement_mapping");
+          return _M0FP37lqyq6668bodymate4core4fail("unregistered_movement_mapping");
+        } else {
+          const _Some = _bind;
+          const _entry = _Some;
+          entry = _entry;
+          break _L$4;
+        }
+      }
+      const previous_movement = _M0FP37lqyq6668bodymate4core22drop__active__movement();
+      const previous_set = _M0FP37lqyq6668bodymate4core28drop__active__structure__set();
+      _M0FP37lqyq6668bodymate4core5state.region = entry.region;
+      _M0FP37lqyq6668bodymate4core5state.selected = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(set.members, 0).structure_id;
+      _M0FP37lqyq6668bodymate4core5state.layer = entry.layer;
+      _M0FP37lqyq6668bodymate4core5state.isolated = false;
+      _M0FP37lqyq6668bodymate4core5state.overview = false;
+      _M0FP37lqyq6668bodymate4core5state.highlight_mode = 1;
+      _M0FP37lqyq6668bodymate4core5state.active_structure_set = set;
+      _M0FP37lqyq6668bodymate4core5state.highlighted = set.members;
+      _M0FP37lqyq6668bodymate4core5state.active_movement = movement;
+      _M0FP37lqyq6668bodymate4core4bump();
+      _M0FP37lqyq6668bodymate4core23note__dropped__movement(previous_movement, action, previous);
+      _M0FP37lqyq6668bodymate4core29note__dropped__structure__set(previous_set, action, previous);
+      _M0FP37lqyq6668bodymate4core23record__movement__event("MovementResolved", action, previous, "accepted", movement.id, mapping.mappings.length, _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(set.members, 0).structure_id);
+      _M0FP37lqyq6668bodymate4core29record__structure__set__event("StructureSetHighlighted", action, previous, "accepted", set.id, set.members.length);
+      _M0FP37lqyq6668bodymate4core23record__movement__event("MovementMappingShown", action, previous, "accepted", movement.id, mapping.mappings.length, _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(set.members, 0).structure_id);
+      return _M0FP37lqyq6668bodymate4core8snapshot();
+    }
+  }
   function _M0FP37lqyq6668bodymate4core13valid__region(region) {
     return region === "neck";
   }
@@ -2802,6 +3928,9 @@ function buildAnatomy(){
       case 6: {
         return _M0FP37lqyq6668bodymate4core31clear__structure__set__internal(_M0FP37lqyq6668bodymate4core12action__text(action.kind));
       }
+      case 7: {
+        return _M0FP37lqyq6668bodymate4core33show__movement__mapping__internal(action.structure_id, _M0FP37lqyq6668bodymate4core12action__text(action.kind));
+      }
       default: {
         _M0FP37lqyq6668bodymate4core13record__event("ActionRejected", "UNKNOWN", _M0FP37lqyq6668bodymate4core5state.selected, "unknown_action");
         return _M0FP37lqyq6668bodymate4core4fail("unknown_action");
@@ -2809,7 +3938,7 @@ function buildAnatomy(){
     }
   }
   function _M0FP37lqyq6668bodymate4core13parse__action(value) {
-    return value === "FIND_STRUCTURE" ? 0 : value === "SELECT_STRUCTURE" ? 1 : value === "ISOLATE_SELECTED" ? 2 : value === "RESTORE_CONTEXT" ? 3 : value === "SHOW_REGION" ? 4 : value === "HIGHLIGHT_STRUCTURE_SET" ? 5 : value === "CLEAR_STRUCTURE_SET" ? 6 : 7;
+    return value === "FIND_STRUCTURE" ? 0 : value === "SELECT_STRUCTURE" ? 1 : value === "ISOLATE_SELECTED" ? 2 : value === "RESTORE_CONTEXT" ? 3 : value === "SHOW_REGION" ? 4 : value === "HIGHLIGHT_STRUCTURE_SET" ? 5 : value === "CLEAR_STRUCTURE_SET" ? 6 : value === "SHOW_MOVEMENT_MAPPING" ? 7 : 8;
   }
   function _M0FP37lqyq6668bodymate4core27domain__execute__action__v1(kind, structure_id, region) {
     return _M0FP37lqyq6668bodymate4core15execute__action(new _M0TP37lqyq6668bodymate4core12DomainAction(_M0FP37lqyq6668bodymate4core13parse__action(kind), structure_id, region, 1));
@@ -2824,6 +3953,7 @@ function buildAnatomy(){
     _M0FP37lqyq6668bodymate4core5state.highlight_mode = 0;
     _M0FP37lqyq6668bodymate4core5state.active_structure_set = undefined;
     _M0FP37lqyq6668bodymate4core5state.highlighted = [];
+    _M0FP37lqyq6668bodymate4core5state.active_movement = undefined;
     _M0FP37lqyq6668bodymate4core5state.revision = 0;
     _M0FP37lqyq6668bodymate4core5state.events = [];
     return _M0FP37lqyq6668bodymate4core8snapshot();
@@ -2911,10 +4041,12 @@ function buildAnatomy(){
   }
   function _M0FP37lqyq6668bodymate4core25reset__overview__internal(action) {
     const previous = _M0FP37lqyq6668bodymate4core5state.selected;
+    const previous_movement = _M0FP37lqyq6668bodymate4core22drop__active__movement();
     const previous_set = _M0FP37lqyq6668bodymate4core28drop__active__structure__set();
     _M0FP37lqyq6668bodymate4core5state.isolated = false;
     _M0FP37lqyq6668bodymate4core5state.overview = true;
     _M0FP37lqyq6668bodymate4core4bump();
+    _M0FP37lqyq6668bodymate4core23note__dropped__movement(previous_movement, action, previous);
     _M0FP37lqyq6668bodymate4core29note__dropped__structure__set(previous_set, action, previous);
     _M0FP37lqyq6668bodymate4core13record__event("OverviewReset", action, _M0FP37lqyq6668bodymate4core5state.selected, "accepted");
     return _M0FP37lqyq6668bodymate4core8snapshot();
@@ -2929,9 +4061,13 @@ function buildAnatomy(){
   globalThis.bodymate_domain_reset = _M0FP37lqyq6668bodymate4core13domain__reset;
   globalThis.bodymate_domain_snapshot_v2 = _M0FP37lqyq6668bodymate4core20domain__snapshot__v2;
   globalThis.bodymate_domain_snapshot_v3 = _M0FP37lqyq6668bodymate4core20domain__snapshot__v3;
+  globalThis.bodymate_domain_snapshot_v4 = _M0FP37lqyq6668bodymate4core20domain__snapshot__v4;
   globalThis.bodymate_domain_events_v1 = _M0FP37lqyq6668bodymate4core18domain__events__v1;
+  globalThis.bodymate_domain_events_v2 = _M0FP37lqyq6668bodymate4core18domain__events__v2;
+  globalThis.bodymate_domain_evidence_v1 = _M0FP37lqyq6668bodymate4core20domain__evidence__v1;
   globalThis.bodymate_domain_resolve_query_v1 = _M0FP37lqyq6668bodymate4core26domain__resolve__query__v1;
   globalThis.bodymate_domain_resolve_query_v2 = _M0FP37lqyq6668bodymate4core26domain__resolve__query__v2;
+  globalThis.bodymate_domain_resolve_query_v3 = _M0FP37lqyq6668bodymate4core26domain__resolve__query__v3;
   globalThis.bodymate_domain_execute_action_v1 = _M0FP37lqyq6668bodymate4core27domain__execute__action__v1;
   globalThis.bodymate_core_clear = _M0FP37lqyq6668bodymate4core5clear;
   globalThis.bodymate_core_register = _M0FP37lqyq6668bodymate4core8register;
@@ -2953,7 +4089,7 @@ const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ROOT_ANATOMY_REGISTRY=globalThis.BodyMateAnatomyRegistry||[];const rootEntryFor=id=>ROOT_ANATOMY_REGISTRY.find(entry=>entry.presentationId===id||entry.structureId===id);const ROOT_SCM_ID=ROOT_ANATOMY_REGISTRY.find(entry=>entry.isDefault)?.structureId;const coreIdFor=id=>rootEntryFor(id)?.structureId??id;const presentationIdFor=id=>rootEntryFor(id)?.presentationId??id;
 function installRealNeckRegistry(){for(const entry of ROOT_ANATOMY_REGISTRY){const existing=DATA[entry.presentationId]||{};DATA[entry.presentationId]={...existing,id:entry.presentationId,label:entry.displayNameZh,region:entry.region,type:entry.layer,center:existing.center||REGIONS.neck.center,code:entry.sourceMeshId,info:`Human Atlas 真实公开网格：${entry.canonicalName}`};}}
-const state={region:'neck',selected:ROOT_SCM_ID,layer:'muscle',isolated:false,labels:true,pulse:!reduced,whole:false,bubble:true,completed:3,selectionRevision:0,highlightMode:'none',highlightSetId:'',highlightSetLabel:'',highlighted:[],showSupport:true,neckSide:'all',neckGroup:'all',neckSearch:''};
+const state={region:'neck',selected:ROOT_SCM_ID,layer:'muscle',isolated:false,labels:true,pulse:!reduced,whole:false,bubble:true,completed:3,selectionRevision:0,highlightMode:'none',highlightSetId:'',highlightSetLabel:'',highlighted:[],activeMovementId:'',movementLabel:'',movementCanonicalName:'',movementMappings:[],coverageNote:'',showSupport:true,neckSide:'all',neckGroup:'all',neckSearch:''};
 let nav,detail,orb,ready=false,lastTime=0,toastTimer=0,particles=[],orbItems=[],renderFrame=0;
 const navCamera=new Camera([0,3.76,.02],13,0,.025,true), detailCamera=new Camera(REGIONS.neck.center,REGIONS.neck.dist,REGIONS.neck.theta,.04),orbCamera=new Camera([0,-.09,0],4.45,.14,.18);
 navCamera.halfHeight=4.25;orbCamera.fov=.61;
@@ -2961,8 +4097,9 @@ let NAV=[],DETAIL=[],coachItems=[],guideMesh=null,guideGeo=null,guideLast=-1,coa
 const current=()=>DATA[presentationIdFor(state.selected)];
 const chatHistory=[];
 let chatSequence=0;
-function applyDomainSnapshotV3(reply){const p=String(reply).split('|'),revision=Number(p[8]);if(p.length!==13||p[0]!=='ok'||p[1]!=='snapshot-v3'||p[2]!=='3'||!p[3]||!p[4]||!['muscle','fascia'].includes(p[5])||!['true','false'].includes(p[6])||!['true','false'].includes(p[7])||!Number.isSafeInteger(revision)||revision<0||!['none','structure_set'].includes(p[9]))return false;const highlighted=p[12]?p[12].split('~').map(item=>{const [structureId,role,weightRaw]=item.split('^'),weight=Number(weightRaw);return structureId&&['focus','primary','secondary','context'].includes(role)&&Number.isSafeInteger(weight)?{structureId,role,weight}:null;}):[];if(highlighted.includes(null)||new Set(highlighted.map(item=>item.structureId)).size!==highlighted.length||(p[9]==='none'&&(p[10]||p[11]||highlighted.length))||(p[9]==='structure_set'&&(!p[10]||!p[11]||!highlighted.length||highlighted[0].structureId!==p[4]||highlighted[0].role!=='focus')))return false;Object.assign(state,{region:p[3],selected:p[4],layer:p[5],isolated:p[6]==='true',whole:p[7]==='true',selectionRevision:revision,highlightMode:p[9],highlightSetId:p[10],highlightSetLabel:p[11],highlighted});return true;}
-function applyCore(reply){const p=String(reply).split('|');if(p[0]!=='ok'){toast('核心拒绝此操作：'+(p[1]||'unknown'));return false;}const revision=Number(p[6]),valid=p.length===7&&p[1]&&p[2]&&['muscle','fascia'].includes(p[3])&&['true','false'].includes(p[4])&&['true','false'].includes(p[5])&&Number.isSafeInteger(revision)&&revision>=0;if(!valid){toast('核心返回损坏的状态，页面未更新。');return false;}if(typeof globalThis.bodymate_domain_snapshot_v3==='function'){if(!applyDomainSnapshotV3(globalThis.bodymate_domain_snapshot_v3())){toast('核心返回损坏的结构集合状态，页面未更新。');return false;}}else Object.assign(state,{region:p[1],selected:p[2],layer:p[3],isolated:p[4]==='true',whole:p[5]==='true',selectionRevision:revision,highlightMode:'none',highlightSetId:'',highlightSetLabel:'',highlighted:[]});return true;}
+function applyDomainSnapshotV3(reply){const p=String(reply).split('|'),revision=Number(p[8]);if(p.length!==13||p[0]!=='ok'||p[1]!=='snapshot-v3'||p[2]!=='3'||!p[3]||!p[4]||!['muscle','fascia'].includes(p[5])||!['true','false'].includes(p[6])||!['true','false'].includes(p[7])||!Number.isSafeInteger(revision)||revision<0||!['none','structure_set'].includes(p[9]))return false;const highlighted=p[12]?p[12].split('~').map(item=>{const [structureId,role,weightRaw]=item.split('^'),weight=Number(weightRaw);return structureId&&['focus','primary','secondary','context'].includes(role)&&Number.isSafeInteger(weight)?{structureId,role,weight}:null;}):[];if(highlighted.includes(null)||highlighted.some(item=>!rootEntryFor(item.structureId))||new Set(highlighted.map(item=>item.structureId)).size!==highlighted.length||(p[9]==='none'&&(p[10]||p[11]||highlighted.length))||(p[9]==='structure_set'&&(!p[10]||!p[11]||!highlighted.length||highlighted[0].structureId!==p[4]||highlighted[0].role!=='focus')))return false;Object.assign(state,{region:p[3],selected:p[4],layer:p[5],isolated:p[6]==='true',whole:p[7]==='true',selectionRevision:revision,highlightMode:p[9],highlightSetId:p[10],highlightSetLabel:p[11],highlighted});return true;}
+function applyDomainSnapshotV4(reply){const p=String(reply).split('|');if(p.length!==18||p[0]!=='ok'||p[1]!=='snapshot-v4'||p[2]!=='4'||!applyDomainSnapshotV3(['ok','snapshot-v3','3',...p.slice(3,13)].join('|')))return false;const mappings=p[16]?p[16].split('~').map(item=>{const [structureId,role,evidenceWire]=item.split('^'),evidenceIds=evidenceWire?evidenceWire.split(','):[];return rootEntryFor(structureId)&&['main_contributor','contributor'].includes(role)&&evidenceIds.length&&evidenceIds.every(Boolean)?{structureId,role,evidenceIds}:null;}):[];const active=Boolean(p[13]||p[14]||p[15]||p[16]||p[17]);if(mappings.includes(null)||new Set(mappings.map(item=>item.structureId)).size!==mappings.length||(active&&(!p[13]||!p[14]||!p[15]||!p[17]||!mappings.length)))return false;Object.assign(state,{activeMovementId:p[13],movementLabel:p[14],movementCanonicalName:p[15],movementMappings:mappings,coverageNote:p[17]});return true;}
+function applyCore(reply){const p=String(reply).split('|');if(p[0]!=='ok'){toast('核心拒绝此操作：'+(p[1]||'unknown'));return false;}const revision=Number(p[6]),valid=p.length===7&&p[1]&&p[2]&&['muscle','fascia'].includes(p[3])&&['true','false'].includes(p[4])&&['true','false'].includes(p[5])&&Number.isSafeInteger(revision)&&revision>=0;if(!valid){toast('核心返回损坏的状态，页面未更新。');return false;}if(typeof globalThis.bodymate_domain_snapshot_v4==='function'){if(!applyDomainSnapshotV4(globalThis.bodymate_domain_snapshot_v4())){toast('核心返回损坏的 movement 状态，页面未更新。');return false;}}else if(typeof globalThis.bodymate_domain_snapshot_v3==='function'){if(!applyDomainSnapshotV3(globalThis.bodymate_domain_snapshot_v3())){toast('核心返回损坏的结构集合状态，页面未更新。');return false;}}else Object.assign(state,{region:p[1],selected:p[2],layer:p[3],isolated:p[4]==='true',whole:p[5]==='true',selectionRevision:revision,highlightMode:'none',highlightSetId:'',highlightSetLabel:'',highlighted:[],activeMovementId:'',movementLabel:'',movementCanonicalName:'',movementMappings:[],coverageNote:''});return true;}
 function callCore(name,...args){const fn=globalThis[name];if(typeof fn!=='function')throw Error('MoonBit 核心未加载：'+name);return applyCore(fn(...args));}
 function registerCore(){const clear=globalThis.bodymate_core_clear;if(typeof clear!=='function')throw Error('MoonBit 核心未加载：bodymate_core_clear');if(!String(clear()).startsWith('ok|'))throw Error('MoonBit 清空失败');for(const d of Object.values(DATA)){const id=coreIdFor(d.id),ok=globalThis.bodymate_core_register(id,d.label,d.region,d.type,id===REGIONS[d.region].default);if(!String(ok).startsWith('ok|'))throw Error('MoonBit 注册失败：'+ok);}if(!callCore('bodymate_core_select_region','neck'))throw Error('MoonBit 初始选择失败');}
 function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),3100);}
@@ -3103,7 +4240,7 @@ function tick(now){const dt=Math.min(.14,(now-lastTime)/1000||.016);lastTime=now
 try{buildAnatomy();installRealNeckRegistry();registerCore();nav=new View($('#nav-canvas'),navCamera);detail=new View($('#detail-canvas'),detailCamera);orb=new View($('#orb-canvas'),orbCamera);coachItems=makeCoach();navFloor=[shapeItem(betweenGeo([0,-.035,0],[0,.016,0],1.36,1.36),{color:[.80,.86,.94]}),shapeItem(torusGeo([0,.02,0],1.11,.017),{color:[.65,.82,.99]}),shapeItem(torusGeo([0,-.01,0],1.50,.011),{color:[.88,.94,1]})];buildOrb(.75);bindUI();navParts();updateUI();attachOrbit(nav,true);attachOrbit(detail,false);new ResizeObserver(resize).observe($('.workspace'));window.addEventListener('resize',resize);resize();detailCamera.update(1);coachPos=[...detailCamera.target];ready=true;$('#engine-status').textContent='离线 3D 已就绪 · '+Object.keys(DATA).length+' 个交互结构';requestAnimationFrame(tick);
 const applyCoachDomainAction=(reply,next)=>{if(!applyCore(reply))return;if(next.action==='SELECT_STRUCTURE'||next.action==='SHOW_REGION'||next.action==='HIGHLIGHT_STRUCTURE_SET')focusDetail(state.region);state.bubble=true;updateUI();};const executeCoachAction=next=>globalThis.BodyMateCoachQuery?.executeCoachAction?.(next,{core:globalThis,onAccepted:applyCoachDomainAction})||false;
  const recordCoachQuery=({text,message,structureId=null})=>{const d=DATA[presentationIdFor(structureId)]||DATA[structureId]||current();if(!d)return;chatHistory.push({id:++chatSequence,structureId:d.id,label:d.label,region:d.region,question:text,answer:message});$('#history-count').textContent=String(chatHistory.length);if($('#history-dialog').open)renderHistory();};
-window.__bodymate={get state(){return{...state,highlighted:state.highlighted.map(item=>({...item}))};},data:DATA,regions:REGIONS,select:selectMuscle,region:gotoRegion,reset:resetAll,setLayer,command,executeCoachAction,recordCoachQuery,domainDebug(){return Object.freeze({snapshot:String(globalThis.bodymate_domain_snapshot_v3?.()||''),events:String(globalThis.bodymate_domain_events_v1?.()||''),registryCount:ROOT_ANATOMY_REGISTRY.length,resolverVersion:'query-v2'});},get history(){return chatHistory.map(x=>({...x}));},get ready(){return ready;},get views(){return{nav,detail,orb};},project(id,which='nav'){const v=which==='nav'?nav:detail,d=DATA[id];const p=v.camera.project(d.center,v.w,v.h),r=v.canvas.getBoundingClientRect();return{x:r.left+p.x,y:r.top+p.y,visible:p.visible};},projectPoint(p,which='nav'){const v=which==='nav'?nav:detail,r=v.canvas.getBoundingClientRect(),q=v.camera.project(p,view.w,view.h);return{x:r.left+q.x,y:r.top+q.y};},stats(){return{frames:renderFrame,navCalls:nav.drawCalls,detailCalls:detail.drawCalls,cache:detail.cache.size,drawnMuscles:DETAIL.filter(x=>x.visible!==false&&x.type==='muscle').map(x=>x.id),drawnFascia:DETAIL.filter(x=>x.visible!==false&&x.type==='fascia').map(x=>x.id),drawnSupport:DETAIL.filter(x=>x.visible!==false&&x.type==='support').length,leftTarget:[...navCamera.target],leftHeight:navCamera.halfHeight};}};
+window.__bodymate={get state(){return{...state,highlighted:state.highlighted.map(item=>({...item})),movementMappings:state.movementMappings.map(item=>({...item,evidenceIds:[...item.evidenceIds]}))};},data:DATA,regions:REGIONS,select:selectMuscle,region:gotoRegion,reset:resetAll,setLayer,command,executeCoachAction,recordCoachQuery,domainDebug(){return Object.freeze({snapshot:String(globalThis.bodymate_domain_snapshot_v4?.()||globalThis.bodymate_domain_snapshot_v3?.()||''),events:String(globalThis.bodymate_domain_events_v2?.()||globalThis.bodymate_domain_events_v1?.()||''),registryCount:ROOT_ANATOMY_REGISTRY.length,resolverVersion:'query-v3'});},get history(){return chatHistory.map(x=>({...x}));},get ready(){return ready;},get views(){return{nav,detail,orb};},project(id,which='nav'){const v=which==='nav'?nav:detail,d=DATA[id];const p=v.camera.project(d.center,v.w,v.h),r=v.canvas.getBoundingClientRect();return{x:r.left+p.x,y:r.top+p.y,visible:p.visible};},projectPoint(p,which='nav'){const v=which==='nav'?nav:detail,r=v.canvas.getBoundingClientRect(),q=v.camera.project(p,view.w,view.h);return{x:r.left+q.x,y:r.top+q.y};},stats(){return{frames:renderFrame,navCalls:nav.drawCalls,detailCalls:detail.drawCalls,cache:detail.cache.size,drawnMuscles:DETAIL.filter(x=>x.visible!==false&&x.type==='muscle').map(x=>x.id),drawnFascia:DETAIL.filter(x=>x.visible!==false&&x.type==='fascia').map(x=>x.id),drawnSupport:DETAIL.filter(x=>x.visible!==false&&x.type==='support').length,leftTarget:[...navCamera.target],leftHeight:navCamera.halfHeight};}};
 window.__bodymate.projectPoint=(point,which='nav')=>{const view=which==='nav'?nav:detail,rect=view.canvas.getBoundingClientRect(),projected=view.camera.project(point,view.w,view.h);return{x:rect.left+projected.x,y:rect.top+projected.y};};
 }catch(e){console.error(e);$('#fatal').hidden=false;$('#fatal').textContent='3D 白模未启动：'+e.message+'。请使用支持 WebGL 的 Edge / Chrome。页面内已包含所有代码，无需加载 CDN。';$('#engine-status').textContent='3D 初始化失败';}
 })();
