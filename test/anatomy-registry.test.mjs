@@ -1,10 +1,8 @@
 import assert from 'node:assert/strict';
-import { execFile } from 'node:child_process';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { promisify } from 'node:util';
 import vm from 'node:vm';
 import { NodeIO } from '@gltf-transform/core';
 import { filterNeckRegistry, neckRegistry } from '../src/anatomy/neck-registry.mjs';
@@ -19,7 +17,6 @@ const moonbitProjection = JSON.parse(await readFile(new URL('generated/anatomy-r
 const registryModuleSource = await readFile(new URL('src/anatomy/neck-registry.mjs', root), 'utf8');
 const html = await readFile(new URL('index.html', root), 'utf8');
 const rootAdapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
-const execFileAsync = promisify(execFile);
 
 test('canonical neck registry has fourteen unique Human Atlas neck and shoulder structures with complete source identity', () => {
   assert.equal(neckRegistry.length, 14);
@@ -42,14 +39,13 @@ test('the JavaScript registry is a generated projection of the MoonBit canonical
   assert.match(registryModuleSource, /const entries = Object\.freeze\(/);
 });
 
-test('pinned Human Atlas discovery CLI reports source identities without inventing mappings', async () => {
-  const { stdout } = await execFileAsync(process.execPath, ['scripts/list-human-atlas-structures.mjs', 'scalenus'], { cwd: new URL('..', import.meta.url) });
-  const candidates = JSON.parse(stdout);
-  assert.deepEqual(candidates.map((entry) => entry.id), ['FJ1570', 'FJ1571', 'FJ1572', 'FJ1592', 'FJ1593', 'FJ1594']);
+test('canonical scalene entries retain all pinned source identities without an anatomy download', () => {
+  const candidates = neckRegistry.filter((entry) => entry.canonicalName.includes('scalenus'));
+  assert.deepEqual(candidates.map((entry) => entry.sourceMeshId).sort(), ['FJ1570', 'FJ1571', 'FJ1572', 'FJ1592', 'FJ1593', 'FJ1594']);
   for (const candidate of candidates) {
-    assert.match(candidate.name, /scalenus/i);
-    assert.match(candidate.chunk, /^body-[45]\.bin$/);
-    assert.match(candidate.conceptId, /^FMA\d+$/);
+    assert.match(candidate.canonicalName, /scalenus/i);
+    assert.match(candidate.sourceChunk, /^body-[45]\.bin$/);
+    assert.match(candidate.sourceConceptId, /^FMA\d+$/);
   }
 });
 
