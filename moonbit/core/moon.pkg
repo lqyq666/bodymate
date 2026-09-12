@@ -1,3 +1,9 @@
+import {
+  "moonbitlang/core/string",
+  "moonbitlang/core/math",
+  "moonbitlang/core/double",
+}
+
 pkgtype(kind: "foreign_library")
 
 supported_targets = "js"
@@ -28,6 +34,21 @@ options(
         "bodymate_domain_resolve_query_v2",
         "bodymate_domain_resolve_query_v3",
         "bodymate_domain_execute_action_v1",
+        "bodymate_motion_registry_v1",
+        "bodymate_motion_resolve_v1",
+        "bodymate_motion_parameters_v1",
+        "bodymate_motion_parse_query_v1",
+        "bodymate_motion_profile_v1",
+        "bodymate_motion_pose_intent_v1",
+        "bodymate_motion_session_reset",
+        "bodymate_motion_session_play_v1",
+        "bodymate_motion_session_stop_v1",
+        "bodymate_motion_session_set_parameters_v1",
+        "bodymate_motion_session_set_paused_v1",
+        "bodymate_motion_session_set_speed_v1",
+        "bodymate_motion_session_seek_v1",
+        "bodymate_motion_session_tick_v1",
+        "bodymate_motion_session_snapshot_v1",
       ],
       "format": "iife",
     },

@@ -1,5 +1,7 @@
 import { Matrix4, Quaternion, Vector3 } from 'three';
-import { normalizeMotionParameters } from './motion-parameters.mjs';
+import { motionDefinitions, motionForQuery, normalizeMotionParameters, poseIntent } from './motion-domain.mjs';
+
+export { motionDefinitions, motionForQuery };
 
 // Atlas world coordinates, metres, +Y up and +Z anterior. These landmarks are aligned
 // to the humeral heads, elbow surfaces, femoral heads, tibiae and tali in the source.
@@ -137,19 +139,13 @@ function solvePushUpArm(start, target, a, b, torso, sign, angle) {
 // Shoulder joint span and rounded external pelvic breadth measured from this atlas.
 export const bodyMetrics = Object.freeze({ shoulderWidth: .33, hipWidth: .29 });
 
-export const motionDefinitions = Object.freeze([
-  { id: 'push_up', title: '俯卧撑', aliases: ['俯卧撑', '卧撑', 'push-up', 'push up'], duration: 4, muscles: ['胸部', '肩部', '上臂后侧'], match: 'pectoralis major|deltoid|triceps brachii|serratus anterior' },
-  { id: 'squat', title: '深蹲', aliases: ['深蹲', 'squat'], duration: 4.4, muscles: ['大腿前侧', '臀部', '大腿后侧'], match: 'rectus femoris|vastus|gluteus|biceps femoris|semitendinosus|semimembranosus' },
-  { id: 'curl', title: '弯举', aliases: ['弯举', '二头弯举', 'curl'], duration: 3.6, muscles: ['上臂前侧', '前臂'], match: 'biceps brachii|brachialis|brachioradialis' },
-]);
-export const motionForQuery = (query) => motionDefinitions.find((motion) => motion.aliases.some((alias) => String(query).toLowerCase().includes(alias)));
-
 // Shared by the asset baker and tests. All links retain their rest length. Root and joint
 // quaternions are baked as standard glTF animation tracks; playback needs no mesh grouping.
 export function sampleMotion(id, phase, input = {}) {
   if (!['push_up', 'squat', 'curl'].includes(id)) throw Error(`No pose sampler for ${id}`);
   const { parameters } = normalizeMotionParameters(id, input);
-  const depth = .5 - .5 * Math.cos(phase * Math.PI * 2);
+  const intent = poseIntent(id, phase, parameters);
+  const depth = intent.depth;
   const world = new Map(), local = new Map();
   let root = restPoint('pelvis'), torso = new Quaternion();
   if (id === 'push_up') {
@@ -159,7 +155,7 @@ export function sampleMotion(id, phase, input = {}) {
     const footAnchor = new Vector3(0, .171, -.025);
     root = restPoint('pelvis').sub(new Vector3(0, .082, -.025)).applyQuaternion(torso).add(footAnchor);
   } else if (id === 'squat') {
-    const excursion = depth * parameters.squatDepth / 100;
+    const excursion = intent.excursion;
     const span = bodyMetrics.hipWidth * parameters.stanceWidth / 2;
     const length = restPoint('leftThigh').distanceTo(restPoint('leftShin')) + restPoint('leftShin').distanceTo(restPoint('leftFoot')) - .008;
     // Widening a stance lowers the pelvis even at the top; never stretch the legs.

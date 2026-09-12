@@ -1,6 +1,6 @@
 import { AnimationClip, QuaternionKeyframeTrack, VectorKeyframeTrack } from 'three';
 import { motionDefinitions, rigJoints, sampleMotion } from './rig-definition.mjs';
-import { normalizeMotionParameters } from './motion-parameters.mjs';
+import { normalizeMotionParameters } from './motion-domain.mjs';
 
 // Rebuild only animation tracks on parameter changes. Geometry and skin stay loaded.
 // Keep just the active clip in the viewer; slider use cannot accumulate mixer bindings.

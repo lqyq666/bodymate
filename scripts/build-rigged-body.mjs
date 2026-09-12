@@ -3,6 +3,7 @@ import { Matrix4 } from 'three';
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { existsSync } from 'node:fs';
+import '../assets/runtime/moonbit-core.js';
 import { fullMuscleSourceFiles, sourceFiles, sha256, humanAtlasCommit } from './human-atlas-source.mjs';
 import { fullMuscleExclusionReason } from '../src/anatomy/full-muscle-policy.mjs';
 import { rigJoints, classifyStructure, weightsForPoint, sampleMotion, motionDefinitions } from '../src/full-muscle/rig-definition.mjs';
