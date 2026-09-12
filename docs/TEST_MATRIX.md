@@ -12,8 +12,8 @@
 | Comparison | MoonBit comparison tests and Node integration tests | Non-deterministic union/intersection/difference, lost left/right roles or provenance, or health-driven comparison mutation |
 | Generated artifacts | `scripts/check-generated.mjs` | A committed runtime/registry/index artifact that differs from its builder output |
 | Offline/file boundary | browser-contract and runtime tests | Runtime CDN/API/anatomy fetches or a non-local embedded runtime dependency |
-| Desktop/mobile acceptance | manual Chromium `file://` pass at 1440×900 and 390×844 | Layout, labels, card, Coach C, interaction, or viewport regressions not observable in unit tests |
+| Desktop/mobile acceptance | Chromium `file://` render capture at 1440×900 and 390×844; reviewer manual interaction replay | Layout, labels, card, Coach C, interaction, or viewport regressions not observable in unit tests |
 | Safety | MoonBit and Node health-query tests | Diagnosis/treatment copy, inferred culprit structure, or health input that mutates anatomy state |
 | Repository hygiene | `scripts/audit-repository-hygiene.mjs` | Tracked credential patterns or accidental local user paths |
 
-Browser acceptance is deliberately documented separately from headless contracts because mesh picking, orbit, and WebGL labels require a real browser interaction pass.
+Browser acceptance is deliberately documented separately from headless contracts because mesh picking, orbit, and WebGL labels require a real browser interaction pass. The automated browser provider blocks interactive `file://` control by policy, so final reviewer interaction replay remains an explicit manual acceptance step; the MoonBit-to-renderer behavior is independently covered by cross-language tests.

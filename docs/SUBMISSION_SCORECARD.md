@@ -7,7 +7,7 @@ This is a factual release-candidate assessment, not a product claim.
 | Product completeness | RISK | The 14-mesh explorer, sets, movements, and comparisons work; anatomy and movement coverage are intentionally narrow. |
 | Engineering quality | PASS | Typed MoonBit domain boundary, generated-artifact gate, deterministic tests, and a clean-clone workflow. |
 | Explainability | PASS | Reviewer quickstart, demo script, architecture, evidence, and review guide explain each domain path. |
-| UX | RISK | Desktop/mobile paths are accepted manually; this remains a prototype and does not replace formal accessibility/usability study. |
+| UX | RISK | Desktop/mobile `file://` rendering is captured in Chromium, while full mesh-pick/orbit/card interaction requires reviewer manual replay because the available automation provider blocks interactive `file://` control. This remains a prototype and does not replace formal accessibility/usability study. |
 | MoonBit depth | PASS | Registry, resolvers, StructureSet, movements, comparison algebra, validation, state, events, and snapshots live in MoonBit. |
 | Reproducibility | PASS | `npm ci`, build, check, stats, and direct `file://` launch are documented and verified from a clean clone. |
 | Testing | PASS | MoonBit, Node contracts, artifact freshness, GLB/provenance, safety, and hygiene are gated. |
