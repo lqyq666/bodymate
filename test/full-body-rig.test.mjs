@@ -8,6 +8,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { rigJoints, motionDefinitions, motionForQuery, highlightForMotion, sampleMotion } from '../src/full-muscle/rig-definition.mjs';
 import { fullMuscleExclusionReason } from '../src/anatomy/full-muscle-policy.mjs';
 import { createMotionClip } from '../src/full-muscle/motion-clip.mjs';
+import { verifyCommittedRiggedBody } from '../scripts/build-rigged-body.mjs';
 
 const runtime = await readFile(new URL('../src/full-muscle/runtime-entry.mjs', import.meta.url), 'utf8');
 const asset = runtime.match(/assets\/anatomy\/human-atlas\/[\w-]+\.glb/)[0];
@@ -18,6 +19,13 @@ const meshes = []; gltf.scene.traverse((node) => { if (node.isSkinnedMesh) meshe
 const mixer = new THREE.AnimationMixer(gltf.scene);
 const point = (name) => gltf.scene.getObjectByName(name).getWorldPosition(new THREE.Vector3());
 const pose = (clip, phase) => { mixer.stopAllAction(); const action = mixer.clipAction(clip).reset().play(); action.time = phase * clip.duration; mixer.update(0); gltf.scene.updateMatrixWorld(true); };
+
+test('clean-clone build verifies the committed rig without rewriting the large asset', async () => {
+  const manifest = await verifyCommittedRiggedBody();
+  assert.equal(manifest.muscleCount, 415);
+  assert.equal(manifest.joints.length, rigJoints.length);
+  assert.deepEqual(manifest.motions.map((motion) => motion.id), motionDefinitions.map((motion) => motion.id));
+});
 
 test('the displayed human has a shared skeleton and normalized vertex binding on every muscle', () => {
   const skins = document.getRoot().listSkins();

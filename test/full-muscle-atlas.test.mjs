@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { NodeIO } from '@gltf-transform/core';
 import { fullMuscleExclusionReason } from '../src/anatomy/full-muscle-policy.mjs';
@@ -37,4 +39,9 @@ test('full-body integration uses the rigged asset and retains grouped selection'
   assert.match(adapterSource, /viewer\.playMotion/);
   assert.match(adapterSource, /viewer\.setView/);
   assert.match(adapterSource, /viewer\.seek/);
+});
+
+test('clean-clone build verifies committed full-body assets without the upstream source cache', () => {
+  const output = execFileSync(process.execPath, ['scripts/build-human-atlas-full.mjs', '--from-committed'], { cwd: fileURLToPath(root), encoding: 'utf8' });
+  assert.match(output, /Verified committed Human Atlas full-muscle GLB \(401 meshes;/);
 });

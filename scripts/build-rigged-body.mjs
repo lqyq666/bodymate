@@ -13,6 +13,18 @@ const pinned = { ...fullMuscleSourceFiles,
   'body-13.bin': '4C51B6BE85D5B705D2B52B79B9AD1CDAE0B65AD03C9402A2F2673C7633FD94F3',
 };
 const correctedMuscle = /fibularis|tibialis|subscapularis|levator scapulae/i;
+export async function verifyCommittedRiggedBody() {
+  const [bytes, manifestText] = await Promise.all([
+    readFile(new URL('assets/anatomy/human-atlas/rigged-body.glb', root)),
+    readFile(new URL('assets/anatomy/human-atlas/rigged-body.manifest.json', root), 'utf8'),
+  ]);
+  const manifest = JSON.parse(manifestText);
+  if (sha256(bytes) !== manifest.outputSha256 || manifest.sourceCommit !== humanAtlasCommit) throw Error('Committed rigged-body provenance mismatch.');
+  if (manifest.joints?.length !== rigJoints.length || manifest.motions?.length !== motionDefinitions.length) throw Error('Committed rigged-body definition mismatch.');
+  if (!Array.isArray(manifest.entries) || manifest.entries.length === 0) throw Error('Committed rigged-body manifest is empty.');
+  return manifest;
+}
+
 export async function buildRiggedBody({ fromFrozen = false } = {}) {
   const atlasPath = new URL('prototype/human-atlas-local/local-assets/atlas.json', root);
   let parts;
@@ -123,4 +135,11 @@ export async function buildRiggedBody({ fromFrozen = false } = {}) {
   console.log(`Built rigged body: ${manifest.muscleCount} muscles, ${manifest.boneCount} skeletal structures, ${rigJoints.length} joints, ${motionDefinitions.length} clips (${Math.round(glb.length / 1024 / 1024)} MB)`);
   return manifest;
 }
-if (process.argv[1] === fileURLToPath(import.meta.url)) await buildRiggedBody({ fromFrozen: process.argv.includes('--from-frozen') });
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  if (process.argv.includes('--from-committed')) {
+    const manifest = await verifyCommittedRiggedBody();
+    console.log(`Verified committed rigged body: ${manifest.muscleCount} muscles, ${manifest.boneCount} skeletal structures, ${manifest.joints.length} joints, ${manifest.motions.length} clips`);
+  } else {
+    await buildRiggedBody({ fromFrozen: process.argv.includes('--from-frozen') });
+  }
+}

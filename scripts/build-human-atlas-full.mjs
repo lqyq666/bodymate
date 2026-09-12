@@ -1,5 +1,5 @@
 import { Document, NodeIO } from '@gltf-transform/core';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { attributionUrl, fetchVerifiedHumanAtlasSource, fullMuscleSourceFiles, humanAtlasCommit, humanAtlasRepository, rawBaseUrl, sha256 } from './human-atlas-source.mjs';
@@ -98,4 +98,22 @@ export async function buildHumanAtlasFull({ source, outputDir = defaultOutputDir
   return { glb, manifest };
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) buildHumanAtlasFull().then(({ manifest }) => console.log(`Built Human Atlas full-muscle GLB (${manifest.entries.length} meshes; ${manifest.outputSha256})`)).catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
+export async function verifyCommittedHumanAtlasFull() {
+  const [glb, manifestText, registrySource, attribution] = await Promise.all([
+    readFile(join(defaultOutputDir, 'full-muscles.glb')),
+    readFile(join(defaultOutputDir, 'full-muscles.manifest.json'), 'utf8'),
+    readFile(generatedRegistry, 'utf8'),
+    readFile(join(defaultOutputDir, 'FULL_BODY_ATTRIBUTION.md'), 'utf8'),
+  ]);
+  const manifest = JSON.parse(manifestText);
+  if (manifest.sourceCommit !== humanAtlasCommit || manifest.outputSha256 !== sha256(glb)) throw Error('Committed Human Atlas full-muscle provenance mismatch.');
+  if (!Array.isArray(manifest.entries) || manifest.entries.length === 0) throw Error('Committed Human Atlas full-muscle manifest is empty.');
+  for (const entry of manifest.entries) if (!registrySource.includes(JSON.stringify(entry.structureId))) throw Error(`Committed full-muscle registry is missing ${entry.structureId}.`);
+  if (!attribution.includes('CC Attribution 4.0 International')) throw Error('Committed Human Atlas full-muscle attribution is incomplete.');
+  return { glb, manifest };
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const command = process.argv.includes('--from-committed') ? verifyCommittedHumanAtlasFull() : buildHumanAtlasFull();
+  command.then(({ manifest }) => console.log(`${process.argv.includes('--from-committed') ? 'Verified committed' : 'Built'} Human Atlas full-muscle GLB (${manifest.entries.length} meshes; ${manifest.outputSha256})`)).catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
+}

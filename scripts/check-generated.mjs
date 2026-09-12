@@ -24,7 +24,8 @@ try {
   execFileSync(process.execPath, ['scripts/build-rigged-body.mjs'], { cwd: root, stdio: 'inherit' });
   const rigAfter = await Promise.all(rigFiles.map((file) => readFile(join(root, file))));
   if (rigBefore.some((artifact, index) => !artifact.equals(rigAfter[index]))) throw Error('Rigged anatomy assets are stale. Run npm run anatomy:build-rig.');
-  for (const script of ['scripts/build-moonbit-registry.mjs', 'scripts/build-anatomy-registry-runtime.mjs', 'scripts/build-coach-query-runtime.mjs', 'scripts/build-root-scm-runtime.mjs', 'scripts/build-human-atlas-full.mjs', 'scripts/build-full-muscle-runtime.mjs']) execFileSync(process.execPath, [script], { cwd: root, stdio: 'inherit' });
+  for (const script of ['scripts/build-moonbit-registry.mjs', 'scripts/build-anatomy-registry-runtime.mjs', 'scripts/build-coach-query-runtime.mjs', 'scripts/build-root-scm-runtime.mjs', 'scripts/build-full-muscle-runtime.mjs']) execFileSync(process.execPath, [script], { cwd: root, stdio: 'inherit' });
+  execFileSync(process.execPath, ['scripts/build-human-atlas-full.mjs', '--from-committed'], { cwd: root, stdio: 'inherit' });
   const after = await Promise.all(generated.map((file) => readFile(join(root, file))));
   const normalizeLineEndings = (artifact) => artifact.toString('utf8').replace(/\r\n/g, '\n');
   if (before.some((artifact, index) => normalizeLineEndings(artifact) !== normalizeLineEndings(after[index]))) throw Error(`Generated artifacts are stale. Run npm run build and commit: ${generated.join(', ')}.`);
