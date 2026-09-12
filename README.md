@@ -6,11 +6,13 @@ The shipped product is real today: 415 muscle meshes, 282 skeletal and related s
 
 ## Why MoonBit is central
 
-MoonBit is the authority for the canonical neck registry, deterministic query resolution, StructureSet semantics, bounded movement/evidence relationships, comparison set algebra, action validation, state transitions, event log, and versioned snapshots. The complete-body motion domain is being brought under the same boundary: MoonBit decides what an action means and whether state may change; JavaScript and Three.js apply accepted output to the rig, camera, materials, labels, and controls.
+MoonBit is the authority for the canonical neck registry, deterministic query resolution, StructureSet semantics, bounded movement/evidence relationships, comparison set algebra, action validation, state transitions, event log, and versioned snapshots. It also owns the complete-body motion registry and aliases, parameter ranges/presets/normalization, qualitative participation profiles, playback session, and renderer-independent pose intents. JavaScript parses the versioned wire contract; Three.js applies accepted output to the GLB rig, camera, materials, labels, and controls.
 
 ```text
 input or mesh pick -> MoonBit domain action -> validated snapshot -> JS adapter -> Three.js / Coach C / UI
 ```
+
+The browser loads the generated MoonBit IIFE from `assets/runtime/moonbit-core.js`; generated code is kept out of `index.html` and is rejected when stale by `npm run check`.
 
 ## Views
 

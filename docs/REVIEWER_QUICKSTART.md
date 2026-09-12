@@ -19,7 +19,11 @@ npm run moonbit:stats
 
 Open `index.html` directly using `file://`. The shipped runtime is local-first: it has no runtime CDN, API, model, anatomy, or backend fetch.
 
-## Three official demos
+## Complete-body demo
+
+Open the default page. Play push-up, change hand width and elbow angle, pause, seek, and change speed; then switch to squat and adjust stance, toe angle, and depth. These definitions, parameter rules, qualitative participation profiles, pose intents, and playback transitions come from MoonBit. Three.js applies them to the shared rig.
+
+## Three neck-domain demos
 
 1. Enter `右侧斜角肌`. MoonBit resolves `bodymate.neck.set.scalene.right`; three real scalene meshes highlight, with right anterior scalene as focus.
 2. Enter `耸肩涉及哪些肌肉`. MoonBit resolves `shoulder_girdle_elevation`, shows the existing StructureSet, and exposes locally bundled evidence.
@@ -33,5 +37,8 @@ Try a health query such as `我脖子疼怎么办` as a safety check: it must re
 - `moonbit/core/resolver.mbt` — deterministic structure, movement, comparison, and health classification
 - `moonbit/core/movements.mbt` and `comparison.mbt` — bounded evidence mapping and pure set algebra
 - `moonbit/core/actions.mbt`, `state.mbt`, `events.mbt`, `wire.mbt` — validation, transitions, events, and versioned boundary
+- `moonbit/core/full_body_motion.mbt` — complete-body motion registry, aliases, parameters, presets, profiles, and pose intents
+- `moonbit/core/motion_session.mbt` — play/stop, phase, pause/resume, speed, seek, and parameter state
+- `src/full-muscle/motion-domain.mjs` — thin parser for the external generated MoonBit wire contract
 
 Read [architecture](MOONBIT_ARCHITECTURE.md), [review guide](MOONBIT_REVIEW_GUIDE.md), [test matrix](TEST_MATRIX.md), [movement evidence](MOVEMENT_EVIDENCE.md), and [asset provenance](HUMAN_ATLAS_NECK_ASSET.md) alongside the code.

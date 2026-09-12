@@ -8,7 +8,7 @@ This is a factual release-candidate assessment, not a product claim.
 | Engineering quality | PASS | Typed MoonBit domain boundary, generated-artifact gate, deterministic tests, and a clean-clone workflow. |
 | Explainability | PASS | Reviewer quickstart, demo script, architecture, evidence, and review guide explain each domain path. |
 | UX | RISK | Desktop/mobile `file://` rendering is captured in Chromium, while full mesh-pick/orbit/card interaction requires reviewer manual replay because the available automation provider blocks interactive `file://` control. This remains a prototype and does not replace formal accessibility/usability study. |
-| MoonBit depth | PASS | Registry, resolvers, StructureSet, movements, comparison algebra, validation, state, events, and snapshots live in MoonBit. |
+| MoonBit depth | PASS | Anatomy registry/resolvers/StructureSet/comparison plus complete-body motion definitions, parameters, participation profiles, playback session, pose intents, validation, events, and snapshots live in MoonBit. |
 | Reproducibility | PASS | `npm ci`, build, check, stats, and direct `file://` launch are documented and verified from a clean clone. |
 | Testing | PASS | MoonBit, Node contracts, artifact freshness, GLB/provenance, safety, and hygiene are gated. |
 | Asset provenance | PASS | Pinned Human Atlas / BodyParts3D provenance, CC BY attribution, manifest, and frozen GLB hash are committed. |
