@@ -49,3 +49,20 @@ export function parseDomainSnapshotV3(reply) {
   if (highlightMode === 'structure_set' && (!highlightSetId || !highlightSetLabel || !highlighted.length || highlighted[0].structureId !== selected || highlighted[0].role !== 'focus')) return null;
   return Object.freeze({ region, selected, layer, isolated: isolated === 'true', overview: overview === 'true', revision, highlightMode, highlightSetId, highlightSetLabel, highlighted: Object.freeze(highlighted) });
 }
+
+export function parseDomainSnapshotV4(reply) {
+  const fields = String(reply).split('|');
+  if (fields.length !== 18 || fields[0] !== 'ok' || fields[1] !== 'snapshot-v4' || fields[2] !== '4') return null;
+  const [, , , region, selected, layer, isolated, overview, revisionRaw, highlightMode, highlightSetId, highlightSetLabel, highlightedWire, activeMovementId, movementLabel, movementCanonicalName, mappingWire, coverageNote] = fields;
+  const revision = Number(revisionRaw);
+  if (!region || !selected || !['muscle', 'fascia'].includes(layer) || !['true', 'false'].includes(isolated) || !['true', 'false'].includes(overview) || !Number.isSafeInteger(revision) || revision < 0 || !['none', 'structure_set'].includes(highlightMode)) return null;
+  const highlighted = highlightedWire ? highlightedWire.split('~').map((item) => { const [structureId, role, weightRaw] = item.split('^'), weight = Number(weightRaw); return structureId && ['focus', 'primary', 'secondary', 'context'].includes(role) && Number.isSafeInteger(weight) ? Object.freeze({ structureId, role, weight }) : null; }) : [];
+  const movementMappings = mappingWire ? mappingWire.split('~').map((item) => { const [structureId, role, evidenceWire] = item.split('^'), evidenceIds = evidenceWire ? evidenceWire.split(',') : []; return entryForPresentationId(structureId) && ['main_contributor', 'contributor'].includes(role) && evidenceIds.length && evidenceIds.every(Boolean) ? Object.freeze({ structureId, role, evidenceIds: Object.freeze(evidenceIds) }) : null; }) : [];
+  if (highlighted.includes(null) || movementMappings.includes(null) || new Set(highlighted.map((item) => item.structureId)).size !== highlighted.length || new Set(movementMappings.map((item) => item.structureId)).size !== movementMappings.length) return null;
+  const hasMovement = Boolean(activeMovementId || movementLabel || movementCanonicalName || mappingWire || coverageNote);
+  if (highlightMode === 'none' && (highlightSetId || highlightSetLabel || highlighted.length)) return null;
+  if (highlightMode === 'structure_set' && (!highlightSetId || !highlightSetLabel || !highlighted.length || highlighted[0].structureId !== selected || highlighted[0].role !== 'focus')) return null;
+  if (!hasMovement) return Object.freeze({ region, selected, layer, isolated: isolated === 'true', overview: overview === 'true', revision, highlightMode, highlightSetId, highlightSetLabel, highlighted: Object.freeze(highlighted), activeMovementId: '', movementLabel: '', movementCanonicalName: '', movementMappings: Object.freeze([]), coverageNote: '' });
+  if (!activeMovementId || !movementLabel || !movementCanonicalName || !coverageNote || !movementMappings.length || highlightMode !== 'structure_set' || !movementMappings.some((item) => item.structureId === selected)) return null;
+  return Object.freeze({ region, selected, layer, isolated: isolated === 'true', overview: overview === 'true', revision, highlightMode, highlightSetId, highlightSetLabel, highlighted: Object.freeze(highlighted), activeMovementId, movementLabel, movementCanonicalName, movementMappings: Object.freeze(movementMappings), coverageNote });
+}

@@ -1,4 +1,4 @@
-let state : DomainState = { entries: [], region: "", selected: "", layer: Muscle, isolated: false, overview: true, highlight_mode: NoHighlight, active_structure_set: None, highlighted: [], revision: 0, events: [] }
+let state : DomainState = { entries: [], region: "", selected: "", layer: Muscle, isolated: false, overview: true, highlight_mode: NoHighlight, active_structure_set: None, highlighted: [], active_movement: None, revision: 0, events: [] }
 
 fn layer_text(layer : Layer) -> String {
   match layer {
@@ -33,6 +33,7 @@ fn reset_to_canonical() -> String {
   state.highlight_mode = NoHighlight
   state.active_structure_set = None
   state.highlighted = []
+  state.active_movement = None
   state.revision = 0
   state.events = []
   snapshot()
@@ -48,6 +49,7 @@ fn clear_legacy_state() -> String {
   state.highlight_mode = NoHighlight
   state.active_structure_set = None
   state.highlighted = []
+  state.active_movement = None
   state.revision = 0
   state.events = []
   snapshot()
@@ -80,6 +82,12 @@ fn drop_active_structure_set() -> StructureSet? {
   previous
 }
 
+fn drop_active_movement() -> Movement? {
+  let previous = state.active_movement
+  state.active_movement = None
+  previous
+}
+
 fn note_dropped_structure_set(previous : StructureSet?, action : String, previous_selected : String) -> Unit {
   match previous {
     Some(value) => record_structure_set_event("StructureSetCleared", action, previous_selected, "accepted", value.id, value.members.length())
@@ -87,8 +95,22 @@ fn note_dropped_structure_set(previous : StructureSet?, action : String, previou
   }
 }
 
+fn note_dropped_movement(previous : Movement?, action : String, previous_selected : String) -> Unit {
+  match previous {
+    Some(value) => {
+      let member_count = match movement_mapping_by_id(value.id) {
+        Some(mapping) => mapping.mappings.length()
+        None => 0
+      }
+      record_movement_event("MovementMappingCleared", action, previous_selected, "accepted", value.id, member_count, "")
+    }
+    None => ()
+  }
+}
+
 fn select_entry(entry : Structure, action : String) -> String {
   let previous = state.selected
+  let previous_movement = drop_active_movement()
   let previous_set = drop_active_structure_set()
   state.region = entry.region
   state.selected = entry.structure_id
@@ -96,6 +118,7 @@ fn select_entry(entry : Structure, action : String) -> String {
   state.isolated = false
   state.overview = false
   bump()
+  note_dropped_movement(previous_movement, action, previous)
   note_dropped_structure_set(previous_set, action, previous)
   record_event("StructureSelected", action, previous, "accepted")
   snapshot()
@@ -116,6 +139,7 @@ fn highlight_structure_set_internal(id : String, action : String) -> String {
     None => { record_event("ActionRejected", action, state.selected, "unknown_structure_set"); fail("unknown_structure_set") }
     Some(set) => if !valid_structure_set(set) { record_event("ActionRejected", action, state.selected, "invalid_structure_set"); fail("invalid_structure_set") } else {
       let previous = state.selected
+      let previous_movement = drop_active_movement()
       let focus = set.members[0]
       match find_entry(focus.structure_id) {
         None => { record_event("ActionRejected", action, previous, "unregistered_structure_set"); fail("unregistered_structure_set") }
@@ -129,6 +153,7 @@ fn highlight_structure_set_internal(id : String, action : String) -> String {
           state.active_structure_set = Some(set)
           state.highlighted = set.members
           bump()
+          note_dropped_movement(previous_movement, action, previous)
           record_structure_set_event("StructureSetHighlighted", action, previous, "accepted", set.id, set.members.length())
           snapshot()
         }
@@ -139,9 +164,58 @@ fn highlight_structure_set_internal(id : String, action : String) -> String {
 
 fn clear_structure_set_internal(action : String) -> String {
   let previous = state.selected
+  let previous_movement = drop_active_movement()
   match drop_active_structure_set() {
-    None => snapshot()
-    Some(set) => { bump(); record_structure_set_event("StructureSetCleared", action, previous, "accepted", set.id, set.members.length()); snapshot() }
+    Some(set) => { bump(); note_dropped_movement(previous_movement, action, previous); record_structure_set_event("StructureSetCleared", action, previous, "accepted", set.id, set.members.length()); snapshot() }
+    None => match previous_movement {
+      Some(_) => { bump(); note_dropped_movement(previous_movement, action, previous); snapshot() }
+      None => snapshot()
+    }
+  }
+}
+
+fn show_movement_mapping_internal(id : String, action : String) -> String {
+  if !valid_movement_catalog() {
+    record_event("ActionRejected", action, state.selected, "invalid_movement_catalog")
+    return fail("invalid_movement_catalog")
+  }
+  match movement_by_id(id) {
+    None => { record_event("ActionRejected", action, state.selected, "unknown_movement"); fail("unknown_movement") }
+    Some(movement) => match movement_mapping_by_id(id) {
+      None => { record_event("ActionRejected", action, state.selected, "unknown_movement"); fail("unknown_movement") }
+      Some(mapping) => match movement_structure_set_for(id, state.selected) {
+        None => { record_event("ActionRejected", action, state.selected, "invalid_movement_mapping"); fail("invalid_movement_mapping") }
+        Some(set) => if !valid_structure_set(set) {
+          record_event("ActionRejected", action, state.selected, "invalid_movement_mapping")
+          fail("invalid_movement_mapping")
+        } else {
+          let previous = state.selected
+          match find_entry(set.members[0].structure_id) {
+            None => { record_event("ActionRejected", action, previous, "unregistered_movement_mapping"); fail("unregistered_movement_mapping") }
+            Some(entry) => {
+              let previous_movement = drop_active_movement()
+              let previous_set = drop_active_structure_set()
+              state.region = entry.region
+              state.selected = set.members[0].structure_id
+              state.layer = entry.layer
+              state.isolated = false
+              state.overview = false
+              state.highlight_mode = StructureSet
+              state.active_structure_set = Some(set)
+              state.highlighted = set.members
+              state.active_movement = Some(movement)
+              bump()
+              note_dropped_movement(previous_movement, action, previous)
+              note_dropped_structure_set(previous_set, action, previous)
+              record_movement_event("MovementResolved", action, previous, "accepted", movement.id, mapping.mappings.length(), set.members[0].structure_id)
+              record_structure_set_event("StructureSetHighlighted", action, previous, "accepted", set.id, set.members.length())
+              record_movement_event("MovementMappingShown", action, previous, "accepted", movement.id, mapping.mappings.length(), set.members[0].structure_id)
+              snapshot()
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -192,10 +266,12 @@ fn restore_internal(action : String) -> String {
 
 fn reset_overview_internal(action : String) -> String {
   let previous = state.selected
+  let previous_movement = drop_active_movement()
   let previous_set = drop_active_structure_set()
   state.isolated = false
   state.overview = true
   bump()
+  note_dropped_movement(previous_movement, action, previous)
   note_dropped_structure_set(previous_set, action, previous)
   record_event("OverviewReset", action, state.selected, "accepted")
   snapshot()

@@ -75,6 +75,18 @@ test('structure-set query does not mutate MoonBit until its accepted action is e
   assert.match(context.bodymate_domain_snapshot_v3(), /structure_set\|bodymate\.neck\.set\.scalene\.right/);
 });
 
+test('movement queries are MoonBit-owned evidence mappings and mutate only through their action', () => {
+  const context = core(), before = snapshot(context), outcome = resolve(context, '耸肩涉及哪些肌肉');
+  assert.equal(outcome.classification, 'MOVEMENT_LOOKUP');
+  assert.equal(outcome.action.action, 'SHOW_MOVEMENT_MAPPING');
+  assert.equal(outcome.movement.id, 'shoulder_girdle_elevation');
+  assert.equal(outcome.movement.mappings.length, 4);
+  assert.equal(outcome.movement.mappings.every((item) => item.evidenceIds.length > 0), true);
+  assert.equal(snapshot(context), before);
+  assert.equal(executeCoachAction(outcome.action, { core: context }), true);
+  assert.match(context.bodymate_domain_snapshot_v4(), /bodymate\.movement\.set\.shoulder_girdle_elevation/);
+});
+
 test('ambiguous candidates do not mutate MoonBit until a user selection action is accepted', () => {
   const context = core(), outcome = resolve(context, '右边脖子'), before = snapshot(context);
   assert.equal(outcome.action.action, 'FIND_STRUCTURE');
@@ -85,13 +97,14 @@ test('ambiguous candidates do not mutate MoonBit until a user selection action i
 });
 
 test('thin JS adapter has no resolver tables or action transition switch', () => {
-  assert.match(source, /bodymate_domain_resolve_query_v2/);
+  assert.match(source, /bodymate_domain_resolve_query_v3/);
   assert.match(source, /bodymate_domain_execute_action_v1/);
   assert.doesNotMatch(source, /searchHints|familyFor|healthResult|sideFor|candidate ranking/i);
   assert.doesNotMatch(source, /document\.|fetch\s*\(/);
+  assert.doesNotMatch(source, /shoulder_girdle_elevation|cervical_rotation_right|trapezius\.upper/);
   assert.match(bridge, /executeCoachAction/);
   assert.match(html, /assets\/runtime\/coach-query-runtime\.js/);
-  assert.match(runtime, /BodyMateCoachQuery|bodymate_domain_resolve_query_v2/);
+  assert.match(runtime, /BodyMateCoachQuery|bodymate_domain_resolve_query_v3/);
 });
 
 test('offline runtime, frozen Human Atlas GLB, and fourteen anatomy nodes remain unchanged', () => {

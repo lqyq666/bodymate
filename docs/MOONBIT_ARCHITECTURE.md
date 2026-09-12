@@ -32,6 +32,16 @@ real mesh click / Coach C query / button
 
 The V2 resolver returns a set for family requests such as `右侧斜角肌`, `左侧斜角肌`, `斜角肌`, and `SCM`; exact full Chinese names still select one structure, while broad location language such as `右边脖子` remains ambiguous. JavaScript receives set members from the MoonBit wire and never maintains a family-to-ID table.
 
+## Movement evidence domain
+
+MoonBit also owns the small, evidence-backed movement catalog. A `Movement` has typed group metadata, aliases, a coverage note, and a `MovementMapping` whose members carry `MainContributor` or `Contributor` plus one or more bundled `EvidenceRef` IDs. The catalog validates unique IDs and aliases, canonical anatomy membership, duplicate-free mapping membership, and evidence completeness before an action can use it.
+
+`SHOW_MOVEMENT_MAPPING` resolves a catalog ID, derives the existing `StructureSet` primitive, chooses focus inside MoonBit (keep the selected mapped structure; otherwise the first main contributor), and records movement events. It does not introduce a second highlight model. `SELECT_STRUCTURE`, overview reset, and clearing the active set clear active movement state deterministically.
+
+Resolver v3 adds `MOVEMENT_LOOKUP` and `STRUCTURE_SET_LOOKUP`; health-language classification remains higher priority than movement lookup. Snapshot v4 adds active movement ID, label, canonical name, participation mappings/evidence IDs, and a current-model coverage note. Evidence source metadata is exported as a separate bundled wire for the offline evidence dialog. JavaScript parses these contracts; it neither maintains a movement catalog nor infers structure participation.
+
+The current catalog is deliberately limited to shoulder-girdle elevation, right/left cervical rotation, and cervical flexion. It says “当前模型覆盖范围内的参与结构”, never activation percentage, EMG, diagnosis, or exercise prescription. See `docs/MOVEMENT_EVIDENCE.md` for sources and exclusions.
+
 ## Public bridge
 
 The embedded IIFE exports legacy `bodymate_core_*` compatibility calls plus these domain calls:

@@ -32,8 +32,12 @@
   };
   globalThis.__coachQueryHandle = (resolution, text) => {
     if (!resolution || !query.isValidCoachActionContract(resolution.action) && resolution.action) return;
-    if (resolution.classification === 'STRUCTURE_LOOKUP' && resolution.resolution === 'EXACT') {
+    if ((resolution.classification === 'STRUCTURE_LOOKUP' || resolution.classification === 'STRUCTURE_SET_LOOKUP') && resolution.resolution === 'EXACT') {
       if (execute(resolution.action)) { clear(); feedback(resolution.message, 'Coach C'); record(text, resolution.message, resolution.action.structureId); }
+      return;
+    }
+    if (resolution.classification === 'MOVEMENT_LOOKUP' && resolution.resolution === 'EXACT') {
+      if (execute(resolution.action)) { clear(); feedback(resolution.message, 'Coach C'); record(text, resolution.message); }
       return;
     }
     if (resolution.classification === 'STRUCTURE_LOOKUP' && resolution.resolution === 'AMBIGUOUS') { feedback(resolution.message, 'Coach C'); record(text, resolution.message); showCandidates(resolution, text); return; }

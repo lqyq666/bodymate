@@ -19,6 +19,8 @@ pub enum StructureGroup {
 ///| Classification returned by the deterministic structure resolver.
 pub enum QueryClassification {
   StructureLookup
+  StructureSetLookup
+  MovementLookup
   DomainCommand
   UnsupportedHealthQuery
   UnknownQuery
@@ -40,7 +42,20 @@ pub enum ActionKind {
   ShowRegion
   HighlightStructureSet
   ClearStructureSet
+  ShowMovementMapping
   UnknownAction
+} derive(Eq)
+
+///| Product-level movement grouping; this is not a training category.
+pub enum MovementGroup {
+  NeckMovement
+  ShoulderGirdle
+} derive(Eq)
+
+///| Evidence-backed qualitative participation, never an activation measurement.
+pub enum ParticipationRole {
+  MainContributor
+  Contributor
 } derive(Eq)
 
 ///| Visual emphasis is a domain intent, not a renderer palette.
@@ -105,6 +120,37 @@ pub struct HighlightedStructure {
   weight : Int
 }
 
+///| One canonical movement supported by the frozen current-model scope.
+pub struct Movement {
+  id : String
+  display_name_zh : String
+  canonical_name : String
+  aliases : Array[String]
+  movement_group : MovementGroup
+  coverage_note : String
+}
+
+///| Bundled source metadata. No runtime fetch is performed.
+pub struct EvidenceRef {
+  id : String
+  source_title : String
+  source_url : String
+  note : String
+}
+
+///| A current-model anatomy relationship backed by one or more evidence references.
+pub struct MovementStructureMapping {
+  structure_id : String
+  role : ParticipationRole
+  evidence_ids : Array[String]
+}
+
+///| Canonical mapping from one movement to existing BodyMate structures.
+pub struct MovementMapping {
+  movement_id : String
+  mappings : Array[MovementStructureMapping]
+}
+
 ///| A deterministic, bounded audit event. It is not analytics.
 pub struct DomainEvent {
   revision : Int
@@ -116,6 +162,7 @@ pub struct DomainEvent {
   result : String
   structure_set_id : String
   member_count : Int
+  movement_id : String
 }
 
 ///| Mutable runtime state; all mutations remain inside MoonBit.
@@ -129,6 +176,7 @@ pub struct DomainState {
   mut highlight_mode : HighlightMode
   mut active_structure_set : StructureSet?
   mut highlighted : Array[HighlightedStructure]
+  mut active_movement : Movement?
   mut revision : Int
   mut events : Array[DomainEvent]
 }

@@ -24,6 +24,17 @@ Does the product have one authoritative, deterministic domain engine for the 14 
 
 Also replay `右边脖子` (still ambiguous) and `右侧胸锁乳突肌` (still an exact single-structure selection).
 
+## Movement evidence replay
+
+1. Query `耸肩涉及哪些肌肉`.
+2. MoonBit resolver v3 returns `MOVEMENT_LOOKUP` and the `shoulder_girdle_elevation` mapping with bundled evidence IDs.
+3. `SHOW_MOVEMENT_MAPPING` derives one existing `StructureSet`; it does not create a renderer-owned movement highlight list.
+4. Snapshot v4 identifies the active movement, the four current-model structures, qualitative participation roles, and the coverage note.
+5. The renderer applies focus/main/contributor presentation tiers to real meshes; Coach C and the right card consume the parsed result.
+6. Click `查看依据` to inspect locally bundled title, URL, and evidence note. The page does not fetch those URLs automatically.
+
+Replay `向右转头涉及哪些结构` for the left SCM/right splenius-capitis coverage, then select any mapped mesh and confirm movement mode clears. Replay `我转头时脖子疼` and confirm the health safety response returns without a state mutation.
+
 ## Required commands
 
 ```text
