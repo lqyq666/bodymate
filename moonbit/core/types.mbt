@@ -21,6 +21,7 @@ pub enum QueryClassification {
   StructureLookup
   StructureSetLookup
   MovementLookup
+  MovementComparison
   DomainCommand
   UnsupportedHealthQuery
   UnknownQuery
@@ -43,6 +44,7 @@ pub enum ActionKind {
   HighlightStructureSet
   ClearStructureSet
   ShowMovementMapping
+  ShowMovementComparison
   UnknownAction
 } derive(Eq)
 
@@ -56,6 +58,13 @@ pub enum MovementGroup {
 pub enum ParticipationRole {
   MainContributor
   Contributor
+} derive(Eq)
+
+///| A comparison bucket preserves directional membership without biological ranking.
+pub enum ComparisonBucket {
+  Overlap
+  OnlyLeft
+  OnlyRight
 } derive(Eq)
 
 ///| Visual emphasis is a domain intent, not a renderer palette.
@@ -151,6 +160,26 @@ pub struct MovementMapping {
   mappings : Array[MovementStructureMapping]
 }
 
+///| One evidence-provenanced structure in a comparison of two existing mappings.
+pub struct ComparedStructure {
+  structure_id : String
+  bucket : ComparisonBucket
+  left_role : ParticipationRole?
+  right_role : ParticipationRole?
+  left_evidence_ids : Array[String]
+  right_evidence_ids : Array[String]
+}
+
+///| Pure, deterministic set comparison of two existing movement mappings.
+pub struct MovementComparison {
+  left_movement_id : String
+  right_movement_id : String
+  overlap : Array[ComparedStructure]
+  only_left : Array[ComparedStructure]
+  only_right : Array[ComparedStructure]
+  union_structure_ids : Array[String]
+}
+
 ///| A deterministic, bounded audit event. It is not analytics.
 pub struct DomainEvent {
   revision : Int
@@ -163,6 +192,11 @@ pub struct DomainEvent {
   structure_set_id : String
   member_count : Int
   movement_id : String
+  comparison_left_id : String
+  comparison_right_id : String
+  overlap_count : Int
+  only_left_count : Int
+  only_right_count : Int
 }
 
 ///| Mutable runtime state; all mutations remain inside MoonBit.
@@ -177,6 +211,7 @@ pub struct DomainState {
   mut active_structure_set : StructureSet?
   mut highlighted : Array[HighlightedStructure]
   mut active_movement : Movement?
+  mut active_comparison : MovementComparison?
   mut revision : Int
   mut events : Array[DomainEvent]
 }

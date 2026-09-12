@@ -74,6 +74,7 @@ fn query_result_wire(result : QueryResult) -> String {
     StructureLookup => "STRUCTURE_LOOKUP"
     StructureSetLookup => "STRUCTURE_SET_LOOKUP"
     MovementLookup => "MOVEMENT_LOOKUP"
+    MovementComparison => "MOVEMENT_COMPARISON"
     DomainCommand => "DOMAIN_COMMAND"
     UnsupportedHealthQuery => "UNSUPPORTED_HEALTH_QUERY"
     UnknownQuery => "UNKNOWN"
@@ -96,7 +97,7 @@ fn query_result_wire(result : QueryResult) -> String {
 }
 
 fn classification_text(classification : QueryClassification) -> String {
-  match classification { StructureLookup => "STRUCTURE_LOOKUP"; StructureSetLookup => "STRUCTURE_SET_LOOKUP"; MovementLookup => "MOVEMENT_LOOKUP"; DomainCommand => "DOMAIN_COMMAND"; UnsupportedHealthQuery => "UNSUPPORTED_HEALTH_QUERY"; UnknownQuery => "UNKNOWN" }
+  match classification { StructureLookup => "STRUCTURE_LOOKUP"; StructureSetLookup => "STRUCTURE_SET_LOOKUP"; MovementLookup => "MOVEMENT_LOOKUP"; MovementComparison => "MOVEMENT_COMPARISON"; DomainCommand => "DOMAIN_COMMAND"; UnsupportedHealthQuery => "UNSUPPORTED_HEALTH_QUERY"; UnknownQuery => "UNKNOWN" }
 }
 
 fn resolution_text(resolution : Resolution) -> String {
@@ -209,6 +210,36 @@ fn mapped_members_wire(mapping : MovementMapping) -> String {
   output
 }
 
+fn comparison_movements_for_query(input : String) -> Array[Movement] {
+  let found : Array[Movement] = []
+  let found_ids : Array[String] = []
+  for movement in movement_catalog {
+    for query_alias in movement.aliases {
+      if input.contains(query_alias.to_lower()) && !found_ids.contains(movement.id) { found.push(movement); found_ids.push(movement.id) }
+    }
+  }
+  found
+}
+
+fn comparison_ids_for_query(input : String) -> Array[String] {
+  for separator in ["和", "与", " and "] {
+    let parts : Array[String] = []
+    for part in input.split(separator) { parts.push(part.trim().to_owned()) }
+    if parts.length() >= 2 {
+      match movement_for_query(parts[0]) {
+        Some(left) => match movement_for_query(parts[1]) { Some(right) => if left.id != right.id { return [left.id, right.id] }; None => () }
+        None => ()
+      }
+    }
+  }
+  let movements = comparison_movements_for_query(input)
+  if movements.length() == 2 { [movements[0].id, movements[1].id] } else { [] }
+}
+
+fn comparison_intent(input : String) -> Bool {
+  input.contains("比较") || input.contains("共同") || input.contains("区别") || input.contains("差异") || input.contains("compare") || input.contains("common") || input.contains("difference")
+}
+
 ///| V3 wire carries either a structure result or a movement mapping without JS inference.
 fn query_result_wire_v3(result : QueryResult, label : String, canonical_name : String, coverage_note : String, members : String) -> String {
   let action = action_for_wire(result)
@@ -223,6 +254,19 @@ fn resolve_query_v3(text : String) -> String {
   match command_for(input) {
     Some(action) => return query_result_wire_v3({ classification: DomainCommand, resolution: Exact, action: Some(action), candidate_ids: [], message_code: if action.kind == IsolateSelected { "isolate" } else { "restore" } }, "", "", "", "")
     None => ()
+  }
+  let comparison_ids = comparison_ids_for_query(input)
+  if comparison_intent(input) && comparison_ids.length() == 2 {
+    match movement_by_id(comparison_ids[0]) {
+      Some(left) => match movement_by_id(comparison_ids[1]) {
+        Some(right) => {
+          let pair = left.id + "," + right.id
+          return query_result_wire_v3({ classification: MovementComparison, resolution: Exact, action: Some({ kind: ShowMovementComparison, structure_id: pair, region: "", confidence: 1.0 }), candidate_ids: [], message_code: "comparison" }, left.display_name_zh + " vs " + right.display_name_zh, "", "当前模型覆盖范围内的比较结果，不代表完整人体肌群。", "")
+        }
+        None => ()
+      }
+      None => ()
+    }
   }
   if valid_movement_catalog() {
     match movement_for_query(input) {

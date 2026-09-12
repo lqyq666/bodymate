@@ -4,7 +4,7 @@ fn record_event(kind : String, action : String, previous_selected : String, resu
     for index = 1; index < state.events.length(); index = index + 1 { retained.push(state.events[index]) }
     state.events = retained
   }
-  state.events.push({ revision: state.revision, kind, action, selected: state.selected, previous_selected, region: state.region, result, structure_set_id: "", member_count: 0, movement_id: "" })
+  state.events.push({ revision: state.revision, kind, action, selected: state.selected, previous_selected, region: state.region, result, structure_set_id: "", member_count: 0, movement_id: "", comparison_left_id: "", comparison_right_id: "", overlap_count: 0, only_left_count: 0, only_right_count: 0 })
 }
 
 fn record_structure_set_event(kind : String, action : String, previous_selected : String, result : String, set_id : String, member_count : Int) -> Unit {
@@ -13,7 +13,7 @@ fn record_structure_set_event(kind : String, action : String, previous_selected 
     for index = 1; index < state.events.length(); index = index + 1 { retained.push(state.events[index]) }
     state.events = retained
   }
-  state.events.push({ revision: state.revision, kind, action, selected: state.selected, previous_selected, region: state.region, result, structure_set_id: set_id, member_count, movement_id: "" })
+  state.events.push({ revision: state.revision, kind, action, selected: state.selected, previous_selected, region: state.region, result, structure_set_id: set_id, member_count, movement_id: "", comparison_left_id: "", comparison_right_id: "", overlap_count: 0, only_left_count: 0, only_right_count: 0 })
 }
 
 fn record_movement_event(kind : String, action : String, previous_selected : String, result : String, movement_id : String, member_count : Int, focus_id : String) -> Unit {
@@ -22,7 +22,12 @@ fn record_movement_event(kind : String, action : String, previous_selected : Str
     for index = 1; index < state.events.length(); index = index + 1 { retained.push(state.events[index]) }
     state.events = retained
   }
-  state.events.push({ revision: state.revision, kind, action, selected: if focus_id == "" { state.selected } else { focus_id }, previous_selected, region: state.region, result, structure_set_id: "", member_count, movement_id })
+  state.events.push({ revision: state.revision, kind, action, selected: if focus_id == "" { state.selected } else { focus_id }, previous_selected, region: state.region, result, structure_set_id: "", member_count, movement_id, comparison_left_id: "", comparison_right_id: "", overlap_count: 0, only_left_count: 0, only_right_count: 0 })
+}
+
+fn record_comparison_event(kind : String, action : String, previous_selected : String, comparison : MovementComparison, focus_id : String) -> Unit {
+  if state.events.length() >= 32 { let retained : Array[DomainEvent] = []; for index = 1; index < state.events.length(); index = index + 1 { retained.push(state.events[index]) }; state.events = retained }
+  state.events.push({ revision: state.revision, kind, action, selected: focus_id, previous_selected, region: state.region, result: "accepted", structure_set_id: "", member_count: comparison.union_structure_ids.length(), movement_id: "", comparison_left_id: comparison.left_movement_id, comparison_right_id: comparison.right_movement_id, overlap_count: comparison.overlap.length(), only_left_count: comparison.only_left.length(), only_right_count: comparison.only_right.length() })
 }
 
 fn event_wire(event : DomainEvent) -> String {

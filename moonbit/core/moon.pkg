@@ -20,6 +20,7 @@ options(
         "bodymate_domain_snapshot_v2",
         "bodymate_domain_snapshot_v3",
         "bodymate_domain_snapshot_v4",
+        "bodymate_domain_snapshot_v5",
         "bodymate_domain_events_v1",
         "bodymate_domain_events_v2",
         "bodymate_domain_evidence_v1",

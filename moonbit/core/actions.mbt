@@ -8,6 +8,7 @@ fn action_text(kind : ActionKind) -> String {
     HighlightStructureSet => "HIGHLIGHT_STRUCTURE_SET"
     ClearStructureSet => "CLEAR_STRUCTURE_SET"
     ShowMovementMapping => "SHOW_MOVEMENT_MAPPING"
+    ShowMovementComparison => "SHOW_MOVEMENT_COMPARISON"
     UnknownAction => "UNKNOWN"
   }
 }
@@ -21,6 +22,7 @@ fn parse_action(value : String) -> ActionKind {
   else if value == "HIGHLIGHT_STRUCTURE_SET" { HighlightStructureSet }
   else if value == "CLEAR_STRUCTURE_SET" { ClearStructureSet }
   else if value == "SHOW_MOVEMENT_MAPPING" { ShowMovementMapping }
+  else if value == "SHOW_MOVEMENT_COMPARISON" { ShowMovementComparison }
   else { UnknownAction }
 }
 
@@ -36,6 +38,7 @@ fn execute_action(action : DomainAction) -> String {
     HighlightStructureSet => highlight_structure_set_internal(action.structure_id, action_text(action.kind))
     ClearStructureSet => clear_structure_set_internal(action_text(action.kind))
     ShowMovementMapping => show_movement_mapping_internal(action.structure_id, action_text(action.kind))
+    ShowMovementComparison => show_movement_comparison_internal(action.structure_id, action_text(action.kind))
     UnknownAction => { record_event("ActionRejected", "UNKNOWN", state.selected, "unknown_action"); fail("unknown_action") }
   }
 }

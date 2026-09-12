@@ -76,6 +76,38 @@ pub fn domain_snapshot_v4() -> String {
   "ok|snapshot-v4|4|\{state.region}|\{state.selected}|\{layer_text(state.layer)}|\{state.isolated}|\{state.overview}|\{state.revision}|\{highlight_mode_text(state.highlight_mode)}|\{set_id}|\{set_label}|\{highlighted}|\{movement_id}|\{movement_label}|\{movement_name}|\{movement_mapping_wire(mapping)}|\{coverage}"
 }
 
+fn compared_structures_wire(comparison : MovementComparison?) -> String {
+  match comparison {
+    None => ""
+    Some(value) => {
+      let output : Array[String] = []
+      for group in [value.overlap, value.only_left, value.only_right] {
+        for item in group {
+          let bucket = match item.bucket { Overlap => "overlap"; OnlyLeft => "only_left"; OnlyRight => "only_right" }
+          let left_role = match item.left_role { Some(role) => participation_role_text(role); None => "" }
+          let right_role = match item.right_role { Some(role) => participation_role_text(role); None => "" }
+          output.push(item.structure_id + "^" + bucket + "^" + left_role + "^" + right_role + "^" + item.left_evidence_ids.join(",") + "^" + item.right_evidence_ids.join(","))
+        }
+      }
+      output.join("~")
+    }
+  }
+}
+
+///| V5 adds a fully provenance-preserving active movement comparison.
+#export_name("bodymate_domain_snapshot_v5")
+pub fn domain_snapshot_v5() -> String {
+  let v4 = domain_snapshot_v4()
+  match state.active_comparison {
+    None => v4.replace_all(old="snapshot-v4|4", new="snapshot-v5|5") + "|||||"
+    Some(comparison) => {
+      let left_label = match movement_by_id(comparison.left_movement_id) { Some(value) => value.display_name_zh; None => "" }
+      let right_label = match movement_by_id(comparison.right_movement_id) { Some(value) => value.display_name_zh; None => "" }
+      v4.replace_all(old="snapshot-v4|4", new="snapshot-v5|5") + "|\{comparison.left_movement_id}|\{left_label}|\{comparison.right_movement_id}|\{right_label}|\{compared_structures_wire(Some(comparison))}"
+    }
+  }
+}
+
 ///| Read-only bounded event representation.
 #export_name("bodymate_domain_events_v1")
 pub fn domain_events_v1() -> String { events_wire() }

@@ -5,7 +5,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 import { NodeIO } from '@gltf-transform/core';
 import { canonicalScmId, entryForPresentationId, legacyPresentationIdForCoreId, rootScmRegistry } from '../src/root-scm/registry.mjs';
-import { focusPlanFromBounds, parseCoreSnapshot, parseDomainSnapshotV3, parseDomainSnapshotV4, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
+import { focusPlanFromBounds, parseCoreSnapshot, parseDomainSnapshotV3, parseDomainSnapshotV4, parseDomainSnapshotV5, registerRootEntries, selectPresentationStructure } from '../src/root-scm/domain-adapter.mjs';
 
 const root = new URL('../', import.meta.url);
 const html = await readFile(new URL('index.html', root), 'utf8');
@@ -67,6 +67,16 @@ test('root domain adapter only accepts an evidence-complete MoonBit v4 movement 
   assert.equal(movement?.movementMappings.filter((item) => item.role === 'main_contributor').length, 2);
   assert.equal(movement?.movementMappings.every((item) => item.evidenceIds.length > 0), true);
   assert.equal(parseDomainSnapshotV4('ok|snapshot-v4|4|neck|bodymate.neck.trapezius.upper.right|muscle|false|false|1|structure_set|set|label|bodymate.neck.trapezius.upper.right^focus^100|movement|label|name|bodymate.neck.unknown^contributor^evidence|note'), null);
+});
+
+test('root domain adapter only accepts a provenance-preserving MoonBit v5 comparison snapshot', () => {
+  const runtime = core(); runtime.bodymate_domain_reset();
+  runtime.bodymate_domain_execute_action_v1('SHOW_MOVEMENT_COMPARISON', 'cervical_flexion,cervical_rotation_right', '');
+  const comparison = parseDomainSnapshotV5(runtime.bodymate_domain_snapshot_v5());
+  assert.equal(comparison?.comparison?.members.filter((item) => item.bucket === 'overlap').length, 1);
+  assert.equal(comparison?.comparison?.members.filter((item) => item.bucket === 'only_left').length, 1);
+  assert.equal(comparison?.comparison?.members.filter((item) => item.bucket === 'only_right').length, 1);
+  assert.equal(comparison?.comparison?.members.find((item) => item.bucket === 'overlap')?.leftEvidenceIds[0], 'ev.neck.rotation-flexion');
 });
 
 test('each Human Atlas muscle selects its canonical ID through MoonBit with one active selection', () => {

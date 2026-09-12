@@ -66,3 +66,17 @@ export function parseDomainSnapshotV4(reply) {
   if (!activeMovementId || !movementLabel || !movementCanonicalName || !coverageNote || !movementMappings.length || highlightMode !== 'structure_set' || !movementMappings.some((item) => item.structureId === selected)) return null;
   return Object.freeze({ region, selected, layer, isolated: isolated === 'true', overview: overview === 'true', revision, highlightMode, highlightSetId, highlightSetLabel, highlighted: Object.freeze(highlighted), activeMovementId, movementLabel, movementCanonicalName, movementMappings: Object.freeze(movementMappings), coverageNote });
 }
+
+export function parseDomainSnapshotV5(reply) {
+  const fields = String(reply).split('|');
+  if (fields.length !== 23 || fields[0] !== 'ok' || fields[1] !== 'snapshot-v5' || fields[2] !== '5') return null;
+  const v4 = parseDomainSnapshotV4(['ok', 'snapshot-v4', '4', ...fields.slice(3, 18)].join('|'));
+  if (!v4) return null;
+  const [, , , , , , , , , , , , , , , , , , leftMovementId, leftMovementLabel, rightMovementId, rightMovementLabel, membersWire] = fields;
+  const members = membersWire ? membersWire.split('~').map((item) => { const [structureId, bucket, leftRole, rightRole, leftEvidenceWire, rightEvidenceWire] = item.split('^'); const evidence = (wire) => wire ? wire.split(',') : []; return entryForPresentationId(structureId) && ['overlap', 'only_left', 'only_right'].includes(bucket) && ['', 'main_contributor', 'contributor'].includes(leftRole) && ['', 'main_contributor', 'contributor'].includes(rightRole) ? Object.freeze({ structureId, bucket, leftRole, rightRole, leftEvidenceIds: Object.freeze(evidence(leftEvidenceWire)), rightEvidenceIds: Object.freeze(evidence(rightEvidenceWire)) }) : null; }) : [];
+  const active = Boolean(leftMovementId || leftMovementLabel || rightMovementId || rightMovementLabel || membersWire);
+  if (members.includes(null) || new Set(members.map((item) => item.structureId)).size !== members.length) return null;
+  if (!active) return Object.freeze({ ...v4, comparison: null });
+  if (!leftMovementId || !leftMovementLabel || !rightMovementId || !rightMovementLabel || !members.length || !members.some((item) => item.structureId === v4.selected)) return null;
+  return Object.freeze({ ...v4, comparison: Object.freeze({ leftMovementId, leftMovementLabel, rightMovementId, rightMovementLabel, members: Object.freeze(members) }) });
+}
