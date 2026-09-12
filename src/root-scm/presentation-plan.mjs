@@ -7,6 +7,12 @@ export const comparisonLeftMaterial = Object.freeze({ color: '#B9DDF3', emissive
 export const comparisonRightMaterial = Object.freeze({ color: '#B8C5E5', emissive: '#27345F', emissiveIntensity: 0.04, opacity: 1, roughness: 0.72, metalness: 0.01 });
 export const contextMaterial = Object.freeze({ color: '#E7EDF1', emissive: '#000000', emissiveIntensity: 0, opacity: 1, roughness: 0.76, metalness: 0.01 });
 
+export function selectedPulsePlan(baseMaterial, timestamp, enabled) {
+  if (!enabled) return Object.freeze({ colorMix: 0, emissiveIntensity: baseMaterial.emissiveIntensity });
+  const wave = .5 + .5 * Math.sin(timestamp / 400);
+  return Object.freeze({ colorMix: .20 + .50 * wave, emissiveIntensity: baseMaterial.emissiveIntensity + .18 + .34 * wave });
+}
+
 export function materialPlanForSnapshot(snapshot, structureId) {
   const selected = snapshot?.selected === structureId && !snapshot?.overview;
   const comparison = snapshot?.comparison?.members?.find((item) => item.structureId === structureId);

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { neckRegistry } from '../anatomy/neck-registry.mjs';
-import { combinedBounds, materialPlanForSnapshot, selectedFocusPlan } from './presentation-plan.mjs';
+import { combinedBounds, materialPlanForSnapshot, selectedFocusPlan, selectedPulsePlan } from './presentation-plan.mjs';
 import { labelAnchorFromBounds, labelCapForViewport, layoutLabelPlans, rankedLabelEntries } from './label-layout.mjs';
 import { createCoachC } from '../coach-c/model.mjs';
 import { coachBubblePlan, coachPlacementPlan, coachPresentationPlan } from '../coach-c/placement.mjs';
@@ -17,11 +17,12 @@ export function mount({ canvas, onPick, onError = () => {} }) {
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .92;
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(32, 1, .001, 10), controls = new OrbitControls(camera, canvas);
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2(), meshes = new Map(), meshBounds = new Map();
+  const selectedPulseAccent = new THREE.Color('#2583F4');
   const cameraGoal = new THREE.Vector3(), targetGoal = new THREE.Vector3();
   const coach = createCoachC(THREE), coachGoal = new THREE.Vector3();
-  let disposed = false, snapshot = null, transitionActive = false, initialized = false, coachInitialized = false, selectedLabelScreen = null, queryFeedback = null;
-  scene.add(new THREE.HemisphereLight(0xf9fcff, 0x9cafc2, 1.7));
-  const key = new THREE.DirectionalLight(0xffffff, 1.65); key.position.set(.8, 1.1, 1.55); scene.add(key);
+  let disposed = false, snapshot = null, transitionActive = false, initialized = false, coachInitialized = false, selectedLabelScreen = null, queryFeedback = null, labelsVisible = true, pulseEnabled = !globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  scene.add(new THREE.HemisphereLight(0xf9fcff, 0x879bae, 1.05));
+  const key = new THREE.DirectionalLight(0xffffff, 2.15); key.position.set(-.8, 1.1, 1.55); scene.add(key);
   const fill = new THREE.DirectionalLight(0xbfdcff, .34); fill.position.set(-1.3, .25, .8); scene.add(fill);
   const rim = new THREE.DirectionalLight(0xe9f4ff, .16); rim.position.set(.1, .8, -1.5); scene.add(rim);
   coach.group.visible = false; scene.add(coach.group);
@@ -53,7 +54,7 @@ export function mount({ canvas, onPick, onError = () => {} }) {
     labelLines.append(line, dot); lineNodes.set(entry.structureId, { line, dot });
   }
 
-  const resize = () => { const box = canvas.getBoundingClientRect(); renderer.setSize(box.width, box.height, false); camera.aspect = box.width / Math.max(box.height, 1); camera.updateProjectionMatrix(); };
+  const resize = () => { const box = canvas.getBoundingClientRect(); if (!box.width || !box.height) return; renderer.setSize(box.width, box.height, false); camera.aspect = box.width / box.height; camera.updateProjectionMatrix(); if (initialized) requestAnimationFrame(() => focusSelected()); };
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
   const currentDirection = () => { const direction = camera.position.clone().sub(controls.target); return direction.lengthSq() > .000001 ? direction.normalize().toArray() : [1, .48, 1]; };
   const useCameraPlan = (plan) => {
@@ -64,15 +65,39 @@ export function mount({ canvas, onPick, onError = () => {} }) {
     if (!initialized || reduced) { controls.target.copy(targetGoal); camera.position.copy(cameraGoal); controls.update(); initialized = true; transitionActive = false; return; }
     transitionActive = true;
   };
-  const focusSelected = () => { const mesh = meshes.get(snapshot?.selected) || meshes.values().next().value; if (!mesh) return; const plan = selectedFocusPlan(meshBounds.get(mesh.userData.structureId), currentDirection()); const group = combinedBounds([...meshBounds.values()]); const contextPlan = group && selectedFocusPlan(group, plan.direction, { context: true }); useCameraPlan({ ...plan, distance: Math.max(plan.distance, (contextPlan?.distance || 0) * .48) }); };
-  const focusContext = () => { const bounds = combinedBounds([...meshBounds.values()]); if (bounds) useCameraPlan(selectedFocusPlan(bounds, currentDirection(), { context: true })); };
+  const defaultCameraDirection = [1, .12, 1.4];
+  // Frame the existing geometry, accounting for both the portrait stage and the camera angle.
+  const frameBounds = (bounds, direction) => {
+    const plan = selectedFocusPlan(bounds, direction, { context: true });
+    const center = new THREE.Vector3(plan.target.x, plan.target.y, plan.target.z);
+    const back = new THREE.Vector3(...direction).normalize(), right = new THREE.Vector3(0, 1, 0).cross(back).normalize(), up = back.clone().cross(right);
+    const tangent = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    let distance = .03;
+    const offset = new THREE.Vector3();
+    for (const mesh of meshes.values()) {
+      if (snapshot?.isolated && mesh.userData.structureId !== snapshot.selected) continue;
+      const vertices = mesh.geometry.getAttribute('position');
+      for (let index = 0; index < vertices.count; index += 1) {
+        offset.fromBufferAttribute(vertices, index).applyMatrix4(mesh.matrixWorld).sub(center);
+        const depth = offset.dot(back);
+        distance = Math.max(distance, depth + Math.abs(offset.dot(right)) / (tangent * camera.aspect * .9), depth + Math.abs(offset.dot(up)) / (tangent * .9));
+      }
+    }
+    return { ...plan, distance };
+  };
+  const focusSelected = (direction = initialized ? currentDirection() : defaultCameraDirection) => { const bounds = snapshot?.isolated ? meshBounds.get(snapshot.selected) : combinedBounds([...meshBounds.values()]); if (bounds) useCameraPlan(frameBounds(bounds, direction)); };
+  const focusContext = (direction = currentDirection()) => { const bounds = combinedBounds([...meshBounds.values()]); if (bounds) useCameraPlan(frameBounds(bounds, direction)); };
+  const resetCamera = () => focusContext(defaultCameraDirection);
   const paint = () => { for (const [id, mesh] of meshes) { const plan = materialPlanForSnapshot(snapshot, id), material = mesh.material; mesh.visible = plan.visible; material.transparent = false; material.opacity = plan.opacity; material.color.set(plan.color); material.emissive.set(plan.emissive); material.emissiveIntensity = plan.emissiveIntensity; material.roughness = plan.roughness; material.metalness = plan.metalness; material.needsUpdate = true; } };
+  const updatePulse = (timestamp) => { const mesh = meshes.get(snapshot?.selected); if (!mesh) return; const plan = materialPlanForSnapshot(snapshot, snapshot.selected); const pulse = selectedPulsePlan(plan, timestamp, pulseEnabled && plan.selected); mesh.material.color.set(plan.color).lerp(selectedPulseAccent, pulse.colorMix); mesh.material.emissiveIntensity = pulse.emissiveIntensity; };
   const updateLabels = () => {
+    if (!labelsVisible) { selectedLabelScreen = null; for (const [id, node] of labelNodes) { node.hidden = true; const lineNodesForId = lineNodes.get(id); lineNodesForId.line.style.display = 'none'; lineNodesForId.dot.style.display = 'none'; } return; }
     const rect = canvas.getBoundingClientRect(); if (!rect.width || !rect.height || !snapshot?.selected) return;
     const visibleEntries = neckRegistry.filter((entry) => meshes.has(entry.structureId) && (!snapshot.isolated || entry.structureId === snapshot.selected)).map((entry) => ({ entry, anchor: labelAnchorFromBounds(meshBounds.get(entry.structureId)) }));
     const highlightedIds = snapshot.highlighted?.map((item) => item.structureId) || [];
     const plans = layoutLabelPlans(rankedLabelEntries(visibleEntries, snapshot.selected, snapshot.isolated ? 1 : labelCapForViewport(rect.width), highlightedIds), { width: rect.width, height: rect.height, project: (anchor) => { const point = new THREE.Vector3(anchor.x, anchor.y, anchor.z).project(camera); return { x: (point.x * .5 + .5) * rect.width, y: (-point.y * .5 + .5) * rect.height, z: point.z }; } });
     const planned = new Map(plans.map((plan) => [plan.entry.structureId, plan]));
+    for (const [id, node] of labelNodes) node.dataset.selected = String(id === snapshot.selected);
     selectedLabelScreen = null;
     for (const [id, node] of labelNodes) { const plan = planned.get(id), lineNodesForId = lineNodes.get(id), highlighted = highlightedIds.includes(id); node.hidden = !plan?.visible; lineNodesForId.line.style.display = plan?.visible ? '' : 'none'; lineNodesForId.dot.style.display = plan?.visible ? '' : 'none'; if (!plan?.visible) continue; node.style.left = `${plan.x}px`; node.style.top = `${plan.y}px`; node.style.zIndex = plan.selected ? '8' : highlighted ? '5' : '3'; node.style.borderColor = plan.selected ? '#83b9f4' : highlighted ? '#b9d7f3' : '#c4d3e2'; node.style.color = plan.selected ? '#236fae' : highlighted ? '#4c83ad' : '#365575'; node.style.boxShadow = plan.selected ? '0 5px 18px #83b9f452' : highlighted ? '0 4px 14px #b9d7f352' : '0 4px 14px #5f789c21'; if (plan.selected) selectedLabelScreen = { x: plan.x, y: plan.y }; const startX = plan.x + (plan.lane === 'left' ? 54 : -54); const stroke = plan.selected ? '#83b9f4' : highlighted ? '#b9d7f3' : '#bdcddd'; lineNodesForId.line.setAttribute('x1', String(startX)); lineNodesForId.line.setAttribute('y1', String(plan.y)); lineNodesForId.line.setAttribute('x2', String(plan.leader.x)); lineNodesForId.line.setAttribute('y2', String(plan.leader.y)); lineNodesForId.line.setAttribute('stroke', stroke); lineNodesForId.line.setAttribute('stroke-width', plan.selected ? '1.4' : highlighted ? '1.2' : '1'); lineNodesForId.dot.setAttribute('cx', String(plan.leader.x)); lineNodesForId.dot.setAttribute('cy', String(plan.leader.y)); lineNodesForId.dot.setAttribute('r', plan.selected ? '2.5' : highlighted ? '2.1' : '1.7'); lineNodesForId.dot.setAttribute('fill', stroke); }
   };
@@ -82,18 +107,36 @@ export function mount({ canvas, onPick, onError = () => {} }) {
     if (!presentation?.visible || !rect.width || !rect.height) { coach.group.visible = false; coachBubble.hidden = true; return; }
     const target = new THREE.Vector3(presentation.target.x, presentation.target.y, presentation.target.z), projected = target.clone().project(camera);
     const plan = coachPlacementPlan({ bounds: meshBounds.get(snapshot.selected), viewport: { width: rect.width, height: rect.height }, projectedCenter: { x: (projected.x * .5 + .5) * rect.width, y: (-projected.y * .5 + .5) * rect.height }, cameraDirection: currentDirection(), cameraRight: new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion).normalize().toArray() });
-    coachGoal.set(plan.position.x, plan.position.y, plan.position.z);
+    const mobile = rect.width <= 480, scale = camera.position.distanceTo(target) * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * (mobile ? .23 : .29);
+    const screenX = plan.side === 'right' ? rect.width - (mobile ? 52 : 74) : (mobile ? 52 : 74);
+    const screenY = rect.height * .76;
+    coachGoal.set(screenX / rect.width * 2 - 1, 1 - screenY / rect.height * 2, projected.z).unproject(camera);
     const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (!coachInitialized || reduced) { coach.group.position.copy(coachGoal); coach.group.scale.setScalar(plan.scale); coachInitialized = true; } else { coach.group.position.lerp(coachGoal, .14); coach.group.scale.lerp(new THREE.Vector3(plan.scale, plan.scale, plan.scale), .14); }
+    if (!coachInitialized || reduced) { coach.group.position.copy(coachGoal); coach.group.scale.setScalar(scale); coachInitialized = true; } else { coach.group.position.lerp(coachGoal, .14); coach.group.scale.lerp(new THREE.Vector3(scale, scale, scale), .14); }
     coach.group.visible = true; coach.update({ cameraPosition: camera.position, target, pointSide: plan.side === 'right' ? -1 : 1 });
-    const coachScreen = coach.group.position.clone().add(new THREE.Vector3(0, plan.scale * .7, 0)).project(camera);
+    const coachScreen = coach.group.position.clone().addScaledVector(new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion), scale * .7).project(camera);
     const bubble = coachBubblePlan({ coachScreen: { x: (coachScreen.x * .5 + .5) * rect.width, y: (-coachScreen.y * .5 + .5) * rect.height }, viewport: { width: rect.width, height: rect.height }, selectedLabelScreen });
     coachBubble.hidden = false; coachBubble.style.left = `${bubble.x}px`; coachBubble.style.top = `${bubble.y}px`; coachBubble.style.width = `${bubble.width}px`; coachBubbleTitle.textContent = queryFeedback?.title || entry.displayNameZh; coachBubbleCopy.textContent = queryFeedback?.message || (rect.width <= 480 ? entry.displayNameZh : `现在看的是${entry.displayNameZh}。`);
   };
-  const applySnapshot = (next) => { const previous = snapshot; if (previous?.selected && previous.selected !== next?.selected) queryFeedback = null; snapshot = next; paint(); if (meshes.size && (!previous?.selected || previous.selected !== next?.selected)) focusSelected(); else if (previous?.isolated && !next?.isolated) focusContext(); };
+  const applySnapshot = (next) => { const previous = snapshot; if (previous?.selected && previous.selected !== next?.selected) queryFeedback = null; snapshot = next; paint(); if (meshes.size && (!previous?.selected || previous.selected !== next?.selected || (!previous?.isolated && next?.isolated))) focusSelected(); else if (previous?.isolated && !next?.isolated) focusContext(); renderThumbnail(); };
   controls.addEventListener('start', () => { transitionActive = false; });
-  const render = () => { if (disposed) return; if (transitionActive) { const speed = .14; controls.target.lerp(targetGoal, speed); camera.position.lerp(cameraGoal, speed); if (controls.target.distanceToSquared(targetGoal) < .0000001 && camera.position.distanceToSquared(cameraGoal) < .0000001) { controls.target.copy(targetGoal); camera.position.copy(cameraGoal); transitionActive = false; } } controls.update(); updateLabels(); updateCoach(); renderer.render(scene, camera); requestAnimationFrame(render); }; requestAnimationFrame(render);
-  canvas.addEventListener('pointerup', (event) => { if (event.movementX || event.movementY || !meshes.size) return; const rect = canvas.getBoundingClientRect(); pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1); raycaster.setFromCamera(pointer, camera); const hit = raycaster.intersectObjects([...meshes.values()], false)[0]; if (hit) onPick(hit.object.userData.structureId); });
-  new GLTFLoader().parse(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '', (gltf) => { gltf.scene.traverse((node) => { if (!node.isMesh) return; const id = node.userData?.structureId || node.name; if (!entriesById.has(id)) return; node.userData.structureId = id; node.material = node.material.clone(); meshes.set(id, node); meshBounds.set(id, plainBounds(new THREE.Box3().setFromObject(node))); }); if (meshes.size !== neckRegistry.length) throw Error('Human Atlas neck nodes missing from generated runtime.'); scene.add(gltf.scene); paint(); focusSelected(); }, onError);
-  return { show() { canvas.hidden = false; }, hide() { canvas.hidden = true; coachBubble.hidden = true; }, applySnapshot, focusSelected, focusContext, setQueryFeedback(feedback) { queryFeedback = feedback?.message ? { title: String(feedback.title || 'Coach C'), message: String(feedback.message) } : null; }, dispose() { disposed = true; observer.disconnect(); labelLayer.remove(); renderer.dispose(); } };
+  const render = (timestamp) => { if (disposed) return; if (transitionActive) { const speed = .14; controls.target.lerp(targetGoal, speed); camera.position.lerp(cameraGoal, speed); if (controls.target.distanceToSquared(targetGoal) < .0000001 && camera.position.distanceToSquared(cameraGoal) < .0000001) { controls.target.copy(targetGoal); camera.position.copy(cameraGoal); transitionActive = false; } } controls.update(); updatePulse(timestamp); updateLabels(); updateCoach(); renderer.render(scene, camera); requestAnimationFrame(render); }; requestAnimationFrame(render);
+  let pointerStart = null;
+  canvas.addEventListener('pointerdown', (event) => { pointerStart = { x: event.clientX, y: event.clientY }; });
+  canvas.addEventListener('pointercancel', () => { pointerStart = null; });
+  canvas.addEventListener('pointerup', (event) => { const start = pointerStart; pointerStart = null; if (!start || Math.hypot(event.clientX - start.x, event.clientY - start.y) > 5 || !meshes.size) return; const rect = canvas.getBoundingClientRect(); pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1); raycaster.setFromCamera(pointer, camera); const hit = raycaster.intersectObjects([...meshes.values()].filter((mesh) => mesh.visible), false)[0]; if (hit) onPick(hit.object.userData.structureId); });
+  // A thumbnail of the same selected mesh, not a stock anatomy illustration.
+  let thumbnailRenderer = null, thumbnailId = null;
+  const thumbnailScene = new THREE.Scene(), thumbnailCamera = new THREE.PerspectiveCamera(32, 65 / 80, .001, 10);
+  const thumbnailLight = new THREE.DirectionalLight(0xffffff, 2); thumbnailLight.position.set(-1, 2, 3); thumbnailScene.add(new THREE.HemisphereLight(0xffffff, 0x9fb9d0, 1.2), thumbnailLight);
+  const renderThumbnail = () => {
+    const mesh = meshes.get(snapshot?.selected), parent = document.querySelector('.current-summary'); if (!mesh || !parent || thumbnailId === snapshot.selected) return;
+    if (!thumbnailRenderer) { const thumbnail = document.createElement('canvas'); thumbnail.id = 'lab-structure-thumb'; thumbnail.setAttribute('aria-label', '当前真实结构缩略图'); parent.append(thumbnail); thumbnailRenderer = new THREE.WebGLRenderer({ canvas: thumbnail, alpha: true, antialias: true }); thumbnailRenderer.setPixelRatio(Math.min(devicePixelRatio, 2)); thumbnailRenderer.setSize(65, 80, false); }
+    const previous = thumbnailScene.getObjectByName('selected-thumbnail'); if (previous) { thumbnailScene.remove(previous); previous.material.dispose(); }
+    const clone = mesh.clone(); clone.name = 'selected-thumbnail'; clone.visible = true; clone.material = mesh.material.clone(); clone.material.color.set('#83B9F4'); thumbnailScene.add(clone);
+    const bounds = meshBounds.get(snapshot.selected), center = labelAnchorFromBounds(bounds), radius = new THREE.Vector3(bounds.max.x - bounds.min.x, bounds.max.y - bounds.min.y, bounds.max.z - bounds.min.z).length() / 2;
+    thumbnailCamera.position.set(center.x, center.y, center.z).addScaledVector(new THREE.Vector3(...defaultCameraDirection).normalize(), radius * 4.6); thumbnailCamera.lookAt(center.x, center.y, center.z); thumbnailRenderer.render(thumbnailScene, thumbnailCamera); thumbnailId = snapshot.selected;
+  };
+  new GLTFLoader().parse(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '', (gltf) => { gltf.scene.traverse((node) => { if (!node.isMesh) return; const id = node.userData?.structureId || node.name; if (!entriesById.has(id)) return; node.userData.structureId = id; node.material = node.material.clone(); meshes.set(id, node); meshBounds.set(id, plainBounds(new THREE.Box3().setFromObject(node))); }); if (meshes.size !== neckRegistry.length) throw Error('Human Atlas neck nodes missing from generated runtime.'); scene.add(gltf.scene); paint(); focusSelected(); renderThumbnail(); }, onError);
+  return { show() { canvas.hidden = false; }, hide() { canvas.hidden = true; coachBubble.hidden = true; }, applySnapshot, focusSelected, focusContext, resetCamera, setPulseEnabled(enabled) { pulseEnabled = Boolean(enabled) && !globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches; paint(); }, setLabelsVisible(visible) { labelsVisible = Boolean(visible); updateLabels(); }, setQueryFeedback(feedback) { queryFeedback = feedback?.message ? { title: String(feedback.title || 'Coach C'), message: String(feedback.message) } : null; }, dispose() { disposed = true; observer.disconnect(); labelLayer.remove(); renderer.dispose(); } };
 }

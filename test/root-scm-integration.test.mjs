@@ -109,6 +109,42 @@ test('Human Atlas pick bridge forwards the picked canonical mesh ID to MoonBit',
   assert.deepEqual(selected, humanAtlasManifest.entries.map((entry) => entry.structureId));
 });
 
+test('Stage 5B routes real-viewer controls and blocks unsupported navigator regions', async () => {
+  const adapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
+  const runtimeSource = await readFile(new URL('src/root-scm/runtime-entry.mjs', root), 'utf8');
+  const selectors = ['#detail-view', '#detail-canvas', '.current-summary', '#label-lines', '#anatomy-labels', '#coach-bubble', '.detail-instruction', '.fiber-note', '.data-tag', '#selection-meta', '#selection-name'];
+  const nodes = new Map(selectors.map((selector) => [selector, node()]));
+  const calls = [];
+  const context = vm.createContext({
+    document: { querySelector: (selector) => nodes.get(selector) ?? null, createElement: () => node() },
+    location: { search: '' }, URLSearchParams,
+    console: { error() {} },
+    BodyMateAnatomyRegistry: [{ structureId: canonicalScmId, displayNameZh: '右侧胸锁乳突肌', canonicalName: 'right sternocleidomastoid', uiGroup: 'neck', side: 'right', sourceProvider: 'Human Atlas / BodyParts3D 4.0' }],
+    __bodymate: { state: { selected: canonicalScmId, whole: false } },
+    BodyMateRootScmRuntime: { mount: () => ({ show() {}, applySnapshot() {}, resetCamera() { calls.push('reset'); }, setPulseEnabled(value) { calls.push(['pulse', value]); }, setLabelsVisible(value) { calls.push(['labels', value]); } }) },
+  });
+  context.globalThis = context;
+  new vm.Script(adapter).runInContext(context);
+  context.__rootScmResetView();
+  context.__rootScmSetPulseEnabled(true);
+  context.__rootScmSetLabelsVisible(false);
+  assert.deepEqual(calls, ['reset', ['pulse', true], ['labels', false]]);
+
+  assert.match(html, /const SUPPORTED_NAVIGATION_REGIONS=new Set\(ROOT_ANATOMY_REGISTRY\.map\(entry=>entry\.region\)\)/);
+  assert.match(html, /function gotoRegion\(reg,id=null,layer=null\)\{if\(!REGIONS\[reg\]\)return false;if\(!SUPPORTED_NAVIGATION_REGIONS\.has\(reg\)\)\{toast\(/);
+  assert.match(html, /for\(const key of SUPPORTED_NAVIGATION_REGIONS\)/);
+  assert.match(html, /globalThis\.__rootScmSetLabelsVisible\?\.\(state\.labels/);
+  assert.match(html, /globalThis\.__rootScmSetPulseEnabled\?\.\(state\.pulse/);
+  assert.match(html, /globalThis\.__rootScmResetView\?\.\(\)/);
+  assert.match(runtimeSource, /const resetCamera = \(\) => focusContext\(defaultCameraDirection\)/);
+  assert.match(runtimeSource, /const updatePulse = \(timestamp\) =>/);
+  assert.match(runtimeSource, /pulseEnabled && plan\.selected/);
+  assert.match(runtimeSource, /if \(!labelsVisible\) \{ selectedLabelScreen = null;/);
+  assert.match(runtimeSource, /setPulseEnabled\(enabled\) \{ pulseEnabled = Boolean\(enabled\)/);
+  assert.match(runtimeSource, /setLabelsVisible\(visible\) \{ labelsVisible = Boolean\(visible\); updateLabels\(\); \}/);
+  assert.match(html, /卧推动作演示已就绪 · 本地预制动画/);
+});
+
 test('root legacy rendering comparisons resolve through the canonical ID adapter', () => {
   const controller = html;
   assert.match(controller, /coreIdFor\(m\.id\)===state\.selected/);

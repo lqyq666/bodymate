@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { NodeIO } from '@gltf-transform/core';
 import { neckRegistry } from '../src/anatomy/neck-registry.mjs';
-import { FROZEN_HUMAN_ATLAS_NECK_SHA, combinedBounds, materialPlanForSnapshot, selectedFocusPlan } from '../src/root-scm/presentation-plan.mjs';
+import { FROZEN_HUMAN_ATLAS_NECK_SHA, combinedBounds, materialPlanForSnapshot, selectedFocusPlan, selectedMaterial, selectedPulsePlan } from '../src/root-scm/presentation-plan.mjs';
 import { labelCapForViewport, labelAnchorFromBounds, layoutLabelPlans, rankedLabelEntries } from '../src/root-scm/label-layout.mjs';
 
 const root = new URL('../', import.meta.url);
@@ -45,6 +45,16 @@ test('material plans keep real anatomy context opaque with MoonBit-derived multi
   const comparison = materialPlanForSnapshot({ selected, isolated: false, overview: false, comparison: { members: [{ structureId: neckRegistry[1].structureId, bucket: 'only_right' }] } }, neckRegistry[1].structureId);
   assert.equal(comparison.comparisonBucket, 'only_right');
   assert.equal(comparison.color, '#B8C5E5');
+});
+
+test('selected pulse has a user-visible color and brightness range while the idle state remains exact', () => {
+  const idle = selectedPulsePlan(selectedMaterial, 0, false);
+  const dim = selectedPulsePlan(selectedMaterial, -Math.PI * 200, true);
+  const bright = selectedPulsePlan(selectedMaterial, Math.PI * 200, true);
+  assert.equal(idle.colorMix, 0);
+  assert.equal(idle.emissiveIntensity, selectedMaterial.emissiveIntensity);
+  assert.ok(bright.colorMix - dim.colorMix >= .35);
+  assert.ok(bright.emissiveIntensity - dim.emissiveIntensity >= .25);
 });
 
 test('focus retains the supplied viewing direction and restore framing comes from real combined bounds', () => {

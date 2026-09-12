@@ -1,0 +1,68 @@
+.full-muscle-demo-active .workspace{grid-template-columns:minmax(0,1fr) 320px!important;grid-template-rows:1fr!important;height:calc(100dvh - 160px);min-height:560px;max-height:1000px;gap:20px}
+.full-muscle-demo-active .detail-panel{grid-column:1!important;grid-row:1!important;min-height:0;height:100%;border-radius:16px;overflow:hidden;background:#f2f6fa}
+.full-muscle-demo-active .sidebar{grid-column:2!important;grid-row:1!important;min-height:0;overflow:visible}
+.full-muscle-demo-active .rail,.full-muscle-demo-active .navigator,.full-muscle-demo-active .progress-mini,.full-muscle-demo-active .current-summary,.full-muscle-demo-active #isolate,.full-muscle-demo-active #nearby,.full-muscle-demo-active .card-space,.full-muscle-demo-active .detail-bottom,.full-muscle-demo-active #detail-canvas,.full-muscle-demo-active #root-scm-canvas,.full-muscle-demo-active #exercise-canvas,.full-muscle-demo-active .exercise-hud,.full-muscle-demo-active #exercise-muscles,.full-muscle-demo-active #exercise-answer,.full-muscle-demo-active #label-lines,.full-muscle-demo-active #anatomy-labels,.full-muscle-demo-active #coach-bubble,.full-muscle-demo-active .detail-instruction,.full-muscle-demo-active .fiber-note,.full-muscle-demo-active .composer-bottom,.full-muscle-demo-active .model-badge,.full-muscle-demo-active .detail-heading .eyebrow,.full-muscle-demo-active .header-note,.full-muscle-demo-active .version,.full-muscle-demo-active .real-neck-labels{display:none!important}
+.full-muscle-demo-active .detail-heading{height:60px;padding:20px 22px 0;flex-shrink:0}
+.full-muscle-demo-active .detail-heading h2{margin:0;font-size:21px;color:#233d53}
+.full-muscle-demo-active .detail-view{min-height:0;flex:1}
+.full-muscle-demo-active .current-card{height:100%;min-height:0;padding:22px 18px;justify-content:flex-end;border-radius:16px}
+.full-muscle-demo-active .composer{margin-top:auto;border:0;padding-top:0}
+.full-muscle-demo-active .chat-context{font-size:12px;color:#526b80}
+.full-muscle-demo-active #chat-input{font-size:14px;line-height:1.6;min-height:80px;color:#20394c}
+.full-muscle-demo-active #chat-input::placeholder{color:#536a7b}
+.full-muscle-demo-active #chat-form{border-radius:10px}
+.full-muscle-demo-active #full-muscle-canvas{position:absolute;left:0;right:0;top:48px;bottom:108px;width:100%;height:calc(100% - 156px);z-index:3;touch-action:none}
+.full-muscle-demo-active .full-muscle-answer{margin:0 0 25px;color:#415c71;font:400 13px/1.8 system-ui,sans-serif}
+.full-muscle-demo-active .full-muscle-answer strong{display:block;color:#243e54;font-size:17px;font-weight:650;line-height:1.5;overflow-wrap:anywhere}
+.full-muscle-demo-active .full-muscle-answer p{margin:10px 0 0}
+.anatomy-toolbar{position:absolute;z-index:4;inset:5px 18px auto;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.anatomy-toolbar button,.anatomy-playback button,.anatomy-examples button{border:1px solid #c8d6e2;background:#f9fcff;color:#355269;border-radius:8px;font:500 12px/1 system-ui,sans-serif;min-height:36px;padding:9px 12px;cursor:pointer}
+.anatomy-toolbar button:hover,.anatomy-playback button:hover,.anatomy-examples button:hover{background:#e7f0f8}
+.anatomy-toolbar button:focus-visible,.anatomy-playback button:focus-visible,.anatomy-examples button:focus-visible,.anatomy-transport input:focus-visible,.anatomy-transport select:focus-visible{outline:2px solid #2e79b6;outline-offset:3px}
+.anatomy-toolbar button:disabled,.anatomy-examples button:disabled{opacity:.5;cursor:wait}
+.anatomy-views{display:flex;gap:4px}
+.anatomy-views [aria-pressed=true]{color:#fff;background:#355b79;border-color:#355b79}
+.anatomy-views [aria-pressed=true]:hover{background:#284a65}
+.anatomy-playback{position:absolute;z-index:4;bottom:14px;left:18px;right:18px;padding:12px 15px;border-radius:12px;background:#f9fcffed;border:1px solid #cfdae4;color:#355269}
+.anatomy-playback[hidden]{display:none}
+.anatomy-motion-line,.anatomy-transport{display:flex;align-items:center;gap:12px}
+.anatomy-motion-line{margin-bottom:10px;font-size:12px}
+.anatomy-motion-line strong{font-size:14px;color:#263f52}
+#anatomy-motion-phase{flex:1;color:#52687a}
+#anatomy-pulse{min-height:28px;font-size:11px;padding:6px 9px}
+#anatomy-pulse[aria-pressed=true]{color:#9c292e;background:#ffeded;border-color:#eeb5b7}
+.anatomy-transport input{min-width:30px;flex:1;accent-color:#a74147;cursor:pointer}
+.anatomy-transport label{font-size:12px;white-space:nowrap}
+.anatomy-transport select{border:0;color:#355269;background:#eaf1f7;padding:6px;border-radius:5px;font:inherit}
+.anatomy-examples{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}
+.anatomy-examples>span{width:100%;font-size:11px;color:#536d82;margin-bottom:2px}
+.anatomy-loading{position:absolute;inset:0;z-index:4;display:grid;place-items:center;background:#f2f6fa;color:#415c71;font-size:14px}
+.full-muscle-demo-active .detail-panel{overflow:clip}
+.full-muscle-demo-active .ambient-line{display:none}
+.full-muscle-demo-active .current-card{overflow:hidden;justify-content:flex-start}
+.full-muscle-demo-active .composer{display:flex;flex-direction:column;flex:1;min-height:0;margin-top:0}
+.anatomy-chat-content{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-right:4px}
+.full-muscle-demo-active #chat-form{flex-shrink:0}
+.anatomy-adjustments{margin:0 0 18px;color:#355269;font:400 12px/1.6 system-ui,sans-serif;border-top:1px solid #c8d6e2;padding-top:10px}
+.anatomy-adjustments[hidden]{display:none}
+.anatomy-adjustments summary{cursor:pointer;padding:8px 0;font-size:14px;font-weight:600}
+.anatomy-adjustments summary span{display:block;font-size:11px;font-weight:400;color:#526b80;margin-left:17px}
+.anatomy-adjustments summary:focus-visible,.anatomy-adjustments button:focus-visible,.anatomy-adjustments input:focus-visible{outline:2px solid #2e79b6;outline-offset:3px}
+.anatomy-presets{display:flex;gap:6px;margin:10px 0}
+.anatomy-presets button{flex:1;min-height:36px;border:1px solid #c8d6e2;border-radius:8px;background:#f9fcff;color:#355269;font:500 12px system-ui,sans-serif;cursor:pointer}
+.anatomy-presets button:hover{background:#e7f0f8}
+.anatomy-presets button[aria-pressed=true]{background:#355b79;color:#fff;border-color:#355b79}
+.anatomy-parameter{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 8px;margin:9px 0}
+.anatomy-parameter output{font-variant-numeric:tabular-nums;color:#243e54}
+.anatomy-parameter input{grid-column:1/-1;width:100%;margin:0;height:30px;accent-color:#355b79;cursor:pointer}
+.anatomy-parameter-help,.anatomy-muscle-note{font-size:11px;line-height:1.7;color:#526b80;margin:10px 0}
+.anatomy-parameter-notice{color:#884b14;font-size:12px}
+.anatomy-parameter-notice:empty{display:none}
+.anatomy-muscle-legend{display:flex;flex-wrap:wrap;gap:8px 12px;font-size:10px;color:#526b80}
+.anatomy-muscle-legend span:before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#cf454e;margin-right:4px}
+.anatomy-muscle-legend span:nth-child(2):before{background:#bc7a83}
+.anatomy-muscle-legend span:nth-child(3):before{background:#ab98a5}
+@media(max-width:1050px){.full-muscle-demo-active .workspace{grid-template-columns:1fr!important;grid-template-rows:620px auto!important;height:auto;min-height:0}.full-muscle-demo-active .sidebar{grid-column:1!important;grid-row:2!important}.full-muscle-demo-active .current-card{padding:20px}.full-muscle-demo-active .full-muscle-answer{margin-bottom:16px}.full-muscle-demo-active .composer{width:100%}.full-muscle-demo-active #chat-input{min-height:60px}}
+@media(max-width:560px){.full-muscle-demo-active .workspace{grid-template-rows:510px auto!important;gap:10px}.full-muscle-demo-active .detail-heading{height:54px;padding:17px 15px 0}.full-muscle-demo-active .detail-heading h2{font-size:18px}.anatomy-toolbar{left:12px;right:12px}.anatomy-toolbar button{padding:9px;min-height:38px}.anatomy-playback{left:10px;right:10px;bottom:10px;padding:10px}.anatomy-motion-line,.anatomy-transport{gap:8px}.full-muscle-demo-active .current-card{padding:17px}.full-muscle-demo-active #chat-input{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.full-muscle-demo-active *{scroll-behavior:auto}}
+@media(max-width:1050px){.full-muscle-demo-active .workspace{max-height:none}.anatomy-chat-content{flex:none;overflow:visible}.full-muscle-demo-active .composer{flex:none;min-height:auto}}
