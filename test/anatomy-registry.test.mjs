@@ -1,21 +1,22 @@
 import assert from 'node:assert/strict';
-import { execFile } from 'node:child_process';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
-import { promisify } from 'node:util';
 import vm from 'node:vm';
 import { NodeIO } from '@gltf-transform/core';
 import { filterNeckRegistry, neckRegistry } from '../src/anatomy/neck-registry.mjs';
-import { buildHumanAtlasNeck } from '../scripts/build-human-atlas-neck.mjs';
+import { verifySourceIdentity } from '../scripts/build-human-atlas-neck.mjs';
 import { fetchVerifiedHumanAtlasSource } from '../scripts/human-atlas-source.mjs';
 
 const root = new URL('../', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('assets/anatomy/human-atlas/manifest.json', root), 'utf8'));
 const glb = await readFile(new URL('assets/anatomy/human-atlas/neck-muscles.glb', root));
 const generatedRuntime = await readFile(new URL('assets/runtime/anatomy-registry.js', root), 'utf8');
+const moonbitProjection = JSON.parse(await readFile(new URL('generated/anatomy-registry.json', root), 'utf8'));
+const registryModuleSource = await readFile(new URL('src/anatomy/neck-registry.mjs', root), 'utf8');
 const html = await readFile(new URL('index.html', root), 'utf8');
 const rootAdapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
-const execFileAsync = promisify(execFile);
 
 test('canonical neck registry has fourteen unique Human Atlas neck and shoulder structures with complete source identity', () => {
   assert.equal(neckRegistry.length, 14);
@@ -32,14 +33,19 @@ test('canonical neck registry has fourteen unique Human Atlas neck and shoulder 
   }
 });
 
-test('pinned Human Atlas discovery CLI reports source identities without inventing mappings', async () => {
-  const { stdout } = await execFileAsync(process.execPath, ['scripts/list-human-atlas-structures.mjs', 'scalenus'], { cwd: new URL('..', import.meta.url) });
-  const candidates = JSON.parse(stdout);
-  assert.deepEqual(candidates.map((entry) => entry.id), ['FJ1570', 'FJ1571', 'FJ1572', 'FJ1592', 'FJ1593', 'FJ1594']);
+test('the JavaScript registry is a generated projection of the MoonBit canonical registry', () => {
+  assert.deepEqual(moonbitProjection, neckRegistry);
+  assert.match(registryModuleSource, /GENERATED from MoonBit bodymate_domain_registry_v1/);
+  assert.match(registryModuleSource, /const entries = Object\.freeze\(/);
+});
+
+test('canonical scalene entries retain all pinned source identities without an anatomy download', () => {
+  const candidates = neckRegistry.filter((entry) => entry.canonicalName.includes('scalenus'));
+  assert.deepEqual(candidates.map((entry) => entry.sourceMeshId).sort(), ['FJ1570', 'FJ1571', 'FJ1572', 'FJ1592', 'FJ1593', 'FJ1594']);
   for (const candidate of candidates) {
-    assert.match(candidate.name, /scalenus/i);
-    assert.match(candidate.chunk, /^body-[45]\.bin$/);
-    assert.match(candidate.conceptId, /^FMA\d+$/);
+    assert.match(candidate.canonicalName, /scalenus/i);
+    assert.match(candidate.sourceChunk, /^body-[45]\.bin$/);
+    assert.match(candidate.sourceConceptId, /^FMA\d+$/);
   }
 });
 
@@ -58,15 +64,18 @@ test('Human Atlas manifest and GLB are a complete projection of the canonical ne
 });
 
 test('Human Atlas builder rejects source identity drift before producing a registry projection', async () => {
-  const source = await fetchVerifiedHumanAtlasSource();
-  const atlas = JSON.parse(Buffer.from(source['atlas.json']).toString('utf8'));
+  const atlas = { parts: neckRegistry.map((entry) => ({ id: entry.sourceMeshId, chunk: entry.sourceChunk.slice(5, -4), conceptId: entry.sourceConceptId })) };
   atlas.parts.find((part) => part.id === 'FJ1595').conceptId = 'FMA0';
-  await assert.rejects(buildHumanAtlasNeck({ source: { ...source, 'atlas.json': Buffer.from(JSON.stringify(atlas)) } }), /source identity drift for FJ1595/);
+  assert.throws(() => verifySourceIdentity(atlas), /source identity drift for FJ1595/);
 });
 
-test('Human Atlas deterministic rebuild reproduces the committed GLB hash', async () => {
-  const { stdout } = await execFileAsync(process.execPath, ['scripts/rebuild-human-atlas-neck.mjs'], { cwd: new URL('..', import.meta.url) });
-  assert.match(stdout, new RegExp(manifest.outputSha256));
+test('normal CI refuses to fetch uncached anatomy sources', async () => {
+  const cacheDir = await mkdtemp(join(tmpdir(), 'bodymate-human-atlas-no-network-'));
+  try {
+    await assert.rejects(fetchVerifiedHumanAtlasSource({ cacheDir }), /BODYMATE_ALLOW_NETWORK=1/);
+  } finally {
+    await rm(cacheDir, { recursive: true, force: true });
+  }
 });
 
 test('generated browser registry is an offline projection of the canonical neck registry', () => {

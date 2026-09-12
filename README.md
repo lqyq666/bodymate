@@ -1,31 +1,32 @@
 # BodyMate
 
-BodyMate is an offline, interactive anatomy-exploration whitebox. It keeps the full-body navigator, the focused local view, and the current action separate so users can inspect a structure without losing context.
+BodyMate is an offline interactive anatomy explorer. It keeps a whole-body navigator, a focused local anatomy view, and a contextual learning panel synchronized around one current structure.
 
-## Open the demo offline
+The current production package contains 14 independently named, mapped Human Atlas / BodyParts3D neck and shoulder muscle meshes. Each mesh keeps a BodyMate stable ID and pinned source identity. Attribution and asset provenance live in `docs/HUMAN_ATLAS_NECK_ASSET.md` and the asset manifest.
 
-This is a dependency-free static page. Open `index.html` directly in a modern Chromium browser with WebGL enabled, or serve the folder with any static HTTP server. The shipped page has no external runtime scripts, API calls, accounts, or required network connection.
+## Run it
+
+Open `index.html` in a modern Chromium browser with WebGL enabled, or serve this folder using any static server. The shipped experience works offline: no runtime CDN, remote API, account, database, or required network request is used.
+
+## Domain model
+
+MoonBit is the authoritative interaction engine for the canonical registry, selected structure, region, layer, isolate/restore/overview state, revision, approved actions, deterministic Coach C query resolution, and bounded event history. The browser receives validated snapshots and renders them; Three.js remains responsible only for real-model loading, picking, materials, and camera behavior.
+
+```text
+mesh click or local query -> stable BodyMate ID -> MoonBit action -> validated snapshot -> renderer
+```
+
+The five permitted domain actions are `FIND_STRUCTURE`, `SELECT_STRUCTURE`, `ISOLATE_SELECTED`, `RESTORE_CONTEXT`, and `SHOW_REGION`. The local query feature is deterministic and intentionally does not provide medical diagnosis or treatment advice. Remote AI is paused.
 
 ## Develop and verify
 
-The interaction state core is written in MoonBit and compiled to a local JavaScript IIFE embedded between the `MOONBIT_CORE_START` and `MOONBIT_CORE_END` markers in `index.html`.
+- Verified MoonBit: `moon 0.1.20260904`.
+- `npm run build` compiles MoonBit and regenerates every committed browser/runtime registry artifact.
+- `npm run moonbit:stats` reports the current MoonBit engine size and test count. The pre-expansion baseline is in `docs/MOONBIT_ENGINE_BASELINE.md`.
+- `npm run check` runs MoonBit tests, Node/browser-contract tests, GLB/provenance guards, and generated-artifact consistency checks.
 
-- Verified toolchain: `moon 0.1.20260904` (Windows tested). Set `MOON` to an explicit executable path when needed; otherwise the scripts use the platform MoonBit install and then PATH.
-- `npm run build` compiles `moonbit/core` and replaces exactly one generated IIFE block in `index.html`.
-- `npm run verify` runs MoonBit checks/tests plus Node contract and embedded-IIFE tests.
-- `npm run check` additionally proves the committed generated block matches a fresh MoonBit compilation. It does not silently refresh it; run `npm run build` and commit the result when source changes.
+For a focused architecture and review path, see `docs/MOONBIT_ARCHITECTURE.md` and `docs/MOONBIT_REVIEW_GUIDE.md`.
 
-The `label` field is intentionally retained in the core registration model for future read-only structure queries. MoonBit currently reports it as unused; this does not affect compilation or runtime behavior.
+## Scope boundaries
 
-## Current scope
-
-- Full-body navigation is independent from the focused detail camera.
-- Selecting a region, mesh, label, or nearby item synchronizes one current structure.
-- Isolation, nearby-structure visibility, labels, pulse, the coach bubble, session-only history, and example weekly progress are local demonstrations.
-- Geometry, fibers, fascia, and body contours are procedural placeholders, not verified anatomical assets or medical advice.
-
-The project intentionally does not include accounts, real training records, medical/rehabilitation recommendations, a real AI connection, or production anatomical assets.
-
-## Verification target
-
-Desktop: 1440 × 900. Mobile: 390 × 844. Respect keyboard focus and `prefers-reduced-motion`.
+BodyMate is an educational exploration prototype, not a medical device. It does not include diagnosis, rehabilitation guidance, accounts, training records, a remote AI system, or a backend. The real anatomy asset is limited to the documented 14-structure neck package; this work does not add whole-body anatomy or alter the target UI direction.

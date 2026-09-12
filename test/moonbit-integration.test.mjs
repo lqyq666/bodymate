@@ -37,3 +37,20 @@ test('embedded MoonBit IIFE exports and executes the interaction contract', () =
   assert.equal(core.bodymate_core_select_structure('missing'), 'error|unknown_structure');
   assert.equal(core.bodymate_core_snapshot(), 'ok|chest|pec_r|muscle|false|false|5');
 });
+
+test('MoonBit owns the canonical neck registry, resolver, action transitions, and bounded event wire', () => {
+  const core = loadCore();
+  for (const name of ['bodymate_domain_registry_v1', 'bodymate_domain_reset', 'bodymate_domain_snapshot_v2', 'bodymate_domain_events_v1', 'bodymate_domain_resolve_query_v1', 'bodymate_domain_execute_action_v1']) {
+    assert.equal(typeof core[name], 'function', `missing ${name}`);
+  }
+  assert.match(core.bodymate_domain_reset(), /^ok\|/);
+  const registry = core.bodymate_domain_registry_v1();
+  assert.equal(registry.slice('ok|registry-v1|'.length).split('~').length, 14);
+  const exact = core.bodymate_domain_resolve_query_v1('right sternocleidomastoid');
+  assert.match(exact, /^ok\|query-v1\|STRUCTURE_LOOKUP\|EXACT\|SELECT_STRUCTURE\|bodymate\.neck\.sternocleidomastoid\.right\|/);
+  assert.match(core.bodymate_domain_execute_action_v1('SELECT_STRUCTURE', 'bodymate.neck.sternocleidomastoid.right', ''), /^ok\|neck\|bodymate\.neck\.sternocleidomastoid\.right\|/);
+  assert.match(core.bodymate_domain_execute_action_v1('ISOLATE_SELECTED', '', ''), /\|true\|false\|/);
+  const snapshot = core.bodymate_domain_snapshot_v2();
+  assert.match(snapshot, /^ok\|snapshot-v2\|2\|neck\|bodymate\.neck\.sternocleidomastoid\.right\|muscle\|true\|false\|/);
+  assert.match(core.bodymate_domain_events_v1(), /^ok\|events-v1\|/);
+});
