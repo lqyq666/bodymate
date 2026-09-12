@@ -27,7 +27,7 @@ test('authored complete-body facts and playback authority are absent from JavaSc
     readFile(new URL('../src/full-muscle/runtime-entry.mjs', import.meta.url), 'utf8'),
   ]);
   assert.doesNotMatch(parameters, /handWidth.*min|窄距.*handWidth|pubmed\.ncbi/);
-  assert.doesNotMatch(rig, /export const motionDefinitions\s*=\s*Object\.freeze\(\[|title:\s*'俯卧撑'|aliases:\s*\['俯卧撑'/);
+  assert.doesNotMatch(rig, /export const motionDefinitions\s*=\s*Object\.freeze\(\[|title:\s*'俯卧撑'|aliases:\s*\['俯卧撑'|standingHeight|root\.z -=|wrist = id ===/);
   assert.doesNotMatch(runtime, /let paused\s*=|let speed\s*=|mixer\?\.update\(delta\)/);
   assert.match(runtime, /motionSession\.tick\(delta\)/);
 });

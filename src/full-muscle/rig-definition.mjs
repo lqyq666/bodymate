@@ -147,22 +147,7 @@ export function sampleMotion(id, phase, input = {}) {
   const intent = poseIntent(id, phase, parameters);
   const depth = intent.depth;
   const world = new Map(), local = new Map();
-  let root = restPoint('pelvis'), torso = new Quaternion();
-  if (id === 'push_up') {
-    torso = rotationX(1.31 + .20 * depth);
-    // The real distal toe vertices need 7 mm more clearance than the ankle-only
-    // contact check. A slightly lower top pose keeps the widest arms reachable.
-    const footAnchor = new Vector3(0, .171, -.025);
-    root = restPoint('pelvis').sub(new Vector3(0, .082, -.025)).applyQuaternion(torso).add(footAnchor);
-  } else if (id === 'squat') {
-    const excursion = intent.excursion;
-    const span = bodyMetrics.hipWidth * parameters.stanceWidth / 2;
-    const length = restPoint('leftThigh').distanceTo(restPoint('leftShin')) + restPoint('leftShin').distanceTo(restPoint('leftFoot')) - .008;
-    // Widening a stance lowers the pelvis even at the top; never stretch the legs.
-    const standingHeight = .104 + Math.sqrt(length * length - (span - .057) ** 2 - .003 ** 2);
-    root.y = standingHeight - .30 * excursion;
-    root.z -= .17 * excursion; torso = rotationX(.32 * excursion);
-  }
+  const root = new Vector3(0, intent.rootY, intent.rootZ), torso = rotationX(intent.torsoX);
   const put = (name, quaternion) => world.set(name, quaternion.clone());
   for (const name of ['pelvis', 'spine', 'chest', 'neck', 'head']) put(name, torso);
   const bodyPoint = (name) => restPoint(name).sub(restPoint('pelvis')).applyQuaternion(torso).add(root);
@@ -173,9 +158,8 @@ export function sampleMotion(id, phase, input = {}) {
     const shoulder = bodyPoint(upper);
     const a = restPoint(fore).distanceTo(restPoint(upper)), b = restPoint(hand).distanceTo(restPoint(fore));
     if (id === 'push_up' || id === 'squat') {
-      const wrist = id === 'push_up' ? new Vector3(sign * bodyMetrics.shoulderWidth * parameters.handWidth / 2, .031, 1.285)
-        : new Vector3(sign * .255, root.y + .28 + .04 * depth, .38 + .07 * depth);
-      const solved = id === 'push_up' ? solvePushUpArm(shoulder, wrist, a, b, torso, sign, parameters.elbowAngle)
+      const wrist = new Vector3(sign * intent.wristX, intent.wristY, intent.wristZ);
+      const solved = id === 'push_up' ? solvePushUpArm(shoulder, wrist, a, b, torso, sign, intent.elbowAngle)
         : solveTwoBone(shoulder, wrist, a, b, shoulder.clone().add(new Vector3(sign * .12, -.5, .15)));
       put(upper, aim(upper, fore, shoulder, solved.joint));
       put(fore, id === 'push_up'
@@ -185,14 +169,14 @@ export function sampleMotion(id, phase, input = {}) {
         ? orientWithPalmarNormal(new Vector3(sign * .024, -.149, .093), new Vector3(0, 0, 1), new Vector3(0, -1, 0))
         : world.get(fore));
     } else {
-      put(upper, rotationX(-.07));
-      put(fore, rotationX(-.07 - 2.05 * depth));
+      put(upper, rotationX(intent.upperArmX));
+      put(fore, rotationX(intent.forearmX));
       put(hand, world.get(fore));
     }
     const thigh = `${side}Thigh`, shin = `${side}Shin`, foot = `${side}Foot`;
     if (id === 'squat') {
-      const hip = bodyPoint(thigh), ankle = restPoint(foot); ankle.x = sign * bodyMetrics.hipWidth * parameters.stanceWidth / 2;
-      const yaw = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), sign * parameters.toeAngle * Math.PI / 180);
+      const hip = bodyPoint(thigh), ankle = restPoint(foot); ankle.x = sign * intent.ankleX;
+      const yaw = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), sign * intent.toeAngle * Math.PI / 180);
       const kneePole = ankle.clone().add(new Vector3(0, .4, .6).applyQuaternion(yaw));
       const solved = solveTwoBone(hip, ankle, restPoint(shin).distanceTo(restPoint(thigh)), restPoint(foot).distanceTo(restPoint(shin)), kneePole);
       put(thigh, aim(thigh, shin, hip, solved.joint)); put(shin, aim(shin, foot, solved.joint, solved.end)); put(foot, yaw);
