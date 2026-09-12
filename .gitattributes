@@ -1,6 +1,7 @@
 # Builders emit LF. Keep checkout bytes stable so build/check leave a clean tree.
 * text=auto eol=lf
 *.glb binary
+assets/runtime/moonbit-core.js linguist-generated=true
 *.bin binary
 generated/** linguist-generated=true
 src/anatomy/neck-registry.mjs linguist-generated=true

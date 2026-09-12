@@ -215,49 +215,149 @@
     {
       "id": "push_up",
       "title": "俯卧撑",
+      "duration": 4,
       "aliases": [
         "俯卧撑",
         "卧撑",
         "push-up",
         "push up"
       ],
-      "duration": 4,
       "muscles": [
         "胸部",
         "肩部",
         "上臂后侧"
       ],
-      "match": "pectoralis major|deltoid|triceps brachii|serratus anterior"
+      "match": "pectoralis major|deltoid|triceps brachii|serratus anterior",
+      "parameters": [
+        {
+          "key": "handWidth",
+          "label": "手距",
+          "unit": "倍肩宽",
+          "min": 0.8,
+          "max": 1.8,
+          "step": 0.05,
+          "initial": 1.5
+        },
+        {
+          "key": "elbowAngle",
+          "label": "底部肘部外展",
+          "unit": "°",
+          "min": 15,
+          "max": 70,
+          "step": 5,
+          "initial": 45
+        }
+      ],
+      "presets": [
+        {
+          "title": "窄距",
+          "parameters": {
+            "handWidth": 0.85,
+            "elbowAngle": 25
+          }
+        },
+        {
+          "title": "标准",
+          "parameters": {
+            "handWidth": 1.5,
+            "elbowAngle": 45
+          }
+        },
+        {
+          "title": "宽距",
+          "parameters": {
+            "handWidth": 1.8,
+            "elbowAngle": 60
+          }
+        }
+      ]
     },
     {
       "id": "squat",
       "title": "深蹲",
+      "duration": 4.4,
       "aliases": [
         "深蹲",
         "squat"
       ],
-      "duration": 4.4,
       "muscles": [
         "大腿前侧",
         "臀部",
         "大腿后侧"
       ],
-      "match": "rectus femoris|vastus|gluteus|biceps femoris|semitendinosus|semimembranosus"
+      "match": "rectus femoris|vastus|gluteus|biceps femoris|semitendinosus|semimembranosus",
+      "parameters": [
+        {
+          "key": "stanceWidth",
+          "label": "站距",
+          "unit": "倍髋宽",
+          "min": 0.8,
+          "max": 1.8,
+          "step": 0.05,
+          "initial": 1.2
+        },
+        {
+          "key": "toeAngle",
+          "label": "脚尖外展",
+          "unit": "°",
+          "min": 0,
+          "max": 35,
+          "step": 5,
+          "initial": 20
+        },
+        {
+          "key": "squatDepth",
+          "label": "下蹲幅度",
+          "unit": "%",
+          "min": 60,
+          "max": 110,
+          "step": 5,
+          "initial": 100
+        }
+      ],
+      "presets": [
+        {
+          "title": "窄站距",
+          "parameters": {
+            "stanceWidth": 0.8,
+            "toeAngle": 10,
+            "squatDepth": 100
+          }
+        },
+        {
+          "title": "标准",
+          "parameters": {
+            "stanceWidth": 1.2,
+            "toeAngle": 20,
+            "squatDepth": 100
+          }
+        },
+        {
+          "title": "宽站距",
+          "parameters": {
+            "stanceWidth": 1.8,
+            "toeAngle": 30,
+            "squatDepth": 100
+          }
+        }
+      ]
     },
     {
       "id": "curl",
       "title": "弯举",
+      "duration": 3.6,
       "aliases": [
         "弯举",
         "二头弯举",
         "curl"
       ],
-      "duration": 3.6,
       "muscles": [
         "上臂前侧",
         "前臂"
       ],
-      "match": "biceps brachii|brachialis|brachioradialis"
+      "match": "biceps brachii|brachialis|brachioradialis",
+      "parameters": [],
+      "presets": []
     }
   ],
   "entries": [

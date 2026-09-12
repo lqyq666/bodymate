@@ -17,7 +17,7 @@ Open the resulting `index.html` directly with `file://` in Chromium. The runtime
 
 | Source | Builder invoked by `npm run build` | Committed output | Freshness guard |
 | --- | --- | --- | --- |
-| `moonbit/core/*.mbt` | `scripts/build-moonbit.mjs` | MoonBit block embedded in `index.html` | `scripts/check-generated.mjs` recompiles and compares it |
+| `moonbit/core/*.mbt` | `scripts/build-moonbit.mjs` | `assets/runtime/moonbit-core.js`; one external script reference in `index.html` | `scripts/check-generated.mjs` recompiles and byte-compares normalized output |
 | MoonBit `bodymate_domain_registry_v1` | `scripts/build-moonbit-registry.mjs` | `generated/anatomy-registry.json`, `src/anatomy/neck-registry.mjs` | Registry projection and byte/semantic comparison |
 | `src/anatomy/neck-registry.mjs` | `scripts/build-anatomy-registry-runtime.mjs` | `assets/runtime/anatomy-registry.js` | Regenerated comparison |
 | `src/coach-c/*.mjs` and MoonBit bundle | `scripts/build-coach-query-runtime.mjs` | `assets/runtime/coach-query-runtime.js` | Regenerated comparison |

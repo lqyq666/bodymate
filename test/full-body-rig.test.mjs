@@ -5,6 +5,7 @@ import { NodeIO } from '@gltf-transform/core';
 import { fileURLToPath } from 'node:url';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import '../assets/runtime/moonbit-core.js';
 import { rigJoints, motionDefinitions, motionForQuery, highlightForMotion, sampleMotion } from '../src/full-muscle/rig-definition.mjs';
 import { fullMuscleExclusionReason } from '../src/anatomy/full-muscle-policy.mjs';
 import { createMotionClip } from '../src/full-muscle/motion-clip.mjs';

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Vector3 } from 'three';
+import '../assets/runtime/moonbit-core.js';
 import { sampleMotion, rigJoints, restPoint, solveTwoBone } from '../src/full-muscle/rig-definition.mjs';
 import { normalizeMotionParameters, parseMotionParameters, muscleProfileForMotion } from '../src/full-muscle/motion-parameters.mjs';
 

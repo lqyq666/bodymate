@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { motionDefinitions, motionForQuery, highlightForMotion } from './rig-definition.mjs';
+import { highlightForMotion } from './rig-definition.mjs';
 import { createMotionClip } from './motion-clip.mjs';
-import { normalizeMotionParameters, muscleProfileForMotion } from './motion-parameters.mjs';
+import { motionDefinitions, motionForQuery, normalizeMotionParameters, muscleProfileForMotion, motionSession } from './motion-domain.mjs';
 import { createCoachC } from '../coach-c/model.mjs';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { mountRealBodyNavigator } from './navigator.mjs';
@@ -42,9 +42,9 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
   controls.maxPolarAngle = Math.PI * .49;
   const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)');
   let disposed = false, loaded = false, model = null, mixer = null, activeAction = null, motion = null;
-  let paused = false, speed = 1, view = 'muscle', pulseEnabled = true, selected = new Set();
+  let session = motionSession.reset(), view = 'muscle', pulseEnabled = true, selected = new Set();
   let lastTime = 0, lastState = 0, frame = 0, framing = false;
-  let parameters = {}, parameterNotices = [], profile = null, dynamicClip = null;
+  let profile = null, dynamicClip = null;
   let headSurface = null;
   const muscleWeights = new Map();
   const meshes = new Map(), entries = [], clips = new Map(), rest = new Map();
@@ -65,10 +65,10 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
   const floorGrid = new THREE.GridHelper(4, 16, 0xbac9d6, 0xd6e0e9);
   floorGrid.position.y = -.008; floorGrid.material.transparent = true; floorGrid.material.opacity = .22; scene.add(floorGrid);
 
-  const state = () => ({ loaded, motion: motion?.id || null, title: motion?.title || '全身解剖',
-    phase: activeAction ? (activeAction.time % motion.duration) / motion.duration : 0, paused, speed, view, pulseEnabled,
-    parameters: { ...parameters }, parameterNotices: [...parameterNotices], muscleNote: profile?.note || '' });
-  const emit = () => { const snapshot = state(); canvas.dataset.motion = snapshot.motion || 'rest'; canvas.dataset.paused = String(paused); canvas.dataset.parameters = JSON.stringify(parameters); onState(snapshot); };
+  const state = () => ({ loaded, motion: session.motion, title: motion?.title || '全身解剖',
+    phase: session.phase, paused: session.paused, speed: session.speed, view, pulseEnabled,
+    parameters: { ...session.parameters }, parameterNotices: [...session.parameterNotices], muscleNote: profile?.note || '' });
+  const emit = () => { const snapshot = state(); canvas.dataset.motion = snapshot.motion || 'rest'; canvas.dataset.paused = String(session.paused); canvas.dataset.parameters = JSON.stringify(session.parameters); onState(snapshot); };
   const fit = (id = null, immediate = false) => {
     const horizontal = id === 'push_up';
     targetGoal.set(0, horizontal ? .32 : id === 'squat' ? .78 : .88, horizontal ? .68 : 0);
@@ -90,8 +90,8 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
   controls.addEventListener('start', () => { framing = false; });
   const paint = (time = 0) => {
     headSurface?.setView(view);
-    const phase = activeAction && motion ? activeAction.time / motion.duration % 1 : 0;
-    const highlight = highlightForMotion(motion?.id, phase, time, { pulseEnabled, reducedMotion: reduced?.matches, paused });
+    const phase = motion ? session.phase : 0;
+    const highlight = highlightForMotion(motion?.id, phase, time, { pulseEnabled, reducedMotion: reduced?.matches, paused: session.paused });
     for (const [id, mesh] of meshes) {
       const muscle = mesh.userData.kind === 'muscle', active = selected.has(id), material = mesh.material;
       mesh.visible = (!muscle || view !== 'bone') && !(headSurface && view === 'muscle' && mesh.userData.kind === 'bone' && mesh.userData.region === 'head');
@@ -105,10 +105,11 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
       }
     }
   };
-  const restore = () => {
-    mixer?.stopAllAction(); activeAction = null; motion = null; paused = false;
+  const restore = ({ stopSession = true } = {}) => {
+    if (stopSession) session = motionSession.stop();
+    mixer?.stopAllAction(); activeAction = null; motion = null;
     if (dynamicClip) { mixer?.uncacheClip(dynamicClip); dynamicClip = null; }
-    parameters = {}; parameterNotices = []; profile = null; muscleWeights.clear();
+    profile = null; muscleWeights.clear();
     for (const [node, transform] of rest) { node.position.copy(transform.position); node.quaternion.copy(transform.quaternion); }
     model?.updateMatrixWorld(true);
   };
@@ -119,8 +120,10 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
     const normalized = normalizeMotionParameters(id, input);
     // Generate first: a rejected clip must not destroy the current animation.
     const nextClip = createMotionClip(id, normalized.parameters);
-    restore(); motion = motionDefinitions.find((item) => item.id === id);
-    parameters = normalized.parameters; parameterNotices = normalized.notices; profile = muscleProfileForMotion(id, parameters);
+    restore({ stopSession: false });
+    session = motionSession.play(id, normalized.parameters, preservePlayback && previous.motion === id, preservePlayback ? previous.paused : Boolean(reduced?.matches));
+    motion = motionDefinitions.find((item) => item.id === id);
+    profile = muscleProfileForMotion(id, session.parameters);
     const groups = profile.groups.map(group => ({ ...group, pattern: new RegExp(group.match, 'i') }));
     const matches = entries.filter((entry) => {
       if (entry.kind !== 'muscle') return false;
@@ -129,11 +132,10 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
       return Boolean(group);
     });
     selected = new Set(matches.map((entry) => entry.structureId));
-    dynamicClip = nextClip; activeAction = mixer.clipAction(dynamicClip); activeAction.reset().play(); activeAction.timeScale = speed;
-    paused = preservePlayback ? previous.paused : Boolean(reduced?.matches); activeAction.paused = paused;
-    if (preservePlayback) activeAction.time = previous.phase * motion.duration;
+    dynamicClip = nextClip; activeAction = mixer.clipAction(dynamicClip); activeAction.reset().play(); activeAction.paused = true;
+    activeAction.time = session.phase * motion.duration;
     mixer.update(0); model.updateMatrixWorld(true); paint(); if (!preservePlayback) fit(id); emit();
-    return { ...motion, parameters: { ...parameters }, notices: [...parameterNotices], profile, count: matches.length, entries: matches };
+    return { ...motion, parameters: { ...session.parameters }, notices: [...session.parameterNotices], profile, count: matches.length, entries: matches };
   };
   const findAll = (query) => {
     const normalized = String(query || '').trim().toLowerCase(); if (!normalized) return [];
@@ -164,7 +166,11 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
   const render = (timestamp) => {
     if (disposed) return;
     const delta = lastTime ? Math.min((timestamp - lastTime) / 1000, .05) : 0; lastTime = timestamp;
-    mixer?.update(delta);
+    if (motion && activeAction) {
+      session = motionSession.tick(delta);
+      activeAction.time = session.phase * motion.duration;
+      mixer.update(0);
+    }
     if (model) model.updateMatrixWorld(true);
     if (framing) {
       const smoothing = 1 - Math.exp(-delta * 9);
@@ -207,18 +213,18 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
     onReady({ count: entries.filter((entry) => entry.kind === 'muscle').length, boneCount: entries.filter((entry) => entry.kind !== 'muscle').length, entries, motions: motionDefinitions });
     emit();
   }).catch(onError);
-  const changeMotionPreference = () => { if (reduced?.matches && activeAction) { paused = true; activeAction.paused = true; emit(); } };
+  const changeMotionPreference = () => { if (reduced?.matches && activeAction) { session = motionSession.setPaused(true); emit(); } };
   reduced?.addEventListener('change', changeMotionPreference);
   return {
     findAll, selectGroup, playMotion, stopExercise, getState: state,
-    setParameters(input) { return motion ? playMotion(motion.id, { ...parameters, ...input }, { preservePlayback: true }) : null; },
+    setParameters(input) { return motion ? playMotion(motion.id, { ...session.parameters, ...input }, { preservePlayback: true }) : null; },
     playPushUp() { return playMotion('push_up')?.entries || []; },
     select(id) { const entry = meshes.get(id)?.userData; return entry ? selectGroup([entry])[0] : null; },
     focusAll() { fit(motion?.id); },
     resetCamera() { stopExercise(); },
-    setPaused(value) { paused = Boolean(value); if (activeAction) activeAction.paused = paused; emit(); },
-    setSpeed(value) { speed = Math.max(.25, Math.min(2, Number(value) || 1)); if (activeAction) activeAction.timeScale = speed; emit(); },
-    seek(value) { if (!activeAction) return; activeAction.time = Math.max(0, Math.min(.99999, value)) * motion.duration; mixer.update(0); model.updateMatrixWorld(true); paint(); emit(); },
+    setPaused(value) { session = motionSession.setPaused(Boolean(value)); emit(); },
+    setSpeed(value) { session = motionSession.setSpeed(value); emit(); },
+    seek(value) { if (!activeAction) return; session = motionSession.seek(value); activeAction.time = session.phase * motion.duration; mixer.update(0); model.updateMatrixWorld(true); paint(); emit(); },
     setView(value) { if (['muscle', 'bone', 'xray'].includes(value)) { view = value; paint(); emit(); } },
     setPulse(value) { pulseEnabled = Boolean(value); paint(); emit(); },
     dispose() {

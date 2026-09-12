@@ -4,8 +4,8 @@
 
 | Area | Evidence | Failure detected |
 | --- | --- | --- |
-| MoonBit unit tests | `moon test --target js` | Invalid registry entries, resolver behavior, StructureSet/movement/comparison algebra, rejected actions, state/event/snapshot regressions |
-| Cross-language contracts | Node tests using the embedded MoonBit bundle | JS bypasses, malformed wire parsing, action-before-render violations, V3/V4/V5 snapshot incompatibility |
+| MoonBit unit tests | `moon test --target js` | Invalid registries, resolver behavior, StructureSet/movement/comparison algebra, complete-body parameters/profiles/pose intents, rejected actions, and state/event/session regressions |
+| Cross-language contracts | Node tests using `assets/runtime/moonbit-core.js` | JS-owned motion facts or playback state, malformed wire parsing, action-before-render violations, and versioned snapshot incompatibility |
 | Registry and GLB integrity | anatomy/registry Node tests | A changed GLB hash, missing node, duplicate stable/source identity, or divergence from the canonical 14-entry registry |
 | Structure resolver | MoonBit resolver and integration tests | Exact, ambiguous, family/set, Chinese/English, and health-query classification regressions |
 | Movement evidence | MoonBit movement tests and Node integration tests | Unknown movement, missing evidence, duplicate member, or renderer-owned movement mapping |

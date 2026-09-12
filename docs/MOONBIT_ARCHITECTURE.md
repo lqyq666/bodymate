@@ -29,12 +29,14 @@ Three.js / Coach C / UI
 - Comparison inputs, pure canonical-ID union/intersection/directional-difference functions, comparison buckets, per-side roles, and evidence provenance.
 - The action allowlist, validation, state transitions, revision, bounded event log, and snapshot versions V2 through V5.
 - Health-query rejection before any selection, movement, or comparison action can mutate state.
+- Complete-body motion definitions, aliases, parameter ranges, presets, text parsing, qualitative participation profiles, and evidence notes.
+- Complete-body playback phase, pause/resume, speed, seek, parameter transitions, and renderer-independent pose intent scalars.
 
 `selected` is one current focus. `highlighted` is independently a zero-or-more StructureSet. A movement and a comparison reuse that existing set primitive; neither gives JavaScript a second source of anatomy state.
 
 ## What JavaScript owns
 
-JavaScript is deliberately a transport and presentation layer. It calls the embedded MoonBit exports, validates and parses their versioned wire payloads, forwards accepted actions, and turns snapshots into materials, cards, labels, camera targets, Coach C copy, and local evidence dialogs. It has no family-to-ID table, movement-to-structure mapping, comparison algebra, action transition switch, or shadow domain state.
+JavaScript is deliberately a transport and presentation layer. It calls the generated external MoonBit IIFE, validates and parses versioned wire payloads, forwards accepted actions, and turns snapshots or pose intents into Three.js vectors/quaternions, materials, cards, labels, camera targets, Coach C copy, and local evidence dialogs. It has no family-to-ID table, motion registry, parameter/preset table, participation mapping, comparison algebra, action transition switch, or shadow playback/domain state.
 
 The generated registry projection is intentionally not a second authored registry:
 
@@ -60,9 +62,13 @@ MoonBit canonical registry
 
 `低头和向右转头有哪些共同结构` resolves to an ordered pair. MoonBit performs deterministic union, intersection, and directional difference over canonical IDs, derives a set focus (overlap first), stores comparison state/events, and emits V5 members with left/right roles and evidence IDs. Presentation uses the supplied buckets only.
 
+### Complete-body motion session
+
+`full_body_motion.mbt` is the canonical source for push-up, squat, and curl identity, aliases, duration, parameter contracts, presets, query parsing, qualitative participation, and key pose scalars. `motion_session.mbt` is the sole playback state: play/stop, phase, pause/resume, speed, seek, and normalized parameters. The render loop asks MoonBit to tick and then positions a paused Three.js `AnimationAction` at the returned phase; Three.js does not advance domain time independently.
+
 ## Exported browser boundary
 
-The embedded IIFE exposes compatibility functions plus domain registry, reset, resolver V1/V2/V3, action execution, event V1/V2, and snapshot V2/V3/V4/V5 calls. The transport is deliberately versioned text rather than an implicit renderer object. `window.__bodymate.domainDebug()` is read-only development inspection; it does not provide a JavaScript mutation backdoor.
+The generated IIFE in `assets/runtime/moonbit-core.js` exposes compatibility functions plus neck-domain and complete-body motion/session contracts. `index.html` contains only one external script reference, so reviewers can inspect source and generated output independently. The transport is deliberately versioned text rather than an implicit renderer object. `window.__bodymate.domainDebug()` is read-only development inspection; it does not provide a JavaScript mutation backdoor.
 
 ## MoonBit language use
 
@@ -74,8 +80,8 @@ The engine uses structs for structures, sets, movements, comparisons, state, eve
 
 ## If MoonBit is removed
 
-The following meaningful capabilities disappear together: canonical structure identity; deterministic structure resolution; StructureSet semantics; movement domain and evidence mapping; movement comparison; set algebra; action validation; state transitions; events; and versioned snapshots. Replacing MoonBit would require independently rebuilding and proving all of these contracts. The renderer would still draw meshes, but it would no longer have the product’s deterministic domain engine.
+The following meaningful capabilities disappear together: canonical structure identity; deterministic structure resolution; StructureSet semantics; movement domain and evidence mapping; movement comparison; set algebra; complete-body action/parameter/profile definitions; playback transitions; pose intents; action validation; events; and versioned snapshots. Replacing MoonBit would require independently rebuilding and proving all of these contracts. The renderer could still draw a static mesh, but the product’s deterministic interaction and motion engine would be gone.
 
 ## Deliberate limits
 
-The model covers 14 neck/shoulder structures, not complete anatomy. The movement catalog is intentionally small and educational; it is not an activation, EMG, diagnosis, treatment, or training system. There is no remote AI, backend, account, or runtime network dependency.
+The evidence-backed query model covers 14 neck/shoulder structures, while the presentation asset contains a broader complete body. The three complete-body actions use an educational rig and qualitative profiles, not a biomechanics, activation, EMG, diagnosis, treatment, or training system. There is no remote AI, backend, account, or runtime network dependency.

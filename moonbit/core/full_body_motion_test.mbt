@@ -1,0 +1,17 @@
+test "complete-body registry and parameter model are domain-owned" {
+  let registry = motion_registry_v1()
+  assert_true(registry.contains("push_up^俯卧撑^4"))
+  assert_true(registry.contains("handWidth@手距@倍肩宽@0.8@1.8@0.05@1.5"))
+  assert_true(registry.contains("squat^深蹲^4.4"))
+  assert_true(registry.contains("curl^弯举^3.6"))
+  assert_eq(motion_resolve_v1("请演示 push-up"), "ok|motion-resolve-v1|push_up")
+  assert_eq(motion_resolve_v1("来一个二头弯举"), "ok|motion-resolve-v1|curl")
+  let normalized = motion_parameters_v1("push_up", "handWidth=4,elbowAngle=43")
+  assert_true(normalized.contains("handWidth=1.8,elbowAngle=45"))
+  assert_true(normalized.contains("手距已调整为 1.8倍肩宽"))
+  assert_true(motion_profile_v1("squat", "stanceWidth=1.8").contains("臀部@gluteus maximus@主要参与@1"))
+  assert_true(motion_pose_intent_v1("squat", 0.5, "squatDepth=80").contains("depth=1,excursion=0.8"))
+  let parsed = motion_parse_query_v1("squat", "宽站距，脚尖外展25度，深度80%", "")
+  assert_true(parsed.contains("stanceWidth=1.8,toeAngle=25,squatDepth=80"))
+  assert_true(parsed.has_suffix("|true"))
+}
