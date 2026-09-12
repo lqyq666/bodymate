@@ -1,0 +1,4 @@
+# Builders emit LF. Keep checkout bytes stable so build/check leave a clean tree.
+* text=auto eol=lf
+*.glb binary
+*.bin binary
