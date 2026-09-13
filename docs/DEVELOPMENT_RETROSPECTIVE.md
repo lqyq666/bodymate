@@ -1,6 +1,6 @@
 # Development retrospective
 
-## Problem and evolution
+## Early development history (September 11)
 
 BodyMate began with a practical educational problem: a viewer should connect a question to a visible, named anatomy structure rather than present a generic static illustration. The product narrowed that problem to 14 real neck/shoulder meshes so provenance, labels, interaction, and verification could be made concrete.
 
@@ -20,6 +20,10 @@ The project uses MoonBit, Three.js, esbuild, and glTF tooling. The root source c
 
 The main lesson is that a small, inspectable domain model is more credible than broad claims. Tests should prove the seam that matters: mesh/query to MoonBit action to validated snapshot to renderer. Offline delivery, artifact freshness, and provenance checks are product-quality work, not release paperwork.
 
-## Known limitations
+## Current full-body project (September 13)
 
-BodyMate is an offline educational prototype with 14 neck/shoulder structures and a deliberately small movement catalog. Its mappings are bounded current-model coverage, not complete activation, EMG, diagnosis, treatment, rehabilitation, or training advice. It has no remote AI, backend, accounts, or full-body anatomy.
+The active product now has one complete-body page with 415 muscle meshes, 282 skeletal and related structures, three parameterized actions, Chinese picking and an independent standing reference. The earlier neck page is retired; its contracts remain for compatibility tests.
+
+The current refinement extracts the existing full-body domain into `lqyq666/bodymate/motion`: a typed, renderer-independent package with private per-instance sessions, detached snapshots, explicit errors and deterministic pose targets. The browser wire adapter and three standalone MoonBit examples import this same implementation. Black-box tests verify real consumer boundaries, including non-finite phase and extreme elapsed-time cases. An actual packaged ZIP is unpacked and built/tested separately from the application.
+
+This work improves reuse and reviewability without claiming a new generic biomechanics engine. The fixed teaching rig, three prepared actions, qualitative profiles, no independent fingers/toes, and no medical or training claims remain deliberate limits. Current local verification is separate from remote CI, Mooncakes publication and formal acceptance.

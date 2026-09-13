@@ -1,19 +1,20 @@
-# Test matrix
+# BodyMate 测试矩阵
 
-`npm run check` is the project acceptance command. It runs MoonBit validation, Node cross-language contracts, generated-artifact checks, and repository hygiene checks. `npm run moonbit:stats` is the canonical, non-hand-maintained size report; effective LOC excludes blank lines, comment-only lines, and generated code.
+`npm run check` 是完整项目检查；`npm run moonbit:package-check` 是发布包隔离验收。两者互补，不能用 HTTP 200 或单个示例替代。
 
-| Area | Evidence | Failure detected |
+| 范围 | 证据 | 检测问题 |
 | --- | --- | --- |
-| MoonBit unit tests | `moon test --target js` | Invalid registries, resolver behavior, StructureSet/movement/comparison algebra, complete-body parameters/profiles/pose intents, rejected actions, and state/event/session regressions |
-| Cross-language contracts | Node tests using `assets/runtime/moonbit-core.js` | JS-owned motion facts or playback state, malformed wire parsing, action-before-render violations, and versioned snapshot incompatibility |
-| Registry and GLB integrity | anatomy/registry Node tests | A changed GLB hash, missing node, duplicate stable/source identity, or divergence from the canonical 14-entry registry |
-| Structure resolver | MoonBit resolver and integration tests | Exact, ambiguous, family/set, Chinese/English, and health-query classification regressions |
-| Movement evidence | MoonBit movement tests and Node integration tests | Unknown movement, missing evidence, duplicate member, or renderer-owned movement mapping |
-| Comparison | MoonBit comparison tests and Node integration tests | Non-deterministic union/intersection/difference, lost left/right roles or provenance, or health-driven comparison mutation |
-| Generated artifacts | `scripts/check-generated.mjs` | A committed runtime/registry/index artifact that differs from its builder output |
-| Offline/file boundary | browser-contract and runtime tests | Runtime CDN/API/anatomy fetches or a non-local embedded runtime dependency |
-| Desktop/mobile acceptance | Chromium `file://` render capture at 1440×900 and 390×844; reviewer manual interaction replay | Layout, labels, card, Coach C, interaction, or viewport regressions not observable in unit tests |
-| Safety | MoonBit and Node health-query tests | Diagnosis/treatment copy, inferred culprit structure, or health input that mutates anatomy state |
-| Repository hygiene | `scripts/audit-repository-hygiene.mjs` | Tracked credential patterns or accidental local user paths |
+| 可复用库黑盒 | `moonbit/motion/motion_test.mbt` | 参数边界/幂等、双会话隔离、拒绝不变、数组隔离、暂停与参数保持、极值时间、确定性姿态、中文单位 |
+| 浏览器 V1 兼容 | `moonbit/core/full_body_motion_test.mbt`、`motion_session_test.mbt` | 抽库后原浏览器线协议及动作状态不兼容 |
+| 跨语言与参数 | `test/motion-domain-boundary.test.mjs`、`motion-parameters.test.mjs` | JS 复制规则、线协议错误、参数只改标签而未改变骨架 |
+| 全身几何 | `test/full-body-rig.test.mjs` | 人体漂移、支撑接触、参数极值及骨架稳定性 |
+| 环境 / UI 策略 | MoonBit 环境与 ui_feedback 测试及对应 Node 测试 | reduced-motion、方位/质量/距离、指针非法值和策略重复 |
+| 中文与页面 | 全身本地化、visual-lab 与 head-surface 测试 | 中文覆盖、旧入口复活、材质/布局结构回退 |
+| 人体与来源 | anatomy、full-muscle、rig tests | 冻结 GLB 哈希、mesh 和 source identity 错误 |
+| 旧领域回归 | core registry/resolver/set/movement/comparison/action/state/events tests | 保留兼容 API 的回归；不作为当前全身 UI 端到端证明 |
+| 生成物与规模 | `check-generated.mjs`、`moonbit-stats.mjs --check` | JS/注册表/公开接口与源码不一致、文档规模过期 |
+| 实际发布包 | `verify-moonbit-package.mjs` | 错误打入 GLB/JS/杂项、缺示例、从 ZIP 解压后无法独立运行 |
+| 浏览器回归 | localhost 全身页真实操作与截图 | 控件、参数更新、播放、模型与渲染错误；独立于自动测试记录 |
+| 仓库卫生 | `audit-repository-hygiene.mjs` | 已跟踪文本中的疑似凭据和机器路径；未跟踪的新材料仍需提交前检查 |
 
-Browser acceptance is deliberately documented separately from headless contracts because mesh picking, orbit, and WebGL labels require a real browser interaction pass. The automated browser provider blocks interactive `file://` control by policy, so final reviewer interaction replay remains an explicit manual acceptance step; the MoonBit-to-renderer behavior is independently covered by cross-language tests.
+示例中的断言不计为额外 `test` 数量。库包的 8 个黑盒测试属于项目 MoonBit 总测试数的一部分。测试未证明医学有效性、任意 rig 兼容或官方参赛资格。

@@ -1,15 +1,12 @@
-/* The full-body viewer owns its form and playback; the neck explorer remains available as a separate runtime. */
+/* The complete-body viewer owns its form and playback. */
 (() => {
-  if (new URLSearchParams(location.search).get('view') === 'neck-lab') return;
   const detail = document.querySelector('#detail-view'), composer = document.querySelector('.composer');
   const runtime = globalThis.BodyMateFullMuscleRuntime;
   if (!detail || !composer || !runtime?.mount) return;
-  globalThis.__bodymateStopExerciseDemo?.();
-  globalThis.__rootScmDispose?.();
   document.title = 'BodyMate｜人体动作实验室';
   document.body.classList.remove('exercise-demo-active'); document.body.classList.add('full-muscle-demo-active');
   const stylesheet = document.createElement('link'); stylesheet.rel = 'stylesheet'; stylesheet.href = 'assets/full-muscle.css'; document.head.append(stylesheet);
-  if (document.body.classList.contains('visual-lab-active')) { const skin = document.createElement('link'); skin.rel = 'stylesheet'; skin.href = 'assets/visual-full-body.css?v=20260912b'; document.head.append(skin); }
+  if (document.body.classList.contains('visual-lab-active')) { const skin = document.createElement('link'); skin.rel = 'stylesheet'; skin.href = 'assets/visual-full-body.css?v=20260913-reference-ui'; document.head.append(skin); }
   const canvas = document.createElement('canvas'); canvas.id = 'full-muscle-canvas';
   canvas.setAttribute('aria-label', '全身骨骼与肌肉三维模型，拖动旋转，滚轮缩放'); detail.append(canvas);
   const loading = document.createElement('div'); loading.className = 'anatomy-loading'; loading.textContent = '正在加载完整人体…'; detail.append(loading);
@@ -21,7 +18,7 @@
   detail.append(playback);
   const answer = document.createElement('div'); answer.className = 'full-muscle-answer'; answer.setAttribute('aria-live', 'polite'); composer.prepend(answer);
   const examples = document.createElement('div'); examples.className = 'anatomy-examples';
-  examples.innerHTML = '<span>试一个动作</span>' + runtime.motionDefinitions.map((motion) => '<button data-motion="' + motion.id + '">' + motion.title + '</button>').join('');
+  examples.innerHTML = '<span>选择动作</span>' + runtime.motionDefinitions.map((motion) => '<button data-motion="' + motion.id + '" aria-label="' + motion.title + '" aria-pressed="false"><span class="motion-button-label">' + motion.title + '</span><span class="motion-button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></button>').join('');
   composer.insertBefore(examples, document.querySelector('#chat-form'));
   const adjustments = document.createElement('details'); adjustments.className = 'anatomy-adjustments'; adjustments.hidden = true;
   adjustments.innerHTML = '<summary>动作调整<span>手距 · 角度</span></summary><div class="anatomy-presets" aria-label="动作姿势预设"></div><div class="anatomy-parameter-fields"></div><p class="anatomy-parameter-help"></p><p class="anatomy-parameter-notice" role="status"></p><p class="anatomy-muscle-note"></p><div class="anatomy-muscle-legend"><span>主要参与</span><span>辅助参与</span><span>稳定参与</span></div>';
@@ -31,21 +28,16 @@
   composer.insertBefore(chatContent, answer);
   for (const node of [answer, composer.querySelector('.chat-context'), examples, adjustments]) if (node) chatContent.append(node);
   const input = document.querySelector('#chat-input'), context = document.querySelector('#chat-context');
-  const heading = document.querySelector('.detail-heading h2'); if (heading) heading.textContent = '人体动作实验室';
   document.querySelector('#detail-panel')?.setAttribute('aria-label', '全身肌肉与骨骼');
   document.querySelector('.current-card')?.setAttribute('aria-label', '动作与肌肉提问');
   document.querySelector('.current-card')?.removeAttribute('aria-labelledby');
   const tagline = document.querySelector('.brand p'); if (tagline) tagline.textContent = '看清每个动作，观察肌肉如何协同。';
-  const status = document.querySelector('#engine-status');
-  if (status) status.textContent = '准备人体模型…';
   if (input) input.placeholder = '如：窄距俯卧撑，夹角45度';
-  const scope = document.querySelector('#chat-scope'); if (scope) scope.textContent = '本地动作与肌肉查询；颈肩关系可切换局部视图。';
+  const scope = document.querySelector('#chat-scope'); if (scope) scope.textContent = '本地动作与肌肉查询，不提供医学或拉伸建议。';
   if (context) context.textContent = '全身人体';
-  const footer = document.querySelectorAll('.footer>span')[1];
-  if (footer) footer.textContent = '教学动作演示 · 颜色为定性参与提示，非实测受力';
   const show = (title, copy) => { answer.replaceChildren(Object.assign(document.createElement('strong'), { textContent: title }), Object.assign(document.createElement('p'), { textContent: copy })); };
-  show('输入动作，让人体动起来', '可旋转观察全身，也可以切换骨骼或透视，查看关节与肌肉的连接。');
-  const showEntry = (entry) => { if (!entry) return; const alias = entry.canonicalName || entry.structureId; show(alias, '已定位到这个结构。输入肌肉名称可以高亮同组肌肉，输入动作可以开始演示。'); if (context) context.textContent = alias; };
+  show('选择一个动作，\n看见肌肉协同。', '从静态结构到动态观察。选择下方动作，或输入想了解的肌肉名称。');
+  const showEntry = (entry) => { if (!entry) return; const label = entry.displayNameZh || entry.canonicalName || entry.structureId; show(label, '已定位到这条肌肉。输入肌肉名称可以高亮同组肌肉，输入动作可以开始演示。'); if (context) context.textContent = label; };
   let ready = false, seeking = false, parameterKey = '';
   const parameterFields = adjustments.querySelector('.anatomy-parameter-fields');
   const parameterNotice = adjustments.querySelector('.anatomy-parameter-notice');
@@ -82,7 +74,7 @@
   const viewer = runtime.mount({
     canvas, onPick: showEntry,
     onReady: ({ count, boneCount }) => {
-      ready = true; loading.remove(); if (status) status.textContent = '人体模型已就绪 · ' + count + ' 个肌肉结构 · ' + boneCount + ' 个骨骼及相关结构';
+      ready = true; loading.remove();
       toolbar.querySelectorAll('button').forEach((button) => { button.disabled = false; });
       examples.querySelectorAll('button').forEach((button) => { button.disabled = false; });
       const ring = document.querySelector('.lab-status-ring'); if (ring) { ring.querySelector('strong').textContent = count; ring.querySelector('span').textContent = '肌肉结构'; }
@@ -90,6 +82,7 @@
     },
     onState: (state) => {
       if (document.body.classList.contains('visual-lab-active')) document.querySelectorAll('[data-lab-mode]').forEach(button=>{const active=button.dataset.labMode===(state.motion?'movement':'structure');button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+      examples.querySelectorAll('[data-motion]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.motion === state.motion)));
       updateParameters(state);
       playback.hidden = !state.motion;
       playback.querySelector('#anatomy-motion-name').textContent = state.title;
@@ -99,7 +92,7 @@
       toolbar.querySelectorAll('[data-view]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.view === state.view)));
       playback.querySelector('#anatomy-pulse').setAttribute('aria-pressed', String(state.pulseEnabled));
     },
-    onError: (error) => { ready = false; loading.textContent = '模型加载失败，请刷新重试'; show('人体模型未能加载', '请确认本地模型文件完整后刷新页面。'); if (status) status.textContent = '人体模型加载失败'; console.error(error); },
+    onError: (error) => { ready = false; loading.textContent = '模型加载失败，请刷新重试'; show('人体模型未能加载', '请确认本地模型文件完整后刷新页面。'); console.error(error); },
   });
   toolbar.querySelectorAll('button').forEach((button) => { button.disabled = true; });
   examples.querySelectorAll('button').forEach((button) => { button.disabled = true; });
@@ -148,7 +141,6 @@
     if (/^(暂停|停止播放)$/.test(query)) { viewer.setPaused(true); return; }
     if (/^(继续|播放)$/.test(query) && viewer.getState().motion) { viewer.setPaused(false); return; }
     if (/^(重置|恢复站立|站立)$/.test(query)) { viewer.stopExercise(); show('全身解剖', '已恢复站立。'); return; }
-    if (/共同|斜角肌|胸锁乳突肌|肩胛提肌|转头|低头|耸肩/.test(query)) { location.href = '?view=neck-lab&q=' + encodeURIComponent(query); return; }
     const action = runtime.motionForQuery(query);
     if (action) {
       const parsed = runtime.parseMotionParameters(action.id, query);

@@ -2,7 +2,7 @@ name: verify
 
 on:
   push:
-    branches: [main, "feat/**"]
+    branches: [main, "feat/**", "codex/**"]
   pull_request:
     branches: [main]
 
@@ -42,3 +42,8 @@ jobs:
           npm run build
           git diff --exit-code -- index.html generated/anatomy-registry.json src/anatomy/neck-registry.mjs assets/runtime/anatomy-registry.js assets/runtime/coach-query-runtime.js assets/runtime/root-scm-runtime.js
           npm run check
+      - name: Run MoonBit scenarios and verify the actual publish archive
+        run: |
+          python3 --version
+          npm run moonbit:examples
+          npm run moonbit:package-check

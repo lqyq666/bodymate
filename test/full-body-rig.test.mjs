@@ -9,6 +9,7 @@ import '../assets/runtime/moonbit-core.js';
 import { rigJoints, motionDefinitions, motionForQuery, highlightForMotion, sampleMotion } from '../src/full-muscle/rig-definition.mjs';
 import { fullMuscleExclusionReason } from '../src/anatomy/full-muscle-policy.mjs';
 import { createMotionClip } from '../src/full-muscle/motion-clip.mjs';
+import { alignBodyToPlatform } from '../src/full-muscle/lab-environment.mjs';
 import { verifyCommittedRiggedBody } from '../scripts/build-rigged-body.mjs';
 
 const runtime = await readFile(new URL('../src/full-muscle/runtime-entry.mjs', import.meta.url), 'utf8');
@@ -184,4 +185,57 @@ test('runtime parameter clips bind to the real asset without contact drift, palm
     mixer.stopAllAction(); mixer.uncacheClip(clip);
   }
   assert.ok(worst.extension < .055, `Variant triangle tearing: ${JSON.stringify(worst)}`);
+});
+
+test('rest and every exercise stay centered on the platform without sliding support contacts', () => {
+  const footprint = (id) => {
+    const bounds = new THREE.Box3(), vertex = new THREE.Vector3();
+    for (const mesh of meshes.filter(node => node.userData.region === 'foot' || id === 'push_up' && node.userData.region === 'hand')) {
+      for (let index = 0; index < mesh.geometry.attributes.position.count; index++) {
+        mesh.getVertexPosition(index, vertex).applyMatrix4(mesh.matrixWorld);
+        bounds.expandByPoint(vertex);
+      }
+    }
+    return bounds;
+  };
+  const centered = (id) => {
+    const bounds = footprint(id), center = bounds.getCenter(new THREE.Vector3());
+    assert.ok(Math.hypot(center.x, center.z) < .001, `${id}: footprint drifted off center`);
+    assert.ok(Math.abs(bounds.min.y) < .001, `${id}: contact height drifted`);
+  };
+  try {
+    mixer.stopAllAction(); gltf.scene.position.set(0, 0, 0);
+    alignBodyToPlatform(gltf.scene);
+    centered('rest');
+    const standingPosition = gltf.scene.position.clone();
+    alignBodyToPlatform(gltf.scene);
+    assert.ok(gltf.scene.position.distanceTo(standingPosition) < 1e-6, 'Repeated alignment must not accumulate an offset');
+    const variants = [
+      ...motionDefinitions.map(({ id }) => [id, {}]),
+      ['push_up', { handWidth: .8, elbowAngle: 15 }],
+      ['push_up', { handWidth: 1.8, elbowAngle: 70 }],
+      ['squat', { stanceWidth: .8, toeAngle: 0, squatDepth: 110 }],
+      ['squat', { stanceWidth: 1.8, toeAngle: 35, squatDepth: 110 }],
+    ];
+    for (const [id, parameters] of variants) {
+      const clip = createMotionClip(id, parameters);
+      pose(clip, .137);
+      const bonePositions = rigJoints.map(({ name }) => [name, gltf.scene.getObjectByName(name).position.clone()]);
+      alignBodyToPlatform(gltf.scene, id);
+      for (const [name, local] of bonePositions) assert.ok(gltf.scene.getObjectByName(name).position.distanceTo(local) < 1e-8, 'Alignment must not change the rig pose');
+      const contacts = id === 'push_up' ? ['leftHand', 'rightHand', 'leftFoot', 'rightFoot'] : ['leftFoot', 'rightFoot'];
+      const planted = contacts.map(point);
+      for (const phase of [0, .25, .5, .75, .99999]) {
+        pose(clip, phase);
+        centered(id);
+        contacts.forEach((name, index) => assert.ok(point(name).distanceTo(planted[index]) < .001, `${id}: ${name} slid while centered`));
+      }
+      mixer.stopAllAction(); mixer.uncacheClip(clip);
+    }
+    alignBodyToPlatform(gltf.scene);
+    centered('rest');
+    assert.ok(gltf.scene.position.distanceTo(standingPosition) < 1e-6, 'Returning to rest must restore the original centered placement');
+  } finally {
+    mixer.stopAllAction(); gltf.scene.position.set(0, 0, 0); gltf.scene.updateMatrixWorld(true);
+  }
 });

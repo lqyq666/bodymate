@@ -13,7 +13,13 @@ const glb = await readFile(glbPath);
 const hash = createHash('sha256').update(glb).digest('hex').toUpperCase();
 // Classic scripts can be opened from file://; fetch/XHR cannot read a sibling GLB there.
 const offline = `/* Generated lossless offline transport; rigged-body.glb SHA-256 ${hash}. */\nglobalThis.BodyMateRiggedBodyOffline=${JSON.stringify(gzipSync(glb,{level:9}).toString('base64'))};\n`;
-await writeFile(resolve(root,'assets/runtime/rigged-body-offline.js'),offline);
+const offlinePath = resolve(root, 'assets/runtime/rigged-body-offline.js');
+const existingOffline = await readFile(offlinePath, 'utf8').catch(error => {
+  if (error.code === 'ENOENT') return null;
+  throw error;
+});
+// Material-only rebuilds should not rewrite the unchanged, large anatomy transport.
+if (existingOffline !== offline) await writeFile(offlinePath, offline);
 
 await build({
   entryPoints: [resolve(root, 'src/full-muscle/runtime-entry.mjs')],

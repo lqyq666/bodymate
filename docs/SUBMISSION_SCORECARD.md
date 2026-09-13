@@ -1,18 +1,21 @@
-# Submission scorecard
+# BodyMate 当前申报准备事实
 
-This is a factual release-candidate assessment, not a product claim.
+更新：2026-09-13。以下是本地优化证据，不是官方打分或通过率预测。
 
-| Dimension | Status | Evidence and remaining risk |
+| 项目 | 状态 | 证据 / 限制 |
 | --- | --- | --- |
-| Product completeness | RISK | The 14-mesh explorer, sets, movements, and comparisons work; anatomy and movement coverage are intentionally narrow. |
-| Engineering quality | PASS | Typed MoonBit domain boundary, generated-artifact gate, deterministic tests, and a clean-clone workflow. |
-| Explainability | PASS | Reviewer quickstart, demo script, architecture, evidence, and review guide explain each domain path. |
-| UX | RISK | Desktop/mobile `file://` rendering is captured in Chromium, while full mesh-pick/orbit/card interaction requires reviewer manual replay because the available automation provider blocks interactive `file://` control. This remains a prototype and does not replace formal accessibility/usability study. |
-| MoonBit depth | PASS | Anatomy registry/resolvers/StructureSet/comparison plus complete-body motion definitions, parameters, participation profiles, playback session, pose intents, validation, events, and snapshots live in MoonBit. |
-| Reproducibility | PASS | `npm ci`, build, check, stats, and direct `file://` launch are documented and verified from a clean clone. |
-| Testing | PASS | MoonBit, Node contracts, artifact freshness, GLB/provenance, safety, and hygiene are gated. |
-| Asset provenance | PASS | Pinned Human Atlas / BodyParts3D provenance, CC BY attribution, manifest, and frozen GLB hash are committed. |
-| Safety | PASS | Health text rejects diagnosis/treatment use and prevents health queries from mutating anatomy state. |
-| Known risks | RISK | A small evidence catalog, browser/WebGL variability, and manual browser interaction acceptance remain. |
+| 新项目定位 | 已准备 | 同一个 BodyMate：MoonBit 动作组件 + 全身应用；三个完整场景、相邻生态比较、真实历史样例 |
+| 可复用性 | 本地验证通过 | 实際 ZIP 解压后，独立 check/build/test/run；没有 DOM、Three.js、GLB 或 npm 依赖 |
+| MoonBit 主要作用 | 已实现 | 参数、解析、独立会话、定性参与及姿态目标；网页适配器使用同一库 |
+| 测试 | 本地通过 | 47/47 MoonBit、120/120 Node；库包中 8 个黑盒测试是 47 个的子集，不重复相加 |
+| 构建与生成物 | 本地通过 | `npm run build` / `npm run check`；公开接口与源码统计过期门禁 |
+| 三条场景 | 本地通过 | 参数解析、双会话独立播放、确定性采样，均含可执行断言 |
+| 代码规模 | 可复算 | `npm run moonbit:stats`，示例与生成物不计入生产 LOC；保留旧契约单独列出 |
+| 冻结人体 | 哈希保持 | neck-muscles、rigged-body、full-muscles 三个既有 SHA-256 不变 |
+| GitHub | 交付基线 | 优化前 origin/main=`2716f30454b7e70214362f779c731908d56e2c4f`；后续交付以公开提交及远端 SHA 为准 |
+| CI | 配置已补齐 | 当前新版本未在远端执行，不能标为远端通过 |
+| 资产来源 | 已记录 | 代码 MIT；人体归属与许可文件保留；Tripo 环境导出来源、哈希和处理过程已记录 |
+| Mooncakes | 本地包可复现 | 没有执行发布；不能声称已在 registry 可用 |
+| 正式申报 | 未提交 | 用户确认本项目尚未申报；新项目资格与验收由官方决定 |
 
-No BLOCKER is known after the Stage 6 acceptance checks.
+本轮范围是本地实现、验证和申报材料。运行日志暂存 `_build/moonbit-acceptance.log`，可用上述命令复算；状态不依赖该临时文件永久保留。浏览器回归记录见 `MOONBIT_OPTIMIZATION_VERIFICATION_2026-09-13.md`。

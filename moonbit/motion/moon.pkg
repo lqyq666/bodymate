@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/core/string",
+  "moonbitlang/core/math",
+  "moonbitlang/core/double",
+}
+supported_targets = "js"
+
+import { "moonbitlang/core/double" } for "test"

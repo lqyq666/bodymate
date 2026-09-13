@@ -1,44 +1,48 @@
-# Reviewer quickstart
+# BodyMate 评委快速开始
 
-## Requirements
+先验证可复用 MoonBit 核心，再看同一核心驱动的完整人体页面。当前唯一产品入口是 `/?view=full-body`，旧颈肩 URL 不作为演示入口。
 
-- Node.js and npm
-- MoonBit `0.1.20260904`
-- A modern Chromium browser with WebGL
+## 1. 准备与自动验收
 
-## Reproduce
+需要 Node.js 24、MoonBit `0.1.20260904`、Python 3、Chromium/WebGL。
 
-```text
+```sh
 git clone https://github.com/lqyq666/bodymate.git
 cd bodymate
 npm ci
 npm run build
 npm run check
+npm run moonbit:examples
+npm run moonbit:package-check
 npm run moonbit:stats
 ```
 
-Open `index.html` directly using `file://`. The shipped runtime is local-first: it has no runtime CDN, API, model, anatomy, or backend fetch.
+以上是提交后的复现方法；本轮本地改动在推送前不会出现在远端 clone 中。当前交付状态请查看 [申报清单](SUBMISSION_CHECKLIST.md)。
 
-## Complete-body demo
+## 2. 三个纯 MoonBit 场景
 
-Open the default page. Play push-up, change hand width and elbow angle, pause, seek, and change speed; then switch to squat and adjust stance, toe angle, and depth. These definitions, parameter rules, qualitative participation profiles, pose intents, and playback transitions come from MoonBit. Three.js applies them to the shared rig.
+| 场景 | 输入与预期 | 文件 |
+| --- | --- | --- |
+| 参数与约束 | 深蹲“宽站距，脚尖外展25度，深度80%”→ 1.8 / 25 / 80；俯卧撑手距 9 → 1.8，并给出范围提示 | `moonbit/examples/parameters/main.mbt` |
+| 双消费者会话 | 深蹲经过 2.2 秒相位 0.5；暂停和 reset 不影响独立弯举会话 | `moonbit/examples/sessions/main.mbt` |
+| 确定性采样 | 深蹲深度 80%，相位 0.5 的 excursion 为 0.8；同输入两次输出相等 | `moonbit/examples/sampling/main.mbt` |
 
-## Three neck-domain demos
+`npm run moonbit:examples` 顺序运行三者。包审计还会从实际 ZIP 解压后的代码重新执行三者，此时没有浏览器、GLB 或 npm 依赖。
 
-1. Enter `右侧斜角肌`. MoonBit resolves `bodymate.neck.set.scalene.right`; three real scalene meshes highlight, with right anterior scalene as focus.
-2. Enter `耸肩涉及哪些肌肉`. MoonBit resolves `shoulder_girdle_elevation`, shows the existing StructureSet, and exposes locally bundled evidence.
-3. Enter `低头和向右转头有哪些共同结构`. MoonBit resolves the ordered movement pair, performs set algebra, and shows overlap / only-left / only-right presentation tiers.
+## 3. 页面路线
 
-Try a health query such as `我脖子疼怎么办` as a safety check: it must return an educational boundary message without changing the selected anatomy.
+```sh
+python -m http.server 4174 --bind 127.0.0.1
+```
 
-## Where to review MoonBit
+打开 `http://127.0.0.1:4174/?view=full-body`，等人体及控件加载完成。
 
-- `moonbit/core/registry.mbt` — canonical 14-structure registry and StructureSet derivation
-- `moonbit/core/resolver.mbt` — deterministic structure, movement, comparison, and health classification
-- `moonbit/core/movements.mbt` and `comparison.mbt` — bounded evidence mapping and pure set algebra
-- `moonbit/core/actions.mbt`, `state.mbt`, `events.mbt`, `wire.mbt` — validation, transitions, events, and versioned boundary
-- `moonbit/core/full_body_motion.mbt` — complete-body motion registry, aliases, parameters, presets, profiles, and pose intents
-- `moonbit/core/motion_session.mbt` — play/stop, phase, pause/resume, speed, seek, and parameter state
-- `src/full-muscle/motion-domain.mjs` — thin parser for the external generated MoonBit wire contract
+1. 点击“动作”，应实际播放俯卧撑。暂停后展开“动作调整”，切到宽距：手距 1.8、肘角 60°，进度和暂停状态保留。
+2. 选择深蹲，调整站距、脚尖角、下蹲深度；改变播放速度与进度；切换骨骼/透视，观察支撑与中心。
+3. 选择弯举，再恢复站立；左侧参照始终独立站立。查询胸大肌并点选肌肉，标签保持中文。
 
-Read [architecture](MOONBIT_ARCHITECTURE.md), [review guide](MOONBIT_REVIEW_GUIDE.md), [test matrix](TEST_MATRIX.md), [movement evidence](MOVEMENT_EVIDENCE.md), and [asset provenance](HUMAN_ATLAS_NECK_ASSET.md) alongside the code.
+## 4. 看代码
+
+从 [公开 API](../moonbit/motion/pkg.generated.mbti) → [库说明](../moonbit/motion/README.md) → `motion_test.mbt` → `moonbit/core/full_body_motion.mbt` / `motion_session.mbt` → `src/full-muscle/motion-domain.mjs` 顺序检查。前三者证明可复用，后两层证明产品实际使用同一份规则。
+
+[技术审查路线](MOONBIT_REVIEW_GUIDE.md)解释错误原子性、独立会话和生成物门禁；[测试矩阵](TEST_MATRIX.md)列出自动测试与浏览器验收的不同边界。
