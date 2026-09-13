@@ -1,13 +1,21 @@
-# BodyMate — one-page project summary
+# BodyMate｜新项目一页说明
 
-**Problem and user.** Anatomy learners can inspect static models or read exercise descriptions, but connecting a parameterized movement to the participating structures is still difficult. BodyMate gives learners and reviewers one offline laboratory where a real complete body moves, relevant muscles receive qualitative emphasis, and a focused evidence-backed neck model can answer bounded questions.
+**项目名称：** BodyMate —— 基于 MoonBit 的全身教学动作引擎与交互实验室。
 
-**Solution.** The default browser view renders 415 muscle meshes and 282 skeletal and related structures from Human Atlas on a shared 21-joint rig. It demonstrates push-up, squat, and curl, including hand width, elbow angle, stance width, toe angle, and squat depth. Users can pause, seek, change speed, restore standing, switch muscle/bone/x-ray views, search structures, and inspect the same asset through an independent miniature navigator. A separate neck laboratory provides 14 canonical structures, real mesh selection, StructureSets, movement relationships, and comparisons.
+**方向与使用者：** 应用与内容工具／图形与通用内容处理组件；面向开发人体教学、动作演示或参数化交互工具的开发者，以及需要观察结构协同的学习者。
 
-**MoonBit architecture.** MoonBit owns domain meaning and accepted state changes. The neck domain owns its canonical registry, deterministic resolver, StructureSet semantics, evidence-backed movement mapping, comparison algebra, actions, state, events, and versioned snapshots. The complete-body domain owns action identity, aliases, parameter contracts and presets, text parameter parsing, qualitative participation profiles, playback state, and key pose intents. A thin JavaScript adapter parses the versioned wire contract; Three.js remains the presentation boundary for GLB loading, quaternion/vector application, raycasting, labels, camera, orbit, materials, and rendering.
+**问题：** 仅有三维模型不能提供可验证的动作含义与参数规则；将逻辑嵌在浏览器中，会使状态隔离、无界面复现和复用困难。
 
-**Canonical demos.** Start with a parameterized push-up and squat in `/?view=full-body`, then switch to `/?view=neck-lab`. `右侧斜角肌` resolves to a three-mesh StructureSet. `耸肩涉及哪些肌肉` resolves bounded evidence-backed coverage. `低头和向右转头有哪些共同结构` compares two mappings as overlap, only-left, and only-right.
+**方案：** 提供 `lqyq666/bodymate/motion` MoonBit 库，负责三种教学动作的参数契约、中文参数解析、独立播放会话、定性参与提示及确定性姿态目标。完整人体网页是实际消费示例，具备 415 条肌肉、282 个骨骼及相关结构、21 关节教学 rig、中文选肌、显示模式、独立参照和动作控制。
 
-**Verification and reproducibility.** Run `npm ci`, `npm run build`, `npm run check`, and `npm run moonbit:stats`, then serve the repository on localhost. The current suite contains 32 MoonBit tests and 101 Node tests covering cross-language contracts, JavaScript-boundary regressions, generated artifacts, the shared rig, parameter extremes, planted supports, asset integrity, safety, and offline transport. Normal build and verification do not require the upstream Human Atlas source cache or a runtime network request.
+**三个完整场景：** ① 中文深蹲参数解析并验证范围／单位；② 两个使用者独立播放、暂停与恢复；③ 不加载渲染器，对指定动作参数和相位采样并复现一致姿态。`npm run moonbit:examples` 给出含断言的可运行证据。
 
-**Open-source provenance and limits.** BodyMate source is MIT licensed. Human Atlas / BodyParts3D geometry and the head presentation surface retain CC BY 4.0 attribution; retained third-party materials keep their own notices. The motion system is educational and qualitative: it is not complete biomechanics, EMG, force estimation, diagnosis, treatment, rehabilitation, or training advice. There is no remote AI or backend.
+**MoonBit 的作用：** 库不依赖 DOM、Three.js、GLB、npm 包或网络，浏览器也导入同一份实现。环境与指针策略另由 MoonBit 管理；JS/Three.js 保留渲染、IK、资源和界面职责。旧颈肩兼容代码单独统计，不作为当前页面能力。
+
+**验证：** `npm run build`、`npm run check`、`npm run moonbit:examples`、`npm run moonbit:package-check`。实际 ZIP 在隔离目录重新 check/build/test/run。规模来自 `npm run moonbit:stats`；最新验收事实见 `docs/SUBMISSION_SCORECARD.md`。
+
+**差异：** 本项目集中于有语义的预设教学动作、参数约束与可隔离会话；不同于 Lottie 播放、BVH 文件解析或通用运动曲线工具。详见申报说明中的来源与比较。
+
+**来源与限制：** 自有代码 MIT；人体保留 Human Atlas / BodyParts3D 的归属与许可证。Tripo 环境的来源、哈希与处理过程已记录，环境资产不进入库包。AI 辅助开发如实披露。当前固定教学骨架与三种动作，定性提示不是受力、肌电或医疗指导。
+
+**新项目状态：** 首个现存提交日期为 2026-09-11；保留真实历史，不创建虚假 commit。尚未正式申报，最终新项目资格由赛事审核；本地优化不等于已推送、已发布或已通过验收。

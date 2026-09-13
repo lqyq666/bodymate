@@ -1,0 +1,3 @@
+import { "lqyq666/bodymate/motion" }
+pkgtype(kind: "executable")
+supported_targets = "js"

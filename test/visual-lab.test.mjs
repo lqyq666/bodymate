@@ -8,19 +8,31 @@ import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { gunzipSync } from 'node:zlib';
 const read = path => readFile(new URL('../' + path, import.meta.url), 'utf8');
 
-test('default presentation keeps the existing complete body and exposes neck detail explicitly', async () => {
+test('only complete-body presentation is mounted, including retired view URLs', async () => {
   const html = await read('index.html'), full = await read('assets/runtime/full-muscle-root-adapter.js'), shell = await read('assets/runtime/visual-lab-shell.js');
-  assert.match(html, /get\('view'\)!=='neck-lab'/);
-  assert.match(full, /get\('view'\) === 'neck-lab'\) return/);
-  assert.match(shell, /完整人体/); assert.match(shell, /颈肩放大/);
-  assert.match(full, /__rootScmDispose/);
+  assert.match(html, /full-muscle-root-adapter\.js/);
+  assert.match(shell, /searchParams\.set\('view', 'full-body'\)/);
+  assert.match(shell, /history\.replaceState/);
+  assert.match(shell, /完整人体/);
+  for (const source of [html, full, shell, await read('assets/runtime/real-body-navigator.js'), await read('src/full-muscle/navigator.mjs')]) {
+    assert.doesNotMatch(source, /neck-lab|onNeckFocus|real-nav-focus|颈肩放大/);
+  }
+  assert.doesNotMatch(html, /class="rail"|root-scm-runtime|root-scm-root-adapter|coach-query-root-adapter|Interaction controller/);
 });
 test('model status derives real counts and UI actions use existing controllers', async () => {
   const shell = await read('assets/runtime/visual-lab-shell.js'), full = await read('assets/runtime/full-muscle-root-adapter.js');
-  assert.match(shell, /registry.length/); assert.match(full, /onReady: \(\{ count, boneCount \}\)/);
+  assert.match(shell, /正在加载/); assert.match(full, /onReady: \(\{ count, boneCount \}\)/);
   assert.match(shell, /requestSubmit\(\)/);
   assert.doesNotMatch(shell, /bodymate_domain_.*\(/);
   assert.doesNotMatch(shell, /75%|训练进度|本周训练|向 AI 提问/);
+});
+test('foreground sculpture stays opaque above the scene blend and uses the imported platform', async () => {
+  const css = await read('assets/visual-full-body.css'), shell = await read('assets/visual-lab.css'), navigator = await read('src/full-muscle/navigator.mjs');
+  assert.match(css, /#full-muscle-canvas\{z-index:1;mask-image:linear-gradient/);
+  assert.match(shell, /\.navigator\{[^}]*position:absolute;[^}]*z-index:3/);
+  assert.doesNotMatch(shell, /real-nav-focus|nav-view:after|root-scm-canvas|rail-button/);
+  assert.match(navigator, /createNavigatorPlatform\(gltf.scene, environmentTarget.texture\)/);
+  assert.doesNotMatch(navigator, /opacity\s*=|transparent\s*=/);
 });
 test('crowded labels remain separated and bounded, including anchors near the lower edge', () => {
   const entries = Array.from({length:5}, (_,i)=>({entry:{structureId:String(i),side:'right'},anchor:{x:i,y:0,z:0}}));

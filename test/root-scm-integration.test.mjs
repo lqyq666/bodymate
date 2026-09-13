@@ -106,7 +106,7 @@ test('Human Atlas pick bridge forwards the picked canonical mesh ID to MoonBit',
   assert.deepEqual(selected, humanAtlasManifest.entries.map((entry) => entry.structureId));
 });
 
-test('Stage 5B routes real-viewer controls and blocks unsupported navigator regions', async () => {
+test('retained SCM adapter routes its isolated controls but is disconnected from the root page', async () => {
   const adapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
   const runtimeSource = await readFile(new URL('src/root-scm/runtime-entry.mjs', root), 'utf8');
   const selectors = ['#detail-view', '#detail-canvas', '.current-summary', '#label-lines', '#anatomy-labels', '#coach-bubble', '.detail-instruction', '.fiber-note', '.data-tag', '#selection-meta', '#selection-name'];
@@ -127,26 +127,18 @@ test('Stage 5B routes real-viewer controls and blocks unsupported navigator regi
   context.__rootScmSetLabelsVisible(false);
   assert.deepEqual(calls, ['reset', ['pulse', true], ['labels', false]]);
 
-  assert.match(html, /const SUPPORTED_NAVIGATION_REGIONS=new Set\(ROOT_ANATOMY_REGISTRY\.map\(entry=>entry\.region\)\)/);
-  assert.match(html, /function gotoRegion\(reg,id=null,layer=null\)\{if\(!REGIONS\[reg\]\)return false;if\(!SUPPORTED_NAVIGATION_REGIONS\.has\(reg\)\)\{toast\(/);
-  assert.match(html, /for\(const key of SUPPORTED_NAVIGATION_REGIONS\)/);
-  assert.match(html, /globalThis\.__rootScmSetLabelsVisible\?\.\(state\.labels/);
-  assert.match(html, /globalThis\.__rootScmSetPulseEnabled\?\.\(state\.pulse/);
-  assert.match(html, /globalThis\.__rootScmResetView\?\.\(\)/);
+  assert.doesNotMatch(html, /SUPPORTED_NAVIGATION_REGIONS|gotoRegion|__rootScm/);
   assert.match(runtimeSource, /const resetCamera = \(\) => focusContext\(defaultCameraDirection\)/);
   assert.match(runtimeSource, /const updatePulse = \(timestamp\) =>/);
   assert.match(runtimeSource, /pulseEnabled && plan\.selected/);
   assert.match(runtimeSource, /if \(!labelsVisible\) \{ selectedLabelScreen = null;/);
   assert.match(runtimeSource, /setPulseEnabled\(enabled\) \{ pulseEnabled = Boolean\(enabled\)/);
   assert.match(runtimeSource, /setLabelsVisible\(visible\) \{ labelsVisible = Boolean\(visible\); updateLabels\(\); \}/);
-  assert.match(html, /卧推动作演示已就绪 · 本地预制动画/);
+  assert.match(html, /full-muscle-root-adapter\.js/);
 });
 
-test('root legacy rendering comparisons resolve through the canonical ID adapter', () => {
-  const controller = html;
-  assert.match(controller, /coreIdFor\(m\.id\)===state\.selected/);
-  assert.match(controller, /coreIdFor\(f\.id\)===state\.selected/);
-  assert.doesNotMatch(controller, /\b[mdf]\.id===state\.selected/);
+test('root page no longer contains the legacy renderer and comparison controller', () => {
+  assert.doesNotMatch(html, /coreIdFor|Interaction controller|EXERCISE_DEMOS|data-neck-group/);
 });
 
 test('bounds focus uses real SCM bounds rather than a hard-coded camera target', () => {
@@ -157,11 +149,10 @@ test('bounds focus uses real SCM bounds rather than a hard-coded camera target',
   assert.equal(plan.direction.length, 3);
 });
 
-test('root retains legacy views and restores the legacy presentation on real-viewer failure', async () => {
+test('retained SCM failure fallback is not mounted by the complete-body entrypoint', async () => {
   const adapter = await readFile(new URL('assets/runtime/root-scm-root-adapter.js', root), 'utf8');
-  for (const id of ['nav-canvas', 'detail-canvas', 'orb-canvas']) assert.match(html, new RegExp(`id=["']${id}["']`));
-  assert.match(html, /assets\/runtime\/root-scm-runtime\.js/);
-  assert.match(html, /root-scm-root-adapter\.js/);
+  for (const id of ['nav-canvas', 'detail-canvas', 'orb-canvas']) assert.doesNotMatch(html, new RegExp(`id=["']${id}["']`));
+  assert.doesNotMatch(html, /assets\/runtime\/root-scm-runtime\.js|root-scm-root-adapter\.js/);
   assert.match(adapter, /root-scm-canvas/);
   assert.match(adapter, /真实 SCM 资源未能初始化/);
   assert.match(adapter, /root-scm-fail/);
@@ -212,8 +203,7 @@ test('Human Atlas neck package pins fourteen independently named real meshes wit
   assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.sourceMeshId), rootScmRegistry.map((entry) => entry.sourceMeshId));
   assert.deepEqual(humanAtlasManifest.entries.map((entry) => entry.structureId), rootScmRegistry.map((entry) => entry.structureId));
   assert.equal(humanAtlasManifest.entries.length, 14);
-  assert.match(html, /BodyMateAnatomyRegistryFilter/);
-  assert.match(html, /data-neck-group="shoulder"/);
+  assert.doesNotMatch(html, /BodyMateAnatomyRegistryFilter|data-neck-group/);
 });
 
 test('committed Human Atlas neck GLB preserves all fourteen mapped meshes and their documented topology', async () => {

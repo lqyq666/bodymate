@@ -1,4 +1,5 @@
 import {
+  "lqyq666/bodymate/motion",
   "moonbitlang/core/string",
   "moonbitlang/core/math",
   "moonbitlang/core/double",
@@ -49,9 +50,15 @@ options(
         "bodymate_motion_session_seek_v1",
         "bodymate_motion_session_tick_v1",
         "bodymate_motion_session_snapshot_v1",
+        "bodymate_environment_reset_v1",
+        "bodymate_environment_set_quality_v1",
+        "bodymate_environment_set_reduced_motion_v1",
+        "bodymate_environment_sample_v1",
+        "bodymate_environment_tick_v1",
+        "bodymate_environment_frame_v1",
+        "bodymate_ui_feedback_v1",
       ],
       "format": "iife",
     },
   },
 )
-

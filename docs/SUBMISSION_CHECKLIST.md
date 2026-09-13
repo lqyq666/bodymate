@@ -1,16 +1,29 @@
-# Submission checklist
+# BodyMate 九月新项目申报清单
 
-- [x] Public GitHub repository with preserved commit history
-- [x] Submission-grade README and root MIT `LICENSE`
-- [x] Clean clone; `npm ci`, `npm run build`, `npm run check`, and `npm run moonbit:stats`
-- [x] Canonical demo steps and reproducibility instructions
-- [x] Desktop/mobile `file://` render captures; manual interaction replay documented where automation blocks `file://`
-- [x] MoonBit architecture, review guide, and test matrix
-- [x] Development retrospective and one-page project summary
-- [x] Human Atlas / BodyParts3D and retained Open Anatomy attribution/license documents
-- [x] AI-assisted-development disclosure and human decision authority statement
-- [x] Tracked-file secret and local absolute-path hygiene gate
-- [x] Final RC tag: `v0.1.0-scc-rc1`
-- [x] Final main CI green
+状态更新：2026-09-13。本清单替代此前旧颈肩/SCC RC 的“全部完成”记录；本地完成、远端发布、报名与正式验收分开记录。
 
-Before submitting, replay the three canonical queries in a local browser and confirm the repository page displays the linked documentation and license.
+## 已完成的本地优化
+
+- [x] 新项目名称、定位、三个完整场景和差异说明：`NEW_PROJECT_PROPOSAL_2026-09-13.md`。
+- [x] `moonbit/motion` 可直接导入的类型化库，当前网页使用同一实现。
+- [x] 独立会话、私有状态、快照隔离、错误不更新与有限输入边界测试。
+- [x] 三个含断言的纯 MoonBit 示例运行成功。
+- [x] 公开 API 文档与自动生成接口；规模基线分项统计并加入过期检查。
+- [x] 实际 ZIP 的允许路径、来源体积与隔离目录 check/build/test/run。
+- [x] 当前全身页对应的 README、评委路线、讲稿和一页说明。
+- [x] 本地完整 build/check：47 个 MoonBit 测试，120 个 Node 测试通过。
+- [x] CI 配置包括全应用检查和库包复现；此项仅说明配置已更新。
+- [x] 公开 GitHub 仓库已实时核查，现有真实提交历史保留。
+
+## 发布与申报检查
+
+- GitHub 交付：以包含本轮源码、资产和文档的提交为单位核对远端 SHA。
+- [ ] 新 SHA 的远端 CI 成功；不能沿用旧 RC 的 green 记录。
+- [ ] Mooncakes 账号命名空间可用，实际发布版本成功并可访问。
+- [ ] 使用最终公开版本重放评审路线，确认未遗漏未跟踪文件。
+- [ ] 正式提交新项目申报、个人资料与官方群确认。
+- [ ] 官方资格审核与最终验收。
+
+不得通过虚构提交、把生成代码计入 MoonBit 或声称不存在的功能来勾选条件。库和网页作为同一个 BodyMate 项目，不拆成多个申报。
+
+[正式章程](https://bxup9uklfcb.feishu.cn/wiki/Dx4Bwd6D1i3GfHkajQCcF7SznEd) · [新项目说明](NEW_PROJECT_PROPOSAL_2026-09-13.md) · [本地验证记录](SUBMISSION_SCORECARD.md)

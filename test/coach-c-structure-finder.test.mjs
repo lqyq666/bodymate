@@ -117,7 +117,7 @@ test('thin JS adapter has no resolver tables or action transition switch', () =>
   assert.doesNotMatch(source, /document\.|fetch\s*\(/);
   assert.doesNotMatch(source, /shoulder_girdle_elevation|cervical_rotation_right|trapezius\.upper/);
   assert.match(bridge, /executeCoachAction/);
-  assert.match(html, /assets\/runtime\/coach-query-runtime\.js/);
+  assert.doesNotMatch(html, /assets\/runtime\/coach-query-runtime\.js/);
   assert.match(runtime, /BodyMateCoachQuery|bodymate_domain_resolve_query_v3/);
 });
 

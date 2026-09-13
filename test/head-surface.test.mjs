@@ -37,8 +37,21 @@ test('surface follows every existing clip without modifying the rig or joining m
 test('bone and x-ray views hide only the new surface and restore it in muscle view',()=>{
   const surface=attachHeadSurface(clone(gltf.scene));surface.setView('bone');assert.equal(surface.group.visible,false);surface.setView('xray');assert.equal(surface.group.visible,false);surface.setView('muscle');assert.equal(surface.group.visible,true);
 });
+
+test('sculpture finish changes only presentation material and preserves the exact head geometry', () => {
+  const normal = attachHeadSurface(clone(gltf.scene));
+  const sculpture = attachHeadSurface(clone(gltf.scene), { sculpture: true });
+  for (let index = 0; index < normal.group.children.length; index++) {
+    const original = normal.group.children[index], styled = sculpture.group.children[index];
+    assert.deepEqual(styled.geometry.attributes.position.array, original.geometry.attributes.position.array);
+    assert.deepEqual(styled.geometry.attributes.normal.array, original.geometry.attributes.normal.array);
+    assert.equal(styled.material.color.getHexString(), 'f5f3ef');
+    assert.equal(styled.material.transparent, false);
+  }
+  sculpture.setView('bone'); assert.equal(sculpture.group.visible, false);
+});
 test('frozen anatomy and the miniature use the same head surface without registry changes',async()=>{
   assert.equal(sha(bytes),'CD2E2108F7551B87928989C445C78E8BB35D867C89D90CD766623CB4CF7E1522');
   assert.equal(sha(await readFile(new URL('assets/anatomy/human-atlas/neck-muscles.glb',root))),'FA6A0CFDDF1DA59367EA8EB72DB77770A08A2F53D01097C2873ECFFD692F7065');
-  for(const file of ['src/full-muscle/runtime-entry.mjs','src/full-muscle/navigator.mjs'])assert.match(await readFile(new URL(file,root),'utf8'),/attachHeadSurface\(model\)/);
+  for(const file of ['src/full-muscle/runtime-entry.mjs','src/full-muscle/navigator.mjs'])assert.match(await readFile(new URL(file,root),'utf8'),/attachHeadSurface\(model(?:,|\))/);
 });

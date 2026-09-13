@@ -1,0 +1,135 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "lqyq666/bodymate/motion"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn catalog() -> Array[MotionDefinition]
+
+pub fn definition(String) -> MotionDefinition?
+
+pub fn normalize(String, Array[MotionParameterValue]) -> Result[NormalizedParameters, MotionError]
+
+pub fn parse_query(String, String, Array[MotionParameterValue]) -> Result[ParsedParameters, MotionError]
+
+pub fn pose_intent(String, Double, Array[MotionParameterValue]) -> Result[PoseIntent, MotionError]
+
+pub fn profile(String, Array[MotionParameterValue]) -> Result[MotionProfile, MotionError]
+
+pub fn resolve(String) -> String?
+
+// Errors
+
+// Types and methods
+pub struct MotionDefinition {
+  id : String
+  title : String
+  aliases : Array[String]
+  duration : Double
+  muscles : Array[String]
+  structure_pattern : String
+  parameters : Array[MotionParameterDefinition]
+  presets : Array[MotionPreset]
+}
+
+pub(all) enum MotionError {
+  UnknownMotion(String)
+  NoActiveMotion
+} derive(Eq, @debug.Debug)
+
+pub struct MotionEvidence {
+  url : String
+  scope : String
+}
+
+pub struct MotionParameterDefinition {
+  key : String
+  label : String
+  unit : String
+  minimum : Double
+  maximum : Double
+  step : Double
+  initial : Double
+}
+
+pub(all) struct MotionParameterValue {
+  key : String
+  value : Double
+}
+
+pub struct MotionParticipationGroup {
+  label : String
+  structure_pattern : String
+  role : String
+  weight : Double
+}
+
+pub struct MotionPreset {
+  title : String
+  values : Array[MotionParameterValue]
+}
+
+pub struct MotionProfile {
+  groups : Array[MotionParticipationGroup]
+  note : String
+  evidence : Array[MotionEvidence]
+}
+
+pub struct NormalizedParameters {
+  values : Array[MotionParameterValue]
+  notices : Array[String]
+}
+
+pub struct ParsedParameters {
+  values : Array[MotionParameterValue]
+  notices : Array[String]
+  recognized : Bool
+}
+
+pub struct PoseIntent {
+  depth : Double
+  excursion : Double
+  root_y : Double
+  root_z : Double
+  torso_x : Double
+  hand_width : Double
+  elbow_angle : Double
+  wrist_x : Double
+  wrist_y : Double
+  wrist_z : Double
+  stance_width : Double
+  toe_angle : Double
+  ankle_x : Double
+  upper_arm_x : Double
+  forearm_x : Double
+} derive(Eq, @debug.Debug)
+
+pub struct Session {
+  // private fields
+}
+pub fn Session::new() -> Self
+pub fn Session::play(Self, String, Array[MotionParameterValue], preserve_phase? : Bool, initially_paused? : Bool) -> Result[SessionSnapshot, MotionError]
+pub fn Session::reset(Self) -> SessionSnapshot
+pub fn Session::seek(Self, Double) -> SessionSnapshot
+pub fn Session::set_parameters(Self, Array[MotionParameterValue]) -> Result[SessionSnapshot, MotionError]
+pub fn Session::set_paused(Self, Bool) -> SessionSnapshot
+pub fn Session::set_speed(Self, Double) -> SessionSnapshot
+pub fn Session::snapshot(Self) -> SessionSnapshot
+pub fn Session::stop(Self) -> SessionSnapshot
+pub fn Session::tick(Self, Double) -> SessionSnapshot
+
+pub struct SessionSnapshot {
+  motion_id : String
+  phase : Double
+  paused : Bool
+  speed : Double
+  parameters : Array[MotionParameterValue]
+  notices : Array[String]
+  revision : Int
+}
+
+// Type aliases
+
+// Traits

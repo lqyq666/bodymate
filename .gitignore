@@ -18,3 +18,9 @@ prototype/human-atlas-local/
 
 # Machine-specific continuation notes; public evidence lives in the other docs.
 docs/CODEX_HANDOFF_2026-09-12.md
+
+docs/CODEX_HANDOFF_2026-09-13.md
+docs/CODEX_UI_OPTIMIZATION_HANDOFF_2026-09-13.md
+
+# Original environment exports remain local; processed/runtime copies and hashes are published.
+assets/environment/source/

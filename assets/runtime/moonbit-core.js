@@ -148,41 +148,12 @@
     this.source_url = param2;
     this.note = param3;
   }
-  function _M0TP37lqyq6668bodymate4core13MotionSession(param0, param1, param2, param3, param4, param5, param6) {
-    this.motion_id = param0;
-    this.phase = param1;
-    this.paused = param2;
-    this.speed = param3;
-    this.parameters = param4;
-    this.notices = param5;
-    this.revision = param6;
-  }
-  function _M0TP37lqyq6668bodymate4core25MotionParameterDefinition(param0, param1, param2, param3, param4, param5, param6) {
-    this.key = param0;
-    this.label = param1;
-    this.unit = param2;
-    this.minimum = param3;
-    this.maximum = param4;
-    this.step = param5;
-    this.initial = param6;
-  }
-  function _M0TP37lqyq6668bodymate4core16MotionDefinition(param0, param1, param2, param3, param4, param5, param6, param7) {
-    this.id = param0;
-    this.title = param1;
-    this.aliases = param2;
-    this.duration = param3;
-    this.muscles = param4;
-    this.structure_pattern = param5;
-    this.parameters = param6;
-    this.presets = param7;
-  }
-  function _M0TP37lqyq6668bodymate4core12MotionPreset(param0, param1) {
-    this.title = param0;
-    this.values = param1;
-  }
-  function _M0TP37lqyq6668bodymate4core20MotionParameterValue(param0, param1) {
-    this.key = param0;
-    this.value = param1;
+  function _M0TP37lqyq6668bodymate4core16EnvironmentState(param0, param1, param2, param3, param4) {
+    this.phase = param0;
+    this.quality = param1;
+    this.range = param2;
+    this.sector = param3;
+    this.reduced_motion = param4;
   }
   function _M0TPC38internal13regex__engine8automata5State(param0, param1, param2, param3) {
     this.slot = param0;
@@ -267,6 +238,7 @@
   function _M0TPB8MutLocalGORPB4IterGRPC38internal13regex__engine8automata11MarkSlotMapEE(param0) {
     this.val = param0;
   }
+  const _M0MPB7JSArray4copy = (arr) => arr.slice(0);
   const _M0MPC16double6Double8mod__ffi = (a, b) => (a % b);
   const _M0MPB7JSArray11set__length = (arr, len) => { arr.length = len; };
   const _M0MPB7JSArray3pop = (arr) => arr.pop();
@@ -633,8 +605,150 @@
     this.pat = param0;
     this.re = param1;
   }
+  function _M0TP37lqyq6668bodymate6motion7Session(param0, param1, param2, param3, param4, param5, param6) {
+    this.motion_id = param0;
+    this.phase = param1;
+    this.paused = param2;
+    this.speed = param3;
+    this.parameters = param4;
+    this.notices = param5;
+    this.revision = param6;
+  }
+  function _M0TP37lqyq6668bodymate6motion15SessionSnapshot(param0, param1, param2, param3, param4, param5, param6) {
+    this.motion_id = param0;
+    this.phase = param1;
+    this.paused = param2;
+    this.speed = param3;
+    this.parameters = param4;
+    this.notices = param5;
+    this.revision = param6;
+  }
+  function _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition(param0, param1, param2, param3, param4, param5, param6) {
+    this.key = param0;
+    this.label = param1;
+    this.unit = param2;
+    this.minimum = param3;
+    this.maximum = param4;
+    this.step = param5;
+    this.initial = param6;
+  }
+  function _M0TP37lqyq6668bodymate6motion16MotionDefinition(param0, param1, param2, param3, param4, param5, param6, param7) {
+    this.id = param0;
+    this.title = param1;
+    this.aliases = param2;
+    this.duration = param3;
+    this.muscles = param4;
+    this.structure_pattern = param5;
+    this.parameters = param6;
+    this.presets = param7;
+  }
+  function _M0TP37lqyq6668bodymate6motion12MotionPreset(param0, param1) {
+    this.title = param0;
+    this.values = param1;
+  }
+  function _M0TP37lqyq6668bodymate6motion20MotionParameterValue(param0, param1) {
+    this.key = param0;
+    this.value = param1;
+  }
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion20NormalizedParametersRP37lqyq6668bodymate6motion11MotionErrorE3Err(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion20NormalizedParametersRP37lqyq6668bodymate6motion11MotionErrorE3Err.prototype.$tag = 0;
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion20NormalizedParametersRP37lqyq6668bodymate6motion11MotionErrorE2Ok(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion20NormalizedParametersRP37lqyq6668bodymate6motion11MotionErrorE2Ok.prototype.$tag = 1;
+  function _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(param0) {
+    this._0 = param0;
+  }
+  _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion.prototype.$tag = 0;
+  function _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion() {}
+  _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion.prototype.$tag = 1;
+  const _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion__ = new _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion();
+  function _M0TPB8MutLocalGbE(param0) {
+    this.val = param0;
+  }
+  function _M0TP37lqyq6668bodymate6motion20NormalizedParameters(param0, param1) {
+    this.values = param0;
+    this.notices = param1;
+  }
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE3Err(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE3Err.prototype.$tag = 0;
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE2Ok(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE2Ok.prototype.$tag = 1;
+  function _M0TPB8MutLocalGRPB5ArrayGRP37lqyq6668bodymate6motion20MotionParameterValueEE(param0) {
+    this.val = param0;
+  }
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion16ParsedParametersRP37lqyq6668bodymate6motion11MotionErrorE3Err(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion16ParsedParametersRP37lqyq6668bodymate6motion11MotionErrorE3Err.prototype.$tag = 0;
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion16ParsedParametersRP37lqyq6668bodymate6motion11MotionErrorE2Ok(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion16ParsedParametersRP37lqyq6668bodymate6motion11MotionErrorE2Ok.prototype.$tag = 1;
+  function _M0TP37lqyq6668bodymate6motion16ParsedParameters(param0, param1, param2) {
+    this.values = param0;
+    this.notices = param1;
+    this.recognized = param2;
+  }
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion13MotionProfileRP37lqyq6668bodymate6motion11MotionErrorE3Err(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion13MotionProfileRP37lqyq6668bodymate6motion11MotionErrorE3Err.prototype.$tag = 0;
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion13MotionProfileRP37lqyq6668bodymate6motion11MotionErrorE2Ok(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion13MotionProfileRP37lqyq6668bodymate6motion11MotionErrorE2Ok.prototype.$tag = 1;
   function _M0TPB8MutLocalGsE(param0) {
     this.val = param0;
+  }
+  function _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup(param0, param1, param2, param3) {
+    this.label = param0;
+    this.structure_pattern = param1;
+    this.role = param2;
+    this.weight = param3;
+  }
+  function _M0TP37lqyq6668bodymate6motion14MotionEvidence(param0, param1) {
+    this.url = param0;
+    this.scope = param1;
+  }
+  function _M0TP37lqyq6668bodymate6motion13MotionProfile(param0, param1, param2) {
+    this.groups = param0;
+    this.note = param1;
+    this.evidence = param2;
+  }
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE3Err(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE3Err.prototype.$tag = 0;
+  function _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE2Ok(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE2Ok.prototype.$tag = 1;
+  function _M0TPB8MutLocalGdE(param0) {
+    this.val = param0;
+  }
+  function _M0TP37lqyq6668bodymate6motion10PoseIntent(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14) {
+    this.depth = param0;
+    this.excursion = param1;
+    this.root_y = param2;
+    this.root_z = param3;
+    this.torso_x = param4;
+    this.hand_width = param5;
+    this.elbow_angle = param6;
+    this.wrist_x = param7;
+    this.wrist_y = param8;
+    this.wrist_z = param9;
+    this.stance_width = param10;
+    this.toe_angle = param11;
+    this.ankle_x = param12;
+    this.upper_arm_x = param13;
+    this.forearm_x = param14;
   }
   function _M0TP37lqyq6668bodymate4core12DomainAction(param0, param1, param2, param3) {
     this.kind = param0;
@@ -694,25 +808,6 @@
     this.only_left = param3;
     this.only_right = param4;
     this.union_structure_ids = param5;
-  }
-  function _M0TPB8MutLocalGbE(param0) {
-    this.val = param0;
-  }
-  function _M0TPB8MutLocalGRPB5ArrayGRP37lqyq6668bodymate4core20MotionParameterValueEE(param0) {
-    this.val = param0;
-  }
-  function _M0TP37lqyq6668bodymate4core24MotionParticipationGroup(param0, param1, param2, param3) {
-    this.label = param0;
-    this.structure_pattern = param1;
-    this.role = param2;
-    this.weight = param3;
-  }
-  function _M0TP37lqyq6668bodymate4core14MotionEvidence(param0, param1) {
-    this.url = param0;
-    this.scope = param1;
-  }
-  function _M0TPB8MutLocalGdE(param0) {
-    this.val = param0;
   }
   const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger = { method_0: _M0IPB13StringBuilderPB6Logger13write__string, method_1: _M0IP016_24default__implPB6Logger16write__substringGRPB13StringBuilderE, method_2: _M0IPB13StringBuilderPB6Logger11write__view, method_3: _M0IPB13StringBuilderPB6Logger11write__char, method_4: _M0IP016_24default__implPB6Logger28write__string__interpolationGRPB13StringBuilderE, method_5: _M0IP016_24default__implPB6Logger5writeGRPB13StringBuilderE };
   const _M0MPC16string10StringView4trimN7_2abindS6760 = "\t\n\r ";
@@ -817,11 +912,9 @@
   const _M0FP37lqyq6668bodymate4core18movement__mappings = [new _M0TP37lqyq6668bodymate4core15MovementMapping("shoulder_girdle_elevation", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.right", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.left", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.right", 1, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.left", 1, ["ev.scapula.elevation"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_right", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.right", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_left", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.left", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_flexion", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"])])];
   const _M0FP37lqyq6668bodymate4core17movement__catalog = [new _M0TP37lqyq6668bodymate4core8Movement("shoulder_girdle_elevation", "肩胛带上提 / 耸肩", "Shoulder Girdle Elevation", ["耸肩", "shrug", "肩膀往上提"], 1, "当前模型覆盖上斜方肌与肩胛提肌；不代表全部参与结构。"), new _M0TP37lqyq6668bodymate4core8Movement("cervical_rotation_right", "颈部向右旋转", "Right Cervical Rotation", ["向右转头", "头转右边", "rotate neck right"], 0, "当前模型仅覆盖有证据支持的胸锁乳突肌与头夹肌；不代表完整旋转肌群。"), new _M0TP37lqyq6668bodymate4core8Movement("cervical_rotation_left", "颈部向左旋转", "Left Cervical Rotation", ["向左转头", "头转左边", "rotate neck left"], 0, "当前模型仅覆盖有证据支持的胸锁乳突肌与头夹肌；不代表完整旋转肌群。"), new _M0TP37lqyq6668bodymate4core8Movement("cervical_flexion", "颈部屈曲 / 低头", "Cervical Flexion", ["低头", "neck flexion"], 0, "当前模型仅覆盖双侧胸锁乳突肌；不代表全部颈部屈肌。")];
   const _M0FP37lqyq6668bodymate4core17evidence__catalog = [new _M0TP37lqyq6668bodymate4core11EvidenceRef("ev.scapula.elevation", "NCBI Bookshelf / StatPearls: Anatomy, Thorax, Scapula", "https://www.ncbi.nlm.nih.gov/books/NBK538319/", "Identifies upper trapezius and levator scapulae for scapular elevation."), new _M0TP37lqyq6668bodymate4core11EvidenceRef("ev.neck.rotation-flexion", "OpenStax Anatomy and Physiology 2e: 11.3 Axial Muscles of the Head, Neck, and Back", "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-3-axial-muscles-of-the-head-neck-and-back", "Describes opposite-side SCM rotation, bilateral SCM flexion, and same-side splenius capitis rotation.")];
-  const _M0FP37lqyq6668bodymate4core15motion__session = new _M0TP37lqyq6668bodymate4core13MotionSession("", 0, false, 1, [], [], 0);
-  const _M0FP37lqyq6668bodymate4core20push__up__parameters = [new _M0TP37lqyq6668bodymate4core25MotionParameterDefinition("handWidth", "手距", "倍肩宽", 0.8, 1.8, 0.05, 1.5), new _M0TP37lqyq6668bodymate4core25MotionParameterDefinition("elbowAngle", "底部肘部外展", "°", 15, 70, 5, 45)];
-  const _M0FP37lqyq6668bodymate4core17squat__parameters = [new _M0TP37lqyq6668bodymate4core25MotionParameterDefinition("stanceWidth", "站距", "倍髋宽", 0.8, 1.8, 0.05, 1.2), new _M0TP37lqyq6668bodymate4core25MotionParameterDefinition("toeAngle", "脚尖外展", "°", 0, 35, 5, 20), new _M0TP37lqyq6668bodymate4core25MotionParameterDefinition("squatDepth", "下蹲幅度", "%", 60, 110, 5, 100)];
+  const _M0FP37lqyq6668bodymate4core18environment__state = new _M0TP37lqyq6668bodymate4core16EnvironmentState(0, 2, 1, 0, false);
   const _M0MPC16string10StringView4findN6constrS9865 = 0;
-  const _M0FP37lqyq6668bodymate4core15motion__catalog = [new _M0TP37lqyq6668bodymate4core16MotionDefinition("push_up", "俯卧撑", ["俯卧撑", "卧撑", "push-up", "push up"], 4, ["胸部", "肩部", "上臂后侧"], "pectoralis major/deltoid/triceps brachii/serratus anterior", _M0FP37lqyq6668bodymate4core20push__up__parameters, [new _M0TP37lqyq6668bodymate4core12MotionPreset("窄距", [new _M0TP37lqyq6668bodymate4core20MotionParameterValue("handWidth", 0.85), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("elbowAngle", 25)]), new _M0TP37lqyq6668bodymate4core12MotionPreset("标准", [new _M0TP37lqyq6668bodymate4core20MotionParameterValue("handWidth", 1.5), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("elbowAngle", 45)]), new _M0TP37lqyq6668bodymate4core12MotionPreset("宽距", [new _M0TP37lqyq6668bodymate4core20MotionParameterValue("handWidth", 1.8), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("elbowAngle", 60)])]), new _M0TP37lqyq6668bodymate4core16MotionDefinition("squat", "深蹲", ["深蹲", "squat"], 4.4, ["大腿前侧", "臀部", "大腿后侧"], "rectus femoris/vastus/gluteus/biceps femoris/semitendinosus/semimembranosus", _M0FP37lqyq6668bodymate4core17squat__parameters, [new _M0TP37lqyq6668bodymate4core12MotionPreset("窄站距", [new _M0TP37lqyq6668bodymate4core20MotionParameterValue("stanceWidth", 0.8), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("toeAngle", 10), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate4core12MotionPreset("标准", [new _M0TP37lqyq6668bodymate4core20MotionParameterValue("stanceWidth", 1.2), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("toeAngle", 20), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate4core12MotionPreset("宽站距", [new _M0TP37lqyq6668bodymate4core20MotionParameterValue("stanceWidth", 1.8), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("toeAngle", 30), new _M0TP37lqyq6668bodymate4core20MotionParameterValue("squatDepth", 100)])]), new _M0TP37lqyq6668bodymate4core16MotionDefinition("curl", "弯举", ["弯举", "二头弯举", "curl"], 3.6, ["上臂前侧", "前臂"], "biceps brachii/brachialis/brachioradialis", [], [])];
+  const _M0FP37lqyq6668bodymate4core15motion__session = _M0MP37lqyq6668bodymate6motion7Session3new();
   const _M0FPC28internal7strconv17check__underscoreN25_2atransition__table__222S230 = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 0, 1, 2, 5];
   const _M0FPC28internal7strconv15parse__inf__nanN25_2atransition__table__304S312 = [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 3, 4, 14, 14, 14, 14, 14, 14, 14, 7, 14, 14, 14, 14, 5, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 6, 14, 14, 14, 0, 14, 14, 14, 14, 14, 14, 14, 14, 14, 8, 14, 14, 14, 14, 14, 1, 14, 14, 9, 14, 14, 14, 14, 14, 14, 14, 14, 10, 14, 14, 14, 14, 14, 14, 11, 14, 14, 14, 14, 14, 14, 14, 14, 14, 12, 14, 14, 14, 14, 14, 14, 14, 14, 13, 14, 1, 14, 14, 14, 14, 14, 14, 14];
   const _M0FPC38internal13regex__engine8automata11rand__state = _M0MPC13ref3Ref3RefGiE(0);
@@ -2266,10 +2359,10 @@
   function _M0MPC15array13ReadOnlyArray11from__arrayGiE(array) {
     return _M0MPC15array10FixedArray11from__arrayGiE(array);
   }
-  function _M0MPC15array13ReadOnlyArray6lengthGOsE(self) {
+  function _M0MPC15array13ReadOnlyArray6lengthGiE(self) {
     return self.length;
   }
-  function _M0MPC15array13ReadOnlyArray6lengthGiE(self) {
+  function _M0MPC15array13ReadOnlyArray6lengthGOsE(self) {
     return self.length;
   }
   function _M0MPC15array13ReadOnlyArray6lengthGRPC46string8internal13regex__engine3ast7PatternE(self) {
@@ -2455,6 +2548,15 @@
     } else {
       const _Some = self;
       return _Some;
+    }
+  }
+  function _M0MPC16option6Option10unwrap__orGsE(self, default_) {
+    if (self === undefined) {
+      return default_;
+    } else {
+      const _Some = self;
+      const _t = _Some;
+      return _t;
     }
   }
   function _M0MPC13int3Int20next__power__of__two(self) {
@@ -2658,6 +2760,9 @@
       const v = _M0MPC15array5Array11unsafe__popGURPC38internal13regex__engine8automata4MarkRPC38internal13regex__engine8automata4SlotRPC25immut11sorted__map9SortedMapGRPC38internal13regex__engine8automata4MarkRPC38internal13regex__engine8automata4SlotEEE(self);
       return v;
     }
+  }
+  function _M0MPC15array5Array4copyGRP37lqyq6668bodymate6motion20MotionParameterValueE(self) {
+    return _M0MPB7JSArray4copy(self);
   }
   function _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(self, index) {
     const len = self.length;
@@ -9573,88 +9678,846 @@
   function _M0FPC14math3cos(_tmp) {
     return Math.cos(_tmp);
   }
-  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_626, _x_627) {
-    if (_x_626 === 0) {
-      if (_x_627 === 0) {
+  function _M0MP37lqyq6668bodymate6motion7Session3new() {
+    return new _M0TP37lqyq6668bodymate6motion7Session("", 0, false, 1, [], [], 0);
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session8snapshot(self) {
+    return new _M0TP37lqyq6668bodymate6motion15SessionSnapshot(self.motion_id, self.phase, self.paused, self.speed, _M0MPC15array5Array4copyGRP37lqyq6668bodymate6motion20MotionParameterValueE(self.parameters), _M0MPC15array5Array4copyGRP37lqyq6668bodymate6motion20MotionParameterValueE(self.notices), self.revision);
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session5reset(self) {
+    self.motion_id = "";
+    self.phase = 0;
+    self.paused = false;
+    self.speed = 1;
+    self.parameters = [];
+    self.notices = [];
+    self.revision = self.revision + 1 | 0;
+    return _M0MP37lqyq6668bodymate6motion7Session8snapshot(self);
+  }
+  function _M0FP37lqyq6668bodymate6motion20push__up__parameters() {
+    return [new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("handWidth", "手距", "倍肩宽", 0.8, 1.8, 0.05, 1.5), new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("elbowAngle", "底部肘部外展", "°", 15, 70, 5, 45)];
+  }
+  function _M0FP37lqyq6668bodymate6motion17squat__parameters() {
+    return [new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("stanceWidth", "站距", "倍髋宽", 0.8, 1.8, 0.05, 1.2), new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("toeAngle", "脚尖外展", "°", 0, 35, 5, 20), new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("squatDepth", "下蹲幅度", "%", 60, 110, 5, 100)];
+  }
+  function _M0FP37lqyq6668bodymate6motion7catalog() {
+    return [new _M0TP37lqyq6668bodymate6motion16MotionDefinition("push_up", "俯卧撑", ["俯卧撑", "卧撑", "push-up", "push up"], 4, ["胸部", "肩部", "上臂后侧"], "pectoralis major/deltoid/triceps brachii/serratus anterior", _M0FP37lqyq6668bodymate6motion20push__up__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 0.85), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 25)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.5), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 45)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 60)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("squat", "深蹲", ["深蹲", "squat"], 4.4, ["大腿前侧", "臀部", "大腿后侧"], "rectus femoris/vastus/gluteus/biceps femoris/semitendinosus/semimembranosus", _M0FP37lqyq6668bodymate6motion17squat__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄站距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 0.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 10), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.2), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 20), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽站距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 30), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("curl", "弯举", ["弯举", "二头弯举", "curl"], 3.6, ["上臂前侧", "前臂"], "biceps brachii/brachialis/brachioradialis", [], [])];
+  }
+  function _M0FP37lqyq6668bodymate6motion10definition(id) {
+    const _bind = _M0FP37lqyq6668bodymate6motion7catalog();
+    const _bind$2 = _bind.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind$2) {
+        const motion = _bind[_];
+        if (motion.id === id) {
+          return motion;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate6motion14finite__double(value) {
+    return !_M0MPC16double6Double7is__nan(value) && (value !== _M0FPC16double8infinity && value !== _M0FPC16double13neg__infinity);
+  }
+  function _M0FP37lqyq6668bodymate6motion16parameter__value(values, key, fallback) {
+    const _bind = values.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const item = values[_];
+        if (item.key === key) {
+          return item.value;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return fallback;
+  }
+  function _M0FP37lqyq6668bodymate6motion9normalize(id, supplied) {
+    let motion;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate6motion10definition(id);
+      if (_bind === undefined) {
+        return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion20NormalizedParametersRP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+      } else {
+        const _Some = _bind;
+        const _motion = _Some;
+        motion = _motion;
+        break _L;
+      }
+    }
+    const values = [];
+    const notices = [];
+    const _bind = motion.parameters;
+    const _bind$2 = _bind.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind$2) {
+        const field = _bind[_];
+        const requested = _M0FP37lqyq6668bodymate6motion16parameter__value(supplied, field.key, field.initial);
+        const finite = _M0FP37lqyq6668bodymate6motion14finite__double(requested) ? requested : field.initial;
+        const clamped = finite < field.minimum ? field.minimum : finite > field.maximum ? field.maximum : finite;
+        const stepped = _M0MPC16double6Double5round((clamped - field.minimum) / field.step) * field.step + field.minimum;
+        const normalized = _M0MPC16double6Double5round(stepped * 100) / 100;
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(values, new _M0TP37lqyq6668bodymate6motion20MotionParameterValue(field.key, normalized));
+        const was_supplied = new _M0TPB8MutLocalGbE(false);
+        const _bind$3 = supplied.length;
+        let _tmp$2 = 0;
+        while (true) {
+          const _$2 = _tmp$2;
+          if (_$2 < _bind$3) {
+            const item = supplied[_$2];
+            if (item.key === field.key) {
+              was_supplied.val = true;
+            }
+            _tmp$2 = _$2 + 1 | 0;
+            continue;
+          } else {
+            break;
+          }
+        }
+        if (was_supplied.val && (!_M0FP37lqyq6668bodymate6motion14finite__double(requested) || Math.abs(normalized - requested) > 0.0001)) {
+          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, `${field.label}已调整为 ${String(normalized)}${field.unit}（本模型演示范围 ${String(field.minimum)}–${String(field.maximum)}${field.unit}）。`);
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion20NormalizedParametersRP37lqyq6668bodymate6motion11MotionErrorE2Ok(new _M0TP37lqyq6668bodymate6motion20NormalizedParameters(values, notices));
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session12play_2einner(self, id, input, preserve_phase, initially_paused) {
+    let normalized;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate6motion9normalize(id, input);
+      if (_bind.$tag === 1) {
+        const _Ok = _bind;
+        const _normalized = _Ok._0;
+        normalized = _normalized;
+        break _L;
+      } else {
+        return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+      }
+    }
+    if (!preserve_phase || _M0IP016_24default__implPB2Eq10not__equalGsE(self.motion_id, id)) {
+      self.phase = 0;
+    }
+    self.motion_id = id;
+    self.parameters = normalized.values;
+    self.notices = normalized.notices;
+    self.paused = initially_paused;
+    self.revision = self.revision + 1 | 0;
+    return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE2Ok(_M0MP37lqyq6668bodymate6motion7Session8snapshot(self));
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session4stop(self) {
+    self.motion_id = "";
+    self.phase = 0;
+    self.paused = false;
+    self.parameters = [];
+    self.notices = [];
+    self.revision = self.revision + 1 | 0;
+    return _M0MP37lqyq6668bodymate6motion7Session8snapshot(self);
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session15set__parameters(self, input) {
+    if (self.motion_id === "") {
+      return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE3Err(_M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion__);
+    }
+    let normalized;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate6motion9normalize(self.motion_id, input);
+      if (_bind.$tag === 1) {
+        const _Ok = _bind;
+        const _normalized = _Ok._0;
+        normalized = _normalized;
+        break _L;
+      } else {
+        return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(self.motion_id));
+      }
+    }
+    self.parameters = normalized.values;
+    self.notices = normalized.notices;
+    self.revision = self.revision + 1 | 0;
+    return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion15SessionSnapshotRP37lqyq6668bodymate6motion11MotionErrorE2Ok(_M0MP37lqyq6668bodymate6motion7Session8snapshot(self));
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session11set__paused(self, paused) {
+    self.paused = paused;
+    self.revision = self.revision + 1 | 0;
+    return _M0MP37lqyq6668bodymate6motion7Session8snapshot(self);
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session10set__speed(self, speed) {
+    const finite = _M0FP37lqyq6668bodymate6motion14finite__double(speed) ? speed : 1;
+    self.speed = finite < 0.25 ? 0.25 : finite > 2 ? 2 : finite;
+    self.revision = self.revision + 1 | 0;
+    return _M0MP37lqyq6668bodymate6motion7Session8snapshot(self);
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session4seek(self, phase) {
+    const finite = _M0FP37lqyq6668bodymate6motion14finite__double(phase) ? phase : 0;
+    self.phase = finite < 0 ? 0 : finite >= 1 ? 0.99999 : finite;
+    self.revision = self.revision + 1 | 0;
+    return _M0MP37lqyq6668bodymate6motion7Session8snapshot(self);
+  }
+  function _M0MP37lqyq6668bodymate6motion7Session4tick(self, delta) {
+    if (_M0IP016_24default__implPB2Eq10not__equalGsE(self.motion_id, "") && (!self.paused && (delta > 0 && _M0FP37lqyq6668bodymate6motion14finite__double(delta)))) {
+      let duration;
+      let motion;
+      _L: {
+        _L$2: {
+          const _bind = _M0FP37lqyq6668bodymate6motion10definition(self.motion_id);
+          if (_bind === undefined) {
+            duration = 1;
+          } else {
+            const _Some = _bind;
+            const _motion = _Some;
+            motion = _motion;
+            break _L$2;
+          }
+          break _L;
+        }
+        duration = motion.duration;
+      }
+      const cycle = duration / self.speed;
+      self.phase = _M0IPC16double6DoublePB3Mod3mod(self.phase + _M0IPC16double6DoublePB3Mod3mod(delta, cycle) / cycle, 1);
+    }
+    return _M0MP37lqyq6668bodymate6motion7Session8snapshot(self);
+  }
+  function _M0FP37lqyq6668bodymate6motion13parse__double(value) {
+    let _try_err;
+    _L: {
+      const _bind = _M0FPC28internal7strconv13parse__double(value);
+      let _tmp;
+      if (_bind.$tag === 1) {
+        const _ok = _bind;
+        _tmp = _ok._0;
+      } else {
+        const _err = _bind;
+        _try_err = _err._0;
+        break _L;
+      }
+      return new _M0DTPC16option6OptionGdE4Some(_tmp);
+    }
+    return _M0DTPC16option6OptionGdE4None__;
+  }
+  function _M0FP37lqyq6668bodymate6motion7resolve(query) {
+    const input = _M0MPC16string6String4trim(_M0MPC16string6String9to__lower(query), undefined);
+    const _bind = _M0FP37lqyq6668bodymate6motion7catalog();
+    const _bind$2 = _bind.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind$2) {
+        const motion = _bind[_];
+        const _bind$3 = motion.aliases;
+        const _bind$4 = _bind$3.length;
+        let _tmp$2 = 0;
+        while (true) {
+          const _$2 = _tmp$2;
+          if (_$2 < _bind$4) {
+            const query_alias = _bind$3[_$2];
+            const _bind$5 = _M0MPC16string6String9to__lower(query_alias);
+            if (_M0MPC16string10StringView8contains(input, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length))) {
+              return motion.id;
+            }
+            _tmp$2 = _$2 + 1 | 0;
+            continue;
+          } else {
+            break;
+          }
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate6motion14set__parameter(values, key, value) {
+    const output = [];
+    const _bind = values.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const item = values[_];
+        if (_M0IP016_24default__implPB2Eq10not__equalGsE(item.key, key)) {
+          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(output, item);
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(output, new _M0TP37lqyq6668bodymate6motion20MotionParameterValue(key, value));
+    return output;
+  }
+  function _M0FP37lqyq6668bodymate6motion20number__for__pattern(text, pattern) {
+    let result;
+    _L: {
+      const _bind = _M0MPC16string5Regex15execute_2einner(_M0MPC16string5Regex20unsafe__from__string(new _M0TPC16string10StringView(pattern, 0, pattern.length)), new _M0TPC16string10StringView(text, 0, text.length), 0);
+      if (_bind === undefined) {
+        return _M0DTPC16option6OptionGdE4None__;
+      } else {
+        const _Some = _bind;
+        const _result = _Some;
+        result = _result;
+        break _L;
+      }
+    }
+    let value;
+    _L$2: {
+      const _bind = _M0MPC16string11MatchResult5group(result, 1);
+      if (_bind === undefined) {
+        return _M0DTPC16option6OptionGdE4None__;
+      } else {
+        const _Some = _bind;
+        const _value = _Some;
+        value = _value;
+        break _L$2;
+      }
+    }
+    return _M0FP37lqyq6668bodymate6motion13parse__double(value);
+  }
+  function _M0FP37lqyq6668bodymate6motion23apply__matching__number(values, key, text, pattern) {
+    let value;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate6motion20number__for__pattern(text, pattern);
+      if (_bind.$tag === 0) {
+        return { _0: values, _1: false };
+      } else {
+        const _Some = _bind;
+        const _value = _Some._0;
+        value = _value;
+        break _L;
+      }
+    }
+    return { _0: _M0FP37lqyq6668bodymate6motion14set__parameter(values, key, value), _1: true };
+  }
+  function _M0FP37lqyq6668bodymate6motion23apply__matching__preset(motion, text, values) {
+    const index = new _M0TPB8MutLocalGiE(-1);
+    let _tmp;
+    const _bind = "窄距";
+    if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
+      _tmp = true;
+    } else {
+      let _tmp$2;
+      const _bind$2 = "窄站距";
+      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
+        _tmp$2 = true;
+      } else {
+        const _bind$3 = "窄脚距";
+        _tmp$2 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length));
+      }
+      _tmp = _tmp$2;
+    }
+    if (_tmp) {
+      index.val = 0;
+    } else {
+      let _tmp$2;
+      const _bind$2 = "宽距";
+      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
+        _tmp$2 = true;
+      } else {
+        let _tmp$3;
+        const _bind$3 = "宽站距";
+        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
+          _tmp$3 = true;
+        } else {
+          const _bind$4 = "宽脚距";
+          _tmp$3 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length));
+        }
+        _tmp$2 = _tmp$3;
+      }
+      if (_tmp$2) {
+        index.val = 2;
+      } else {
+        const _bind$3 = "标准";
+        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
+          index.val = 1;
+        }
+      }
+    }
+    if (index.val < 0 || index.val >= motion.presets.length) {
+      return { _0: values, _1: false };
+    }
+    const output = new _M0TPB8MutLocalGRPB5ArrayGRP37lqyq6668bodymate6motion20MotionParameterValueEE(values);
+    const _bind$2 = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(motion.presets, index.val).values;
+    const _bind$3 = _bind$2.length;
+    let _tmp$2 = 0;
+    while (true) {
+      const _ = _tmp$2;
+      if (_ < _bind$3) {
+        const item = _bind$2[_];
+        output.val = _M0FP37lqyq6668bodymate6motion14set__parameter(output.val, item.key, item.value);
+        _tmp$2 = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return { _0: output.val, _1: true };
+  }
+  function _M0FP37lqyq6668bodymate6motion12parse__query(id, query, base) {
+    let motion;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate6motion10definition(id);
+      if (_bind === undefined) {
+        return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion16ParsedParametersRP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+      } else {
+        const _Some = _bind;
+        const _motion = _Some;
+        motion = _motion;
+        break _L;
+      }
+    }
+    const text = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(query, undefined));
+    let preset_values;
+    let preset_recognized;
+    _L$2: {
+      const _bind = _M0FP37lqyq6668bodymate6motion23apply__matching__preset(motion, text, base);
+      const _preset_values = _bind._0;
+      const _preset_recognized = _bind._1;
+      preset_values = _preset_values;
+      preset_recognized = _preset_recognized;
+      break _L$2;
+    }
+    const values = new _M0TPB8MutLocalGRPB5ArrayGRP37lqyq6668bodymate6motion20MotionParameterValueEE(preset_values);
+    const recognized = new _M0TPB8MutLocalGbE(preset_recognized);
+    const value = "[[:space:]]*(?:调整为|调整到|调到|改成|设为|为|到|是|:|：|=)?[[:space:]]*(-?[[:digit:]]+(?:\\.[[:digit:]]+)?)[[:space:]]*";
+    if (id === "push_up") {
+      const _bind = "倍髋宽";
+      if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
+        let next_hand;
+        let hand_found;
+        _L$3: {
+          const _bind$2 = _M0FP37lqyq6668bodymate6motion23apply__matching__number(values.val, "handWidth", text, `(?:手距|两手间距|双手间距|手间距)${value}倍(?:肩宽)?`);
+          const _next_hand = _bind$2._0;
+          const _hand_found = _bind$2._1;
+          next_hand = _next_hand;
+          hand_found = _hand_found;
+          break _L$3;
+        }
+        values.val = next_hand;
+        recognized.val = recognized.val || hand_found;
+      }
+      let _tmp;
+      const _bind$2 = "地面夹角";
+      if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
+        let _tmp$2;
+        const _bind$3 = "躯干倾斜";
+        if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
+          let _tmp$3;
+          const _bind$4 = "身体倾斜";
+          if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
+            const _bind$5 = "手腕夹角";
+            _tmp$3 = !_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length));
+          } else {
+            _tmp$3 = false;
+          }
+          _tmp$2 = _tmp$3;
+        } else {
+          _tmp$2 = false;
+        }
+        _tmp = _tmp$2;
+      } else {
+        _tmp = false;
+      }
+      if (_tmp) {
+        let next_elbow;
+        let elbow_found;
+        _L$3: {
+          const _bind$3 = _M0FP37lqyq6668bodymate6motion23apply__matching__number(values.val, "elbowAngle", text, `(?:肘部外展(?:角度|角)?|肘部夹角|肘角|上臂与躯干夹角|夹角)${value}(?:度|°)`);
+          const _next_elbow = _bind$3._0;
+          const _elbow_found = _bind$3._1;
+          next_elbow = _next_elbow;
+          elbow_found = _elbow_found;
+          break _L$3;
+        }
+        values.val = next_elbow;
+        recognized.val = recognized.val || elbow_found;
+      }
+    } else {
+      if (id === "squat") {
+        const _bind = "倍肩宽";
+        if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
+          let next_stance;
+          let stance_found;
+          _L$3: {
+            const _bind$2 = _M0FP37lqyq6668bodymate6motion23apply__matching__number(values.val, "stanceWidth", text, `(?:站距|脚距|脚间距|双脚间距|两脚间距)${value}倍(?:髋宽)?`);
+            const _next_stance = _bind$2._0;
+            const _stance_found = _bind$2._1;
+            next_stance = _next_stance;
+            stance_found = _stance_found;
+            break _L$3;
+          }
+          values.val = next_stance;
+          recognized.val = recognized.val || stance_found;
+        }
+        let next_toe;
+        let toe_found;
+        _L$3: {
+          const _bind$2 = _M0FP37lqyq6668bodymate6motion23apply__matching__number(values.val, "toeAngle", text, `(?:脚尖外展(?:角度|角)?|脚尖角度|脚尖角|脚尖外撇|外撇)${value}(?:度|°)`);
+          const _next_toe = _bind$2._0;
+          const _toe_found = _bind$2._1;
+          next_toe = _next_toe;
+          toe_found = _toe_found;
+          break _L$3;
+        }
+        values.val = next_toe;
+        recognized.val = recognized.val || toe_found;
+        let next_depth;
+        let depth_found;
+        _L$4: {
+          const _bind$2 = _M0FP37lqyq6668bodymate6motion23apply__matching__number(values.val, "squatDepth", text, `(?:下蹲幅度|下蹲深度|幅度|深度)${value}%`);
+          const _next_depth = _bind$2._0;
+          const _depth_found = _bind$2._1;
+          next_depth = _next_depth;
+          depth_found = _depth_found;
+          break _L$4;
+        }
+        values.val = next_depth;
+        recognized.val = recognized.val || depth_found;
+      }
+    }
+    let normalized;
+    _L$3: {
+      const _bind = _M0FP37lqyq6668bodymate6motion9normalize(id, values.val);
+      if (_bind.$tag === 1) {
+        const _Ok = _bind;
+        const _normalized = _Ok._0;
+        normalized = _normalized;
+        break _L$3;
+      } else {
+        return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion16ParsedParametersRP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+      }
+    }
+    const notices = normalized.notices;
+    let _tmp;
+    const _bind = "抬高";
+    if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
+      _tmp = true;
+    } else {
+      let _tmp$2;
+      const _bind$2 = "负重";
+      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
+        _tmp$2 = true;
+      } else {
+        let _tmp$3;
+        const _bind$3 = "单手";
+        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
+          _tmp$3 = true;
+        } else {
+          let _tmp$4;
+          const _bind$4 = "单脚";
+          if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
+            _tmp$4 = true;
+          } else {
+            let _tmp$5;
+            const _bind$5 = "单腿";
+            if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length))) {
+              _tmp$5 = true;
+            } else {
+              let _tmp$6;
+              const _bind$6 = "倾斜";
+              if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$6, 0, _bind$6.length))) {
+                _tmp$6 = true;
+              } else {
+                let _tmp$7;
+                const _bind$7 = "手腕角";
+                if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$7, 0, _bind$7.length))) {
+                  _tmp$7 = true;
+                } else {
+                  let _tmp$8;
+                  const _bind$8 = "手腕夹角";
+                  if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$8, 0, _bind$8.length))) {
+                    _tmp$8 = true;
+                  } else {
+                    let _tmp$9;
+                    const _bind$9 = "掌心角";
+                    if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$9, 0, _bind$9.length))) {
+                      _tmp$9 = true;
+                    } else {
+                      const _bind$10 = "地面夹角";
+                      _tmp$9 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$10, 0, _bind$10.length));
+                    }
+                    _tmp$8 = _tmp$9;
+                  }
+                  _tmp$7 = _tmp$8;
+                }
+                _tmp$6 = _tmp$7;
+              }
+              _tmp$5 = _tmp$6;
+            }
+            _tmp$4 = _tmp$5;
+          }
+          _tmp$3 = _tmp$4;
+        }
+        _tmp$2 = _tmp$3;
+      }
+      _tmp = _tmp$2;
+    }
+    if (_tmp) {
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, "本次只应用面板中的参数；抬高、负重、单侧或其他角度尚未支持。");
+    }
+    let _tmp$2;
+    if (!recognized.val) {
+      let _tmp$3;
+      const _bind$2 = "手距";
+      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
+        _tmp$3 = true;
+      } else {
+        let _tmp$4;
+        const _bind$3 = "站距";
+        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
+          _tmp$4 = true;
+        } else {
+          let _tmp$5;
+          const _bind$4 = "脚距";
+          if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
+            _tmp$5 = true;
+          } else {
+            let _tmp$6;
+            const _bind$5 = "夹角";
+            if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length))) {
+              _tmp$6 = true;
+            } else {
+              let _tmp$7;
+              const _bind$6 = "外展";
+              if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$6, 0, _bind$6.length))) {
+                _tmp$7 = true;
+              } else {
+                let _tmp$8;
+                const _bind$7 = "外撇";
+                if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$7, 0, _bind$7.length))) {
+                  _tmp$8 = true;
+                } else {
+                  let _tmp$9;
+                  const _bind$8 = "深度";
+                  if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$8, 0, _bind$8.length))) {
+                    _tmp$9 = true;
+                  } else {
+                    const _bind$9 = "幅度";
+                    _tmp$9 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$9, 0, _bind$9.length));
+                  }
+                  _tmp$8 = _tmp$9;
+                }
+                _tmp$7 = _tmp$8;
+              }
+              _tmp$6 = _tmp$7;
+            }
+            _tmp$5 = _tmp$6;
+          }
+          _tmp$4 = _tmp$5;
+        }
+        _tmp$3 = _tmp$4;
+      }
+      _tmp$2 = _tmp$3;
+    } else {
+      _tmp$2 = false;
+    }
+    if (_tmp$2) {
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, "未识别具体参数，暂用当前或默认值。可输入“手距1.2倍肩宽、夹角45度”或“站距1.5倍髋宽、脚尖外展20度、深度80%”。");
+    }
+    return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion16ParsedParametersRP37lqyq6668bodymate6motion11MotionErrorE2Ok(new _M0TP37lqyq6668bodymate6motion16ParsedParameters(normalized.values, notices, recognized.val));
+  }
+  function _M0FP37lqyq6668bodymate6motion7profile(id, input) {
+    let normalized;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate6motion9normalize(id, input);
+      if (_bind.$tag === 1) {
+        const _Ok = _bind;
+        const _normalized = _Ok._0;
+        normalized = _normalized;
+        break _L;
+      } else {
+        return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion13MotionProfileRP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+      }
+    }
+    const p = normalized.values;
+    const groups = [];
+    const evidence = [];
+    const note = new _M0TPB8MutLocalGsE("");
+    if (id === "push_up") {
+      const hand_width = _M0FP37lqyq6668bodymate6motion16parameter__value(p, "handWidth", 1.5);
+      const narrow = hand_width <= 1;
+      const wide = hand_width >= 1.6;
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("胸部", "pectoralis major", "主要参与", narrow ? 1 : wide ? 0.82 : 0.9));
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("上臂后侧", "triceps brachii", "主要参与", narrow ? 1 : wide ? 0.78 : 0.88));
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("肩部", "deltoid", "辅助参与", 0.55));
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("肩胛与核心", "serratus anterior/rectus abdominis/external oblique", "稳定参与", 0.35));
+      note.val = `${narrow ? "窄距研究中胸大肌与肱三头肌的肌电活动均可能提高。" : wide ? "宽距不等于胸肌参与一定更多。" : "胸部与上臂后侧共同参与，肩部和核心协同。"}肘部夹角与手距的组合未作受力定量；颜色是参与提示，不是实测。`;
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence, new _M0TP37lqyq6668bodymate6motion14MotionEvidence("https://pubmed.ncbi.nlm.nih.gov/16095413/", "Acute surface EMG, narrow versus wide hands; not a continuous angle or hypertrophy model."));
+    } else {
+      if (id === "squat") {
+        const wide = _M0FP37lqyq6668bodymate6motion16parameter__value(p, "stanceWidth", 1.2) >= 1.6;
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("大腿前侧", "rectus femoris/vastus", "主要参与", 0.95));
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("臀部", "gluteus maximus", "主要参与", wide ? 1 : 0.85));
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("大腿内侧", "adductor magnus/adductor longus/adductor brevis", "辅助参与", 0.5));
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("大腿后侧与核心", "biceps femoris/semitendinosus/semimembranosus/gluteus medius/rectus abdominis/external oblique", "稳定参与", 0.35));
+        note.val = `${wide ? "部分宽站距研究观察到臀大肌肌电增加，不能据此预测增肌。" : "大腿前侧与臀部共同参与。"}脚尖角度和深度会改变姿态；这里不将它们换算成单块肌肉受力百分比。`;
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence, new _M0TP37lqyq6668bodymate6motion14MotionEvidence("https://pubmed.ncbi.nlm.nih.gov/19130646/", "Six experienced lifters, back squats at selected widths and loads; qualitative gluteus maximus trend only."));
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence, new _M0TP37lqyq6668bodymate6motion14MotionEvidence("https://pubmed.ncbi.nlm.nih.gov/30026952/", "Stance and foot angle affect joint motion and moments, not measured individual muscle forces."));
+      } else {
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("上臂前侧", "biceps brachii/brachialis", "主要参与", 1));
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate6motion24MotionParticipationGroup("前臂", "brachioradialis", "辅助参与", 0.6));
+        note.val = "红色表示预设参与肌群，不是实测肌电或肌肉受力。";
+      }
+    }
+    return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion13MotionProfileRP37lqyq6668bodymate6motion11MotionErrorE2Ok(new _M0TP37lqyq6668bodymate6motion13MotionProfile(groups, note.val, evidence));
+  }
+  function _M0FP37lqyq6668bodymate6motion12pose__intent(id, phase, input) {
+    let normalized;
+    _L: {
+      const _bind = _M0FP37lqyq6668bodymate6motion9normalize(id, input);
+      if (_bind.$tag === 1) {
+        const _Ok = _bind;
+        const _normalized = _Ok._0;
+        normalized = _normalized;
+        break _L;
+      } else {
+        return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+      }
+    }
+    const p = normalized.values;
+    const finite_phase = _M0FP37lqyq6668bodymate6motion14finite__double(phase) ? phase : 0;
+    const bounded_phase = finite_phase < 0 ? 0 : finite_phase > 1 ? 1 : finite_phase;
+    const depth = 0.5 - 0.5 * _M0FPC14math3cos(bounded_phase * 3.1415926535897931 * 2);
+    const excursion = id === "squat" ? depth * _M0FP37lqyq6668bodymate6motion16parameter__value(p, "squatDepth", 100) / 100 : depth;
+    const hand_width = _M0FP37lqyq6668bodymate6motion16parameter__value(p, "handWidth", 1.5);
+    const elbow_angle = _M0FP37lqyq6668bodymate6motion16parameter__value(p, "elbowAngle", 45);
+    const stance_width = _M0FP37lqyq6668bodymate6motion16parameter__value(p, "stanceWidth", 1.2);
+    const toe_angle = _M0FP37lqyq6668bodymate6motion16parameter__value(p, "toeAngle", 20);
+    const root_y = new _M0TPB8MutLocalGdE(0.91);
+    const root_z = new _M0TPB8MutLocalGdE(-0.025);
+    const torso_x = new _M0TPB8MutLocalGdE(0);
+    const wrist_x = new _M0TPB8MutLocalGdE(0);
+    const wrist_y = new _M0TPB8MutLocalGdE(0);
+    const wrist_z = new _M0TPB8MutLocalGdE(0);
+    const ankle_x = new _M0TPB8MutLocalGdE(0);
+    const upper_arm_x = new _M0TPB8MutLocalGdE(0);
+    const forearm_x = new _M0TPB8MutLocalGdE(0);
+    if (id === "push_up") {
+      torso_x.val = 1.31 + 0.2 * depth;
+      root_y.val = 0.171 + 0.828 * _M0FPC14math3cos(torso_x.val);
+      root_z.val = -0.025 + 0.828 * _M0FPC14math3sin(torso_x.val);
+      wrist_x.val = 0.33 * hand_width / 2;
+      wrist_y.val = 0.031;
+      wrist_z.val = 1.285;
+    } else {
+      if (id === "squat") {
+        const span = 0.29 * stance_width / 2;
+        const thigh = Math.sqrt(0.18357199999999999);
+        const shin = Math.sqrt(0.14306900000000003);
+        const leg_length = thigh + shin - 0.008;
+        const standing_height = 0.104 + Math.sqrt(leg_length * leg_length - (span - 0.057) * (span - 0.057) - 9e-006);
+        root_y.val = standing_height - 0.3 * excursion;
+        root_z.val = -0.025 - 0.17 * excursion;
+        torso_x.val = 0.32 * excursion;
+        wrist_x.val = 0.255;
+        wrist_y.val = root_y.val + 0.28 + 0.04 * depth;
+        wrist_z.val = 0.38 + 0.07 * depth;
+        ankle_x.val = span;
+      } else {
+        upper_arm_x.val = -0.07;
+        forearm_x.val = -0.07 - 2.05 * depth;
+      }
+    }
+    return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE2Ok(new _M0TP37lqyq6668bodymate6motion10PoseIntent(depth, excursion, root_y.val, root_z.val, torso_x.val, hand_width, elbow_angle, wrist_x.val, wrist_y.val, wrist_z.val, stance_width, toe_angle, ankle_x.val, upper_arm_x.val, forearm_x.val));
+  }
+  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_599, _x_600) {
+    if (_x_599 === 0) {
+      if (_x_600 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_627 === 1) {
+      if (_x_600 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_622, _x_623) {
-    switch (_x_622) {
+  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_595, _x_596) {
+    switch (_x_595) {
       case 0: {
-        if (_x_623 === 0) {
+        if (_x_596 === 0) {
           return true;
         } else {
           return false;
         }
       }
       case 1: {
-        if (_x_623 === 1) {
+        if (_x_596 === 1) {
           return true;
         } else {
           return false;
         }
       }
       case 2: {
-        if (_x_623 === 2) {
+        if (_x_596 === 2) {
           return true;
         } else {
           return false;
         }
       }
       case 3: {
-        if (_x_623 === 3) {
+        if (_x_596 === 3) {
           return true;
         } else {
           return false;
         }
       }
       case 4: {
-        if (_x_623 === 4) {
+        if (_x_596 === 4) {
           return true;
         } else {
           return false;
         }
       }
       case 5: {
-        if (_x_623 === 5) {
+        if (_x_596 === 5) {
           return true;
         } else {
           return false;
         }
       }
       case 6: {
-        if (_x_623 === 6) {
+        if (_x_596 === 6) {
           return true;
         } else {
           return false;
         }
       }
       case 7: {
-        if (_x_623 === 7) {
+        if (_x_596 === 7) {
           return true;
         } else {
           return false;
         }
       }
       case 8: {
-        if (_x_623 === 8) {
+        if (_x_596 === 8) {
           return true;
         } else {
           return false;
         }
       }
       default: {
-        if (_x_623 === 9) {
+        if (_x_596 === 9) {
           return true;
         } else {
           return false;
@@ -9662,30 +10525,30 @@
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_618, _x_619) {
-    if (_x_618 === 0) {
-      if (_x_619 === 0) {
+  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_591, _x_592) {
+    if (_x_591 === 0) {
+      if (_x_592 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_619 === 1) {
+      if (_x_592 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_598, _x_599) {
-    if (_x_598 === 0) {
-      if (_x_599 === 0) {
+  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_571, _x_572) {
+    if (_x_571 === 0) {
+      if (_x_572 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_599 === 1) {
+      if (_x_572 === 1) {
         return true;
       } else {
         return false;
@@ -13325,6 +14188,17 @@
   function _M0FP37lqyq6668bodymate4core14core__snapshot() {
     return _M0FP37lqyq6668bodymate4core8snapshot();
   }
+  function _M0FP37lqyq6668bodymate4core14feedback__axis(value) {
+    return _M0MPC16double6Double7is__nan(value) || (value === _M0FPC16double8infinity || value === _M0FPC16double13neg__infinity) ? 0 : value < -1 ? -1 : value > 1 ? 1 : value;
+  }
+  function _M0FP37lqyq6668bodymate4core16ui__feedback__v1(x, y, hovered, reduced_motion, fine_pointer) {
+    const enabled = hovered && (fine_pointer && !reduced_motion);
+    const px = enabled ? _M0FP37lqyq6668bodymate4core14feedback__axis(x) : 0;
+    const py = enabled ? _M0FP37lqyq6668bodymate4core14feedback__axis(y) : 0;
+    const lift = enabled ? -2 : 0;
+    const duration = reduced_motion || !fine_pointer ? 0 : 200;
+    return `ok|ui-feedback-v1|x=${String(px * 1.5)},y=${String(lift)},rx=${String(py * -2)},ry=${String(px * 2)},duration=${_M0MPC13int3Int18to__string_2einner(duration, 10)}`;
+  }
   function _M0FP37lqyq6668bodymate4core13notices__wire(notices) {
     const _bind = "~";
     return _M0MPC15array5Array4joinGsE(notices, new _M0TPC16string10StringView(_bind, 0, _bind.length));
@@ -13347,57 +14221,39 @@
     const _bind$2 = ",";
     return _M0MPC15array5Array4joinGsE(output, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length));
   }
-  function _M0FP37lqyq6668bodymate4core17session__snapshot() {
-    return `ok|motion-session-v1|${_M0FP37lqyq6668bodymate4core15motion__session.motion_id}|${String(_M0FP37lqyq6668bodymate4core15motion__session.phase)}|${_M0IPC14bool4BoolPB4Show10to__string(_M0FP37lqyq6668bodymate4core15motion__session.paused)}|${String(_M0FP37lqyq6668bodymate4core15motion__session.speed)}|${_M0FP37lqyq6668bodymate4core15parameter__wire(_M0FP37lqyq6668bodymate4core15motion__session.parameters)}|${_M0FP37lqyq6668bodymate4core13notices__wire(_M0FP37lqyq6668bodymate4core15motion__session.notices)}|${_M0MPC13int3Int18to__string_2einner(_M0FP37lqyq6668bodymate4core15motion__session.revision, 10)}`;
+  function _M0FP37lqyq6668bodymate4core13session__wire(value) {
+    return `ok|motion-session-v1|${value.motion_id}|${String(value.phase)}|${_M0IPC14bool4BoolPB4Show10to__string(value.paused)}|${String(value.speed)}|${_M0FP37lqyq6668bodymate4core15parameter__wire(value.parameters)}|${_M0FP37lqyq6668bodymate4core13notices__wire(value.notices)}|${_M0MPC13int3Int18to__string_2einner(value.revision, 10)}`;
+  }
+  function _M0FP37lqyq6668bodymate4core19motion__error__wire(error) {
+    if (error.$tag === 0) {
+      return "error|unknown_motion";
+    } else {
+      return "error|no_active_motion";
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core21session__result__wire(value) {
+    let error;
+    _L: {
+      let snapshot;
+      _L$2: {
+        if (value.$tag === 1) {
+          const _Ok = value;
+          const _snapshot = _Ok._0;
+          snapshot = _snapshot;
+          break _L$2;
+        } else {
+          const _Err = value;
+          const _error = _Err._0;
+          error = _error;
+          break _L;
+        }
+      }
+      return _M0FP37lqyq6668bodymate4core13session__wire(snapshot);
+    }
+    return _M0FP37lqyq6668bodymate4core19motion__error__wire(error);
   }
   function _M0FP37lqyq6668bodymate4core22motion__session__reset() {
-    _M0FP37lqyq6668bodymate4core15motion__session.motion_id = "";
-    _M0FP37lqyq6668bodymate4core15motion__session.phase = 0;
-    _M0FP37lqyq6668bodymate4core15motion__session.paused = false;
-    _M0FP37lqyq6668bodymate4core15motion__session.speed = 1;
-    _M0FP37lqyq6668bodymate4core15motion__session.parameters = [];
-    _M0FP37lqyq6668bodymate4core15motion__session.notices = [];
-    _M0FP37lqyq6668bodymate4core15motion__session.revision = _M0FP37lqyq6668bodymate4core15motion__session.revision + 1 | 0;
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
-  }
-  function _M0FP37lqyq6668bodymate4core14finite__double(value) {
-    return !_M0MPC16double6Double7is__nan(value) && (value !== _M0FPC16double8infinity && value !== _M0FPC16double13neg__infinity);
-  }
-  function _M0FP37lqyq6668bodymate4core14motion__by__id(id) {
-    const _bind = _M0FP37lqyq6668bodymate4core15motion__catalog.length;
-    let _tmp = 0;
-    while (true) {
-      const _ = _tmp;
-      if (_ < _bind) {
-        const motion = _M0FP37lqyq6668bodymate4core15motion__catalog[_];
-        if (motion.id === id) {
-          return motion;
-        }
-        _tmp = _ + 1 | 0;
-        continue;
-      } else {
-        break;
-      }
-    }
-    return undefined;
-  }
-  function _M0FP37lqyq6668bodymate4core16parameter__value(values, key, fallback) {
-    const _bind = values.length;
-    let _tmp = 0;
-    while (true) {
-      const _ = _tmp;
-      if (_ < _bind) {
-        const item = values[_];
-        if (item.key === key) {
-          return item.value;
-        }
-        _tmp = _ + 1 | 0;
-        continue;
-      } else {
-        break;
-      }
-    }
-    return fallback;
+    return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session5reset(_M0FP37lqyq6668bodymate4core15motion__session));
   }
   function _M0FP37lqyq6668bodymate4core13parse__double(value) {
     let _try_err;
@@ -13451,172 +14307,36 @@
             }
             break _L$2;
           }
-          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(values, new _M0TP37lqyq6668bodymate4core20MotionParameterValue(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(parts, 0)), value));
+          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(values, new _M0TP37lqyq6668bodymate6motion20MotionParameterValue(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(parts, 0)), value));
         }
       }
       continue;
     }
     return values;
   }
-  function _M0FP37lqyq6668bodymate4core21normalize__parameters(id, input) {
-    let motion;
-    _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core14motion__by__id(id);
-      if (_bind === undefined) {
-        return undefined;
-      } else {
-        const _Some = _bind;
-        const _motion = _Some;
-        motion = _motion;
-        break _L;
-      }
-    }
-    const supplied = _M0FP37lqyq6668bodymate4core22parse__parameter__wire(input);
-    const values = [];
-    const notices = [];
-    const _bind = motion.parameters;
-    const _bind$2 = _bind.length;
-    let _tmp = 0;
-    while (true) {
-      const _ = _tmp;
-      if (_ < _bind$2) {
-        const field = _bind[_];
-        const requested = _M0FP37lqyq6668bodymate4core16parameter__value(supplied, field.key, field.initial);
-        const finite = _M0FP37lqyq6668bodymate4core14finite__double(requested) ? requested : field.initial;
-        const clamped = finite < field.minimum ? field.minimum : finite > field.maximum ? field.maximum : finite;
-        const stepped = _M0MPC16double6Double5round((clamped - field.minimum) / field.step) * field.step + field.minimum;
-        const normalized = _M0MPC16double6Double5round(stepped * 100) / 100;
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(values, new _M0TP37lqyq6668bodymate4core20MotionParameterValue(field.key, normalized));
-        const was_supplied = new _M0TPB8MutLocalGbE(false);
-        const _bind$3 = supplied.length;
-        let _tmp$2 = 0;
-        while (true) {
-          const _$2 = _tmp$2;
-          if (_$2 < _bind$3) {
-            const item = supplied[_$2];
-            if (item.key === field.key) {
-              was_supplied.val = true;
-            }
-            _tmp$2 = _$2 + 1 | 0;
-            continue;
-          } else {
-            break;
-          }
-        }
-        if (was_supplied.val && (!_M0FP37lqyq6668bodymate4core14finite__double(requested) || Math.abs(normalized - requested) > 0.0001)) {
-          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, `${field.label}已调整为 ${String(normalized)}${field.unit}（本模型演示范围 ${String(field.minimum)}–${String(field.maximum)}${field.unit}）。`);
-        }
-        _tmp = _ + 1 | 0;
-        continue;
-      } else {
-        break;
-      }
-    }
-    return { _0: values, _1: notices };
-  }
   function _M0FP37lqyq6668bodymate4core25motion__session__play__v1(id, input, preserve_phase, initially_paused) {
-    let values;
-    let notices;
-    _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core21normalize__parameters(id, input);
-      if (_bind === undefined) {
-        return "error|unknown_motion";
-      } else {
-        const _Some = _bind;
-        const _x = _Some;
-        const _values = _x._0;
-        const _notices = _x._1;
-        values = _values;
-        notices = _notices;
-        break _L;
-      }
-    }
-    if (!preserve_phase || _M0IP016_24default__implPB2Eq10not__equalGsE(_M0FP37lqyq6668bodymate4core15motion__session.motion_id, id)) {
-      _M0FP37lqyq6668bodymate4core15motion__session.phase = 0;
-    }
-    _M0FP37lqyq6668bodymate4core15motion__session.motion_id = id;
-    _M0FP37lqyq6668bodymate4core15motion__session.parameters = values;
-    _M0FP37lqyq6668bodymate4core15motion__session.notices = notices;
-    _M0FP37lqyq6668bodymate4core15motion__session.paused = initially_paused;
-    _M0FP37lqyq6668bodymate4core15motion__session.revision = _M0FP37lqyq6668bodymate4core15motion__session.revision + 1 | 0;
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core21session__result__wire(_M0MP37lqyq6668bodymate6motion7Session12play_2einner(_M0FP37lqyq6668bodymate4core15motion__session, id, _M0FP37lqyq6668bodymate4core22parse__parameter__wire(input), preserve_phase, initially_paused));
   }
   function _M0FP37lqyq6668bodymate4core25motion__session__stop__v1() {
-    _M0FP37lqyq6668bodymate4core15motion__session.motion_id = "";
-    _M0FP37lqyq6668bodymate4core15motion__session.phase = 0;
-    _M0FP37lqyq6668bodymate4core15motion__session.paused = false;
-    _M0FP37lqyq6668bodymate4core15motion__session.parameters = [];
-    _M0FP37lqyq6668bodymate4core15motion__session.notices = [];
-    _M0FP37lqyq6668bodymate4core15motion__session.revision = _M0FP37lqyq6668bodymate4core15motion__session.revision + 1 | 0;
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session4stop(_M0FP37lqyq6668bodymate4core15motion__session));
   }
   function _M0FP37lqyq6668bodymate4core36motion__session__set__parameters__v1(input) {
-    if (_M0FP37lqyq6668bodymate4core15motion__session.motion_id === "") {
-      return "error|no_active_motion";
-    }
-    let values;
-    let notices;
-    _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core21normalize__parameters(_M0FP37lqyq6668bodymate4core15motion__session.motion_id, input);
-      if (_bind === undefined) {
-        return "error|unknown_motion";
-      } else {
-        const _Some = _bind;
-        const _x = _Some;
-        const _values = _x._0;
-        const _notices = _x._1;
-        values = _values;
-        notices = _notices;
-        break _L;
-      }
-    }
-    _M0FP37lqyq6668bodymate4core15motion__session.parameters = values;
-    _M0FP37lqyq6668bodymate4core15motion__session.notices = notices;
-    _M0FP37lqyq6668bodymate4core15motion__session.revision = _M0FP37lqyq6668bodymate4core15motion__session.revision + 1 | 0;
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core21session__result__wire(_M0MP37lqyq6668bodymate6motion7Session15set__parameters(_M0FP37lqyq6668bodymate4core15motion__session, _M0FP37lqyq6668bodymate4core22parse__parameter__wire(input)));
   }
   function _M0FP37lqyq6668bodymate4core32motion__session__set__paused__v1(paused) {
-    _M0FP37lqyq6668bodymate4core15motion__session.paused = paused;
-    _M0FP37lqyq6668bodymate4core15motion__session.revision = _M0FP37lqyq6668bodymate4core15motion__session.revision + 1 | 0;
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session11set__paused(_M0FP37lqyq6668bodymate4core15motion__session, paused));
   }
   function _M0FP37lqyq6668bodymate4core31motion__session__set__speed__v1(speed) {
-    const finite = _M0FP37lqyq6668bodymate4core14finite__double(speed) ? speed : 1;
-    _M0FP37lqyq6668bodymate4core15motion__session.speed = finite < 0.25 ? 0.25 : finite > 2 ? 2 : finite;
-    _M0FP37lqyq6668bodymate4core15motion__session.revision = _M0FP37lqyq6668bodymate4core15motion__session.revision + 1 | 0;
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session10set__speed(_M0FP37lqyq6668bodymate4core15motion__session, speed));
   }
   function _M0FP37lqyq6668bodymate4core25motion__session__seek__v1(phase) {
-    const finite = _M0FP37lqyq6668bodymate4core14finite__double(phase) ? phase : 0;
-    _M0FP37lqyq6668bodymate4core15motion__session.phase = finite < 0 ? 0 : finite >= 1 ? 0.99999 : finite;
-    _M0FP37lqyq6668bodymate4core15motion__session.revision = _M0FP37lqyq6668bodymate4core15motion__session.revision + 1 | 0;
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session4seek(_M0FP37lqyq6668bodymate4core15motion__session, phase));
   }
   function _M0FP37lqyq6668bodymate4core25motion__session__tick__v1(delta) {
-    if (_M0IP016_24default__implPB2Eq10not__equalGsE(_M0FP37lqyq6668bodymate4core15motion__session.motion_id, "") && (!_M0FP37lqyq6668bodymate4core15motion__session.paused && (delta > 0 && _M0FP37lqyq6668bodymate4core14finite__double(delta)))) {
-      let duration;
-      let motion;
-      _L: {
-        _L$2: {
-          const _bind = _M0FP37lqyq6668bodymate4core14motion__by__id(_M0FP37lqyq6668bodymate4core15motion__session.motion_id);
-          if (_bind === undefined) {
-            duration = 1;
-          } else {
-            const _Some = _bind;
-            const _motion = _Some;
-            motion = _motion;
-            break _L$2;
-          }
-          break _L;
-        }
-        duration = motion.duration;
-      }
-      _M0FP37lqyq6668bodymate4core15motion__session.phase = _M0IPC16double6DoublePB3Mod3mod(_M0FP37lqyq6668bodymate4core15motion__session.phase + delta * _M0FP37lqyq6668bodymate4core15motion__session.speed / duration, 1);
-    }
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session4tick(_M0FP37lqyq6668bodymate4core15motion__session, delta));
   }
   function _M0FP37lqyq6668bodymate4core29motion__session__snapshot__v1() {
-    return _M0FP37lqyq6668bodymate4core17session__snapshot();
+    return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session8snapshot(_M0FP37lqyq6668bodymate4core15motion__session));
   }
   function _M0FP37lqyq6668bodymate4core12preset__wire(preset) {
     return `${preset.title}@${_M0FP37lqyq6668bodymate4core15parameter__wire(preset.values)}`;
@@ -13669,12 +14389,13 @@
   }
   function _M0FP37lqyq6668bodymate4core20motion__registry__v1() {
     const records = [];
-    const _bind = _M0FP37lqyq6668bodymate4core15motion__catalog.length;
+    const _bind = _M0FP37lqyq6668bodymate6motion7catalog();
+    const _bind$2 = _bind.length;
     let _tmp = 0;
     while (true) {
       const _ = _tmp;
-      if (_ < _bind) {
-        const motion = _M0FP37lqyq6668bodymate4core15motion__catalog[_];
+      if (_ < _bind$2) {
+        const motion = _bind[_];
         _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(records, _M0FP37lqyq6668bodymate4core12motion__wire(motion));
         _tmp = _ + 1 | 0;
         continue;
@@ -13682,591 +14403,428 @@
         break;
       }
     }
-    const _bind$2 = "~";
-    return `ok|motion-registry-v1|${_M0MPC15array5Array4joinGsE(records, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))}`;
+    const _bind$3 = "~";
+    return `ok|motion-registry-v1|${_M0MPC15array5Array4joinGsE(records, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))}`;
   }
   function _M0FP37lqyq6668bodymate4core19motion__resolve__v1(query) {
-    const input = _M0MPC16string6String4trim(_M0MPC16string6String9to__lower(query), undefined);
-    const _bind = _M0FP37lqyq6668bodymate4core15motion__catalog.length;
-    let _tmp = 0;
-    while (true) {
-      const _ = _tmp;
-      if (_ < _bind) {
-        const motion = _M0FP37lqyq6668bodymate4core15motion__catalog[_];
-        const _bind$2 = motion.aliases;
-        const _bind$3 = _bind$2.length;
-        let _tmp$2 = 0;
-        while (true) {
-          const _$2 = _tmp$2;
-          if (_$2 < _bind$3) {
-            const query_alias = _bind$2[_$2];
-            const _bind$4 = _M0MPC16string6String9to__lower(query_alias);
-            if (_M0MPC16string10StringView8contains(input, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
-              return `ok|motion-resolve-v1|${motion.id}`;
-            }
-            _tmp$2 = _$2 + 1 | 0;
-            continue;
-          } else {
-            break;
-          }
-        }
-        _tmp = _ + 1 | 0;
-        continue;
-      } else {
-        break;
-      }
-    }
-    return "ok|motion-resolve-v1|";
+    return `ok|motion-resolve-v1|${_M0MPC16option6Option10unwrap__orGsE(_M0FP37lqyq6668bodymate6motion7resolve(query), "")}`;
   }
   function _M0FP37lqyq6668bodymate4core22motion__parameters__v1(id, input) {
-    let values;
-    let notices;
-    _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core21normalize__parameters(id, input);
-      if (_bind === undefined) {
-        return "error|unknown_motion";
-      } else {
-        const _Some = _bind;
-        const _x = _Some;
-        const _values = _x._0;
-        const _notices = _x._1;
-        values = _values;
-        notices = _notices;
-        break _L;
-      }
-    }
-    return `ok|motion-parameters-v1|${_M0FP37lqyq6668bodymate4core15parameter__wire(values)}|${_M0FP37lqyq6668bodymate4core13notices__wire(notices)}`;
-  }
-  function _M0FP37lqyq6668bodymate4core14set__parameter(values, key, value) {
-    const output = [];
-    const _bind = values.length;
-    let _tmp = 0;
-    while (true) {
-      const _ = _tmp;
-      if (_ < _bind) {
-        const item = values[_];
-        if (_M0IP016_24default__implPB2Eq10not__equalGsE(item.key, key)) {
-          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(output, item);
-        }
-        _tmp = _ + 1 | 0;
-        continue;
-      } else {
-        break;
-      }
-    }
-    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(output, new _M0TP37lqyq6668bodymate4core20MotionParameterValue(key, value));
-    return output;
-  }
-  function _M0FP37lqyq6668bodymate4core20number__for__pattern(text, pattern) {
-    let result;
-    _L: {
-      const _bind = _M0MPC16string5Regex15execute_2einner(_M0MPC16string5Regex20unsafe__from__string(new _M0TPC16string10StringView(pattern, 0, pattern.length)), new _M0TPC16string10StringView(text, 0, text.length), 0);
-      if (_bind === undefined) {
-        return _M0DTPC16option6OptionGdE4None__;
-      } else {
-        const _Some = _bind;
-        const _result = _Some;
-        result = _result;
-        break _L;
-      }
-    }
-    let value;
-    _L$2: {
-      const _bind = _M0MPC16string11MatchResult5group(result, 1);
-      if (_bind === undefined) {
-        return _M0DTPC16option6OptionGdE4None__;
-      } else {
-        const _Some = _bind;
-        const _value = _Some;
-        value = _value;
-        break _L$2;
-      }
-    }
-    return _M0FP37lqyq6668bodymate4core13parse__double(value);
-  }
-  function _M0FP37lqyq6668bodymate4core23apply__matching__number(values, key, text, pattern) {
     let value;
     _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core20number__for__pattern(text, pattern);
-      if (_bind.$tag === 0) {
-        return { _0: values, _1: false };
-      } else {
-        const _Some = _bind;
-        const _value = _Some._0;
-        value = _value;
-        break _L;
-      }
-    }
-    return { _0: _M0FP37lqyq6668bodymate4core14set__parameter(values, key, value), _1: true };
-  }
-  function _M0FP37lqyq6668bodymate4core23apply__matching__preset(motion, text, values) {
-    const index = new _M0TPB8MutLocalGiE(-1);
-    let _tmp;
-    const _bind = "窄距";
-    if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
-      _tmp = true;
-    } else {
-      let _tmp$2;
-      const _bind$2 = "窄站距";
-      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
-        _tmp$2 = true;
-      } else {
-        const _bind$3 = "窄脚距";
-        _tmp$2 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length));
-      }
-      _tmp = _tmp$2;
-    }
-    if (_tmp) {
-      index.val = 0;
-    } else {
-      let _tmp$2;
-      const _bind$2 = "宽距";
-      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
-        _tmp$2 = true;
-      } else {
-        let _tmp$3;
-        const _bind$3 = "宽站距";
-        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
-          _tmp$3 = true;
+      let error;
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate6motion9normalize(id, _M0FP37lqyq6668bodymate4core22parse__parameter__wire(input));
+        if (_bind.$tag === 0) {
+          const _Err = _bind;
+          const _error = _Err._0;
+          error = _error;
+          break _L$2;
         } else {
-          const _bind$4 = "宽脚距";
-          _tmp$3 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length));
-        }
-        _tmp$2 = _tmp$3;
-      }
-      if (_tmp$2) {
-        index.val = 2;
-      } else {
-        const _bind$3 = "标准";
-        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
-          index.val = 1;
+          const _Ok = _bind;
+          const _value = _Ok._0;
+          value = _value;
+          break _L;
         }
       }
+      return _M0FP37lqyq6668bodymate4core19motion__error__wire(error);
     }
-    if (index.val < 0 || index.val >= motion.presets.length) {
-      return { _0: values, _1: false };
-    }
-    const output = new _M0TPB8MutLocalGRPB5ArrayGRP37lqyq6668bodymate4core20MotionParameterValueEE(values);
-    const _bind$2 = _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(motion.presets, index.val).values;
-    const _bind$3 = _bind$2.length;
-    let _tmp$2 = 0;
-    while (true) {
-      const _ = _tmp$2;
-      if (_ < _bind$3) {
-        const item = _bind$2[_];
-        output.val = _M0FP37lqyq6668bodymate4core14set__parameter(output.val, item.key, item.value);
-        _tmp$2 = _ + 1 | 0;
-        continue;
-      } else {
-        break;
-      }
-    }
-    return { _0: output.val, _1: true };
+    return `ok|motion-parameters-v1|${_M0FP37lqyq6668bodymate4core15parameter__wire(value.values)}|${_M0FP37lqyq6668bodymate4core13notices__wire(value.notices)}`;
   }
   function _M0FP37lqyq6668bodymate4core24motion__parse__query__v1(id, query, base) {
-    let motion;
+    let value;
     _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core14motion__by__id(id);
-      if (_bind === undefined) {
-        return "error|unknown_motion";
-      } else {
-        const _Some = _bind;
-        const _motion = _Some;
-        motion = _motion;
-        break _L;
-      }
-    }
-    const text = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(query, undefined));
-    let preset_values;
-    let preset_recognized;
-    _L$2: {
-      const _bind = _M0FP37lqyq6668bodymate4core23apply__matching__preset(motion, text, _M0FP37lqyq6668bodymate4core22parse__parameter__wire(base));
-      const _preset_values = _bind._0;
-      const _preset_recognized = _bind._1;
-      preset_values = _preset_values;
-      preset_recognized = _preset_recognized;
-      break _L$2;
-    }
-    const values = new _M0TPB8MutLocalGRPB5ArrayGRP37lqyq6668bodymate4core20MotionParameterValueEE(preset_values);
-    const recognized = new _M0TPB8MutLocalGbE(preset_recognized);
-    const value = "[[:space:]]*(?:调整为|调整到|调到|改成|设为|为|到|是|:|：|=)?[[:space:]]*(-?[[:digit:]]+(?:\\.[[:digit:]]+)?)[[:space:]]*";
-    if (id === "push_up") {
-      const _bind = "倍髋宽";
-      if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
-        let next_hand;
-        let hand_found;
-        _L$3: {
-          const _bind$2 = _M0FP37lqyq6668bodymate4core23apply__matching__number(values.val, "handWidth", text, `(?:手距|两手间距|双手间距|手间距)${value}倍(?:肩宽)?`);
-          const _next_hand = _bind$2._0;
-          const _hand_found = _bind$2._1;
-          next_hand = _next_hand;
-          hand_found = _hand_found;
-          break _L$3;
-        }
-        values.val = next_hand;
-        recognized.val = recognized.val || hand_found;
-      }
-      let _tmp;
-      const _bind$2 = "地面夹角";
-      if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
-        let _tmp$2;
-        const _bind$3 = "躯干倾斜";
-        if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
-          let _tmp$3;
-          const _bind$4 = "身体倾斜";
-          if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
-            const _bind$5 = "手腕夹角";
-            _tmp$3 = !_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length));
-          } else {
-            _tmp$3 = false;
-          }
-          _tmp$2 = _tmp$3;
+      let error;
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate6motion12parse__query(id, query, _M0FP37lqyq6668bodymate4core22parse__parameter__wire(base));
+        if (_bind.$tag === 0) {
+          const _Err = _bind;
+          const _error = _Err._0;
+          error = _error;
+          break _L$2;
         } else {
-          _tmp$2 = false;
+          const _Ok = _bind;
+          const _value = _Ok._0;
+          value = _value;
+          break _L;
         }
-        _tmp = _tmp$2;
-      } else {
-        _tmp = false;
       }
-      if (_tmp) {
-        let next_elbow;
-        let elbow_found;
-        _L$3: {
-          const _bind$3 = _M0FP37lqyq6668bodymate4core23apply__matching__number(values.val, "elbowAngle", text, `(?:肘部外展(?:角度|角)?|肘部夹角|肘角|上臂与躯干夹角|夹角)${value}(?:度|°)`);
-          const _next_elbow = _bind$3._0;
-          const _elbow_found = _bind$3._1;
-          next_elbow = _next_elbow;
-          elbow_found = _elbow_found;
-          break _L$3;
-        }
-        values.val = next_elbow;
-        recognized.val = recognized.val || elbow_found;
-      }
-    } else {
-      if (id === "squat") {
-        const _bind = "倍肩宽";
-        if (!_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
-          let next_stance;
-          let stance_found;
-          _L$3: {
-            const _bind$2 = _M0FP37lqyq6668bodymate4core23apply__matching__number(values.val, "stanceWidth", text, `(?:站距|脚距|脚间距|双脚间距|两脚间距)${value}倍(?:髋宽)?`);
-            const _next_stance = _bind$2._0;
-            const _stance_found = _bind$2._1;
-            next_stance = _next_stance;
-            stance_found = _stance_found;
-            break _L$3;
-          }
-          values.val = next_stance;
-          recognized.val = recognized.val || stance_found;
-        }
-        let next_toe;
-        let toe_found;
-        _L$3: {
-          const _bind$2 = _M0FP37lqyq6668bodymate4core23apply__matching__number(values.val, "toeAngle", text, `(?:脚尖外展(?:角度|角)?|脚尖角度|脚尖角|脚尖外撇|外撇)${value}(?:度|°)`);
-          const _next_toe = _bind$2._0;
-          const _toe_found = _bind$2._1;
-          next_toe = _next_toe;
-          toe_found = _toe_found;
-          break _L$3;
-        }
-        values.val = next_toe;
-        recognized.val = recognized.val || toe_found;
-        let next_depth;
-        let depth_found;
-        _L$4: {
-          const _bind$2 = _M0FP37lqyq6668bodymate4core23apply__matching__number(values.val, "squatDepth", text, `(?:下蹲幅度|下蹲深度|幅度|深度)${value}%`);
-          const _next_depth = _bind$2._0;
-          const _depth_found = _bind$2._1;
-          next_depth = _next_depth;
-          depth_found = _depth_found;
-          break _L$4;
-        }
-        values.val = next_depth;
-        recognized.val = recognized.val || depth_found;
-      }
+      return _M0FP37lqyq6668bodymate4core19motion__error__wire(error);
     }
-    let normalized;
-    let domain_notices;
-    _L$3: {
-      const _bind = _M0FP37lqyq6668bodymate4core21normalize__parameters(id, _M0FP37lqyq6668bodymate4core15parameter__wire(values.val));
-      if (_bind === undefined) {
-        return "error|unknown_motion";
-      } else {
-        const _Some = _bind;
-        const _x = _Some;
-        const _normalized = _x._0;
-        const _domain_notices = _x._1;
-        normalized = _normalized;
-        domain_notices = _domain_notices;
-        break _L$3;
-      }
-    }
-    const notices = domain_notices;
-    let _tmp;
-    const _bind = "抬高";
-    if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind, 0, _bind.length))) {
-      _tmp = true;
-    } else {
-      let _tmp$2;
-      const _bind$2 = "负重";
-      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
-        _tmp$2 = true;
-      } else {
-        let _tmp$3;
-        const _bind$3 = "单手";
-        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
-          _tmp$3 = true;
-        } else {
-          let _tmp$4;
-          const _bind$4 = "单脚";
-          if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
-            _tmp$4 = true;
-          } else {
-            let _tmp$5;
-            const _bind$5 = "单腿";
-            if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length))) {
-              _tmp$5 = true;
-            } else {
-              let _tmp$6;
-              const _bind$6 = "倾斜";
-              if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$6, 0, _bind$6.length))) {
-                _tmp$6 = true;
-              } else {
-                let _tmp$7;
-                const _bind$7 = "手腕角";
-                if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$7, 0, _bind$7.length))) {
-                  _tmp$7 = true;
-                } else {
-                  let _tmp$8;
-                  const _bind$8 = "手腕夹角";
-                  if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$8, 0, _bind$8.length))) {
-                    _tmp$8 = true;
-                  } else {
-                    let _tmp$9;
-                    const _bind$9 = "掌心角";
-                    if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$9, 0, _bind$9.length))) {
-                      _tmp$9 = true;
-                    } else {
-                      const _bind$10 = "地面夹角";
-                      _tmp$9 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$10, 0, _bind$10.length));
-                    }
-                    _tmp$8 = _tmp$9;
-                  }
-                  _tmp$7 = _tmp$8;
-                }
-                _tmp$6 = _tmp$7;
-              }
-              _tmp$5 = _tmp$6;
-            }
-            _tmp$4 = _tmp$5;
-          }
-          _tmp$3 = _tmp$4;
-        }
-        _tmp$2 = _tmp$3;
-      }
-      _tmp = _tmp$2;
-    }
-    if (_tmp) {
-      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, "本次只应用面板中的参数；抬高、负重、单侧或其他角度尚未支持。");
-    }
-    let _tmp$2;
-    if (!recognized.val) {
-      let _tmp$3;
-      const _bind$2 = "手距";
-      if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))) {
-        _tmp$3 = true;
-      } else {
-        let _tmp$4;
-        const _bind$3 = "站距";
-        if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length))) {
-          _tmp$4 = true;
-        } else {
-          let _tmp$5;
-          const _bind$4 = "脚距";
-          if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))) {
-            _tmp$5 = true;
-          } else {
-            let _tmp$6;
-            const _bind$5 = "夹角";
-            if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length))) {
-              _tmp$6 = true;
-            } else {
-              let _tmp$7;
-              const _bind$6 = "外展";
-              if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$6, 0, _bind$6.length))) {
-                _tmp$7 = true;
-              } else {
-                let _tmp$8;
-                const _bind$7 = "外撇";
-                if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$7, 0, _bind$7.length))) {
-                  _tmp$8 = true;
-                } else {
-                  let _tmp$9;
-                  const _bind$8 = "深度";
-                  if (_M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$8, 0, _bind$8.length))) {
-                    _tmp$9 = true;
-                  } else {
-                    const _bind$9 = "幅度";
-                    _tmp$9 = _M0MPC16string6String8contains(text, new _M0TPC16string10StringView(_bind$9, 0, _bind$9.length));
-                  }
-                  _tmp$8 = _tmp$9;
-                }
-                _tmp$7 = _tmp$8;
-              }
-              _tmp$6 = _tmp$7;
-            }
-            _tmp$5 = _tmp$6;
-          }
-          _tmp$4 = _tmp$5;
-        }
-        _tmp$3 = _tmp$4;
-      }
-      _tmp$2 = _tmp$3;
-    } else {
-      _tmp$2 = false;
-    }
-    if (_tmp$2) {
-      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, "未识别具体参数，暂用当前或默认值。可输入“手距1.2倍肩宽、夹角45度”或“站距1.5倍髋宽、脚尖外展20度、深度80%”。");
-    }
-    return `ok|motion-parse-v1|${_M0FP37lqyq6668bodymate4core15parameter__wire(normalized)}|${_M0FP37lqyq6668bodymate4core13notices__wire(notices)}|${_M0IPC14bool4BoolPB4Show10to__string(recognized.val)}`;
-  }
-  function _M0FP37lqyq6668bodymate4core11group__wire(group) {
-    return `${group.label}@${group.structure_pattern}@${group.role}@${String(group.weight)}`;
+    return `ok|motion-parse-v1|${_M0FP37lqyq6668bodymate4core15parameter__wire(value.values)}|${_M0FP37lqyq6668bodymate4core13notices__wire(value.notices)}|${_M0IPC14bool4BoolPB4Show10to__string(value.recognized)}`;
   }
   function _M0FP37lqyq6668bodymate4core19motion__profile__v1(id, input) {
-    let p;
+    let value;
     _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core21normalize__parameters(id, input);
-      if (_bind === undefined) {
-        return "error|unknown_motion";
-      } else {
-        const _Some = _bind;
-        const _x = _Some;
-        const _p = _x._0;
-        p = _p;
-        break _L;
+      let error;
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate6motion7profile(id, _M0FP37lqyq6668bodymate4core22parse__parameter__wire(input));
+        if (_bind.$tag === 0) {
+          const _Err = _bind;
+          const _error = _Err._0;
+          error = _error;
+          break _L$2;
+        } else {
+          const _Ok = _bind;
+          const _value = _Ok._0;
+          value = _value;
+          break _L;
+        }
       }
+      return _M0FP37lqyq6668bodymate4core19motion__error__wire(error);
     }
     const groups = [];
-    const evidence = [];
-    const note = new _M0TPB8MutLocalGsE("");
-    if (id === "push_up") {
-      const hand_width = _M0FP37lqyq6668bodymate4core16parameter__value(p, "handWidth", 1.5);
-      const narrow = hand_width <= 1;
-      const wide = hand_width >= 1.6;
-      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("胸部", "pectoralis major", "主要参与", narrow ? 1 : wide ? 0.82 : 0.9));
-      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("上臂后侧", "triceps brachii", "主要参与", narrow ? 1 : wide ? 0.78 : 0.88));
-      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("肩部", "deltoid", "辅助参与", 0.55));
-      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("肩胛与核心", "serratus anterior/rectus abdominis/external oblique", "稳定参与", 0.35));
-      note.val = `${narrow ? "窄距研究中胸大肌与肱三头肌的肌电活动均可能提高。" : wide ? "宽距不等于胸肌参与一定更多。" : "胸部与上臂后侧共同参与，肩部和核心协同。"}肘部夹角与手距的组合未作受力定量；颜色是参与提示，不是实测。`;
-      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence, new _M0TP37lqyq6668bodymate4core14MotionEvidence("https://pubmed.ncbi.nlm.nih.gov/16095413/", "Acute surface EMG, narrow versus wide hands; not a continuous angle or hypertrophy model."));
-    } else {
-      if (id === "squat") {
-        const wide = _M0FP37lqyq6668bodymate4core16parameter__value(p, "stanceWidth", 1.2) >= 1.6;
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("大腿前侧", "rectus femoris/vastus", "主要参与", 0.95));
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("臀部", "gluteus maximus", "主要参与", wide ? 1 : 0.85));
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("大腿内侧", "adductor magnus/adductor longus/adductor brevis", "辅助参与", 0.5));
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("大腿后侧与核心", "biceps femoris/semitendinosus/semimembranosus/gluteus medius/rectus abdominis/external oblique", "稳定参与", 0.35));
-        note.val = `${wide ? "部分宽站距研究观察到臀大肌肌电增加，不能据此预测增肌。" : "大腿前侧与臀部共同参与。"}脚尖角度和深度会改变姿态；这里不将它们换算成单块肌肉受力百分比。`;
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence, new _M0TP37lqyq6668bodymate4core14MotionEvidence("https://pubmed.ncbi.nlm.nih.gov/19130646/", "Six experienced lifters, back squats at selected widths and loads; qualitative gluteus maximus trend only."));
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence, new _M0TP37lqyq6668bodymate4core14MotionEvidence("https://pubmed.ncbi.nlm.nih.gov/30026952/", "Stance and foot angle affect joint motion and moments, not measured individual muscle forces."));
-      } else {
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("上臂前侧", "biceps brachii/brachialis", "主要参与", 1));
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, new _M0TP37lqyq6668bodymate4core24MotionParticipationGroup("前臂", "brachioradialis", "辅助参与", 0.6));
-        note.val = "红色表示预设参与肌群，不是实测肌电或肌肉受力。";
-      }
-    }
-    const group_records = [];
-    const _bind = groups.length;
+    const _bind = value.groups;
+    const _bind$2 = _bind.length;
     let _tmp = 0;
     while (true) {
       const _ = _tmp;
-      if (_ < _bind) {
-        const group = groups[_];
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(group_records, _M0FP37lqyq6668bodymate4core11group__wire(group));
+      if (_ < _bind$2) {
+        const group = _bind[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(groups, `${group.label}@${group.structure_pattern}@${group.role}@${String(group.weight)}`);
         _tmp = _ + 1 | 0;
         continue;
       } else {
         break;
       }
     }
-    const evidence_records = [];
-    const _bind$2 = evidence.length;
+    const evidence = [];
+    const _bind$3 = value.evidence;
+    const _bind$4 = _bind$3.length;
     let _tmp$2 = 0;
     while (true) {
       const _ = _tmp$2;
-      if (_ < _bind$2) {
-        const item = evidence[_];
-        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence_records, `${item.url}@${item.scope}`);
+      if (_ < _bind$4) {
+        const item = _bind$3[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(evidence, `${item.url}@${item.scope}`);
         _tmp$2 = _ + 1 | 0;
         continue;
       } else {
         break;
       }
     }
-    const _bind$3 = "~";
-    const _tmp$3 = _M0MPC15array5Array4joinGsE(group_records, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length));
-    const _tmp$4 = note.val;
-    const _bind$4 = "~";
-    return `ok|motion-profile-v1|${_tmp$3}|${_tmp$4}|${_M0MPC15array5Array4joinGsE(evidence_records, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))}`;
+    const _bind$5 = "~";
+    const _tmp$3 = _M0MPC15array5Array4joinGsE(groups, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length));
+    const _tmp$4 = value.note;
+    const _bind$6 = "~";
+    return `ok|motion-profile-v1|${_tmp$3}|${_tmp$4}|${_M0MPC15array5Array4joinGsE(evidence, new _M0TPC16string10StringView(_bind$6, 0, _bind$6.length))}`;
   }
   function _M0FP37lqyq6668bodymate4core24motion__pose__intent__v1(id, phase, input) {
     let p;
     _L: {
-      const _bind = _M0FP37lqyq6668bodymate4core21normalize__parameters(id, input);
-      if (_bind === undefined) {
-        return "error|unknown_motion";
-      } else {
-        const _Some = _bind;
-        const _x = _Some;
-        const _p = _x._0;
-        p = _p;
-        break _L;
+      let error;
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate6motion12pose__intent(id, phase, _M0FP37lqyq6668bodymate4core22parse__parameter__wire(input));
+        if (_bind.$tag === 0) {
+          const _Err = _bind;
+          const _error = _Err._0;
+          error = _error;
+          break _L$2;
+        } else {
+          const _Ok = _bind;
+          const _p = _Ok._0;
+          p = _p;
+          break _L;
+        }
+      }
+      return _M0FP37lqyq6668bodymate4core19motion__error__wire(error);
+    }
+    return `ok|pose-intent-v1|depth=${String(p.depth)},excursion=${String(p.excursion)},rootY=${String(p.root_y)},rootZ=${String(p.root_z)},torsoX=${String(p.torso_x)},handWidth=${String(p.hand_width)},elbowAngle=${String(p.elbow_angle)},wristX=${String(p.wrist_x)},wristY=${String(p.wrist_y)},wristZ=${String(p.wrist_z)},stanceWidth=${String(p.stance_width)},toeAngle=${String(p.toe_angle)},ankleX=${String(p.ankle_x)},upperArmX=${String(p.upper_arm_x)},forearmX=${String(p.forearm_x)}`;
+  }
+  function _M0FP37lqyq6668bodymate4core19environment__finite(value, fallback) {
+    return !_M0MPC16double6Double7is__nan(value) && (value !== _M0FPC16double8infinity && value !== _M0FPC16double13neg__infinity) ? value : fallback;
+  }
+  function _M0FP37lqyq6668bodymate4core18clamp__environment(value, minimum, maximum) {
+    return value < minimum ? minimum : value > maximum ? maximum : value;
+  }
+  function _M0FP37lqyq6668bodymate4core18normalize__azimuth(value) {
+    const two_pi = 6.2831853071795862;
+    const finite = _M0FP37lqyq6668bodymate4core19environment__finite(value, 0);
+    const wrapped = _M0IPC16double6DoublePB3Mod3mod(finite, two_pi);
+    return wrapped < 0 ? wrapped + two_pi : wrapped;
+  }
+  function _M0FP37lqyq6668bodymate4core19environment__sector(angle) {
+    const quarter = 1.5707963267948966;
+    const eighth = 0.78539816339744828;
+    return angle < eighth || angle >= 6.2831853071795862 - eighth ? 0 : angle < quarter + eighth ? 1 : angle < 3.1415926535897931 + eighth ? 2 : 3;
+  }
+  function _M0FP37lqyq6668bodymate4core14sector__center(sector) {
+    switch (sector) {
+      case 0: {
+        return 0;
+      }
+      case 1: {
+        return 1.5707963267948966;
+      }
+      case 2: {
+        return 3.1415926535897931;
+      }
+      default: {
+        return 4.71238898038469;
       }
     }
-    const bounded_phase = phase < 0 ? 0 : phase > 1 ? 1 : phase;
-    const depth = 0.5 - 0.5 * _M0FPC14math3cos(bounded_phase * 3.1415926535897931 * 2);
-    const excursion = id === "squat" ? depth * _M0FP37lqyq6668bodymate4core16parameter__value(p, "squatDepth", 100) / 100 : depth;
-    const hand_width = _M0FP37lqyq6668bodymate4core16parameter__value(p, "handWidth", 1.5);
-    const elbow_angle = _M0FP37lqyq6668bodymate4core16parameter__value(p, "elbowAngle", 45);
-    const stance_width = _M0FP37lqyq6668bodymate4core16parameter__value(p, "stanceWidth", 1.2);
-    const toe_angle = _M0FP37lqyq6668bodymate4core16parameter__value(p, "toeAngle", 20);
-    const root_y = new _M0TPB8MutLocalGdE(0.91);
-    const root_z = new _M0TPB8MutLocalGdE(-0.025);
-    const torso_x = new _M0TPB8MutLocalGdE(0);
-    const wrist_x = new _M0TPB8MutLocalGdE(0);
-    const wrist_y = new _M0TPB8MutLocalGdE(0);
-    const wrist_z = new _M0TPB8MutLocalGdE(0);
-    const ankle_x = new _M0TPB8MutLocalGdE(0);
-    const upper_arm_x = new _M0TPB8MutLocalGdE(0);
-    const forearm_x = new _M0TPB8MutLocalGdE(0);
-    if (id === "push_up") {
-      torso_x.val = 1.31 + 0.2 * depth;
-      root_y.val = 0.171 + 0.828 * _M0FPC14math3cos(torso_x.val);
-      root_z.val = -0.025 + 0.828 * _M0FPC14math3sin(torso_x.val);
-      wrist_x.val = 0.33 * hand_width / 2;
-      wrist_y.val = 0.031;
-      wrist_z.val = 1.285;
+  }
+  function _M0FP37lqyq6668bodymate4core12sector__name(sector) {
+    switch (sector) {
+      case 0: {
+        return "front";
+      }
+      case 1: {
+        return "right";
+      }
+      case 2: {
+        return "back";
+      }
+      default: {
+        return "left";
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core11range__name(range) {
+    switch (range) {
+      case 0: {
+        return "near";
+      }
+      case 1: {
+        return "mid";
+      }
+      default: {
+        return "far";
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core13quality__name(quality) {
+    switch (quality) {
+      case 0: {
+        return "low";
+      }
+      case 1: {
+        return "medium";
+      }
+      default: {
+        return "high";
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core24next__environment__range(current, radius) {
+    switch (current) {
+      case 0: {
+        return radius > 2.35 ? 1 : 0;
+      }
+      case 1: {
+        return radius < 2.05 ? 0 : radius > 3.65 ? 2 : 1;
+      }
+      default: {
+        return radius < 3.35 ? 1 : 2;
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate4core18environment__frame(azimuth, elevation, radius) {
+    const angle = _M0FP37lqyq6668bodymate4core18normalize__azimuth(azimuth);
+    const pitch = _M0FP37lqyq6668bodymate4core18clamp__environment(_M0FP37lqyq6668bodymate4core19environment__finite(elevation, 0.25), -0.15, 1.35);
+    const distance = _M0FP37lqyq6668bodymate4core18clamp__environment(_M0FP37lqyq6668bodymate4core19environment__finite(radius, 3), 0.7, 5.5);
+    const sector = _M0FP37lqyq6668bodymate4core19environment__sector(angle);
+    _M0FP37lqyq6668bodymate4core18environment__state.sector = sector;
+    _M0FP37lqyq6668bodymate4core18environment__state.range = _M0FP37lqyq6668bodymate4core24next__environment__range(_M0FP37lqyq6668bodymate4core18environment__state.range, distance);
+    const center = _M0FP37lqyq6668bodymate4core14sector__center(sector);
+    let is_front;
+    if (sector === 0) {
+      is_front = true;
     } else {
-      if (id === "squat") {
-        const span = 0.29 * stance_width / 2;
-        const thigh = Math.sqrt(0.18357199999999999);
-        const shin = Math.sqrt(0.14306900000000003);
-        const leg_length = thigh + shin - 0.008;
-        const standing_height = 0.104 + Math.sqrt(leg_length * leg_length - (span - 0.057) * (span - 0.057) - 9e-006);
-        root_y.val = standing_height - 0.3 * excursion;
-        root_z.val = -0.025 - 0.17 * excursion;
-        torso_x.val = 0.32 * excursion;
-        wrist_x.val = 0.255;
-        wrist_y.val = root_y.val + 0.28 + 0.04 * depth;
-        wrist_z.val = 0.38 + 0.07 * depth;
-        ankle_x.val = span;
-      } else {
-        upper_arm_x.val = -0.07;
-        forearm_x.val = -0.07 - 2.05 * depth;
+      is_front = false;
+    }
+    const raw_delta = is_front && angle > 3.1415926535897931 ? angle - 6.2831853071795862 : angle - center;
+    const delta = raw_delta < 0 ? -raw_delta : raw_delta;
+    const sector_blend = _M0FP37lqyq6668bodymate4core18clamp__environment(1 - delta / 0.78539816339744828, 0, 1);
+    const _bind = _M0FP37lqyq6668bodymate4core18environment__state.range;
+    let range_factor;
+    switch (_bind) {
+      case 0: {
+        range_factor = 1;
+        break;
+      }
+      case 1: {
+        range_factor = 0.58;
+        break;
+      }
+      default: {
+        range_factor = 0.22;
       }
     }
-    return `ok|pose-intent-v1|depth=${String(depth)},excursion=${String(excursion)},rootY=${String(root_y.val)},rootZ=${String(root_z.val)},torsoX=${String(torso_x.val)},handWidth=${String(hand_width)},elbowAngle=${String(elbow_angle)},wristX=${String(wrist_x.val)},wristY=${String(wrist_y.val)},wristZ=${String(wrist_z.val)},stanceWidth=${String(stance_width)},toeAngle=${String(toe_angle)},ankleX=${String(ankle_x.val)},upperArmX=${String(upper_arm_x.val)},forearmX=${String(forearm_x.val)}`;
+    const _bind$2 = _M0FP37lqyq6668bodymate4core18environment__state.quality;
+    let quality_factor;
+    switch (_bind$2) {
+      case 0: {
+        quality_factor = 0.72;
+        break;
+      }
+      case 1: {
+        quality_factor = 0.88;
+        break;
+      }
+      default: {
+        quality_factor = 1;
+      }
+    }
+    const near_parallax = 0.055 * range_factor;
+    const mid_parallax = 0.022 * range_factor;
+    const far_parallax = 0.006 * range_factor;
+    const parallax_x = _M0FPC14math3sin(angle) * range_factor;
+    const parallax_z = _M0FPC14math3cos(angle) * range_factor;
+    const rim_azimuth = _M0FP37lqyq6668bodymate4core18normalize__azimuth(5.25 + angle * 0.32);
+    const rim_intensity = (1.15 + sector_blend * 0.18) * quality_factor;
+    const platform_emissive = (0.42 + 0.08 * _M0FPC14math3sin(_M0FP37lqyq6668bodymate4core18environment__state.phase)) * quality_factor;
+    const _bind$3 = _M0FP37lqyq6668bodymate4core18environment__state.range;
+    const _bind$4 = _M0FP37lqyq6668bodymate4core18environment__state.quality;
+    let show_close_detail;
+    if (_bind$3 === 0) {
+      switch (_bind$4) {
+        case 1: {
+          show_close_detail = true;
+          break;
+        }
+        case 2: {
+          show_close_detail = true;
+          break;
+        }
+        default: {
+          show_close_detail = false;
+        }
+      }
+    } else {
+      show_close_detail = false;
+    }
+    const _bind$5 = _M0FP37lqyq6668bodymate4core18environment__state.quality;
+    const _bind$6 = _M0FP37lqyq6668bodymate4core18environment__state.range;
+    let show_transmission;
+    if (_bind$5 === 2) {
+      switch (_bind$6) {
+        case 0: {
+          show_transmission = true;
+          break;
+        }
+        case 1: {
+          show_transmission = true;
+          break;
+        }
+        default: {
+          show_transmission = false;
+        }
+      }
+    } else {
+      show_transmission = false;
+    }
+    const _bind$7 = _M0FP37lqyq6668bodymate4core18environment__state.quality;
+    let enable_bloom;
+    if (_bind$7 === 2) {
+      enable_bloom = true;
+    } else {
+      enable_bloom = false;
+    }
+    const _bind$8 = _M0FP37lqyq6668bodymate4core18environment__state.range;
+    let detail_opacity;
+    switch (_bind$8) {
+      case 0: {
+        detail_opacity = 1;
+        break;
+      }
+      case 1: {
+        detail_opacity = 0.52;
+        break;
+      }
+      default: {
+        detail_opacity = 0;
+      }
+    }
+    return `ok|environment-frame-v1|phase=${String(_M0FP37lqyq6668bodymate4core18environment__state.phase)},azimuth=${String(angle)},elevation=${String(pitch)},radius=${String(distance)},sector=${_M0FP37lqyq6668bodymate4core12sector__name(sector)},range=${_M0FP37lqyq6668bodymate4core11range__name(_M0FP37lqyq6668bodymate4core18environment__state.range)},quality=${_M0FP37lqyq6668bodymate4core13quality__name(_M0FP37lqyq6668bodymate4core18environment__state.quality)},sectorBlend=${String(sector_blend)},nearParallax=${String(near_parallax)},midParallax=${String(mid_parallax)},farParallax=${String(far_parallax)},parallaxX=${String(parallax_x)},parallaxZ=${String(parallax_z)},keyIntensity=${String(2.35 * quality_factor)},fillIntensity=${String(0.92 * quality_factor)},rimAzimuth=${String(rim_azimuth)},rimIntensity=${String(rim_intensity)},platformEmissive=${String(platform_emissive)},detailOpacity=${String(detail_opacity)},showCloseDetail=${_M0IPC14bool4BoolPB4Show10to__string(show_close_detail)},showTransmission=${_M0IPC14bool4BoolPB4Show10to__string(show_transmission)},enableBloom=${_M0IPC14bool4BoolPB4Show10to__string(enable_bloom)},reducedMotion=${_M0IPC14bool4BoolPB4Show10to__string(_M0FP37lqyq6668bodymate4core18environment__state.reduced_motion)}`;
+  }
+  function _M0FP37lqyq6668bodymate4core22environment__reset__v1() {
+    _M0FP37lqyq6668bodymate4core18environment__state.phase = 0;
+    _M0FP37lqyq6668bodymate4core18environment__state.quality = 2;
+    _M0FP37lqyq6668bodymate4core18environment__state.range = 1;
+    _M0FP37lqyq6668bodymate4core18environment__state.sector = 0;
+    _M0FP37lqyq6668bodymate4core18environment__state.reduced_motion = false;
+    return _M0FP37lqyq6668bodymate4core18environment__frame(0, 0.25, 3);
+  }
+  function _M0FP37lqyq6668bodymate4core29environment__set__quality__v1(quality) {
+    let _tmp;
+    switch (quality) {
+      case "low": {
+        _tmp = 0;
+        break;
+      }
+      case "medium": {
+        _tmp = 1;
+        break;
+      }
+      default: {
+        _tmp = 2;
+      }
+    }
+    _M0FP37lqyq6668bodymate4core18environment__state.quality = _tmp;
+    const _bind = _M0FP37lqyq6668bodymate4core18environment__state.range;
+    let _tmp$2;
+    switch (_bind) {
+      case 0: {
+        _tmp$2 = 1.8;
+        break;
+      }
+      case 1: {
+        _tmp$2 = 3;
+        break;
+      }
+      default: {
+        _tmp$2 = 4.2;
+      }
+    }
+    return _M0FP37lqyq6668bodymate4core18environment__frame(0, 0.25, _tmp$2);
+  }
+  function _M0FP37lqyq6668bodymate4core37environment__set__reduced__motion__v1(reduced) {
+    _M0FP37lqyq6668bodymate4core18environment__state.reduced_motion = reduced;
+    const _bind = _M0FP37lqyq6668bodymate4core18environment__state.range;
+    let _tmp;
+    switch (_bind) {
+      case 0: {
+        _tmp = 1.8;
+        break;
+      }
+      case 1: {
+        _tmp = 3;
+        break;
+      }
+      default: {
+        _tmp = 4.2;
+      }
+    }
+    return _M0FP37lqyq6668bodymate4core18environment__frame(0, 0.25, _tmp);
+  }
+  function _M0FP37lqyq6668bodymate4core23environment__sample__v1(azimuth, elevation, radius) {
+    return _M0FP37lqyq6668bodymate4core18environment__frame(azimuth, elevation, radius);
+  }
+  function _M0FP37lqyq6668bodymate4core21environment__tick__v1(azimuth, elevation, radius, delta) {
+    const elapsed = _M0FP37lqyq6668bodymate4core18clamp__environment(_M0FP37lqyq6668bodymate4core19environment__finite(delta, 0), 0, 0.1);
+    if (!_M0FP37lqyq6668bodymate4core18environment__state.reduced_motion) {
+      _M0FP37lqyq6668bodymate4core18environment__state.phase = _M0IPC16double6DoublePB3Mod3mod(_M0FP37lqyq6668bodymate4core18environment__state.phase + elapsed * 0.72, 6.2831853071795862);
+    }
+    return _M0FP37lqyq6668bodymate4core18environment__frame(azimuth, elevation, radius);
+  }
+  function _M0FP37lqyq6668bodymate4core22environment__frame__v1() {
+    const _bind = _M0FP37lqyq6668bodymate4core18environment__state.range;
+    let _tmp;
+    switch (_bind) {
+      case 0: {
+        _tmp = 1.8;
+        break;
+      }
+      case 1: {
+        _tmp = 3;
+        break;
+      }
+      default: {
+        _tmp = 4.2;
+      }
+    }
+    return _M0FP37lqyq6668bodymate4core18environment__frame(0, 0.25, _tmp);
   }
   globalThis.bodymate_domain_registry_v1 = _M0FP37lqyq6668bodymate4core20domain__registry__v1;
   globalThis.bodymate_domain_reset = _M0FP37lqyq6668bodymate4core13domain__reset;
@@ -14291,6 +14849,7 @@
   globalThis.bodymate_core_restore_context = _M0FP37lqyq6668bodymate4core16restore__context;
   globalThis.bodymate_core_reset_overview = _M0FP37lqyq6668bodymate4core15reset__overview;
   globalThis.bodymate_core_snapshot = _M0FP37lqyq6668bodymate4core14core__snapshot;
+  globalThis.bodymate_ui_feedback_v1 = _M0FP37lqyq6668bodymate4core16ui__feedback__v1;
   globalThis.bodymate_motion_session_reset = _M0FP37lqyq6668bodymate4core22motion__session__reset;
   globalThis.bodymate_motion_session_play_v1 = _M0FP37lqyq6668bodymate4core25motion__session__play__v1;
   globalThis.bodymate_motion_session_stop_v1 = _M0FP37lqyq6668bodymate4core25motion__session__stop__v1;
@@ -14306,5 +14865,11 @@
   globalThis.bodymate_motion_parse_query_v1 = _M0FP37lqyq6668bodymate4core24motion__parse__query__v1;
   globalThis.bodymate_motion_profile_v1 = _M0FP37lqyq6668bodymate4core19motion__profile__v1;
   globalThis.bodymate_motion_pose_intent_v1 = _M0FP37lqyq6668bodymate4core24motion__pose__intent__v1;
+  globalThis.bodymate_environment_reset_v1 = _M0FP37lqyq6668bodymate4core22environment__reset__v1;
+  globalThis.bodymate_environment_set_quality_v1 = _M0FP37lqyq6668bodymate4core29environment__set__quality__v1;
+  globalThis.bodymate_environment_set_reduced_motion_v1 = _M0FP37lqyq6668bodymate4core37environment__set__reduced__motion__v1;
+  globalThis.bodymate_environment_sample_v1 = _M0FP37lqyq6668bodymate4core23environment__sample__v1;
+  globalThis.bodymate_environment_tick_v1 = _M0FP37lqyq6668bodymate4core21environment__tick__v1;
+  globalThis.bodymate_environment_frame_v1 = _M0FP37lqyq6668bodymate4core22environment__frame__v1;
 })();
 //# sourceMappingURL=core.js.map

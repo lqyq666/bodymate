@@ -1,0 +1,49 @@
+{
+  "mobileMovement": {
+    "canvasLeft": 126,
+    "canvasesDoNotOverlap": true,
+    "horizontalOverflow": false,
+    "motion": {
+      "engine": "three.js r180",
+      "environmentQuality": "high",
+      "environmentRange": "far",
+      "environmentSector": "right",
+      "motion": "push_up",
+      "parameters": "{\"handWidth\":1.5,\"elbowAngle\":45}",
+      "paused": "true"
+    },
+    "navigatorRight": 126,
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "reducedMotion": {
+    "arrow": "none",
+    "transform": "none",
+    "transition": "0s"
+  },
+  "environmentResources": [
+    {
+      "url": "http://127.0.0.1:4174/assets/environment/runtime/observation-platform.glb",
+      "decodedBytes": 5321720
+    },
+    {
+      "url": "http://127.0.0.1:4174/assets/environment/runtime/ceiling-ring.glb",
+      "decodedBytes": 2083764
+    },
+    {
+      "url": "http://127.0.0.1:4174/assets/environment/runtime/rear-portal.glb",
+      "decodedBytes": 4253332
+    },
+    {
+      "url": "http://127.0.0.1:4174/assets/environment/runtime/curved-wall-bay.glb",
+      "decodedBytes": 2519988
+    },
+    {
+      "url": "http://127.0.0.1:4174/assets/environment/runtime/observation-platform.glb",
+      "decodedBytes": 5321720
+    }
+  ],
+  "consoleErrors": []
+}

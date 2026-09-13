@@ -1,49 +1,63 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import vm from 'node:vm';
 
-const source = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const read = path => readFile(new URL('../' + path, import.meta.url), 'utf8');
+const source = await read('index.html');
+const adapter = await read('assets/runtime/full-muscle-root-adapter.js');
+const shell = await read('assets/runtime/visual-lab-shell.js');
 
-test('keeps the three-view exploration contract in the offline page', () => {
-  for (const id of [
-    'nav-canvas',
-    'detail-canvas',
-    'orb-canvas',
-    'isolate',
-    'chat-input',
-    'history-open',
-    'progress-open',
-  ]) {
-    assert.match(source, new RegExp(`id=["']${id}["']`), `missing #${id}`);
+test('root page keeps only complete-body reference, main stage and question panel', () => {
+  for (const id of ['nav-view', 'detail-view', 'chat-form', 'chat-input', 'help-dialog']) {
+    assert.match(source, new RegExp('id="' + id + '"'));
   }
-
-  assert.match(source, /const navCamera=.*detailCamera=/s);
-  assert.match(source, /selectionRevision/);
-  assert.match(source, /prefers-reduced-motion/);
-  assert.match(source, /window\.__bodymate=/);
+  assert.doesNotMatch(source, /class="rail"|data-panel|region-choices|detail-canvas|orb-canvas|progress-dialog|neck-lab|class="footer"|engine-status|教学动作演示/);
+  assert.match(source, /data-nav="front"/);
+  assert.match(source, /data-nav="back"/);
+  assert.match(source, /data-nav="side"/);
 });
 
-test('does not add external runtime dependencies or medical claims', () => {
+test('root mounts only the full-body runtime after the local MoonBit core', () => {
+  const scripts = [...source.matchAll(/<script src="([^"]+)"/g)].map(match => match[1].split('?')[0]);
+  assert.deepEqual(scripts, [
+    'assets/runtime/moonbit-core.js', 'assets/runtime/visual-lab-shell.js',
+    'assets/runtime/full-muscle-runtime.js', 'assets/runtime/full-muscle-root-adapter.js',
+    'assets/runtime/real-body-navigator.js',
+  ]);
   assert.doesNotMatch(source, /<script[^>]+src=["']https?:\/\//i);
-  assert.doesNotMatch(source, /fetch\s*\(/);
-  assert.match(source, /非真实解剖资产/);
   assert.match(source, /不提供医学或拉伸建议/);
+  assert.match(source, /Human Atlas（CC BY 4.0）/);
 });
 
-test('ships an offline push-up demo with broad activation regions and an uncluttered question panel', () => {
-  assert.match(source, /const EXERCISE_DEMOS = Object\.freeze\(/);
-  assert.match(source, /canvas\.id = 'exercise-canvas'/);
-  assert.match(source, /activateExercise\('push_up'\)/);
-  assert.match(source, /胸大肌.*肱三头肌.*前三角肌/);
-  assert.match(source, /exercise-demo-active \.current-summary/);
-  assert.match(source, /exercise-demo-active \.progress-mini/);
-  assert.match(source, /depth=reduced \? \.5/);
+test('full-body motion and muscle queries stay in the same page without neck redirects', () => {
+  assert.match(adapter, /runtime.motionForQuery\(query\)/);
+  assert.match(adapter, /viewer.findAll\(query\)/);
+  assert.match(adapter, /viewer.playMotion\(id, parameters\)/);
+  assert.doesNotMatch(adapter, /location.href|neck-lab|__rootScm/);
+  assert.doesNotMatch(shell, /comparison|颈肩|结构<\/button>/);
 });
 
-test('delegates selection revision and explicit muscle entry to the embedded core', () => {
-  const controller = source.slice(source.indexOf('/* Interaction controller.'));
-  assert.doesNotMatch(controller, /selectionRevision\+\+/);
-  assert.doesNotMatch(controller, /state\.(region|selected|layer|isolated|whole)\s*=(?!=)/);
-  assert.match(controller, /bodymate_core_select_region_layer/);
-  assert.match(controller, /Number\.isSafeInteger\(revision\)/);
+test('clicking the movement mode starts a real motion instead of only moving focus', () => {
+  assert.match(shell, /button\.dataset\.labMode === 'movement'[\s\S]*?anatomy-examples button'\)\?\.click\(\)/);
+  assert.doesNotMatch(shell, /anatomy-examples button'\)\?\.focus\(\)/);
+});
+
+test('old view URLs migrate in place while normal full-body URLs remain intact', () => {
+  for (const [query, expected] of [
+    ['?view=neck-lab&q=old&glb-only=1', '?view=full-body&glb-only=1'],
+    ['?view=motion-lab', '?view=full-body'],
+    ['?view=full-body&glb-only=1', null],
+    ['', null],
+  ]) {
+    let replaced = null;
+    const node = () => ({ setAttribute() {}, prepend() {}, addEventListener() {} });
+    const context = vm.createContext({
+      URL, location: { href: 'http://localhost:4174/' + query },
+      history: { replaceState(_state, _title, url) { replaced = url.search; } },
+      document: { createElement: node, querySelector: node },
+    });
+    new vm.Script(shell).runInContext(context);
+    assert.equal(replaced, expected);
+  }
 });

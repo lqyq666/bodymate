@@ -1,24 +1,23 @@
-# BodyMate demo script
+# BodyMate 新项目演示讲稿
 
-## 60 seconds
+## 60 秒
 
-Open BodyMate's complete-body laboratory. Play a push-up, widen the hands, change elbow angle, pause, seek, and restore standing; MoonBit owns the action, normalized parameters, playback phase, and pose intent while Three.js applies the resulting vectors and quaternions to the real shared rig. The highlighted muscles remain a qualitative teaching signal rather than a force claim. Switch to squat, adjust stance and depth, then show muscle, bone, and x-ray views. Open the neck laboratory and enter `右侧斜角肌`: MoonBit resolves one StructureSet and Three.js highlights three real meshes. Everything required runs locally. BodyMate is educational, bounded, and not diagnostic.
+“BodyMate 是一个用 MoonBit 驱动的全身动作实验室。MoonBit 负责动作含义、参数校验、播放状态和姿态目标。我先播放俯卧撑，暂停，再改成宽距：动作位置没有跳回起点。再切深蹲，调整站距和深度，观察同一个真实人体的变化。
 
-## 3 minutes
+这份核心也能脱离网页使用。三个 MoonBit 示例直接验证参数解析、双会话隔离和姿态采样；发布包不包含 Three.js 或人体模型。完整人体页面与动作库是同一个项目。颜色只表示定性参与，不是肌电或受力测量。”
 
-Start at `/?view=full-body`. Orbit the complete Human Atlas body and show that the left navigator is an independent view of the same real asset. Play push-up and change hand width and elbow angle without losing phase, pause state, speed, camera, or view mode. Restore standing, play squat, adjust stance width, toe angle, and depth, then switch muscle, bone, and x-ray modes. Explain that red emphasis is a bounded participation hint, not EMG, force, or growth percentage.
+## 三分钟
 
-Open `/?view=neck-lab`. Pick a mesh to show that mesh clicks cross the same MoonBit action boundary as text queries. Enter `右侧斜角肌`; explain that `selected` is one focus while `highlighted` is a distinct three-member StructureSet. Use isolate and restore to show that presentation obeys the validated snapshot.
+1. 0:00–0:40：打开 `/?view=full-body`，展示 415 条肌肉、中文标签、独立站立参照及三个显示模式。
+2. 0:40–1:20：全身→动作启动俯卧撑；暂停并切宽距，解释参数、相位与暂停状态都在 MoonBit；切深蹲并改深度。
+3. 1:20–2:10：运行 `npm run moonbit:examples`，展示三个 PASS。指出它们没有加载 DOM、GLB 或 JS 适配器。
+4. 2:10–2:45：打开 `moonbit/motion/session.mbt` 与 `pkg.generated.mbti`，解释私有状态、独立实例、typed Result 和快照隔离；展示包审计输出。
+5. 2:45–3:00：说明固定教学骨架、三种动作、定性颜色和 AI 辅助开发边界。完成情况与远端发布情况分开报告。
 
-Enter `耸肩涉及哪些肌肉`, open `查看依据`, and explain current-model coverage. Then enter `低头和向右转头有哪些共同结构` to show deterministic union, intersection, directional difference, and preserved evidence IDs. Finish with `我脖子疼怎么办`: the domain rejects diagnosis/treatment inference and leaves anatomy state unchanged.
+## 技术追问准备
 
-## 8-minute technical demo
-
-1. **Problem (0:00–0:40).** Connect a visible real body, parameterized movement, and bounded anatomy meaning without pretending to measure biomechanics.
-2. **Complete-body product (0:40–2:00).** Show the 415 muscle meshes, 282 skeletal/related structures, shared 21-joint rig, independent navigator, three display modes, and structure search.
-3. **Parameterized motion (2:00–3:10).** Demonstrate push-up hand width/elbow angle and squat stance/toe angle/depth. Pause, seek, change speed, and restore standing.
-4. **MoonBit boundary (3:10–4:10).** Follow input → MoonBit action/parameter validation/playback state → versioned snapshot or pose intent → JavaScript adapter → Three.js. Show `moonbit/core/full_body_motion.mbt`, `motion_session.mbt`, and the small `src/full-muscle/motion-domain.mjs` adapter. MoonBit decides what; Three.js decides how it is displayed.
-5. **Real anatomy and StructureSet (4:10–5:00).** Open the neck laboratory, run `右侧斜角肌`, inspect the three highlight roles, and point to Human Atlas / BodyParts3D provenance.
-6. **Evidence and set algebra (5:00–6:20).** Run `耸肩涉及哪些肌肉` and `低头和向右转头有哪些共同结构`; show evidence, overlap, directional buckets, and stable canonical IDs.
-7. **Tests and offline delivery (6:20–7:25).** Run `npm run check`; point out 32 MoonBit tests and 101 Node tests, cross-language/boundary contracts, rig/parameter geometry tests, frozen GLB hashes, external generated-bundle freshness, and clean-clone verification.
-8. **Limits (7:25–8:00).** Three prepared actions, no independent fingers/toes, no soft-tissue solver, no measured activation, no diagnosis or treatment, no remote AI or backend.
+- 为什么用 MoonBit？参数、状态和姿态是可确定且需要多消费者复用的领域规则；类型、结果枚举与黑盒测试让这些规则可审查。
+- JS 还有什么？GLB/Three.js、几何 IK、DOM、相机、材质、中文肌肉索引。没有将整页伪装为纯 MoonBit。
+- 怎样证明真复用？看实际发布 ZIP 的隔离构建和三个独立 MoonBit 示例，再追到网页 V1 适配器导入同一包。
+- 为什么不是任意骨架引擎？当前姿态尺寸来自项目固定教学 rig，通用重定向尚未实现。
+- 代码多少？现场运行 `npm run moonbit:stats`，同时展示库、策略、适配器、保留兼容代码的分项，不依靠手填数字。
