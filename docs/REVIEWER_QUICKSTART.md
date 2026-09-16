@@ -51,6 +51,8 @@ npm run moonbit:install-check # 从 mooncakes.io 真实 moon add 并运行（需
 
 ## 4. 页面路线
 
+不装任何东西：打开在线演示 **https://lqyq666.github.io/bodymate/?view=full-body**（GitHub Pages 静态托管；没有 AI 代理，对话框走内置 MoonBit 动作引擎）。本地运行：
+
 ```sh
 npm start        # 启动本地服务并打开页面；或 python -m http.server 4174 --bind 127.0.0.1
 ```

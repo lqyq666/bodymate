@@ -62,6 +62,8 @@ moon run moonbit/examples/export --target js       # 四库串联：指令 → �
 
 ## 参考应用：全身动作实验室
 
+在线演示（GitHub Pages，静态托管，无 AI 代理时由内置 MoonBit 动作引擎接管）：**https://lqyq666.github.io/bodymate/?view=full-body** ——首次加载需下载约 60 MB 人体与环境模型。
+
 `/?view=full-body`：415 条肌肉、282 个骨骼及相关结构、21 关节教学骨架；俯卧撑、深蹲、弯举的播放、暂停、进度、速度、姿势预设与参数比较、四阶段讲解、中英文结构检索与点选、定性参与肌群高亮；可选的本地 AI 对话。
 
 ```text

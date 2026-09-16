@@ -2,7 +2,7 @@ name: verify
 
 on:
   push:
-    branches: [main, "feat/**", "codex/**"]
+    branches: [main, "feat/**", "codex/**", "zcode/**"]
   pull_request:
     branches: [main]
 
