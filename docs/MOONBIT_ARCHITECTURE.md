@@ -55,7 +55,7 @@ JS 负责线协议解析、NFKC 文本规范化、DOM、事件适配和资源生
 
 ## 分发与验证
 
-`.moonignore` 只让 motion 库、anatomy 术语库、agent 护栏库、zhnum 数量解析库、公开接口、测试、三个示例及说明/许可证进入 Mooncakes ZIP。完整应用及人体/环境资产留在 GitHub 项目中；库没有 DOM、Three.js、GLB、npm 包或网络依赖，执行 JS target 仍需要 Node.js。
+`.moonignore` 只让 motion 库、anatomy 术语库、agent 护栏库、zhnum 数量解析库、公开接口、测试、四个示例及说明/许可证进入 Mooncakes ZIP。完整应用及人体/环境资产留在 GitHub 项目中；库没有 DOM、Three.js、GLB、npm 包或网络依赖，执行 JS target 仍需要 Node.js。
 
 `npm run check` 验证完整应用、MoonBit/Node 测试、生成物、冻结人体和规模基线；`npm run moonbit:package-check` 验证真实 ZIP 的路径/体积与隔离后的 check/build/test/run。公开 API `pkg.generated.mbti` 是生成物，修改 API 后先生成再审查。
 

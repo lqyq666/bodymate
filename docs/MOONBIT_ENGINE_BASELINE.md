@@ -9,7 +9,7 @@ MoonBit test files: 20
 MoonBit test effective LOC: 816
 MoonBit public function declarations (including methods and adapters): 99
 MoonBit tests: 70
-MoonBit example effective LOC (excluded from production): 38
+MoonBit example effective LOC (excluded from production): 70
 Reusable motion library: 422 effective LOC (8 files)
 Reusable anatomy terminology library: 501 effective LOC (3 files)
 Reusable agent action guard library: 169 effective LOC (1 files)

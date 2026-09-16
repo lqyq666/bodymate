@@ -38,7 +38,7 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
         names.append(path)
         total += entry.file_size
     required = ['moon.mod', 'LICENSE', 'moonbit/motion/moon.pkg', 'moonbit/motion/motion_test.mbt', 'moonbit/anatomy/moon.pkg', 'moonbit/anatomy/anatomy_test.mbt', 'moonbit/agent/moon.pkg', 'moonbit/agent/agent_test.mbt', 'moonbit/zhnum/moon.pkg', 'moonbit/zhnum/zhnum_test.mbt']
-    required += ['moonbit/examples/' + scenario + '/main.mbt' for scenario in ['parameters', 'sessions', 'sampling']]
+    required += ['moonbit/examples/' + scenario + '/main.mbt' for scenario in ['parameters', 'sessions', 'sampling', 'export']]
     if any(path not in names for path in required):
         raise RuntimeError('Incomplete MoonBit archive')
     if total > 200000:

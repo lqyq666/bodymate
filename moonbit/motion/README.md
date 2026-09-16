@@ -14,9 +14,10 @@ moon test --target js
 moon run moonbit/examples/parameters --target js
 moon run moonbit/examples/sessions --target js
 moon run moonbit/examples/sampling --target js
+moon run moonbit/examples/export --target js > frames.csv
 ```
 
-示例包含断言，错误会以非零退出码失败。参数示例输出规范化结果；会话示例证明两个消费者互不干扰；采样示例不加载渲染器即可输出五个姿态帧。
+示例包含断言，错误会以非零退出码失败。参数示例输出规范化结果；会话示例证明两个消费者互不干扰；采样示例不加载渲染器即可输出五个姿态帧；导出示例把四个库串起来——中文指令解析（zhnum）→ 模型提议护栏（agent）→ 双语结构名（anatomy）→ 全部动作的确定性姿态帧 CSV，可直接作为教学卡片数据或回归基线。
 
 ## 调用方式
 
@@ -131,6 +132,6 @@ let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceW
 
 ## 发布边界
 
-发布配置只打包 motion、anatomy、agent、zhnum 四个库、测试、三个示例和 MIT 许可证。`moon package --list` 可查看准确清单；人体及环境资产、浏览器 JS、旧颈肩兼容模块不进入 Mooncakes 包。
+发布配置只打包 motion、anatomy、agent、zhnum 四个库、测试、四个示例和 MIT 许可证。`moon package --list` 可查看准确清单；人体及环境资产、浏览器 JS、旧颈肩兼容模块不进入 Mooncakes 包。
 
 仓库地址：https://github.com/lqyq666/bodymate 。本地打包或通过测试不代表已经发布；发布状态应以 Mooncakes 的实际版本记录为准。
