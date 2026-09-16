@@ -16,7 +16,7 @@ pub fn normalize(id : String, supplied : Array[MotionParameterValue]) -> Result[
     let mut was_supplied = false
     for item in supplied { if item.key == field.key { was_supplied = true } }
     if was_supplied && (!finite_double(requested) || (normalized - requested).abs() > 0.0001) {
-      notices.push(field.label + "已调整为 " + normalized.to_string() + field.unit + "（本模型演示范围 " + field.minimum.to_string() + "–" + field.maximum.to_string() + field.unit + "）。")
+      notices.push(field.label + "已调整为 " + normalized.to_string() + field.unit + "（契约范围 " + field.minimum.to_string() + "–" + field.maximum.to_string() + field.unit + "）。")
     }
   }
   Ok({ values, notices })

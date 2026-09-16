@@ -27,6 +27,6 @@
 
 ## 范围说明
 
-可复用不等于任意骨架通用：`motion` 的姿态数学绑定教学骨架尺寸。`anatomy` 是展示用译名，不是临床术语标准。Three.js 负责 IK、向量/四元数、绘制和交互适配。旧的 14 结构颈肩 registry、resolver、comparison 等保留为兼容与单独回归，不在当前演示路线内，也不进入 Mooncakes 包。
+可复用不等于任意骨架通用：`motion` 的姿态数学绑定参照骨架尺寸。`anatomy` 是展示用译名，不是临床术语标准。Three.js 负责 IK、向量/四元数、绘制和交互适配。旧的 14 结构颈肩 registry、resolver、comparison 等保留为兼容与单独回归，不在当前演示路线内，也不进入 Mooncakes 包。
 
 [完整架构](MOONBIT_ARCHITECTURE.md) · [评委快速开始](REVIEWER_QUICKSTART.md) · [库 API 文档](../moonbit/motion/README.md)

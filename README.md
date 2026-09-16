@@ -1,10 +1,10 @@
-# BodyMate｜MoonBit 基础库套件与全身参考应用
+# lqyq666/bodymate｜MoonBit 基础库套件与 MoonRig Console
 
 > **English summary.** `lqyq666/bodymate` ships four dependency-free MoonBit packages you can `moon add` individually — `agent` (a guard that turns untrusted LLM proposals into allowlisted commands with bounded numeric fields, or nothing), `zhnum` (Chinese numeral parsing, formatting and in-text normalization), `anatomy` (376 bilingual Human Atlas / BodyParts3D terms with laterality and search) and `motion` (parameterized motion sessions with deterministic pose intents) — plus an offline full-body Three.js reference application that proves the same MoonBit code drives the browser, a local AI proxy and command-line examples. Published on [mooncakes.io](https://mooncakes.io/docs/lqyq666/bodymate); API docs are in the [library README](moonbit/motion/README.md).
 
-`lqyq666/bodymate` 是一组无依赖、可单独 `moon add` 的 MoonBit 库，外加一个使用它们的离线全身三维参考应用。库是主体，应用是证明：同一份 MoonBit 代码同时驱动浏览器页面、本地 AI 代理和纯命令行示例。
+`lqyq666/bodymate` 是一组无依赖、可单独 `moon add` 的 MoonBit 库，外加一个使用它们的离线三维参照骨架应用（MoonRig Console）。库是主体，应用是证明：同一份 MoonBit 代码同时驱动浏览器页面、本地 AI 代理和纯命令行示例。
 
-![全身动作实验室：宽距俯卧撑停在最低点，胸大肌与肱三头肌以定性颜色高亮](docs/media/full-body-lab.png)
+![MoonRig Console：宽距俯卧撑停在最低点，胸大肌与肱三头肌以定性颜色高亮](docs/media/full-body-lab.png)
 
 ```sh
 moon add lqyq666/bodymate
@@ -15,7 +15,7 @@ moon add lqyq666/bodymate
 | `lqyq666/bodymate/agent` | **LLM 输出的执行护栏**：宿主声明允许的命令与数值字段，模型提议只能收敛为 `None` / `Command` / `Lookup`，未声明的 id、字段、非有限数值一律丢弃 | 任何用 MoonBit 写 Agent / 工具调用 / 对话式控制的项目 |
 | `lqyq666/bodymate/zhnum` | **中文数字与数量表达**：`三万五千`、`三点一四`、`半`、全角数字、`百分之八十` → ASCII 数字；单位前取数 | 中文 UI 指令、语音/聊天输入、配置与表单解析 |
 | `lqyq666/bodymate/anatomy` | **Human Atlas / BodyParts3D 双语术语库**：376 条归一化拉丁名 → 中文，覆盖 415 肌肉与 282 骨/椎间盘/肋/牙/软骨/筋膜，含侧别与检索 | 医学、体育、康复教育与可视化项目 |
-| `lqyq666/bodymate/motion` | **参数化动作会话引擎**：类型化参数与限幅、中文指令解析、独立 `Session`、相位讲解、确定性姿态意图 | 动作教学、动画/仿真状态机、需要可复现姿态帧的工具 |
+| `lqyq666/bodymate/motion` | **参数化动作会话引擎**：类型化参数与限幅、中文指令解析、独立 `Session`、相位讲解、确定性姿态意图 | 动作回放工具、动画/仿真状态机、需要可复现姿态帧的工具 |
 
 四个包都不依赖 DOM、Three.js、GLB、网络或 npm；`agent` 与 `zhnum` 与人体领域无关，`anatomy` 与 `motion` 是领域库但同样脱离页面可用。
 
@@ -53,20 +53,20 @@ moon run moonbit/examples/sampling --target js     # 五个相位的确定性姿
 moon run moonbit/examples/export --target js       # 四库串联：指令 → 护栏 → 命名 → 姿态帧 CSV
 ```
 
-每个示例含断言，成功输出 `PASS`；`export` 的 CSV 可直接落盘作为教学卡片数据或回归基线。工具链不在 PATH 时用 `npm run moonbit:examples`。
+每个示例含断言，成功输出 `PASS`；`export` 的 CSV 可直接落盘作为标注卡片数据或回归基线。工具链不在 PATH 时用 `npm run moonbit:examples`。
 
 ## 生态贡献与边界
 
 - **补空缺，不重复**：截至 2026-09-16，mooncakes.io 上没有面向 LLM 应用的动作白名单原语，中文数字方向只有“数字→中文大写金额”的格式化包而没有反向解析库，也没有解剖学术语字典；这三项都是从真实应用需求中抽出的、边界清晰的独立包。
 - **单一事实来源**：术语表、护栏规则、动作目录只存在于 MoonBit；浏览器与 Node 侧的 JavaScript 只做字符串编解码（见 [架构](docs/MOONBIT_ARCHITECTURE.md)）。
 - **可验证**：MoonBit 76 项测试、Node 143 项测试、生成物新鲜度检查、冻结人体资产哈希、仓库卫生审计、真实发布 ZIP 的隔离 check/build/test/run；`npm run moonbit:install-check` 会在临时模块里从 mooncakes.io 真实 `moon add lqyq666/bodymate` 并运行四个包（需要网络）。规模基线见 [实时基线](docs/MOONBIT_ENGINE_BASELINE.md)。
-- **诚实边界**：`motion` 的姿态标量绑定当前教学骨架尺寸，不是通用骨骼求解器；`anatomy` 是展示用译名，不是临床术语标准；整套项目不提供医疗诊断、疼痛判断、训练处方或实测发力结论。
+- **诚实边界**：`motion` 的姿态标量绑定当前参照骨架尺寸，不是通用骨骼求解器；`anatomy` 是展示用译名，不是临床术语标准；整套项目不提供医疗诊断、疼痛判断、训练处方或实测发力结论。
 
-## 参考应用：全身动作实验室
+## 参考应用：MoonRig Console
 
 在线演示（GitHub Pages，静态托管，无 AI 代理时由内置 MoonBit 动作引擎接管）：**https://lqyq666.github.io/bodymate/?view=full-body** ——首次加载需下载约 60 MB 人体与环境模型。
 
-`/?view=full-body`：415 条肌肉、282 个骨骼及相关结构、21 关节教学骨架；俯卧撑、深蹲、弯举的播放、暂停、进度、速度、姿势预设与参数比较、四阶段讲解、中英文结构检索与点选、定性参与肌群高亮；可选的本地 AI 对话。
+`/?view=full-body`：415 条肌肉、282 个骨骼及相关结构、21 关节参照骨架；俯卧撑、深蹲、弯举的播放、暂停、进度、速度、姿势预设与参数比较、四个关键帧标注、中英文结构检索与点选、定性参与映射高亮；可选的本地 AI 对话。
 
 ```text
 用户输入 / 模型提议 / 参数控件 / 每帧经过时间
@@ -120,4 +120,4 @@ npm run ai:serve
 
 ChatGPT / Codex / ZCode 参与设计、实现、测试与文档，见 [开发复盘](docs/DEVELOPMENT_RETROSPECTIVE.md)。参赛者理解并解释最终实现、数据来源、技术边界与验证结果。
 
-当前是三种预设教学动作，不模拟软组织或独立手指脚趾；颜色与参与 profile 只用于定性视觉强调，不是实测肌电、受力、诊断或训练处方。
+当前是三种预设样例动作，不模拟软组织或独立手指脚趾；颜色与参与 profile 只用于定性视觉强调，不是实测肌电、受力、诊断或训练处方。

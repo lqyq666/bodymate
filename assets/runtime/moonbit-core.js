@@ -11195,7 +11195,7 @@
           }
         }
         if (was_supplied.val && (!_M0FP37lqyq6668bodymate6motion14finite__double(requested) || Math.abs(normalized - requested) > 0.0001)) {
-          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, `${field.label}已调整为 ${String(normalized)}${field.unit}（本模型演示范围 ${String(field.minimum)}–${String(field.maximum)}${field.unit}）。`);
+          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(notices, `${field.label}已调整为 ${String(normalized)}${field.unit}（契约范围 ${String(field.minimum)}–${String(field.maximum)}${field.unit}）。`);
         }
         _tmp = _ + 1 | 0;
         continue;
@@ -11850,13 +11850,13 @@
     } else {
       switch (id) {
         case "push_up": {
-          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_ready", 0, 0.875, 0.125, "准备姿势", "从头到脚保持教学模型的整体对齐；这一阶段用于观察起始位置。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_lower", 0.25, 0.125, 0.4375, "下降", "躯干向下移动，胸部与上臂后侧的参与提示开始显现。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_bottom", 0.5, 0.4375, 0.5625, "最低点", "动作到达示范最低位置；手距与肘部外展会改变当前教学姿态。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_rise", 0.75, 0.5625, 0.875, "推起", "躯干回到准备位置；颜色只表示定性参与，不表示实测受力。")]);
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_ready", 0, 0.875, 0.125, "准备姿势", "参照骨架保持整体对齐；该关键帧是起始位置基线。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_lower", 0.25, 0.125, 0.4375, "下降", "躯干下降；胸部与上臂后侧的定性参与映射开始显现。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_bottom", 0.5, 0.4375, 0.5625, "最低点", "到达契约定义的最低位置；手距与肘部外展参数在此帧改变姿态。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_rise", 0.75, 0.5625, 0.875, "推起", "躯干回到起始位置；颜色只表示定性参与映射，不表示实测受力。")]);
         }
         case "squat": {
-          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_ready", 0, 0.875, 0.125, "准备姿势", "双脚站距与脚尖方向使用当前参数；此处是比较的起点。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_lower", 0.25, 0.125, 0.4375, "下降", "髋与膝共同屈曲；可在相同阶段切换站距、脚尖外展和幅度。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_bottom", 0.5, 0.4375, 0.5625, "最低点", "当前下蹲幅度达到最大；模型范围是教学约束，不是训练建议。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_rise", 0.75, 0.5625, 0.875, "起身", "髋与膝伸展回到准备位置；观察臀部与大腿区域的定性提示。")]);
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_ready", 0, 0.875, 0.125, "准备姿势", "双脚站距与脚尖方向取自当前参数；此帧是比较的基线。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_lower", 0.25, 0.125, 0.4375, "下降", "髋与膝共同屈曲；可在同一关键帧切换站距、脚尖外展和幅度。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_bottom", 0.5, 0.4375, 0.5625, "最低点", "下蹲幅度达到当前参数最大值；范围来自参数契约，不是训练建议。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_rise", 0.75, 0.5625, 0.875, "起身", "髋与膝伸展回到起始位置；臀部与大腿区域为定性参与映射。")]);
         }
         case "curl": {
-          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_ready", 0, 0.875, 0.125, "准备姿势", "手臂位于教学模型的起始位置。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_flex", 0.25, 0.125, 0.4375, "屈肘", "前臂向上移动；上臂前侧为主要参与提示。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_top", 0.5, 0.4375, 0.5625, "最高点", "肘部屈曲达到示范最高位置；停在这里便于观察前臂与上臂关系。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_extend", 0.75, 0.5625, 0.875, "伸肘", "前臂回到起始位置；颜色是教学提示，不代表力或肌电。")]);
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_ready", 0, 0.875, 0.125, "准备姿势", "手臂位于参照骨架的起始位置。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_flex", 0.25, 0.125, 0.4375, "屈肘", "前臂上举；上臂前侧为主要参与映射。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_top", 0.5, 0.4375, 0.5625, "最高点", "肘部屈曲达到契约最高位置；停在此帧便于检视前臂与上臂关系。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_extend", 0.75, 0.5625, 0.875, "伸肘", "前臂回到起始位置；颜色是定性参与映射，不代表力或肌电。")]);
         }
         default: {
           return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
