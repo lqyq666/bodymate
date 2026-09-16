@@ -12,7 +12,7 @@ pub fn agent_guard_command_v1(
   @agent.action_wire(
     @agent.guard_command(
       candidate_id,
-      @agent.parse_fields(fields),
+      @agent.parse_candidates(fields),
       @agent.parse_allowlist(allowlist),
     ),
   )
@@ -32,7 +32,7 @@ pub fn agent_explain_command_v1(
 ) -> String {
   let report = @agent.explain_command(
     candidate_id,
-    @agent.parse_fields(fields),
+    @agent.parse_candidates(fields),
     @agent.parse_allowlist(allowlist),
     @agent.policy_from_string(policy),
   )
