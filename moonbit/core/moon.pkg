@@ -40,6 +40,7 @@ options(
         "bodymate_motion_parameters_v1",
         "bodymate_motion_parse_query_v1",
         "bodymate_motion_profile_v1",
+        "bodymate_motion_phase_guides_v1",
         "bodymate_motion_pose_intent_v1",
         "bodymate_motion_session_reset",
         "bodymate_motion_session_play_v1",

@@ -642,9 +642,10 @@
     this.parameters = param6;
     this.presets = param7;
   }
-  function _M0TP37lqyq6668bodymate6motion12MotionPreset(param0, param1) {
+  function _M0TP37lqyq6668bodymate6motion12MotionPreset(param0, param1, param2) {
     this.title = param0;
-    this.values = param1;
+    this.is_baseline = param1;
+    this.values = param2;
   }
   function _M0TP37lqyq6668bodymate6motion20MotionParameterValue(param0, param1) {
     this.key = param0;
@@ -749,6 +750,22 @@
     this.ankle_x = param12;
     this.upper_arm_x = param13;
     this.forearm_x = param14;
+  }
+  function _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err.prototype.$tag = 0;
+  function _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok.prototype.$tag = 1;
+  function _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide(param0, param1, param2, param3, param4, param5) {
+    this.id = param0;
+    this.phase = param1;
+    this.start = param2;
+    this.end = param3;
+    this.title = param4;
+    this.detail = param5;
   }
   function _M0TP37lqyq6668bodymate4core12DomainAction(param0, param1, param2, param3) {
     this.kind = param0;
@@ -9701,7 +9718,7 @@
     return [new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("stanceWidth", "站距", "倍髋宽", 0.8, 1.8, 0.05, 1.2), new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("toeAngle", "脚尖外展", "°", 0, 35, 5, 20), new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("squatDepth", "下蹲幅度", "%", 60, 110, 5, 100)];
   }
   function _M0FP37lqyq6668bodymate6motion7catalog() {
-    return [new _M0TP37lqyq6668bodymate6motion16MotionDefinition("push_up", "俯卧撑", ["俯卧撑", "卧撑", "push-up", "push up"], 4, ["胸部", "肩部", "上臂后侧"], "pectoralis major/deltoid/triceps brachii/serratus anterior", _M0FP37lqyq6668bodymate6motion20push__up__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 0.85), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 25)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.5), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 45)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 60)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("squat", "深蹲", ["深蹲", "squat"], 4.4, ["大腿前侧", "臀部", "大腿后侧"], "rectus femoris/vastus/gluteus/biceps femoris/semitendinosus/semimembranosus", _M0FP37lqyq6668bodymate6motion17squat__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄站距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 0.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 10), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.2), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 20), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽站距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 30), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("curl", "弯举", ["弯举", "二头弯举", "curl"], 3.6, ["上臂前侧", "前臂"], "biceps brachii/brachialis/brachioradialis", [], [])];
+    return [new _M0TP37lqyq6668bodymate6motion16MotionDefinition("push_up", "俯卧撑", ["俯卧撑", "卧撑", "push-up", "push up"], 4, ["胸部", "肩部", "上臂后侧"], "pectoralis major/deltoid/triceps brachii/serratus anterior", _M0FP37lqyq6668bodymate6motion20push__up__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 0.85), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 25)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", true, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.5), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 45)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 60)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("squat", "深蹲", ["深蹲", "squat"], 4.4, ["大腿前侧", "臀部", "大腿后侧"], "rectus femoris/vastus/gluteus/biceps femoris/semitendinosus/semimembranosus", _M0FP37lqyq6668bodymate6motion17squat__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄站距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 0.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 10), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", true, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.2), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 20), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽站距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 30), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("curl", "弯举", ["弯举", "二头弯举", "curl"], 3.6, ["上臂前侧", "前臂"], "biceps brachii/brachialis/brachioradialis", [], [])];
   }
   function _M0FP37lqyq6668bodymate6motion10definition(id) {
     const _bind = _M0FP37lqyq6668bodymate6motion7catalog();
@@ -10436,88 +10453,109 @@
     }
     return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE2Ok(new _M0TP37lqyq6668bodymate6motion10PoseIntent(depth, excursion, root_y.val, root_z.val, torso_x.val, hand_width, elbow_angle, wrist_x.val, wrist_y.val, wrist_z.val, stance_width, toe_angle, ankle_x.val, upper_arm_x.val, forearm_x.val));
   }
-  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_599, _x_600) {
-    if (_x_599 === 0) {
-      if (_x_600 === 0) {
+  function _M0FP37lqyq6668bodymate6motion13phase__guides(id) {
+    const _bind = _M0FP37lqyq6668bodymate6motion10definition(id);
+    if (_bind === undefined) {
+      return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+    } else {
+      switch (id) {
+        case "push_up": {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_ready", 0, 0.875, 0.125, "准备姿势", "从头到脚保持教学模型的整体对齐；这一阶段用于观察起始位置。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_lower", 0.25, 0.125, 0.4375, "下降", "躯干向下移动，胸部与上臂后侧的参与提示开始显现。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_bottom", 0.5, 0.4375, 0.5625, "最低点", "动作到达示范最低位置；手距与肘部外展会改变当前教学姿态。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_rise", 0.75, 0.5625, 0.875, "推起", "躯干回到准备位置；颜色只表示定性参与，不表示实测受力。")]);
+        }
+        case "squat": {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_ready", 0, 0.875, 0.125, "准备姿势", "双脚站距与脚尖方向使用当前参数；此处是比较的起点。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_lower", 0.25, 0.125, 0.4375, "下降", "髋与膝共同屈曲；可在相同阶段切换站距、脚尖外展和幅度。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_bottom", 0.5, 0.4375, 0.5625, "最低点", "当前下蹲幅度达到最大；模型范围是教学约束，不是训练建议。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_rise", 0.75, 0.5625, 0.875, "起身", "髋与膝伸展回到准备位置；观察臀部与大腿区域的定性提示。")]);
+        }
+        case "curl": {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_ready", 0, 0.875, 0.125, "准备姿势", "手臂位于教学模型的起始位置。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_flex", 0.25, 0.125, 0.4375, "屈肘", "前臂向上移动；上臂前侧为主要参与提示。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_top", 0.5, 0.4375, 0.5625, "最高点", "肘部屈曲达到示范最高位置；停在这里便于观察前臂与上臂关系。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_extend", 0.75, 0.5625, 0.875, "伸肘", "前臂回到起始位置；颜色是教学提示，不代表力或肌电。")]);
+        }
+        default: {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+        }
+      }
+    }
+  }
+  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_605, _x_606) {
+    if (_x_605 === 0) {
+      if (_x_606 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_600 === 1) {
+      if (_x_606 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_595, _x_596) {
-    switch (_x_595) {
+  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_601, _x_602) {
+    switch (_x_601) {
       case 0: {
-        if (_x_596 === 0) {
+        if (_x_602 === 0) {
           return true;
         } else {
           return false;
         }
       }
       case 1: {
-        if (_x_596 === 1) {
+        if (_x_602 === 1) {
           return true;
         } else {
           return false;
         }
       }
       case 2: {
-        if (_x_596 === 2) {
+        if (_x_602 === 2) {
           return true;
         } else {
           return false;
         }
       }
       case 3: {
-        if (_x_596 === 3) {
+        if (_x_602 === 3) {
           return true;
         } else {
           return false;
         }
       }
       case 4: {
-        if (_x_596 === 4) {
+        if (_x_602 === 4) {
           return true;
         } else {
           return false;
         }
       }
       case 5: {
-        if (_x_596 === 5) {
+        if (_x_602 === 5) {
           return true;
         } else {
           return false;
         }
       }
       case 6: {
-        if (_x_596 === 6) {
+        if (_x_602 === 6) {
           return true;
         } else {
           return false;
         }
       }
       case 7: {
-        if (_x_596 === 7) {
+        if (_x_602 === 7) {
           return true;
         } else {
           return false;
         }
       }
       case 8: {
-        if (_x_596 === 8) {
+        if (_x_602 === 8) {
           return true;
         } else {
           return false;
         }
       }
       default: {
-        if (_x_596 === 9) {
+        if (_x_602 === 9) {
           return true;
         } else {
           return false;
@@ -10525,30 +10563,30 @@
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_591, _x_592) {
-    if (_x_591 === 0) {
-      if (_x_592 === 0) {
+  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_597, _x_598) {
+    if (_x_597 === 0) {
+      if (_x_598 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_592 === 1) {
+      if (_x_598 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_571, _x_572) {
-    if (_x_571 === 0) {
-      if (_x_572 === 0) {
+  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_577, _x_578) {
+    if (_x_577 === 0) {
+      if (_x_578 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_572 === 1) {
+      if (_x_578 === 1) {
         return true;
       } else {
         return false;
@@ -14339,7 +14377,10 @@
     return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session8snapshot(_M0FP37lqyq6668bodymate4core15motion__session));
   }
   function _M0FP37lqyq6668bodymate4core12preset__wire(preset) {
-    return `${preset.title}@${_M0FP37lqyq6668bodymate4core15parameter__wire(preset.values)}`;
+    return `${preset.title}@${_M0IPC14bool4BoolPB4Show10to__string(preset.is_baseline)}@${_M0FP37lqyq6668bodymate4core15parameter__wire(preset.values)}`;
+  }
+  function _M0FP37lqyq6668bodymate4core18phase__guide__wire(guide) {
+    return `${guide.id}^${String(guide.phase)}^${String(guide.start)}^${String(guide.end)}^${guide.title}^${guide.detail}`;
   }
   function _M0FP37lqyq6668bodymate4core12motion__wire(motion) {
     const fields = [];
@@ -14508,6 +14549,43 @@
     const _tmp$4 = value.note;
     const _bind$6 = "~";
     return `ok|motion-profile-v1|${_tmp$3}|${_tmp$4}|${_M0MPC15array5Array4joinGsE(evidence, new _M0TPC16string10StringView(_bind$6, 0, _bind$6.length))}`;
+  }
+  function _M0FP37lqyq6668bodymate4core25motion__phase__guides__v1(id) {
+    let guides;
+    _L: {
+      let error;
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate6motion13phase__guides(id);
+        if (_bind.$tag === 0) {
+          const _Err = _bind;
+          const _error = _Err._0;
+          error = _error;
+          break _L$2;
+        } else {
+          const _Ok = _bind;
+          const _guides = _Ok._0;
+          guides = _guides;
+          break _L;
+        }
+      }
+      return _M0FP37lqyq6668bodymate4core19motion__error__wire(error);
+    }
+    const records = [];
+    const _bind = guides.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const guide = guides[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(records, _M0FP37lqyq6668bodymate4core18phase__guide__wire(guide));
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const _bind$2 = "~";
+    return `ok|motion-phase-guides-v1|${_M0MPC15array5Array4joinGsE(records, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))}`;
   }
   function _M0FP37lqyq6668bodymate4core24motion__pose__intent__v1(id, phase, input) {
     let p;
@@ -14864,6 +14942,7 @@
   globalThis.bodymate_motion_parameters_v1 = _M0FP37lqyq6668bodymate4core22motion__parameters__v1;
   globalThis.bodymate_motion_parse_query_v1 = _M0FP37lqyq6668bodymate4core24motion__parse__query__v1;
   globalThis.bodymate_motion_profile_v1 = _M0FP37lqyq6668bodymate4core19motion__profile__v1;
+  globalThis.bodymate_motion_phase_guides_v1 = _M0FP37lqyq6668bodymate4core25motion__phase__guides__v1;
   globalThis.bodymate_motion_pose_intent_v1 = _M0FP37lqyq6668bodymate4core24motion__pose__intent__v1;
   globalThis.bodymate_environment_reset_v1 = _M0FP37lqyq6668bodymate4core22environment__reset__v1;
   globalThis.bodymate_environment_set_quality_v1 = _M0FP37lqyq6668bodymate4core29environment__set__quality__v1;

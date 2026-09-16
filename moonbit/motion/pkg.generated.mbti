@@ -14,6 +14,8 @@ pub fn normalize(String, Array[MotionParameterValue]) -> Result[NormalizedParame
 
 pub fn parse_query(String, String, Array[MotionParameterValue]) -> Result[ParsedParameters, MotionError]
 
+pub fn phase_guides(String) -> Result[Array[MotionPhaseGuide], MotionError]
+
 pub fn pose_intent(String, Double, Array[MotionParameterValue]) -> Result[PoseIntent, MotionError]
 
 pub fn profile(String, Array[MotionParameterValue]) -> Result[MotionProfile, MotionError]
@@ -66,8 +68,18 @@ pub struct MotionParticipationGroup {
   weight : Double
 }
 
+pub struct MotionPhaseGuide {
+  id : String
+  phase : Double
+  start : Double
+  end : Double
+  title : String
+  detail : String
+}
+
 pub struct MotionPreset {
   title : String
+  is_baseline : Bool
   values : Array[MotionParameterValue]
 }
 

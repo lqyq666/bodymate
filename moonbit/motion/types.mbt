@@ -12,6 +12,7 @@ pub struct MotionParameterDefinition {
 ///| A named parameter set owned by the motion domain.
 pub struct MotionPreset {
   title : String
+  is_baseline : Bool
   values : Array[MotionParameterValue]
 }
 
@@ -67,6 +68,16 @@ pub struct MotionProfile {
   groups : Array[MotionParticipationGroup]
   note : String
   evidence : Array[MotionEvidence]
+}
+
+///| One authored teaching checkpoint in a cyclic motion. `start > end` wraps across phase 1 to 0.
+pub struct MotionPhaseGuide {
+  id : String
+  phase : Double
+  start : Double
+  end : Double
+  title : String
+  detail : String
 }
 
 pub struct PoseIntent {

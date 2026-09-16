@@ -1,6 +1,6 @@
 # BodyMate Motion
 
-BodyMate 的 MoonBit 动作领域库，包路径 `lqyq666/bodymate/motion`，当前支持 JS target。提供三个有边界的教学动作（俯卧撑、深蹲、弯举）的参数规则、中文指令解析、独立播放会话、参与提示及确定性姿态标量。
+BodyMate 的 MoonBit 动作领域库，包路径 `lqyq666/bodymate/motion`，当前支持 JS target。提供三个有边界的教学动作（俯卧撑、深蹲、弯举）的参数规则、中文指令解析、独立播放会话、参与提示、关键阶段讲解及确定性姿态标量。
 
 这是 BodyMate 新项目的一部分：完整人体页面和纯 MoonBit 示例使用同一份库。库不依赖 DOM、Three.js、GLB、网络、账号或 npm 包；调用方负责渲染。它不是通用骨骼求解器，姿态标量使用 BodyMate 的固定教学骨架尺寸，也不提供生物力学、肌电、诊断或训练处方。
 
@@ -46,11 +46,12 @@ fn main raise {
 
 | API | 返回与边界 |
 | --- | --- |
-| `catalog()` / `definition(id)` | 独立数据副本；调用者修改数组不影响后续查询 |
+| `catalog()` / `definition(id)` | 独立数据副本；每个可调动作有且只有一个 `is_baseline` 预设，供观察对比使用 |
 | `resolve(query)` | 有界中英文别名匹配，未知返回 `None`；不是开放式自然语言理解 |
 | `normalize(id, values)` | 限幅、步进取整、非有限值回默认；规范化后的再次输入不产生调整提示 |
 | `parse_query(id, query, base)` | 类型化值、识别标志和提示；保留单位要求，说明未支持参数 |
 | `profile(id, values)` | 定性的肌群参与、局限说明和依据链接；权重仅用于视觉强调 |
+| `phase_guides(id)` | 四个可暂停比较的关键阶段；说明固定教学姿态，不是训练指令或实测数据 |
 | `pose_intent(id, phase, values)` | 同输入同输出；phase 限在 `[0,1]`，非有限值回 `0` |
 | `Session::new()` | 创建独立会话，无库级全局单例 |
 | `play` / `stop` / `reset` | 切换动作重置相位；同动作可显式保留；stop 保留速度，reset 恢复速度 1 |

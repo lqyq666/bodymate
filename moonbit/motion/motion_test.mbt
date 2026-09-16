@@ -60,6 +60,18 @@ test "returned arrays cannot mutate the catalog or a running session" {
   assert_eq(session.snapshot().notices.length(), 1)
 }
 
+test "parameterized motions expose one observation baseline" {
+  for definition in @motion.catalog() {
+    let mut baselines = 0
+    for preset in definition.presets { if preset.is_baseline { baselines = baselines + 1 } }
+    if definition.parameters.length() == 0 {
+      assert_eq(baselines, 0)
+    } else {
+      assert_eq(baselines, 1)
+    }
+  }
+}
+
 test "parameter changes preserve paused position and speed" {
   let session = @motion.Session::new()
   ignore(session.play("push_up", []).unwrap())
@@ -105,6 +117,20 @@ test "pose sampler is deterministic and bounds non-finite phase" {
       assert_true(!pose.root_y.is_nan() && !pose.root_z.is_nan())
     }
   }
+}
+
+test "phase guides describe four stable teaching checkpoints" {
+  for definition in @motion.catalog() {
+    let guides = @motion.phase_guides(definition.id).unwrap()
+    assert_eq(guides.length(), 4)
+    assert_eq(guides[0].phase, 0.0)
+    assert_eq(guides[2].phase, 0.5)
+    assert_true(guides[0].start > guides[0].end)
+  }
+  let bottom = @motion.phase_guides("push_up").unwrap()[2]
+  assert_eq(bottom.id, "push_up_bottom")
+  assert_eq(bottom.title, "最低点")
+  assert_true(@motion.phase_guides("invented") is Err(@motion.UnknownMotion("invented")))
 }
 
 test "typed query parser preserves units and unsupported instructions" {

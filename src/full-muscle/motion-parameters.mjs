@@ -3,6 +3,7 @@ export {
   parameterDefinitions,
   motionPresets,
   normalizeMotionParameters,
+  motionParameterComparison,
   parseMotionParameters,
   muscleProfileForMotion,
 } from './motion-domain.mjs';
