@@ -40,6 +40,8 @@
 
 `moonbit/agent` 是第三个可复用库，也是“AI 输出不是执行权限”这条规则的唯一实现：`GuardedAction` 只能是 `None`、`Command(id, 有限数值字段)` 或 `Lookup(有界文本)`；`parse_allowlist` 校验命令 id（`^[a-z][a-z0-9_]*$`）与字段键（`^[A-Za-z][A-Za-z0-9_]*$`），`guard_command` 只保留白名单内的 id 及其声明字段中的有限数值，`guard_lookup` 只接受修剪、截断后仍非空的文本。`moonbit/core/agent_guard.mbt` 以 `bodymate_agent_guard_command_v1` / `bodymate_agent_guard_lookup_v1` 导出；`src/ai/agent-guard.mjs` 是唯一的 JS 编解码器，被本地代理（服务端，经 `load-moonbit-core.mjs`）和浏览器适配器（`applyAiAction`）共同调用，因此模型建议在服务端和页面端接受的是同一份 MoonBit 规则。库本身与动作、肌肉无关，任何 MoonBit Agent 应用都可以用它约束 LLM 提议。
 
+`console.html` + `assets/runtime/console.js` 是不含 Three.js 的第二个浏览器消费者：直接调用 `moonbit-core.js` 的 wire 导出（agent explain、zhnum normalize/parse/format、motion registry/parameters/pose_intent）渲染三个工作台并记录每次调用；3D 页通过 `?motion=&params=&phase=` 深链接接收它的帧。`moonbit/core/zhnum_wire.mbt` 为此提供 `bodymate_zhnum_{normalize,parse,format}_v1`。
+
 `moonbit/zhnum` 是第四个可复用库：中文数字（零〇一…九、壹…玖、两、十百千万亿、`点` 小数、`半`）解析、文本内数字归一化（全角数字、`百分之X`→`X%`）以及“单位前取数”。`motion.parse_query` 在匹配有界正则前先调用 `normalize_numerals`，所以中文数字指令与阿拉伯数字指令等价，而正则本身零改动。
 
 `moonbit/core/environment_scene.mbt` 决定环境方位扇区混合、距离滞回、质量、视差、灯光和 reduced-motion。`environment-domain.mjs` 解析 frame，`lab-environment.mjs` 加载并呈现四个本地环境 GLB。

@@ -131,6 +131,17 @@
       examples.querySelectorAll('button').forEach((button) => { button.disabled = false; });
       const ring = document.querySelector('.lab-status-ring'); if (ring) { ring.querySelector('strong').textContent = count; ring.querySelector('span').textContent = '肌肉结构'; }
       const summary = document.querySelector('.lab-status-body p'); if (summary) { summary.replaceChildren(); const title = document.createElement('strong'); title.textContent = '参照骨架'; summary.append(title, boneCount + ' 个骨骼及相关结构'); }
+      // Deep link from the console: ?motion=<id>&params=<key=value,...>&phase=<0..1> replays a specific frame.
+      const query = new URLSearchParams(location.search), linkedMotion = query.get('motion');
+      if (linkedMotion && runtime.motionDefinitions.some((motion) => motion.id === linkedMotion)) {
+        const linkedParameters = {};
+        for (const pair of (query.get('params') || '').split(',')) {
+          const index = pair.indexOf('='), value = Number(pair.slice(index + 1));
+          if (index > 0 && Number.isFinite(value)) linkedParameters[pair.slice(0, index)] = value;
+        }
+        const result = start(linkedMotion, linkedParameters), phase = Number(query.get('phase'));
+        if (result && Number.isFinite(phase)) { viewer.setPaused(true); viewer.seek(Math.min(1, Math.max(0, phase))); }
+      }
     },
     onState: (state) => {
       if (document.body.classList.contains('visual-lab-active')) document.querySelectorAll('[data-lab-mode]').forEach(button=>{const active=button.dataset.labMode===(state.motion?'movement':'structure');button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});

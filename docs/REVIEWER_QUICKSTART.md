@@ -51,7 +51,7 @@ npm run moonbit:install-check # 从 mooncakes.io 真实 moon add 并运行（需
 
 ## 4. 页面路线
 
-不装任何东西：打开在线演示 **https://lqyq666.github.io/bodymate/?view=full-body**（GitHub Pages 静态托管；没有 AI 代理，对话框走内置 MoonBit 动作引擎）。本地运行：
+不装任何东西：先打开**库工作台 https://lqyq666.github.io/bodymate/console.html**——把模型提议里的 handWidth 改成 2.5 点“校验”，看 MoonBit 返回 `clamped:handWidth:2.5->1.8`；在 zhnum 面板改中文数字，看归一化与 `parse_query` 联动；在 motion 面板改参数看姿态帧重算，点“回放此帧”跳到 3D 视图。3D 回放视图：**https://lqyq666.github.io/bodymate/?view=full-body**（没有 AI 代理，对话框走内置 MoonBit 引擎）。本地运行：
 
 ```sh
 npm start        # 启动本地服务并打开页面；或 python -m http.server 4174 --bind 127.0.0.1

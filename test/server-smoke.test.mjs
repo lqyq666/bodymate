@@ -31,6 +31,11 @@ test('local service serves the lab page and every asset it references', async ()
     const body = await manifest.json();
     assert.equal(body.muscleCount, 415);
     assert.equal(body.entries.length, 697);
+    for (const path of ['console.html', 'assets/console.css', 'assets/runtime/console.js', 'assets/theme-engineer.css']) {
+      const response = await fetch(`${base}/${path}`);
+      assert.equal(response.status, 200, path);
+      assert.ok((await response.text()).length > 0, path);
+    }
     const head = await fetch(`${base}/`, { method: 'HEAD' });
     assert.equal(head.status, 200);
     assert.equal(await head.text(), '');

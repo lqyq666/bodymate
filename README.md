@@ -62,9 +62,13 @@ moon run moonbit/examples/export --target js       # 四库串联：指令 → �
 - **可验证**：MoonBit 76 项测试、Node 143 项测试、生成物新鲜度检查、冻结人体资产哈希、仓库卫生审计、真实发布 ZIP 的隔离 check/build/test/run；`npm run moonbit:install-check` 会在临时模块里从 mooncakes.io 真实 `moon add lqyq666/bodymate` 并运行四个包（需要网络）。规模基线见 [实时基线](docs/MOONBIT_ENGINE_BASELINE.md)。
 - **诚实边界**：`motion` 的姿态标量绑定当前参照骨架尺寸，不是通用骨骼求解器；`anatomy` 是展示用译名，不是临床术语标准；整套项目不提供医疗诊断、疼痛判断、训练处方或实测发力结论。
 
-## 参考应用：MoonRig Console
+## MoonRig Console：库工作台 + 3D 回放视图
 
-在线演示（GitHub Pages，静态托管，无 AI 代理时由内置 MoonBit 动作引擎接管）：**https://lqyq666.github.io/bodymate/?view=full-body** ——首次加载需下载约 60 MB 人体与环境模型。
+**库工作台（在线）：https://lqyq666.github.io/bodymate/console.html** ——三个面板直接调用页面内的 MoonBit 编译产物，没有服务器：`agent` 面板粘贴模型提议 JSON、编辑白名单与越界策略，实时得到裁决与原因码；`zhnum` 面板把中文数量归一化并联动 `motion.parse_query`；`motion` 面板改参数即重算九个相位的确定性姿态帧，可导出 CSV 作为回归基线，或按“回放此帧”深链接跳到 3D 视图（`index.html?motion=…&params=…&phase=…`）。底部是每一次 wire 调用的记录。
+
+![MoonRig Console 库工作台：agent 护栏裁决与原因码、zhnum 归一化、motion 姿态帧表](docs/media/console.png)
+
+**3D 回放视图（在线）：https://lqyq666.github.io/bodymate/?view=full-body** ——参照骨架、参数契约、关键帧标注与定性参与映射；无 AI 代理时由内置 MoonBit 引擎接管。首次加载需下载约 60 MB 人体与环境模型。
 
 `/?view=full-body`：415 条肌肉、282 个骨骼及相关结构、21 关节参照骨架；俯卧撑、深蹲、弯举的播放、暂停、进度、速度、姿势预设与参数比较、四个关键帧标注、中英文结构检索与点选、定性参与映射高亮；可选的本地 AI 对话。
 
@@ -107,7 +111,7 @@ npm run ai:serve
 ## 评审入口
 
 - [库说明（四个包的 API、边界、示例）](moonbit/motion/README.md)
-- [评委快速开始](docs/REVIEWER_QUICKSTART.md) · [MoonBit 技术审查](docs/MOONBIT_REVIEW_GUIDE.md)
+- [评委快速开始](docs/REVIEWER_QUICKSTART.md) · [MoonBit 技术审查](docs/MOONBIT_REVIEW_GUIDE.md) · [在线库工作台](https://lqyq666.github.io/bodymate/console.html) · [在线库工作台](https://lqyq666.github.io/bodymate/console.html)
 - [架构](docs/MOONBIT_ARCHITECTURE.md) · [测试矩阵](docs/TEST_MATRIX.md) · [实时规模基线](docs/MOONBIT_ENGINE_BASELINE.md)
 - [演示讲稿](docs/DEMO_SCRIPT.md) · [一页项目说明](docs/ONE_PAGE_PROJECT.md) · [申报清单](docs/SUBMISSION_CHECKLIST.md)
 - [更新日志](CHANGELOG.md) · [参与开发（含新增包清单）](CONTRIBUTING.md)
