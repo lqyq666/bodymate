@@ -73,7 +73,13 @@ async function loadConfig() {
   const encrypted = await readEncryptedProviderEnvironment({});
   let local = {};
   try { local = parseLocalEnv(await import('node:fs/promises').then(m => m.readFile(root + '/.env.local', 'utf8'))); } catch {}
-  return aiConfig({ ...encrypted, ...local, ...process.env });
+  const config = aiConfig({ ...encrypted, ...local, ...process.env });
+  // GUARD_UPSTREAM_URL overrides the DPAPI base URL (e.g. Coding Plan endpoint).
+  if (config && process.env.GUARD_UPSTREAM_URL) {
+    const base = process.env.GUARD_UPSTREAM_URL.replace(/\/+$/, '');
+    return { ...config, endpoint: base + '/chat/completions' };
+  }
+  return config;
 }
 
 await loadMoonBitCore({ probe: 'bodymate_agent_explain_command_v1' });
