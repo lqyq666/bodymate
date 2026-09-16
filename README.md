@@ -1,5 +1,7 @@
 # BodyMate｜MoonBit 基础库套件与全身参考应用
 
+> **English summary.** `lqyq666/bodymate` ships four dependency-free MoonBit packages you can `moon add` individually — `agent` (a guard that turns untrusted LLM proposals into allowlisted commands with bounded numeric fields, or nothing), `zhnum` (Chinese numeral parsing, formatting and in-text normalization), `anatomy` (376 bilingual Human Atlas / BodyParts3D terms with laterality and search) and `motion` (parameterized motion sessions with deterministic pose intents) — plus an offline full-body Three.js reference application that proves the same MoonBit code drives the browser, a local AI proxy and command-line examples. Published on [mooncakes.io](https://mooncakes.io/docs/lqyq666/bodymate); API docs are in the [library README](moonbit/motion/README.md).
+
 `lqyq666/bodymate` 是一组无依赖、可单独 `moon add` 的 MoonBit 库，外加一个使用它们的离线全身三维参考应用。库是主体，应用是证明：同一份 MoonBit 代码同时驱动浏览器页面、本地 AI 代理和纯命令行示例。
 
 ```sh
@@ -55,7 +57,7 @@ moon run moonbit/examples/export --target js       # 四库串联：指令 → �
 
 - **补空缺，不重复**：截至 2026-09-16，mooncakes.io 上没有面向 LLM 应用的动作白名单原语，中文数字方向只有“数字→中文大写金额”的格式化包而没有反向解析库，也没有解剖学术语字典；这三项都是从真实应用需求中抽出的、边界清晰的独立包。
 - **单一事实来源**：术语表、护栏规则、动作目录只存在于 MoonBit；浏览器与 Node 侧的 JavaScript 只做字符串编解码（见 [架构](docs/MOONBIT_ARCHITECTURE.md)）。
-- **可验证**：MoonBit 70 项测试、Node 142 项测试、生成物新鲜度检查、冻结人体资产哈希、仓库卫生审计、真实发布 ZIP 的隔离 check/build/test/run；规模基线见 [实时基线](docs/MOONBIT_ENGINE_BASELINE.md)。
+- **可验证**：MoonBit 76 项测试、Node 143 项测试、生成物新鲜度检查、冻结人体资产哈希、仓库卫生审计、真实发布 ZIP 的隔离 check/build/test/run；`npm run moonbit:install-check` 会在临时模块里从 mooncakes.io 真实 `moon add lqyq666/bodymate` 并运行四个包（需要网络）。规模基线见 [实时基线](docs/MOONBIT_ENGINE_BASELINE.md)。
 - **诚实边界**：`motion` 的姿态标量绑定当前教学骨架尺寸，不是通用骨骼求解器；`anatomy` 是展示用译名，不是临床术语标准；整套项目不提供医疗诊断、疼痛判断、训练处方或实测发力结论。
 
 ## 参考应用：全身动作实验室

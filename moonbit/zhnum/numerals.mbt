@@ -52,10 +52,17 @@ fn parse_integer(chars : Array[Char]) -> Int64? {
           None => return None
           Some(unit) =>
             if unit >= 10000L {
-              if section + current == 0L {
-                return None
+              let pending = section + current
+              if pending == 0L {
+                // 一万亿: a bare 亿 after 万 scales everything accumulated so far.
+                if total > 0L && total < unit {
+                  total = total * unit
+                } else {
+                  return None
+                }
+              } else {
+                total += pending * unit
               }
-              total += (section + current) * unit
               section = 0L
               current = 0L
             } else {
@@ -81,8 +88,14 @@ fn numeral_parts(run : Array[Char]) -> (String, String)? {
   if run.length() == 1 && run[0] == '半' {
     return Some(("0", "5"))
   }
+  let negative = run.length() > 1 && run[0] == '负'
+  let body = if negative { run[1:].to_owned() } else { run }
+  let sign = if negative { "-" } else { "" }
+  if body.length() == 1 && body[0] == '半' {
+    return Some((sign + "0", "5"))
+  }
   let mut point = -1
-  for index, ch in run {
+  for index, ch in body {
     if ch == '点' {
       if point >= 0 {
         return None
@@ -90,8 +103,8 @@ fn numeral_parts(run : Array[Char]) -> (String, String)? {
       point = index
     }
   }
-  let integer_chars = if point >= 0 { run[0:point].to_owned() } else { run }
-  let fraction_chars = if point >= 0 { run[point + 1:].to_owned() } else { [] }
+  let integer_chars = if point >= 0 { body[0:point].to_owned() } else { body }
+  let fraction_chars = if point >= 0 { body[point + 1:].to_owned() } else { [] }
   if point >= 0 && (integer_chars.length() == 0 || fraction_chars.length() == 0) {
     return None
   }
@@ -106,7 +119,7 @@ fn numeral_parts(run : Array[Char]) -> (String, String)? {
       None => return None
     }
   }
-  Some((integer.to_string(), fraction.to_string()))
+  Some((sign + integer.to_string(), fraction.to_string()))
 }
 
 ///| Parses a standalone Chinese numeral such as "二十", "一千零五", "三点一四" or "半".
@@ -144,19 +157,27 @@ fn starts_with_at(chars : Array[Char], index : Int, prefix : Array[Char]) -> Boo
   true
 }
 
-///| Length of the Chinese numeral run starting at `index` (digits, place values,
-///| a single 点 between numerals, or a lone 半). Zero when none starts here.
+///| Length of the Chinese numeral run starting at `index` (an optional leading 负,
+///| digits, place values, a single 点 between numerals, or a lone 半). Zero when none
+///| starts here.
 fn numeral_run_length(chars : Array[Char], index : Int) -> Int {
-  if index < chars.length() && chars[index] == '半' {
-    return 1
+  let mut start = index
+  if start < chars.length() &&
+    chars[start] == '负' &&
+    start + 1 < chars.length() &&
+    (is_numeral_char(chars[start + 1]) || chars[start + 1] == '半') {
+    start += 1
   }
-  let mut end = index
+  if start < chars.length() && chars[start] == '半' {
+    return start + 1 - index
+  }
+  let mut end = start
   while end < chars.length() {
     let ch = chars[end]
     if is_numeral_char(ch) {
       end += 1
     } else if ch == '点' &&
-      end > index &&
+      end > start &&
       end + 1 < chars.length() &&
       digit_value(chars[end + 1]) is Some(_) {
       end += 1
@@ -164,7 +185,75 @@ fn numeral_run_length(chars : Array[Char], index : Int) -> Int {
       break
     }
   }
+  if end == start {
+    return 0
+  }
   end - index
+}
+
+let digit_names : Array[String] = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
+
+let small_units : Array[String] = ["", "十", "百", "千"]
+
+let section_units : Array[String] = ["", "万", "亿", "万亿"]
+
+fn format_section(section : Int, has_higher : Bool) -> String {
+  let digits = [section / 1000 % 10, section / 100 % 10, section / 10 % 10, section % 10]
+  let out = StringBuilder()
+  let mut started = false
+  let mut pending_zero = false
+  for position, digit in digits {
+    if digit == 0 {
+      if started {
+        pending_zero = true
+      }
+      continue
+    }
+    if pending_zero {
+      out.write_string("零")
+      pending_zero = false
+    }
+    if position == 2 && digit == 1 && !started && !has_higher {
+      out.write_string("十")
+    } else {
+      out.write_string(digit_names[digit] + small_units[3 - position])
+    }
+    started = true
+  }
+  out.to_string()
+}
+
+///| Standard Chinese reading of an integer: 0 → 零, 15 → 十五, 110 → 一百一十,
+///| 1005 → 一千零五, 10500 → 一万零五百, 120000000 → 一亿二千万, -3 → 负三.
+///| Output always round-trips through `parse_numeral`. Supports magnitudes up to 万亿.
+pub fn format_numeral(value : Int64) -> String {
+  if value == 0L {
+    return "零"
+  }
+  let negative = value < 0L
+  let mut rest = if negative { -value } else { value }
+  let sections : Array[Int] = []
+  while rest > 0L && sections.length() < section_units.length() {
+    sections.push((rest % 10000L).to_int())
+    rest = rest / 10000L
+  }
+  let out = StringBuilder()
+  if negative {
+    out.write_string("负")
+  }
+  let top = sections.length() - 1
+  for i = top; i >= 0; i = i - 1 {
+    let section = sections[i]
+    if section == 0 {
+      continue
+    }
+    if i != top && section < 1000 {
+      out.write_string("零")
+    }
+    out.write_string(format_section(section, i != top))
+    out.write_string(section_units[i])
+  }
+  out.to_string()
 }
 
 fn ascii_number_run_length(chars : Array[Char], index : Int) -> Int {

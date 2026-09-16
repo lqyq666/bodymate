@@ -1,5 +1,7 @@
 # BodyMate MoonBit 库套件
 
+> **English.** Four dependency-free MoonBit packages under `lqyq666/bodymate` (js target): `agent` — guard untrusted LLM proposals down to allowlisted commands with bounded numeric fields or bounded lookups, with explainable reasons; `zhnum` — parse and format Chinese numerals and normalize numbers inside Chinese text; `anatomy` — 376 bilingual Human Atlas / BodyParts3D terms with laterality handling and muscle-first search; `motion` — parameterized teaching-motion sessions with Chinese command parsing and deterministic pose intents. Each section below documents one package in Chinese; the code samples are language-neutral.
+
 `lqyq666/bodymate` 提供四个无依赖、可单独导入的 MoonBit 包（当前支持 JS target）：
 
 | 包 | 一句话 |
@@ -98,9 +100,13 @@ let hits = @anatomy.search_structures(entries, "腰大肌")      // 肌肉排在
 
 ```moonbit
 // moon.pkg: import { "lqyq666/bodymate/agent" }
-let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceWidth")
-@agent.guard_command("push_up", [("handWidth", 1.8), ("invented", 7.0)], allowed)
-// Command("push_up", [("handWidth", 1.8)])
+let allowed = @agent.parse_allowlist("push_up^handWidth:0.8:1.8,elbowAngle:15:70~squat^stanceWidth")
+@agent.guard_command("push_up", [("handWidth", 2.5), ("invented", 7.0)], allowed)
+// Command("push_up", [("handWidth", 1.8)])   —— 越界值默认截断到边界，未声明字段丢弃
+@agent.guard_command_with("push_up", [("handWidth", 2.5)], allowed, Reject)
+// Command("push_up", [])                      —— 严格策略：越界值直接丢弃
+@agent.explain_command("push_up", [("handWidth", 2.5), ("invented", 7.0)], allowed, Clamp).reasons
+// ["clamped:handWidth:2.5->1.8", "unknown_field:invented"]
 @agent.guard_command("run_marathon", [], allowed)   // None
 @agent.guard_lookup("  胸大肌 ", 80)                 // Lookup("胸大肌")
 @agent.action_wire(...)                              // "command|push_up|handWidth=1.8"
@@ -108,11 +114,14 @@ let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceW
 
 | API | 返回与边界 |
 | --- | --- |
-| `parse_allowlist(wire)` / `allowlist_wire(allowed)` | `id^key,key~id^key`；非法 id/键、重复项与畸形记录直接丢弃 |
+| `parse_allowlist(wire)` / `allowlist_wire(allowed)` | `id^key,key:min:max,key:min:,key::max~id^key`；边界可选、可单侧；非法 id/键、上下界倒置、重复项与畸形记录直接丢弃 |
+| `FieldSpec::unbounded(key)` / `FieldSpec::bounded(key, min, max)` | 程序化构造允许字段 |
 | `parse_fields(wire)` | `key=value,...`；只保留标识符键与有限数值，重复键取首个 |
-| `guard_command(id, fields, allowed)` | id 不在白名单 → `None`；否则按白名单字段顺序保留候选中的有限数值 |
+| `guard_command(id, fields, allowed)` | id 不在白名单 → `None`；否则按白名单字段顺序保留候选中的有限数值，越界值截断到边界 |
+| `guard_command_with(..., policy)` | `Clamp`（默认）或 `Reject`（越界字段丢弃） |
+| `explain_command(...) -> GuardReport` / `explain_lookup(...)` | 同上并附机器可读原因：`unknown_id:`、`unknown_field:`、`non_finite:`、`clamped:key:from->to`、`out_of_range:key:value`、`empty_lookup` |
 | `guard_lookup(text, max_chars)` | 修剪并按字符截断；为空 → `None` |
-| `is_valid_command_id` / `is_valid_field_key` / `bound_text` | 无正则依赖的标识符与文本约束，可单独复用 |
+| `is_valid_command_id` / `is_valid_field_key` / `bound_text` / `policy_from_string` | 无正则依赖的标识符与文本约束，可单独复用 |
 | `action_wire(action)` | `none` / `command\|id\|k=v,...` / `lookup\|text`，宿主按此解码 |
 
 它不解析 JSON，也不生成提示词：宿主负责把不可信文本解成候选值再交给护栏，护栏负责决定什么可以执行。
@@ -124,15 +133,17 @@ let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceW
 ```moonbit
 // moon.pkg: import { "lqyq666/bodymate/zhnum" }
 @zhnum.parse_numeral("三万五千")                          // Some(35000.0)
-@zhnum.parse_numeral("三点一四")                          // Some(3.14)
+@zhnum.parse_numeral("负零点五")                          // Some(-0.5)
+@zhnum.format_numeral(120000000L)                        // "一亿二千万"
 @zhnum.normalize_numerals("夹角六十度，深度百分之八十")   // "夹角60度，深度80%"
 @zhnum.quantity_before_unit("夹角六十度", ["度", "°"])   // Some(60.0)
 ```
 
 | API | 返回与边界 |
 | --- | --- |
-| `parse_numeral(text)` | 零〇一…九、壹…玖、两，十百千万亿（含繁体/大写），`点` 小数，`半`=0.5；空串、非数字字符、`点五`/`一点` 等畸形输入返回 `None`，不猜测 |
-| `normalize_numerals(text)` | 逐段改写中文数字、全角数字（`１２．５`→`12.5`、`％`→`%`）和 `百分之X`→`X%`；不含数字的文本原样返回。所有数字段都会被改写（含“十分”这类惯用语），语义应由调用方结合单位判断 |
+| `parse_numeral(text)` | 零〇一…九、壹…玖、两，十百千万亿（含繁体/大写、`一万亿` 复合单位），`点` 小数，`半`=0.5，`负` 前缀；空串、非数字字符、`点五`/`一点`/`万` 等畸形输入返回 `None`，不猜测 |
+| `format_numeral(value)` | 整数的标准中文读法：15→十五、110→一百一十、1005→一千零五、10500→一万零五百、-3→负三，支持到万亿；**0–10999 全部整数与多组大数经 `parse_numeral` 往返一致**（测试覆盖） |
+| `normalize_numerals(text)` | 逐段改写中文数字（含 `负`）、全角数字（`１２．５`→`12.5`、`％`→`%`）和 `百分之X`→`X%`；不含数字的文本原样返回。所有数字段都会被改写（含“十分”这类惯用语），语义应由调用方结合单位判断 |
 | `quantity_before_unit(text, units)` | 先归一化，再返回第一个紧跟（可隔空白）给定单位之一的数字；无则 `None` |
 
 它只做数字层面的规范化，不理解量词语义、不做区间校验；范围与单位约束仍由调用方（如 `motion.normalize`）负责。

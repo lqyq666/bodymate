@@ -168,7 +168,7 @@
   const applyAiAction = (action) => {
     if (!action || typeof action !== 'object') return '';
     if (action.kind === 'motion') {
-      const allowlist = runtime.motionDefinitions.map((motion) => ({ id: motion.id, fields: (runtime.parameterDefinitions[motion.id] || []).map((field) => field.key) }));
+      const allowlist = runtime.motionDefinitions.map((motion) => ({ id: motion.id, fields: (runtime.parameterDefinitions[motion.id] || []).map((field) => ({ key: field.key, min: field.min, max: field.max })) }));
       const guarded = runtime.guardAiCommand(action.id, action.parameters, allowlist);
       if (!guarded) return '';
       const result = start(guarded.id, guarded.parameters);

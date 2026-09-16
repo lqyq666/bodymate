@@ -12,7 +12,13 @@ pub fn allowlist_wire(Array[AllowedCommand]) -> String
 
 pub fn bound_text(String, Int) -> String
 
+pub fn explain_command(String, Array[(String, Double)], Array[AllowedCommand], RangePolicy) -> GuardReport
+
+pub fn explain_lookup(String, Int) -> GuardReport
+
 pub fn guard_command(String, Array[(String, Double)], Array[AllowedCommand]) -> GuardedAction
+
+pub fn guard_command_with(String, Array[(String, Double)], Array[AllowedCommand], RangePolicy) -> GuardedAction
 
 pub fn guard_lookup(String, Int) -> GuardedAction
 
@@ -24,18 +30,38 @@ pub fn parse_allowlist(String) -> Array[AllowedCommand]
 
 pub fn parse_fields(String) -> Array[(String, Double)]
 
+pub fn policy_from_string(String) -> RangePolicy
+
 // Errors
 
 // Types and methods
 pub(all) struct AllowedCommand {
   id : String
-  fields : Array[String]
+  fields : Array[FieldSpec]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FieldSpec {
+  key : String
+  min : Double?
+  max : Double?
+} derive(Eq, @debug.Debug)
+pub fn FieldSpec::bounded(String, Double, Double) -> Self
+pub fn FieldSpec::unbounded(String) -> Self
+
+pub(all) struct GuardReport {
+  action : GuardedAction
+  reasons : Array[String]
 } derive(Eq, @debug.Debug)
 
 pub(all) enum GuardedAction {
   None
   Command(String, Array[(String, Double)])
   Lookup(String)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum RangePolicy {
+  Clamp
+  Reject
 } derive(Eq, @debug.Debug)
 
 // Type aliases

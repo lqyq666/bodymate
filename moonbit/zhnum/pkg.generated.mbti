@@ -2,6 +2,8 @@
 package "lqyq666/bodymate/zhnum"
 
 // Values
+pub fn format_numeral(Int64) -> String
+
 pub fn normalize_numerals(String) -> String
 
 pub fn parse_numeral(String) -> Double?
