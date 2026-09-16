@@ -9,11 +9,13 @@ const start = '<!-- MOONBIT_CORE_START -->';
 const end = '<!-- MOONBIT_CORE_END -->';
 try {
   verifyMoonVersion({ cwd: root });
-  const interfacePath = join(root, 'moonbit/motion/pkg.generated.mbti');
-  const interfaceBefore = await readFile(interfacePath, 'utf8');
-  runMoon(['info', 'moonbit/motion', '--target', 'js'], { cwd: root });
-  const interfaceAfter = await readFile(interfacePath, 'utf8');
-  if (interfaceBefore.replace(/\r\n/g, '\n') !== interfaceAfter.replace(/\r\n/g, '\n')) throw Error('MoonBit public interface is stale. Run moon info moonbit/motion --target js and review the API change.');
+  for (const pkg of ['moonbit/motion', 'moonbit/anatomy']) {
+    const interfacePath = join(root, pkg, 'pkg.generated.mbti');
+    const interfaceBefore = await readFile(interfacePath, 'utf8');
+    runMoon(['info', pkg, '--target', 'js'], { cwd: root });
+    const interfaceAfter = await readFile(interfacePath, 'utf8');
+    if (interfaceBefore.replace(/\r\n/g, '\n') !== interfaceAfter.replace(/\r\n/g, '\n')) throw Error(`MoonBit public interface is stale. Run moon info ${pkg} --target js and review the API change.`);
+  }
   runMoon(['build', '--target', 'js', 'moonbit/core'], { cwd: root });
   const [html, bundle, externalBundle] = await Promise.all([
     readFile(join(root, 'index.html'), 'utf8'),

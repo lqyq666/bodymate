@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { loadMoonBitCore } from '../scripts/load-moonbit-core.mjs';
 import { hasChineseMuscleName, hasChineseStructureName, muscleNameZh, searchStructures, structureNameZh } from '../src/full-muscle/anatomy-name-zh.mjs';
 
+await loadMoonBitCore();
 const manifest = JSON.parse(await readFile(new URL('../assets/anatomy/human-atlas/rigged-body.manifest.json', import.meta.url), 'utf8'));
 const muscles = manifest.entries.filter((entry) => entry.kind === 'muscle');
 const otherStructures = manifest.entries.filter((entry) => entry.kind !== 'muscle');

@@ -200,6 +200,13 @@ http://127.0.0.1:4174/?view=full-body
 - **窄屏验证通过，无需 CSS 修正。** 390×844：无横向溢出、无元素越出右边界，纵向堆叠（画布 → 状态卡 → 动作按钮 → 对话框，页高 1427）；启动宽距俯卧撑后阶段条呈 2×2 网格、`动作调整` 自动展开、两条滑块全宽、暂停态“已暂停 · 准备姿势”正确。768：左侧缩略参照 + 右侧主画布两栏，播放条与状态卡完整，深蹲股四头肌高亮可见。
 - **自动化点击超时的根因已定位（不是应用缺陷）**：对照实验中 Playwright `click()` 对所有控件都报超时，`force:true` 同样超时，但“俯卧撑”点击报超时后动作状态已是“动作中”——点击已派发，超时发生在内置浏览器后端点击后的“页面稳定”等待；页面 WebGL 画布持续 `requestAnimationFrame` 渲染使其永不收敛。CSS 无无限动画（只有 200ms 过渡），排除。真实用户不受影响。自动化验收统一用 `evaluate` 直接触发 + 轮询预期效果。若将来要做按需渲染（空闲时停帧）可同时改善此问题与功耗，但属于 Three.js 渲染循环重构，需单独评估。
 
+### 2026-09-16 更新：参赛策略与 MoonBit 占比（OSC2026 9 月黑客松）
+
+赛事为 **MoonBit 国产基础软件生态开源大赛（OSC2026）9 月黑客松**，评优四维度：完成度、MoonBit 生态贡献、工程质量、展示表现；验收要求 MoonBit 为主要实现语言 + 公开仓库 + README/示例/CI/测试 + mooncakes 发布；报名截止 2026-09-24。调研前 BodyMate 手写 JS 3607 行 > MoonBit 2208 行，可复用库仅 422 行，是最大短板。按优先级推进：
+
+- **第 1 步（本条）：解剖术语库迁入 MoonBit。** 新包 `moonbit/anatomy`（`terms.mbt` 376 条数据 + `names.mbt` + `search.mbt`，501 有效行，5 条测试）；`moonbit/core/anatomy_names.mbt` 三个无状态 wire 导出（name / has_name / search，`id^kind^canonical` 记录以 `~` 相连）；`src/full-muscle/anatomy-name-zh.mjs` 退化为 58 行编解码适配器；`scripts/load-moonbit-core.mjs` 让 Node 侧（测试、注册表生成）加载同一 bundle。`.moonignore`、包审计白名单、`check-generated` 的 `pkg.generated.mbti` 新鲜度检查均已纳入 anatomy；`moonbit-stats` 新增“Reusable anatomy terminology library”分组。结果：MoonBit 生产代码 2208 → 2742 行，MoonBit 测试 49 → 56，Node 142 全过，包审计 27 文件 73KB 通过，浏览器实测点击标签与检索经 MoonBit 正常。
+- 后续步骤：AI 动作协议校验迁 MoonBit → GitHub Pages 静态部署工作流 → 申报书更新 → MoonBit 原生导出示例。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：

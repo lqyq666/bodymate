@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { attributionUrl, fetchVerifiedHumanAtlasSource, fullMuscleSourceFiles, humanAtlasCommit, humanAtlasRepository, rawBaseUrl, sha256 } from './human-atlas-source.mjs';
 import { bodymateMuscleId, fullMuscleExclusionReason, fullMuscleExclusionTerms, includesFullBodyMuscle } from '../src/anatomy/full-muscle-policy.mjs';
 import { structureNameZh } from '../src/full-muscle/anatomy-name-zh.mjs';
+import { loadMoonBitCore } from './load-moonbit-core.mjs';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const defaultOutputDir = join(root, 'assets/anatomy/human-atlas');
@@ -42,6 +43,7 @@ export function selectFullBodyMuscles(atlas) {
 }
 
 export async function buildHumanAtlasFull({ source, outputDir = defaultOutputDir, registryOutput = generatedRegistry } = {}) {
+  await loadMoonBitCore();
   const files = source ?? await fetchVerifiedHumanAtlasSource({ requiredFiles: fullMuscleSourceFiles });
   const atlas = JSON.parse(Buffer.from(files['atlas.json']).toString('utf8'));
   const selection = selectFullBodyMuscles(atlas);

@@ -1,0 +1,50 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "lqyq666/bodymate/anatomy"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn has_chinese_muscle_name(String) -> Bool
+
+pub fn has_chinese_structure_name(String, StructureKind) -> Bool
+
+pub fn kind_from_string(String) -> StructureKind
+
+pub fn laterality_prefix(String) -> String
+
+pub fn muscle_name_zh(String) -> String
+
+pub fn muscle_terms() -> Array[(String, String)]
+
+pub fn normalize_name(String) -> String
+
+pub fn search_structures(Array[StructureEntry], String) -> Array[StructureEntry]
+
+pub fn structure_name_zh(String, StructureKind) -> String
+
+pub fn structure_terms() -> Array[(String, String)]
+
+pub fn term_counts() -> (Int, Int)
+
+// Errors
+
+// Types and methods
+pub(all) struct StructureEntry {
+  structure_id : String
+  canonical_name : String
+  kind : StructureKind
+} derive(Eq, @debug.Debug)
+pub fn StructureEntry::display_name_zh(Self) -> String
+
+pub(all) enum StructureKind {
+  Muscle
+  Bone
+  Connective
+  Other
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

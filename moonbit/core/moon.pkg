@@ -1,5 +1,6 @@
 import {
   "lqyq666/bodymate/motion",
+  "lqyq666/bodymate/anatomy",
   "moonbitlang/core/string",
   "moonbitlang/core/math",
   "moonbitlang/core/double",
@@ -58,6 +59,9 @@ options(
         "bodymate_environment_tick_v1",
         "bodymate_environment_frame_v1",
         "bodymate_ui_feedback_v1",
+        "bodymate_anatomy_name_v1",
+        "bodymate_anatomy_has_name_v1",
+        "bodymate_anatomy_search_v1",
       ],
       "format": "iife",
     },

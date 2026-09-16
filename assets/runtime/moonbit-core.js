@@ -826,6 +826,11 @@
     this.only_right = param4;
     this.union_structure_ids = param5;
   }
+  function _M0TP37lqyq6668bodymate7anatomy14StructureEntry(param0, param1, param2) {
+    this.structure_id = param0;
+    this.canonical_name = param1;
+    this.kind = param2;
+  }
   const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger = { method_0: _M0IPB13StringBuilderPB6Logger13write__string, method_1: _M0IP016_24default__implPB6Logger16write__substringGRPB13StringBuilderE, method_2: _M0IPB13StringBuilderPB6Logger11write__view, method_3: _M0IPB13StringBuilderPB6Logger11write__char, method_4: _M0IP016_24default__implPB6Logger28write__string__interpolationGRPB13StringBuilderE, method_5: _M0IP016_24default__implPB6Logger5writeGRPB13StringBuilderE };
   const _M0MPC16string10StringView4trimN7_2abindS6760 = "\t\n\r ";
   const _M0MPC16string6String4trimN7_2abindS6861 = "\t\n\r ";
@@ -924,6 +929,8 @@
   const _M0FPC46string8internal13regex__engine3ast5empty = new _M0TPC46string8internal13regex__engine3ast7Pattern(new _M0DTPC46string8internal13regex__engine3ast11PatternDesc11Alternation([]), false);
   const _M0FPC46string8internal13regex__engine3ast7epsilon = new _M0TPC46string8internal13regex__engine3ast7Pattern(new _M0DTPC46string8internal13regex__engine3ast11PatternDesc8Sequence([]), true);
   const _M0FPC36string8internal13regex__engine18pending__state__id = 18446744073709551615n;
+  const _M0FP37lqyq6668bodymate7anatomy19muscle__term__table = [{ _0: "abdominal part of pectoralis major", _1: "胸大肌腹部" }, { _0: "abductor digiti minimi of foot", _1: "足小趾展肌" }, { _0: "abductor digiti minimi of hand", _1: "手小指展肌" }, { _0: "abductor hallucis", _1: "拇展肌" }, { _0: "abductor pollicis brevis", _1: "拇短展肌" }, { _0: "abductor pollicis longus", _1: "拇长展肌" }, { _0: "acromial part of deltoid", _1: "三角肌肩峰部" }, { _0: "adductor brevis", _1: "短收肌" }, { _0: "adductor longus", _1: "长收肌" }, { _0: "adductor magnus", _1: "大收肌" }, { _0: "adductor minimus", _1: "小收肌" }, { _0: "anconeus", _1: "肘肌" }, { _0: "anterior papillary muscle of ventricle", _1: "心室前乳头肌" }, { _0: "anterolateral head of lateral papillary muscle of ventricle", _1: "心室外侧乳头肌前外侧头" }, { _0: "aryepiglotticus", _1: "杓会厌肌" }, { _0: "ascending part of trapezius", _1: "斜方肌升部" }, { _0: "brachialis", _1: "肱肌" }, { _0: "brachioradialis", _1: "肱桡肌" }, { _0: "cervical rotator", _1: "颈旋转肌" }, { _0: "clavicular part of deltoid", _1: "三角肌锁骨部" }, { _0: "clavicular part of pectoralis major", _1: "胸大肌锁骨部" }, { _0: "coccygeus", _1: "尾骨肌" }, { _0: "coracobrachialis", _1: "喙肱肌" }, { _0: "descending part of trapezius", _1: "斜方肌降部" }, { _0: "diaphragm", _1: "膈肌" }, { _0: "digastric", _1: "二腹肌" }, { _0: "extensor carpi radialis brevis", _1: "桡侧腕短伸肌" }, { _0: "extensor carpi radialis longus", _1: "桡侧腕长伸肌" }, { _0: "extensor carpi ulnaris", _1: "尺侧腕伸肌" }, { _0: "extensor digiti minimi", _1: "小指伸肌" }, { _0: "extensor digitorum", _1: "指伸肌" }, { _0: "extensor digitorum longus", _1: "趾长伸肌" }, { _0: "extensor hallucis brevis", _1: "拇趾短伸肌" }, { _0: "extensor hallucis longus", _1: "拇趾长伸肌" }, { _0: "extensor indicis", _1: "食指伸肌" }, { _0: "extensor pollicis brevis", _1: "拇短伸肌" }, { _0: "extensor pollicis longus", _1: "拇长伸肌" }, { _0: "external anal sphincter", _1: "肛门外括约肌" }, { _0: "external intercostal muscle", _1: "肋间外肌" }, { _0: "external oblique", _1: "腹外斜肌" }, { _0: "fibularis brevis", _1: "腓骨短肌" }, { _0: "fibularis longus", _1: "腓骨长肌" }, { _0: "fibularis tertius", _1: "第三腓骨肌" }, { _0: "first lumbrical of foot", _1: "足第一蚓状肌" }, { _0: "first plantar interosseous of foot", _1: "足第一跖侧骨间肌" }, { _0: "flexor accessorius", _1: "足底方肌" }, { _0: "flexor carpi radialis", _1: "桡侧腕屈肌" }, { _0: "flexor digiti minimi brevis of foot", _1: "足小趾短屈肌" }, { _0: "flexor digiti minimi brevis of hand", _1: "手小指短屈肌" }, { _0: "flexor digitorum brevis", _1: "趾短屈肌" }, { _0: "flexor digitorum longus", _1: "趾长屈肌" }, { _0: "flexor digitorum profundus", _1: "指深屈肌" }, { _0: "flexor digitorum superficialis", _1: "指浅屈肌" }, { _0: "flexor hallucis longus", _1: "拇趾长屈肌" }, { _0: "flexor pollicis brevis", _1: "拇短屈肌" }, { _0: "flexor pollicis longus", _1: "拇长屈肌" }, { _0: "fourth lumbrical of foot", _1: "足第四蚓状肌" }, { _0: "gemellus inferior", _1: "下孖肌" }, { _0: "gemellus superior", _1: "上孖肌" }, { _0: "genioglossus", _1: "颏舌肌" }, { _0: "geniohyoid", _1: "颏舌骨肌" }, { _0: "gluteus maximus", _1: "臀大肌" }, { _0: "gluteus medius", _1: "臀中肌" }, { _0: "gluteus minimus", _1: "臀小肌" }, { _0: "gracilis", _1: "股薄肌" }, { _0: "humeral head of flexor carpi ulnaris", _1: "尺侧腕屈肌肱骨头" }, { _0: "humeral head of pronator teres", _1: "旋前圆肌肱骨头" }, { _0: "hyoglossus", _1: "舌骨舌肌" }, { _0: "iliacus", _1: "髂肌" }, { _0: "iliococcygeus", _1: "髂尾肌" }, { _0: "iliocostalis cervicis", _1: "颈髂肋肌" }, { _0: "iliocostalis lumborum", _1: "腰髂肋肌" }, { _0: "iliocostalis thoracis", _1: "胸髂肋肌" }, { _0: "inferior oblique", _1: "下斜肌" }, { _0: "inferior oblique part of longus colli", _1: "颈长肌下斜部" }, { _0: "inferior rectus", _1: "下直肌" }, { _0: "infraspinatus muscle", _1: "冈下肌" }, { _0: "innermost intercostal muscle", _1: "肋间最内肌" }, { _0: "internal intercostal muscle", _1: "肋间内肌" }, { _0: "interspinalis thoracis", _1: "胸棘间肌" }, { _0: "lateral crico-arytenoid", _1: "环杓侧肌" }, { _0: "lateral head of flexor hallucis brevis", _1: "拇趾短屈肌外侧头" }, { _0: "lateral head of gastrocnemius", _1: "腓肠肌外侧头" }, { _0: "lateral head of triceps brachii", _1: "肱三头肌外侧头" }, { _0: "lateral lumbar intertransversarius", _1: "腰外侧横突间肌" }, { _0: "lateral papillary muscle of ventricle", _1: "心室外侧乳头肌" }, { _0: "lateral rectus", _1: "外直肌" }, { _0: "levator palpebrae superioris", _1: "上睑提肌" }, { _0: "levator scapulae", _1: "肩胛提肌" }, { _0: "levator veli palatini", _1: "腭帆提肌" }, { _0: "long head of biceps brachii", _1: "肱二头肌长头" }, { _0: "long head of biceps femoris", _1: "股二头肌长头" }, { _0: "long head of triceps brachii", _1: "肱三头肌长头" }, { _0: "longissimus capitis", _1: "头最长肌" }, { _0: "longissimus cervicis", _1: "颈最长肌" }, { _0: "longissimus thoracis", _1: "胸最长肌" }, { _0: "longus capitis", _1: "头长肌" }, { _0: "lumbar rotator", _1: "腰旋转肌" }, { _0: "medial head of flexor hallucis brevis", _1: "拇趾短屈肌内侧头" }, { _0: "medial head of gastrocnemius", _1: "腓肠肌内侧头" }, { _0: "medial head of triceps brachii", _1: "肱三头肌内侧头" }, { _0: "medial lumbar intertransversarius", _1: "腰内侧横突间肌" }, { _0: "medial rectus", _1: "内直肌" }, { _0: "mylohyoid", _1: "下颌舌骨肌" }, { _0: "oblique arytenoid", _1: "杓斜肌" }, { _0: "oblique head of adductor hallucis", _1: "拇趾收肌斜头" }, { _0: "oblique head of adductor pollicis", _1: "拇收肌斜头" }, { _0: "oblique part of cricothyroid", _1: "环甲肌斜部" }, { _0: "obliquus capitis inferior", _1: "头下斜肌" }, { _0: "obliquus capitis superior", _1: "头上斜肌" }, { _0: "obturator externus", _1: "闭孔外肌" }, { _0: "obturator internus", _1: "闭孔内肌" }, { _0: "omohyoid", _1: "肩胛舌骨肌" }, { _0: "opponens digiti minimi of foot", _1: "足小趾对跖肌" }, { _0: "opponens digiti minimi of hand", _1: "手小指对掌肌" }, { _0: "opponens pollicis", _1: "拇对掌肌" }, { _0: "palmaris longus", _1: "掌长肌" }, { _0: "pectineus", _1: "耻骨肌" }, { _0: "pectoralis minor", _1: "胸小肌" }, { _0: "piriformis", _1: "梨状肌" }, { _0: "plantaris", _1: "跖肌" }, { _0: "platysma", _1: "颈阔肌" }, { _0: "popliteus", _1: "腘肌" }, { _0: "posterior crico-arytenoid", _1: "环杓后肌" }, { _0: "posterior papillary muscle of ventricle", _1: "心室后乳头肌" }, { _0: "pronator quadratus", _1: "旋前方肌" }, { _0: "psoas major", _1: "腰大肌" }, { _0: "pubococcygeus", _1: "耻尾肌" }, { _0: "puborectalis", _1: "耻骨直肠肌" }, { _0: "quadratus femoris", _1: "股方肌" }, { _0: "rectus capitis anterior", _1: "头前直肌" }, { _0: "rectus capitis lateralis", _1: "头外侧直肌" }, { _0: "rectus capitis posterior major", _1: "头后大直肌" }, { _0: "rectus capitis posterior minor", _1: "头后小直肌" }, { _0: "rectus femoris", _1: "股直肌" }, { _0: "rhomboid major", _1: "大菱形肌" }, { _0: "rhomboid minor", _1: "小菱形肌" }, { _0: "sartorius", _1: "缝匠肌" }, { _0: "scalenus anterior", _1: "前斜角肌" }, { _0: "scalenus medius", _1: "中斜角肌" }, { _0: "scalenus posterior", _1: "后斜角肌" }, { _0: "second lumbrical of foot", _1: "足第二蚓状肌" }, { _0: "second plantar interosseous of foot", _1: "足第二跖侧骨间肌" }, { _0: "semimembranosus", _1: "半膜肌" }, { _0: "semispinalis capitis", _1: "头半棘肌" }, { _0: "semispinalis cervicis", _1: "颈半棘肌" }, { _0: "semispinalis thoracis", _1: "胸半棘肌" }, { _0: "semitendinosus", _1: "半腱肌" }, { _0: "septal papillary muscle of ventricle", _1: "心室间隔乳头肌" }, { _0: "serratus anterior", _1: "前锯肌" }, { _0: "serratus posterior inferior", _1: "下后锯肌" }, { _0: "serratus posterior superior", _1: "上后锯肌" }, { _0: "set of anterior cervical intertransversarii", _1: "颈前横突间肌群" }, { _0: "set of dorsal interossei of hand", _1: "手背侧骨间肌群" }, { _0: "set of interspinales cervicis", _1: "颈棘间肌群" }, { _0: "set of interspinales lumborum", _1: "腰棘间肌群" }, { _0: "set of levatores costarum breves", _1: "短肋提肌群" }, { _0: "set of levatores costarum longi", _1: "长肋提肌群" }, { _0: "set of lumbricals of hand", _1: "手蚓状肌群" }, { _0: "set of palmar interossei of hand", _1: "手掌侧骨间肌群" }, { _0: "set of posterior cervical intertransversarii", _1: "颈后横突间肌群" }, { _0: "short head of biceps brachii", _1: "肱二头肌短头" }, { _0: "short head of biceps femoris", _1: "股二头肌短头" }, { _0: "soleus", _1: "比目鱼肌" }, { _0: "spinal part of deltoid", _1: "三角肌肩胛冈部" }, { _0: "spinalis", _1: "棘肌" }, { _0: "spinalis thoracis", _1: "胸棘肌" }, { _0: "splenius capitis", _1: "头夹肌" }, { _0: "splenius cervicis", _1: "颈夹肌" }, { _0: "sternocleidomastoid", _1: "胸锁乳突肌" }, { _0: "sternocostal part of pectoralis major", _1: "胸大肌胸肋部" }, { _0: "sternohyoid", _1: "胸骨舌骨肌" }, { _0: "sternothyroid", _1: "胸骨甲状肌" }, { _0: "straight part of cricothyroid", _1: "环甲肌直部" }, { _0: "stylohyoid", _1: "茎突舌骨肌" }, { _0: "subclavius", _1: "锁骨下肌" }, { _0: "subscapularis", _1: "肩胛下肌" }, { _0: "superficial head of flexor pollicis brevis", _1: "拇短屈肌浅头" }, { _0: "superior oblique", _1: "上斜肌" }, { _0: "superior oblique part of longus colli", _1: "颈长肌上斜部" }, { _0: "superior rectus", _1: "上直肌" }, { _0: "supinator", _1: "旋后肌" }, { _0: "supraspinatus", _1: "冈上肌" }, { _0: "tensor veli palatini", _1: "腭帆张肌" }, { _0: "teres major", _1: "大圆肌" }, { _0: "teres minor", _1: "小圆肌" }, { _0: "third lumbrical of foot", _1: "足第三蚓状肌" }, { _0: "third plantar interosseous of foot", _1: "足第三跖侧骨间肌" }, { _0: "thoracic rotator", _1: "胸旋转肌" }, { _0: "thyro-arytenoid", _1: "甲杓肌" }, { _0: "thyrohyoid", _1: "甲状舌骨肌" }, { _0: "tibialis anterior", _1: "胫骨前肌" }, { _0: "tibialis posterior", _1: "胫骨后肌" }, { _0: "transverse arytenoid", _1: "杓横肌" }, { _0: "transverse head of adductor hallucis", _1: "拇趾收肌横头" }, { _0: "transverse head of adductor pollicis", _1: "拇收肌横头" }, { _0: "transverse part of trapezius", _1: "斜方肌横部" }, { _0: "transversus thoracis", _1: "胸横肌" }, { _0: "ulnar head of flexor carpi ulnaris", _1: "尺侧腕屈肌尺骨头" }, { _0: "ulnar head of pronator teres", _1: "旋前圆肌尺骨头" }, { _0: "uvular muscle", _1: "悬雍垂肌" }, { _0: "vastus intermedius", _1: "中间广肌" }, { _0: "vastus lateralis", _1: "外侧广肌" }, { _0: "vastus medialis", _1: "内侧广肌" }, { _0: "vertical intermediate part of longus colli", _1: "颈长肌垂直中间部" }, { _0: "vocalis", _1: "声带肌" }];
+  const _M0FP37lqyq6668bodymate7anatomy22structure__term__table = [{ _0: "arytenoid cartilage", _1: "杓状软骨" }, { _0: "atlas", _1: "寰椎" }, { _0: "axis", _1: "枢椎" }, { _0: "body of sternum", _1: "胸骨体" }, { _0: "calcaneus", _1: "跟骨" }, { _0: "capitate", _1: "头状骨" }, { _0: "clavicle", _1: "锁骨" }, { _0: "corniculate cartilage", _1: "小角软骨" }, { _0: "cricoid cartilage", _1: "环状软骨" }, { _0: "cuboid bone", _1: "骰骨" }, { _0: "cuneiform cartilage", _1: "楔状软骨" }, { _0: "distal phalanx of big toe", _1: "拇趾远节趾骨" }, { _0: "distal phalanx of fourth toe", _1: "第四趾远节趾骨" }, { _0: "distal phalanx of index finger", _1: "示指远节指骨" }, { _0: "distal phalanx of little finger", _1: "小指远节指骨" }, { _0: "distal phalanx of little toe", _1: "小趾远节趾骨" }, { _0: "distal phalanx of middle finger", _1: "中指远节指骨" }, { _0: "distal phalanx of ring finger", _1: "环指远节指骨" }, { _0: "distal phalanx of second toe", _1: "第二趾远节趾骨" }, { _0: "distal phalanx of third toe", _1: "第三趾远节趾骨" }, { _0: "distal phalanx of thumb", _1: "拇指远节指骨" }, { _0: "eighth rib", _1: "第八肋骨" }, { _0: "eighth thoracic vertebra", _1: "第八胸椎" }, { _0: "eleventh rib", _1: "第十一肋骨" }, { _0: "eleventh thoracic vertebra", _1: "第十一胸椎" }, { _0: "ethmoid", _1: "筛骨" }, { _0: "femur", _1: "股骨" }, { _0: "fibula", _1: "腓骨" }, { _0: "fifth cervical vertebra", _1: "第五颈椎" }, { _0: "fifth costal cartilage", _1: "第五肋软骨" }, { _0: "fifth lumbar vertebra", _1: "第五腰椎" }, { _0: "fifth metacarpal bone", _1: "第五掌骨" }, { _0: "fifth metatarsal bone", _1: "第五跖骨" }, { _0: "fifth rib", _1: "第五肋骨" }, { _0: "fifth thoracic vertebra", _1: "第五胸椎" }, { _0: "first costal cartilage", _1: "第一肋软骨" }, { _0: "first lumbar vertebra", _1: "第一腰椎" }, { _0: "first metacarpal bone", _1: "第一掌骨" }, { _0: "first metatarsal bone", _1: "第一跖骨" }, { _0: "first rib", _1: "第一肋骨" }, { _0: "first thoracic vertebra", _1: "第一胸椎" }, { _0: "fourth cervical vertebra", _1: "第四颈椎" }, { _0: "fourth costal cartilage", _1: "第四肋软骨" }, { _0: "fourth lumbar vertebra", _1: "第四腰椎" }, { _0: "fourth metacarpal bone", _1: "第四掌骨" }, { _0: "fourth metatarsal bone", _1: "第四跖骨" }, { _0: "fourth rib", _1: "第四肋骨" }, { _0: "fourth thoracic vertebra", _1: "第四胸椎" }, { _0: "frontal bone", _1: "额骨" }, { _0: "gingiva of lower jaw", _1: "下颌牙龈" }, { _0: "gingiva of upper jaw", _1: "上颌牙龈" }, { _0: "hamate", _1: "钩骨" }, { _0: "hip bone", _1: "髋骨" }, { _0: "humerus", _1: "肱骨" }, { _0: "hyoid bone", _1: "舌骨" }, { _0: "iliotibial tract", _1: "髂胫束" }, { _0: "intermediate cuneiform bone", _1: "中间楔骨" }, { _0: "intervertebral disk", _1: "椎间盘" }, { _0: "intervertebral disk of axis", _1: "枢椎椎间盘" }, { _0: "intervertebral disk of eighth thoracic vertebra", _1: "第八胸椎椎间盘" }, { _0: "intervertebral disk of eleventh thoracic vertebra", _1: "第十一胸椎椎间盘" }, { _0: "intervertebral disk of fifth cervical vertebra", _1: "第五颈椎椎间盘" }, { _0: "intervertebral disk of fifth lumbar vertebra", _1: "第五腰椎椎间盘" }, { _0: "intervertebral disk of fifth thoracic vertebra", _1: "第五胸椎椎间盘" }, { _0: "intervertebral disk of first lumbar vertebra", _1: "第一腰椎椎间盘" }, { _0: "intervertebral disk of first thoracic vertebra", _1: "第一胸椎椎间盘" }, { _0: "intervertebral disk of fourth cervical vertebra", _1: "第四颈椎椎间盘" }, { _0: "intervertebral disk of fourth lumbar vertebra", _1: "第四腰椎椎间盘" }, { _0: "intervertebral disk of fourth thoracic vertebra", _1: "第四胸椎椎间盘" }, { _0: "intervertebral disk of ninth thoracic vertebra", _1: "第九胸椎椎间盘" }, { _0: "intervertebral disk of second lumbar vertebra", _1: "第二腰椎椎间盘" }, { _0: "intervertebral disk of second thoracic vertebra", _1: "第二胸椎椎间盘" }, { _0: "intervertebral disk of seventh cervical vertebra", _1: "第七颈椎椎间盘" }, { _0: "intervertebral disk of seventh thoracic vertebra", _1: "第七胸椎椎间盘" }, { _0: "intervertebral disk of sixth cervical vertebra", _1: "第六颈椎椎间盘" }, { _0: "intervertebral disk of sixth thoracic vertebra", _1: "第六胸椎椎间盘" }, { _0: "intervertebral disk of tenth thoracic vertebra", _1: "第十胸椎椎间盘" }, { _0: "intervertebral disk of third cervical vertebra", _1: "第三颈椎椎间盘" }, { _0: "intervertebral disk of third lumbar vertebra", _1: "第三腰椎椎间盘" }, { _0: "intervertebral disk of third thoracic vertebra", _1: "第三胸椎椎间盘" }, { _0: "lateral cuneiform bone", _1: "外侧楔骨" }, { _0: "lower central secondary incisor tooth", _1: "下颌中切牙" }, { _0: "lower first secondary molar tooth", _1: "下颌第一磨牙" }, { _0: "lower first secondary premolar tooth", _1: "下颌第一前磨牙" }, { _0: "lower lateral secondary incisor tooth", _1: "下颌侧切牙" }, { _0: "lower second secondary molar tooth", _1: "下颌第二磨牙" }, { _0: "lower second secondary premolar tooth", _1: "下颌第二前磨牙" }, { _0: "lower secondary canine tooth", _1: "下颌尖牙" }, { _0: "lunate", _1: "月骨" }, { _0: "major alar cartilage", _1: "鼻翼大软骨" }, { _0: "mandible", _1: "下颌骨" }, { _0: "manubrium", _1: "胸骨柄" }, { _0: "maxilla", _1: "上颌骨" }, { _0: "medial cuneiform bone", _1: "内侧楔骨" }, { _0: "middle phalanx of fourth toe", _1: "第四趾中节趾骨" }, { _0: "middle phalanx of index finger", _1: "示指中节指骨" }, { _0: "middle phalanx of little finger", _1: "小指中节指骨" }, { _0: "middle phalanx of little toe", _1: "小趾中节趾骨" }, { _0: "middle phalanx of middle finger", _1: "中指中节指骨" }, { _0: "middle phalanx of ring finger", _1: "环指中节指骨" }, { _0: "middle phalanx of second toe", _1: "第二趾中节趾骨" }, { _0: "middle phalanx of third toe", _1: "第三趾中节趾骨" }, { _0: "nasal bone", _1: "鼻骨" }, { _0: "navicular bone of foot", _1: "足舟骨" }, { _0: "ninth rib", _1: "第九肋骨" }, { _0: "ninth thoracic vertebra", _1: "第九胸椎" }, { _0: "occipital bone", _1: "枕骨" }, { _0: "palatine bone", _1: "腭骨" }, { _0: "parietal bone", _1: "顶骨" }, { _0: "patella", _1: "髌骨" }, { _0: "pisiform", _1: "豌豆骨" }, { _0: "proximal phalanx of big toe", _1: "拇趾近节趾骨" }, { _0: "proximal phalanx of fourth toe", _1: "第四趾近节趾骨" }, { _0: "proximal phalanx of index finger", _1: "示指近节指骨" }, { _0: "proximal phalanx of little finger", _1: "小指近节指骨" }, { _0: "proximal phalanx of little toe", _1: "小趾近节趾骨" }, { _0: "proximal phalanx of middle finger", _1: "中指近节指骨" }, { _0: "proximal phalanx of ring finger", _1: "环指近节指骨" }, { _0: "proximal phalanx of second toe", _1: "第二趾近节趾骨" }, { _0: "proximal phalanx of third toe", _1: "第三趾近节趾骨" }, { _0: "proximal phalanx of thumb", _1: "拇指近节指骨" }, { _0: "radius", _1: "桡骨" }, { _0: "sacrum", _1: "骶骨" }, { _0: "scaphoid", _1: "手舟骨" }, { _0: "scapula", _1: "肩胛骨" }, { _0: "second costal cartilage", _1: "第二肋软骨" }, { _0: "second lumbar vertebra", _1: "第二腰椎" }, { _0: "second metacarpal bone", _1: "第二掌骨" }, { _0: "second metatarsal bone", _1: "第二跖骨" }, { _0: "second rib", _1: "第二肋骨" }, { _0: "second thoracic vertebra", _1: "第二胸椎" }, { _0: "sesamoid bone of foot", _1: "足籽骨" }, { _0: "seventh cervical vertebra", _1: "第七颈椎" }, { _0: "seventh costal cartilage", _1: "第七肋软骨" }, { _0: "seventh rib", _1: "第七肋骨" }, { _0: "seventh thoracic vertebra", _1: "第七胸椎" }, { _0: "sixth cervical vertebra", _1: "第六颈椎" }, { _0: "sixth costal cartilage", _1: "第六肋软骨" }, { _0: "sixth rib", _1: "第六肋骨" }, { _0: "sixth thoracic vertebra", _1: "第六胸椎" }, { _0: "sphenoid bone", _1: "蝶骨" }, { _0: "talus", _1: "距骨" }, { _0: "temporal bone", _1: "颞骨" }, { _0: "tenth rib", _1: "第十肋骨" }, { _0: "tenth thoracic vertebra", _1: "第十胸椎" }, { _0: "third cervical vertebra", _1: "第三颈椎" }, { _0: "third costal cartilage", _1: "第三肋软骨" }, { _0: "third lumbar vertebra", _1: "第三腰椎" }, { _0: "third metacarpal bone", _1: "第三掌骨" }, { _0: "third metatarsal bone", _1: "第三跖骨" }, { _0: "third rib", _1: "第三肋骨" }, { _0: "third thoracic vertebra", _1: "第三胸椎" }, { _0: "thyroid cartilage", _1: "甲状软骨" }, { _0: "tibia", _1: "胫骨" }, { _0: "trapezium", _1: "大多角骨" }, { _0: "trapezoid", _1: "小多角骨" }, { _0: "triquetral", _1: "三角骨" }, { _0: "twelfth rib", _1: "第十二肋骨" }, { _0: "twelfth thoracic vertebra", _1: "第十二胸椎" }, { _0: "ulna", _1: "尺骨" }, { _0: "upper central secondary incisor tooth", _1: "上颌中切牙" }, { _0: "upper first secondary molar tooth", _1: "上颌第一磨牙" }, { _0: "upper first secondary premolar tooth", _1: "上颌第一前磨牙" }, { _0: "upper lateral secondary incisor tooth", _1: "上颌侧切牙" }, { _0: "upper second secondary molar tooth", _1: "上颌第二磨牙" }, { _0: "upper second secondary premolar tooth", _1: "上颌第二前磨牙" }, { _0: "upper secondary canine tooth", _1: "上颌尖牙" }, { _0: "vomer", _1: "犁骨" }, { _0: "xiphoid process", _1: "剑突" }, { _0: "zygomatic bone", _1: "颧骨" }];
   const _M0FP37lqyq6668bodymate4core19canonical__registry = [new _M0TP37lqyq6668bodymate4core9Structure("scm_r", "bodymate.neck.sternocleidomastoid.right", "右侧胸锁乳突肌", "right sternocleidomastoid", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1595", "FMA13408", "body-5.bin", true), new _M0TP37lqyq6668bodymate4core9Structure("scm_l", "bodymate.neck.sternocleidomastoid.left", "左侧胸锁乳突肌", "left sternocleidomastoid", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1573", "FMA13409", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("trapezius_r", "bodymate.neck.trapezius.upper.right", "右侧斜方肌上部", "descending part of right trapezius", "neck", 0, 1, 1, "Human Atlas / BodyParts3D 4.0", "FJ1521", "FMA33586", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("trapezius_l", "bodymate.neck.trapezius.upper.left", "左侧斜方肌上部", "descending part of left trapezius", "neck", 0, 0, 1, "Human Atlas / BodyParts3D 4.0", "FJ1521M", "FMA33587", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("levator_r", "bodymate.neck.levator-scapulae.right", "右侧肩胛提肌", "right levator scapulae", "neck", 0, 1, 1, "Human Atlas / BodyParts3D 4.0", "FJ1532", "FMA32540", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("levator_l", "bodymate.neck.levator-scapulae.left", "左侧肩胛提肌", "left levator scapulae", "neck", 0, 0, 1, "Human Atlas / BodyParts3D 4.0", "FJ1532M", "FMA32541", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_anterior_r", "bodymate.neck.scalene.anterior.right", "右侧前斜角肌", "right scalenus anterior", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1592", "FMA13392", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_anterior_l", "bodymate.neck.scalene.anterior.left", "左侧前斜角肌", "left scalenus anterior", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1570", "FMA13393", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_medius_r", "bodymate.neck.scalene.medius.right", "右侧中斜角肌", "right scalenus medius", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1593", "FMA13390", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_medius_l", "bodymate.neck.scalene.medius.left", "左侧中斜角肌", "left scalenus medius", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1571", "FMA13391", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_posterior_r", "bodymate.neck.scalene.posterior.right", "右侧后斜角肌", "right scalenus posterior", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1594", "FMA13388", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_posterior_l", "bodymate.neck.scalene.posterior.left", "左侧后斜角肌", "left scalenus posterior", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1572", "FMA13389", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("splenius_capitis_r", "bodymate.neck.splenius.capitis.right", "右侧头夹肌", "right splenius capitis", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1545", "FMA22728", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("splenius_capitis_l", "bodymate.neck.splenius.capitis.left", "左侧头夹肌", "left splenius capitis", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1545M", "FMA22729", "body-4.bin", false)];
   const _M0FP37lqyq6668bodymate4core5state = new _M0TP37lqyq6668bodymate4core11DomainState([], "", "", 0, false, true, 0, undefined, [], undefined, undefined, 0, []);
   const _M0FP37lqyq6668bodymate4core18movement__mappings = [new _M0TP37lqyq6668bodymate4core15MovementMapping("shoulder_girdle_elevation", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.right", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.left", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.right", 1, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.left", 1, ["ev.scapula.elevation"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_right", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.right", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_left", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.left", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_flexion", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"])])];
@@ -9695,6 +9702,226 @@
   function _M0FPC14math3cos(_tmp) {
     return Math.cos(_tmp);
   }
+  function _M0IP37lqyq6668bodymate7anatomy13StructureKindPB2Eq5equal(_x_33, _x_34) {
+    switch (_x_33) {
+      case 0: {
+        if (_x_34 === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      case 1: {
+        if (_x_34 === 1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      case 2: {
+        if (_x_34 === 2) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      default: {
+        if (_x_34 === 3) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate7anatomy18laterality__prefix(canonical) {
+    const _tmp = _M0MPC16string6String9to__lower(canonical);
+    const _bind = " ";
+    const _it = _M0MPC16string6String5split(_tmp, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let part;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _part = _Some;
+          part = _part;
+          break _L;
+        }
+      }
+      const word = _M0MPC16string10StringView9to__owned(part);
+      if (word === "left") {
+        return "左侧";
+      }
+      if (word === "right") {
+        return "右侧";
+      }
+      continue;
+    }
+    return "";
+  }
+  function _M0FP37lqyq6668bodymate7anatomy6lookup(terms, key) {
+    const _bind = terms.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const term = terms[_];
+        if (term._0 === key) {
+          return term._1;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical) {
+    const words = [];
+    const _tmp = _M0MPC16string6String9to__lower(canonical);
+    const _bind = " ";
+    const _it = _M0MPC16string6String5split(_tmp, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let part;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _part = _Some;
+          part = _part;
+          break _L;
+        }
+      }
+      const word = _M0MPC16string10StringView9to__owned(part);
+      if (word === "" || (word === "left" || word === "right")) {
+        continue;
+      }
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(words, word);
+      continue;
+    }
+    const _bind$2 = " ";
+    return _M0MPC15array5Array4joinGsE(words, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length));
+  }
+  function _M0FP37lqyq6668bodymate7anatomy16muscle__name__zh(canonical) {
+    let term;
+    const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy19muscle__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+    if (_bind === undefined) {
+      term = "肌肉结构";
+    } else {
+      const _Some = _bind;
+      const _term = _Some;
+      term = _term;
+    }
+    return `${_M0FP37lqyq6668bodymate7anatomy18laterality__prefix(canonical)}${term}`;
+  }
+  function _M0FP37lqyq6668bodymate7anatomy19structure__name__zh(canonical, kind) {
+    if (kind === 0) {
+      return _M0FP37lqyq6668bodymate7anatomy16muscle__name__zh(canonical);
+    } else {
+      let term;
+      const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy22structure__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+      if (_bind === undefined) {
+        switch (kind) {
+          case 2: {
+            term = "结缔结构";
+            break;
+          }
+          case 1: {
+            term = "骨骼结构";
+            break;
+          }
+          default: {
+            term = "人体结构";
+          }
+        }
+      } else {
+        const _Some = _bind;
+        const _term = _Some;
+        term = _term;
+      }
+      return `${_M0FP37lqyq6668bodymate7anatomy18laterality__prefix(canonical)}${term}`;
+    }
+  }
+  function _M0MP37lqyq6668bodymate7anatomy14StructureEntry17display__name__zh(self) {
+    return _M0FP37lqyq6668bodymate7anatomy19structure__name__zh(self.canonical_name, self.kind);
+  }
+  function _M0FP37lqyq6668bodymate7anatomy18search__structures(entries, query) {
+    const normalized = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string6String9to__lower(query), undefined));
+    if (normalized === "") {
+      return [];
+    }
+    const muscles = [];
+    const others = [];
+    const _bind = entries.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const entry = entries[_];
+        const canonical = _M0MPC16string6String9to__lower(entry.canonical_name);
+        if (_M0MPC16string6String8contains(canonical, new _M0TPC16string10StringView(normalized, 0, normalized.length)) || _M0MPC16string6String8contains(_M0MP37lqyq6668bodymate7anatomy14StructureEntry17display__name__zh(entry), new _M0TPC16string10StringView(normalized, 0, normalized.length))) {
+          if (_M0IP37lqyq6668bodymate7anatomy13StructureKindPB2Eq5equal(entry.kind, 0)) {
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(muscles, entry);
+          } else {
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(others, entry);
+          }
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const _bind$2 = others.length;
+    let _tmp$2 = 0;
+    while (true) {
+      const _ = _tmp$2;
+      if (_ < _bind$2) {
+        const entry = others[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(muscles, entry);
+        _tmp$2 = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return muscles;
+  }
+  function _M0FP37lqyq6668bodymate7anatomy18kind__from__string(kind) {
+    const _bind = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string6String9to__lower(kind), undefined));
+    switch (_bind) {
+      case "muscle": {
+        return 0;
+      }
+      case "bone": {
+        return 1;
+      }
+      case "connective": {
+        return 2;
+      }
+      default: {
+        return 3;
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate7anatomy26has__chinese__muscle__name(canonical) {
+    const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy19muscle__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+    return !(_bind === undefined);
+  }
+  function _M0FP37lqyq6668bodymate7anatomy29has__chinese__structure__name(canonical, kind) {
+    if (kind === 0) {
+      return _M0FP37lqyq6668bodymate7anatomy26has__chinese__muscle__name(canonical);
+    } else {
+      const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy22structure__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+      return !(_bind === undefined);
+    }
+  }
   function _M0MP37lqyq6668bodymate6motion7Session3new() {
     return new _M0TP37lqyq6668bodymate6motion7Session("", 0, false, 1, [], [], 0);
   }
@@ -10474,88 +10701,88 @@
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_605, _x_606) {
-    if (_x_605 === 0) {
-      if (_x_606 === 0) {
+  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_617, _x_618) {
+    if (_x_617 === 0) {
+      if (_x_618 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_606 === 1) {
+      if (_x_618 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_601, _x_602) {
-    switch (_x_601) {
+  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_613, _x_614) {
+    switch (_x_613) {
       case 0: {
-        if (_x_602 === 0) {
+        if (_x_614 === 0) {
           return true;
         } else {
           return false;
         }
       }
       case 1: {
-        if (_x_602 === 1) {
+        if (_x_614 === 1) {
           return true;
         } else {
           return false;
         }
       }
       case 2: {
-        if (_x_602 === 2) {
+        if (_x_614 === 2) {
           return true;
         } else {
           return false;
         }
       }
       case 3: {
-        if (_x_602 === 3) {
+        if (_x_614 === 3) {
           return true;
         } else {
           return false;
         }
       }
       case 4: {
-        if (_x_602 === 4) {
+        if (_x_614 === 4) {
           return true;
         } else {
           return false;
         }
       }
       case 5: {
-        if (_x_602 === 5) {
+        if (_x_614 === 5) {
           return true;
         } else {
           return false;
         }
       }
       case 6: {
-        if (_x_602 === 6) {
+        if (_x_614 === 6) {
           return true;
         } else {
           return false;
         }
       }
       case 7: {
-        if (_x_602 === 7) {
+        if (_x_614 === 7) {
           return true;
         } else {
           return false;
         }
       }
       case 8: {
-        if (_x_602 === 8) {
+        if (_x_614 === 8) {
           return true;
         } else {
           return false;
         }
       }
       default: {
-        if (_x_602 === 9) {
+        if (_x_614 === 9) {
           return true;
         } else {
           return false;
@@ -10563,30 +10790,30 @@
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_597, _x_598) {
-    if (_x_597 === 0) {
-      if (_x_598 === 0) {
+  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_609, _x_610) {
+    if (_x_609 === 0) {
+      if (_x_610 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_598 === 1) {
+      if (_x_610 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_577, _x_578) {
-    if (_x_577 === 0) {
-      if (_x_578 === 0) {
+  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_589, _x_590) {
+    if (_x_589 === 0) {
+      if (_x_590 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_578 === 1) {
+      if (_x_590 === 1) {
         return true;
       } else {
         return false;
@@ -14904,6 +15131,56 @@
     }
     return _M0FP37lqyq6668bodymate4core18environment__frame(0, 0.25, _tmp);
   }
+  function _M0FP37lqyq6668bodymate4core17anatomy__name__v1(canonical, kind) {
+    return `ok|anatomy-name-v1|${_M0FP37lqyq6668bodymate7anatomy19structure__name__zh(canonical, _M0FP37lqyq6668bodymate7anatomy18kind__from__string(kind))}`;
+  }
+  function _M0FP37lqyq6668bodymate4core22anatomy__has__name__v1(canonical, kind) {
+    const covered = _M0FP37lqyq6668bodymate7anatomy29has__chinese__structure__name(canonical, _M0FP37lqyq6668bodymate7anatomy18kind__from__string(kind));
+    return `ok|anatomy-has-name-v1|${covered ? "true" : "false"}`;
+  }
+  function _M0FP37lqyq6668bodymate4core19anatomy__search__v1(entries, query) {
+    const parsed = [];
+    const _bind = "~";
+    const _it = _M0MPC16string6String5split(entries, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let record;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _record = _Some;
+          record = _record;
+          break _L;
+        }
+      }
+      const _bind$2 = "^";
+      const fields = _M0MPB4Iter9to__arrayGRPC16string10StringViewE(_M0MPC16string10StringView5split(record, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length)));
+      if (fields.length < 3) {
+        continue;
+      }
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(parsed, new _M0TP37lqyq6668bodymate7anatomy14StructureEntry(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(fields, 0)), _M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(fields, 2)), _M0FP37lqyq6668bodymate7anatomy18kind__from__string(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(fields, 1)))));
+      continue;
+    }
+    const ids = [];
+    const _bind$2 = _M0FP37lqyq6668bodymate7anatomy18search__structures(parsed, query);
+    const _bind$3 = _bind$2.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind$3) {
+        const entry = _bind$2[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(ids, entry.structure_id);
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const _bind$4 = "~";
+    return `ok|anatomy-search-v1|${_M0MPC15array5Array4joinGsE(ids, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))}`;
+  }
   globalThis.bodymate_domain_registry_v1 = _M0FP37lqyq6668bodymate4core20domain__registry__v1;
   globalThis.bodymate_domain_reset = _M0FP37lqyq6668bodymate4core13domain__reset;
   globalThis.bodymate_domain_snapshot_v2 = _M0FP37lqyq6668bodymate4core20domain__snapshot__v2;
@@ -14950,5 +15227,8 @@
   globalThis.bodymate_environment_sample_v1 = _M0FP37lqyq6668bodymate4core23environment__sample__v1;
   globalThis.bodymate_environment_tick_v1 = _M0FP37lqyq6668bodymate4core21environment__tick__v1;
   globalThis.bodymate_environment_frame_v1 = _M0FP37lqyq6668bodymate4core22environment__frame__v1;
+  globalThis.bodymate_anatomy_name_v1 = _M0FP37lqyq6668bodymate4core17anatomy__name__v1;
+  globalThis.bodymate_anatomy_has_name_v1 = _M0FP37lqyq6668bodymate4core22anatomy__has__name__v1;
+  globalThis.bodymate_anatomy_search_v1 = _M0FP37lqyq6668bodymate4core19anatomy__search__v1;
 })();
 //# sourceMappingURL=core.js.map

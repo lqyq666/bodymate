@@ -60,8 +60,32 @@ fn main raise {
 
 `revision` 记录接受的控制命令，不随每帧 `tick` 增加。`set_parameters` 输入是完整参数集合，省略字段回到默认值；需要部分修改时，从快照合并后再调用。浏览器适配器继续暴露既有 V1 wire 接口，库使用者不需要解析这些字符串。
 
+## 解剖术语包 `lqyq666/bodymate/anatomy`
+
+同一模块还发布一个无依赖的双语解剖术语库：376 条归一化拉丁名 → 中文术语，覆盖 Human Atlas / BodyParts3D 人体集的 415 条肌肉与 282 个骨、椎间盘、肋、牙、软骨、筋膜结构。
+
+```moonbit
+// moon.pkg: import { "lqyq666/bodymate/anatomy" }
+@anatomy.structure_name_zh("Left femur", Bone)              // "左侧股骨"
+@anatomy.muscle_name_zh("Long head of right biceps brachii") // "右侧肱二头肌长头"
+@anatomy.normalize_name("Distal phalanx of left big toe")    // "distal phalanx of big toe"
+let hits = @anatomy.search_structures(entries, "腰大肌")      // 肌肉排在其他结构之前
+```
+
+| API | 返回与边界 |
+| --- | --- |
+| `normalize_name(name)` | 小写、去掉 left/right 词、折叠空白；镜像结构共用一个术语 |
+| `laterality_prefix(name)` | `"左侧"` / `"右侧"` / `""`，只看独立的 left/right 单词 |
+| `muscle_name_zh(name)` / `has_chinese_muscle_name(name)` | 未收录肌肉回退 `"肌肉结构"`（仍带侧别） |
+| `structure_name_zh(name, kind)` / `has_chinese_structure_name(name, kind)` | `Muscle` 委托肌肉表；`Bone` / `Connective` / `Other` 分别回退 `"骨骼结构"` / `"结缔结构"` / `"人体结构"` |
+| `kind_from_string(text)` | `"muscle"` / `"bone"` / `"connective"`（忽略大小写与空白），其余为 `Other` |
+| `search_structures(entries, query)` | 同时匹配中文显示名与拉丁名，大小写不敏感，空查询返回空；肌肉优先、组内保持输入顺序 |
+| `muscle_terms()` / `structure_terms()` / `term_counts()` | 词典副本与规模，供审计或二次加工 |
+
+术语采用通用解剖学中文命名（如筛骨、大多角骨、环杓后肌），是展示用译名，不是医学诊断或临床术语标准的替代。
+
 ## 发布边界
 
-发布配置只打包本库、测试、三个示例和 MIT 许可证。`moon package --list` 可查看准确清单；人体及环境资产、浏览器 JS、旧颈肩兼容模块不进入 Mooncakes 包。
+发布配置只打包 motion 与 anatomy 两个库、测试、三个示例和 MIT 许可证。`moon package --list` 可查看准确清单；人体及环境资产、浏览器 JS、旧颈肩兼容模块不进入 Mooncakes 包。
 
 仓库地址：https://github.com/lqyq666/bodymate 。本地打包或通过测试不代表已经发布；发布状态应以 Mooncakes 的实际版本记录为准。
