@@ -6,12 +6,9 @@ _build/
 .moon/
 prototype/real-neck/local-assets/
 *.log
-
-# Local development/review orchestration.
-.agent-loop/
-.opencode/
-AGENT_LOOP.md
-agent-loop.ps1
+.env
+.env.*
+!.env.example
 
 # Upstream source cache used to derive committed, attributed runtime assets.
 prototype/human-atlas-local/

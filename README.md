@@ -31,7 +31,7 @@ moon run moonbit/examples/sampling --target js
 
 ## 完整页面与验证
 
-环境：Node.js 24、MoonBit `0.1.20260904`、Python 3（本地服务与包审计）、支持 WebGL 的 Chromium 浏览器。
+环境：Node.js 24、MoonBit `0.1.20260904`、Python 3（离线本地服务与包审计）、支持 WebGL 的 Chromium 浏览器。
 
 ```sh
 npm ci
@@ -44,6 +44,20 @@ python -m http.server 4174 --bind 127.0.0.1
 ```
 
 打开 `http://127.0.0.1:4174/?view=full-body`。正常运行不请求 CDN、远程 AI、模型服务或后台；首次安装工具链和 npm 依赖需要网络。
+
+若要启用人与 AI 的自然语言对话，先按 [AI 对话接入说明](docs/AI_CHAT_SETUP.md) 在本机配置 API。Windows 上的 GLM Key 已在剪贴板时，先运行：
+
+```sh
+npm run ai:configure-glm
+```
+
+再运行：
+
+```sh
+npm run ai:serve
+```
+
+浏览器只调用本地代理；代理只向你配置的模型服务发送当前对话、当前动作状态和受限动作目录。模型提出的动作或肌肉展示建议会被现有 MoonBit 目录再次验证，动画与参与肌群高亮仍在本地页面完成。未配置 AI 时，`python -m http.server` 的离线动作与肌肉检索仍可使用。
 
 `moonbit:package-check` 检查实际发布 ZIP、排除应用资产并在隔离目录重新 check/build/test/run；只执行本地验证。Mooncakes 发布状态与正式申报状态见 [申报清单](docs/SUBMISSION_CHECKLIST.md)，本地成功不代表已发布或已获资格。
 
