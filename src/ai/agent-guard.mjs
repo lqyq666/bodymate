@@ -38,12 +38,12 @@ export function allowlistWire(commands) {
     .join('~');
 }
 
-// { key: number } -> "key=value,key=value"; non-numbers never reach MoonBit.
+// { key: number | string } -> "key=value,key~text"; other types never reach MoonBit.
 export function fieldsWire(parameters) {
   if (!parameters || typeof parameters !== 'object' || Array.isArray(parameters)) return '';
   return Object.entries(parameters)
-    .filter(([key, value]) => typeof value === 'number' && key && !WIRE_UNSAFE.test(key))
-    .map(([key, value]) => `${key}=${String(value)}`)
+    .filter(([key, value]) => (typeof value === 'number' || typeof value === 'string') && key && !WIRE_UNSAFE.test(key))
+    .map(([key, value]) => (typeof value === 'number' ? `${key}=${String(value)}` : `${key}~${value}`))
     .join(',');
 }
 
@@ -53,8 +53,12 @@ function decodeAction(body) {
     const parameters = {};
     for (const pair of (rest[1] || '').split(',')) {
       if (!pair) continue;
-      const index = pair.indexOf('=');
-      parameters[pair.slice(0, index)] = Number(pair.slice(index + 1));
+      const eq = pair.indexOf('='), tilde = pair.indexOf('~');
+      if (tilde >= 0 && (eq < 0 || tilde < eq)) {
+        parameters[pair.slice(0, tilde)] = pair.slice(tilde + 1);
+      } else if (eq >= 0) {
+        parameters[pair.slice(0, eq)] = Number(pair.slice(eq + 1));
+      }
     }
     return { kind, id: rest[0], parameters };
   }
