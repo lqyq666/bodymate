@@ -16,9 +16,9 @@
 .full-muscle-demo-active .full-muscle-answer strong{display:block;color:#243e54;font-size:17px;font-weight:650;line-height:1.5;overflow-wrap:anywhere}
 .full-muscle-demo-active .full-muscle-answer p{margin:10px 0 0}
 .anatomy-toolbar{position:absolute;z-index:4;inset:5px 18px auto;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.anatomy-toolbar button,.anatomy-playback button,.anatomy-examples button{border:1px solid #c8d6e2;background:#f9fcff;color:#355269;border-radius:8px;font:500 12px/1 system-ui,sans-serif;min-height:36px;padding:9px 12px;cursor:pointer}
-.anatomy-toolbar button:hover,.anatomy-playback button:hover,.anatomy-examples button:hover{background:#e7f0f8}
-.anatomy-toolbar button:focus-visible,.anatomy-playback button:focus-visible,.anatomy-examples button:focus-visible,.anatomy-transport input:focus-visible,.anatomy-transport select:focus-visible{outline:2px solid #2e79b6;outline-offset:3px}
+.anatomy-toolbar button,.anatomy-playback button,.anatomy-examples button,.anatomy-phase-steps button{border:1px solid #c8d6e2;background:#f9fcff;color:#355269;border-radius:8px;font:500 12px/1 system-ui,sans-serif;min-height:36px;padding:9px 12px;cursor:pointer}
+.anatomy-toolbar button:hover,.anatomy-playback button:hover,.anatomy-examples button:hover,.anatomy-phase-steps button:hover{background:#e7f0f8}
+.anatomy-toolbar button:focus-visible,.anatomy-playback button:focus-visible,.anatomy-examples button:focus-visible,.anatomy-phase-steps button:focus-visible,.anatomy-transport input:focus-visible,.anatomy-transport select:focus-visible{outline:2px solid #2e79b6;outline-offset:3px}
 .anatomy-toolbar button:disabled,.anatomy-examples button:disabled{opacity:.5;cursor:wait}
 .anatomy-views{display:flex;gap:4px}
 .anatomy-views [aria-pressed=true]{color:#fff;background:#355b79;border-color:#355b79}
@@ -36,6 +36,21 @@
 .anatomy-transport select{border:0;color:#355269;background:#eaf1f7;padding:6px;border-radius:5px;font:inherit}
 .anatomy-examples{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}
 .anatomy-examples>span{width:100%;font-size:11px;color:#536d82;margin-bottom:2px}
+.anatomy-conversation{display:grid;gap:8px;margin:0 0 16px}
+.anatomy-conversation[hidden]{display:none}
+.anatomy-dialogue{margin:0;padding:9px 11px;border:1px solid #d8e3ec;border-radius:10px;background:#f7fbfe;color:#355269;font:12px/1.55 system-ui,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}
+.anatomy-dialogue strong{display:block;margin-bottom:3px;font-size:10px;color:#6b8499}
+.anatomy-dialogue[data-role=user]{background:#edf4fa;border-color:#cbdce8}
+.anatomy-dialogue[data-role=user] strong{color:#2e79b6}
+.anatomy-phase-guide{margin:0 0 18px;padding:12px 0 14px;border-top:1px solid #c8d6e2;color:#355269;font:400 12px/1.6 system-ui,sans-serif}
+.anatomy-phase-guide[hidden]{display:none}
+.anatomy-phase-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.anatomy-phase-heading span{font-size:11px;color:#536d82}
+.anatomy-phase-heading strong{font-size:14px;color:#243e54}
+.anatomy-phase-guide p{margin:8px 0 10px;color:#526b80;font-size:11px;line-height:1.75}
+.anatomy-phase-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.anatomy-phase-steps button{min-height:38px;padding:7px 5px;font-size:10px}
+.anatomy-phase-steps button[aria-pressed=true]{background:#355b79;border-color:#355b79;color:#fff}
 .anatomy-loading{position:absolute;inset:0;z-index:4;display:grid;place-items:center;background:#f2f6fa;color:#415c71;font-size:14px}
 .full-muscle-demo-active .detail-panel{overflow:clip}
 .full-muscle-demo-active .ambient-line{display:none}
@@ -52,6 +67,7 @@
 .anatomy-presets button{flex:1;min-height:36px;border:1px solid #c8d6e2;border-radius:8px;background:#f9fcff;color:#355269;font:500 12px system-ui,sans-serif;cursor:pointer}
 .anatomy-presets button:hover{background:#e7f0f8}
 .anatomy-presets button[aria-pressed=true]{background:#355b79;color:#fff;border-color:#355b79}
+.anatomy-parameter-comparison{margin:9px 0;padding-left:9px;border-left:2px solid #7899b4;color:#355269;font-size:11px;line-height:1.75}
 .anatomy-parameter{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 8px;margin:9px 0}
 .anatomy-parameter output{font-variant-numeric:tabular-nums;color:#243e54}
 .anatomy-parameter input{grid-column:1/-1;width:100%;margin:0;height:30px;accent-color:#355b79;cursor:pointer}

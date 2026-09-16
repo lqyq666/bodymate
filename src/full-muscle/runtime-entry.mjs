@@ -3,11 +3,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { highlightForMotion } from './rig-definition.mjs';
 import { createMotionClip } from './motion-clip.mjs';
-import { motionDefinitions, motionForQuery, normalizeMotionParameters, muscleProfileForMotion, motionSession } from './motion-domain.mjs';
+import { motionDefinitions, motionForQuery, motionPhaseGuides, normalizeMotionParameters, muscleProfileForMotion, motionSession } from './motion-domain.mjs';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { mountRealBodyNavigator } from './navigator.mjs';
 import { attachHeadSurface } from './head-surface.mjs';
-import { muscleNameZh } from './anatomy-name-zh.mjs';
+import { searchStructures, structureNameZh } from './anatomy-name-zh.mjs';
 import { environmentDomain } from './environment-domain.mjs';
 import { alignBodyToPlatform, createLabEnvironment } from './lab-environment.mjs';
 import { applySculptureFinish, sculptureWhite } from './sculpture-material.mjs';
@@ -23,8 +23,8 @@ const loadRiggedAsset = () => riggedAssetPromise ||= (async () => {
 })();
 export async function mountNavigator(options) { const gltf = await loadRiggedAsset(); return mountRealBodyNavigator({ ...options, source: gltf.scene }); }
 
-export { motionDefinitions, motionForQuery };
-export { parameterDefinitions, motionPresets, parseMotionParameters } from './motion-parameters.mjs';
+export { motionDefinitions, motionForQuery, motionPhaseGuides };
+export { parameterDefinitions, motionPresets, motionParameterComparison, parseMotionParameters } from './motion-parameters.mjs';
 const aliases = [
   ['胸大肌', 'pectoralis major'], ['胸小肌', 'pectoralis minor'], ['胸部', 'pectoralis'], ['三角肌', 'deltoid'], ['肩部', 'deltoid'],
   ['斜方肌', 'trapezius'], ['肱二头肌', 'biceps brachii'], ['肱三头肌', 'triceps brachii'],
@@ -159,7 +159,9 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
   const findAll = (query) => {
     const normalized = String(query || '').trim().toLowerCase(); if (!normalized) return [];
     const alias = aliases.find(([zh]) => normalized.includes(zh));
-    return entries.filter((entry) => entry.kind === 'muscle' && (alias ? new RegExp(alias[1], 'i').test(entry.canonicalName) : entry.canonicalName.toLowerCase().includes(normalized)));
+    const grouped = alias ? entries.filter((entry) => entry.kind === 'muscle' && new RegExp(alias[1], 'i').test(entry.canonicalName)) : [];
+    const merged = [...new Set([...grouped, ...searchStructures(entries, normalized)])];
+    return [...merged.filter((entry) => entry.kind === 'muscle'), ...merged.filter((entry) => entry.kind !== 'muscle')];
   };
   const selectGroup = (matched, { notify = true } = {}) => {
     restore(); selected = new Set(matched.map((entry) => entry.structureId)); paint(); fit(); emit();
@@ -220,7 +222,7 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
       node.material = node.material.clone(); node.material.roughness = .66; node.material.metalness = 0;
       if (labStyle) applySculptureFinish(node.material, node.userData.kind);
       const metadata = node.userData; entries.push(metadata); meshes.set(metadata.structureId, node);
-      if (metadata.kind === 'muscle') metadata.displayNameZh = muscleNameZh(metadata.canonicalName);
+      metadata.displayNameZh = structureNameZh(metadata.canonicalName, metadata.kind);
     });
     headSurface = attachHeadSurface(model, { sculpture: labStyle });
     scene.add(model); mixer = new THREE.AnimationMixer(model);
