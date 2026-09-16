@@ -213,6 +213,214 @@ export function normalizeMuscleName(canonicalName) {
   return String(canonicalName || '').toLowerCase().replace(/\b(?:left|right)\b/g, '').replace(/\s+/g, ' ').trim();
 }
 
+function lateralityPrefix(source) {
+  return /\bleft\b/i.test(source) ? '左侧' : /\bright\b/i.test(source) ? '右侧' : '';
+}
+
+// Chinese terms for the pinned non-muscle structures (bones, teeth, cartilage, gingiva, fascia).
+// Laterality is stripped by normalizeMuscleName and re-attached by structureNameZh.
+const structureTerms = Object.freeze({
+  'arytenoid cartilage': '杓状软骨',
+  'atlas': '寰椎',
+  'axis': '枢椎',
+  'body of sternum': '胸骨体',
+  'calcaneus': '跟骨',
+  'capitate': '头状骨',
+  'clavicle': '锁骨',
+  'corniculate cartilage': '小角软骨',
+  'cricoid cartilage': '环状软骨',
+  'cuboid bone': '骰骨',
+  'cuneiform cartilage': '楔状软骨',
+  'distal phalanx of big toe': '拇趾远节趾骨',
+  'distal phalanx of fourth toe': '第四趾远节趾骨',
+  'distal phalanx of index finger': '示指远节指骨',
+  'distal phalanx of little finger': '小指远节指骨',
+  'distal phalanx of little toe': '小趾远节趾骨',
+  'distal phalanx of middle finger': '中指远节指骨',
+  'distal phalanx of ring finger': '环指远节指骨',
+  'distal phalanx of second toe': '第二趾远节趾骨',
+  'distal phalanx of third toe': '第三趾远节趾骨',
+  'distal phalanx of thumb': '拇指远节指骨',
+  'eighth rib': '第八肋骨',
+  'eighth thoracic vertebra': '第八胸椎',
+  'eleventh rib': '第十一肋骨',
+  'eleventh thoracic vertebra': '第十一胸椎',
+  'ethmoid': '筛骨',
+  'femur': '股骨',
+  'fibula': '腓骨',
+  'fifth cervical vertebra': '第五颈椎',
+  'fifth costal cartilage': '第五肋软骨',
+  'fifth lumbar vertebra': '第五腰椎',
+  'fifth metacarpal bone': '第五掌骨',
+  'fifth metatarsal bone': '第五跖骨',
+  'fifth rib': '第五肋骨',
+  'fifth thoracic vertebra': '第五胸椎',
+  'first costal cartilage': '第一肋软骨',
+  'first lumbar vertebra': '第一腰椎',
+  'first metacarpal bone': '第一掌骨',
+  'first metatarsal bone': '第一跖骨',
+  'first rib': '第一肋骨',
+  'first thoracic vertebra': '第一胸椎',
+  'fourth cervical vertebra': '第四颈椎',
+  'fourth costal cartilage': '第四肋软骨',
+  'fourth lumbar vertebra': '第四腰椎',
+  'fourth metacarpal bone': '第四掌骨',
+  'fourth metatarsal bone': '第四跖骨',
+  'fourth rib': '第四肋骨',
+  'fourth thoracic vertebra': '第四胸椎',
+  'frontal bone': '额骨',
+  'gingiva of lower jaw': '下颌牙龈',
+  'gingiva of upper jaw': '上颌牙龈',
+  'hamate': '钩骨',
+  'hip bone': '髋骨',
+  'humerus': '肱骨',
+  'hyoid bone': '舌骨',
+  'iliotibial tract': '髂胫束',
+  'intermediate cuneiform bone': '中间楔骨',
+  'intervertebral disk': '椎间盘',
+  'intervertebral disk of axis': '枢椎椎间盘',
+  'intervertebral disk of eighth thoracic vertebra': '第八胸椎椎间盘',
+  'intervertebral disk of eleventh thoracic vertebra': '第十一胸椎椎间盘',
+  'intervertebral disk of fifth cervical vertebra': '第五颈椎椎间盘',
+  'intervertebral disk of fifth lumbar vertebra': '第五腰椎椎间盘',
+  'intervertebral disk of fifth thoracic vertebra': '第五胸椎椎间盘',
+  'intervertebral disk of first lumbar vertebra': '第一腰椎椎间盘',
+  'intervertebral disk of first thoracic vertebra': '第一胸椎椎间盘',
+  'intervertebral disk of fourth cervical vertebra': '第四颈椎椎间盘',
+  'intervertebral disk of fourth lumbar vertebra': '第四腰椎椎间盘',
+  'intervertebral disk of fourth thoracic vertebra': '第四胸椎椎间盘',
+  'intervertebral disk of ninth thoracic vertebra': '第九胸椎椎间盘',
+  'intervertebral disk of second lumbar vertebra': '第二腰椎椎间盘',
+  'intervertebral disk of second thoracic vertebra': '第二胸椎椎间盘',
+  'intervertebral disk of seventh cervical vertebra': '第七颈椎椎间盘',
+  'intervertebral disk of seventh thoracic vertebra': '第七胸椎椎间盘',
+  'intervertebral disk of sixth cervical vertebra': '第六颈椎椎间盘',
+  'intervertebral disk of sixth thoracic vertebra': '第六胸椎椎间盘',
+  'intervertebral disk of tenth thoracic vertebra': '第十胸椎椎间盘',
+  'intervertebral disk of third cervical vertebra': '第三颈椎椎间盘',
+  'intervertebral disk of third lumbar vertebra': '第三腰椎椎间盘',
+  'intervertebral disk of third thoracic vertebra': '第三胸椎椎间盘',
+  'lateral cuneiform bone': '外侧楔骨',
+  'lower central secondary incisor tooth': '下颌中切牙',
+  'lower first secondary molar tooth': '下颌第一磨牙',
+  'lower first secondary premolar tooth': '下颌第一前磨牙',
+  'lower lateral secondary incisor tooth': '下颌侧切牙',
+  'lower second secondary molar tooth': '下颌第二磨牙',
+  'lower second secondary premolar tooth': '下颌第二前磨牙',
+  'lower secondary canine tooth': '下颌尖牙',
+  'lunate': '月骨',
+  'major alar cartilage': '鼻翼大软骨',
+  'mandible': '下颌骨',
+  'manubrium': '胸骨柄',
+  'maxilla': '上颌骨',
+  'medial cuneiform bone': '内侧楔骨',
+  'middle phalanx of fourth toe': '第四趾中节趾骨',
+  'middle phalanx of index finger': '示指中节指骨',
+  'middle phalanx of little finger': '小指中节指骨',
+  'middle phalanx of little toe': '小趾中节趾骨',
+  'middle phalanx of middle finger': '中指中节指骨',
+  'middle phalanx of ring finger': '环指中节指骨',
+  'middle phalanx of second toe': '第二趾中节趾骨',
+  'middle phalanx of third toe': '第三趾中节趾骨',
+  'nasal bone': '鼻骨',
+  'navicular bone of foot': '足舟骨',
+  'ninth rib': '第九肋骨',
+  'ninth thoracic vertebra': '第九胸椎',
+  'occipital bone': '枕骨',
+  'palatine bone': '腭骨',
+  'parietal bone': '顶骨',
+  'patella': '髌骨',
+  'pisiform': '豌豆骨',
+  'proximal phalanx of big toe': '拇趾近节趾骨',
+  'proximal phalanx of fourth toe': '第四趾近节趾骨',
+  'proximal phalanx of index finger': '示指近节指骨',
+  'proximal phalanx of little finger': '小指近节指骨',
+  'proximal phalanx of little toe': '小趾近节趾骨',
+  'proximal phalanx of middle finger': '中指近节指骨',
+  'proximal phalanx of ring finger': '环指近节指骨',
+  'proximal phalanx of second toe': '第二趾近节趾骨',
+  'proximal phalanx of third toe': '第三趾近节趾骨',
+  'proximal phalanx of thumb': '拇指近节指骨',
+  'radius': '桡骨',
+  'sacrum': '骶骨',
+  'scaphoid': '手舟骨',
+  'scapula': '肩胛骨',
+  'second costal cartilage': '第二肋软骨',
+  'second lumbar vertebra': '第二腰椎',
+  'second metacarpal bone': '第二掌骨',
+  'second metatarsal bone': '第二跖骨',
+  'second rib': '第二肋骨',
+  'second thoracic vertebra': '第二胸椎',
+  'sesamoid bone of foot': '足籽骨',
+  'seventh cervical vertebra': '第七颈椎',
+  'seventh costal cartilage': '第七肋软骨',
+  'seventh rib': '第七肋骨',
+  'seventh thoracic vertebra': '第七胸椎',
+  'sixth cervical vertebra': '第六颈椎',
+  'sixth costal cartilage': '第六肋软骨',
+  'sixth rib': '第六肋骨',
+  'sixth thoracic vertebra': '第六胸椎',
+  'sphenoid bone': '蝶骨',
+  'talus': '距骨',
+  'temporal bone': '颞骨',
+  'tenth rib': '第十肋骨',
+  'tenth thoracic vertebra': '第十胸椎',
+  'third cervical vertebra': '第三颈椎',
+  'third costal cartilage': '第三肋软骨',
+  'third lumbar vertebra': '第三腰椎',
+  'third metacarpal bone': '第三掌骨',
+  'third metatarsal bone': '第三跖骨',
+  'third rib': '第三肋骨',
+  'third thoracic vertebra': '第三胸椎',
+  'thyroid cartilage': '甲状软骨',
+  'tibia': '胫骨',
+  'trapezium': '大多角骨',
+  'trapezoid': '小多角骨',
+  'triquetral': '三角骨',
+  'twelfth rib': '第十二肋骨',
+  'twelfth thoracic vertebra': '第十二胸椎',
+  'ulna': '尺骨',
+  'upper central secondary incisor tooth': '上颌中切牙',
+  'upper first secondary molar tooth': '上颌第一磨牙',
+  'upper first secondary premolar tooth': '上颌第一前磨牙',
+  'upper lateral secondary incisor tooth': '上颌侧切牙',
+  'upper second secondary molar tooth': '上颌第二磨牙',
+  'upper second secondary premolar tooth': '上颌第二前磨牙',
+  'upper secondary canine tooth': '上颌尖牙',
+  'vomer': '犁骨',
+  'xiphoid process': '剑突',
+  'zygomatic bone': '颧骨',
+});
+
+export function hasChineseStructureName(canonicalName, kind = 'bone') {
+  if (kind === 'muscle') return hasChineseMuscleName(canonicalName);
+  return Object.hasOwn(structureTerms, normalizeMuscleName(canonicalName));
+}
+
+export function structureNameZh(canonicalName, kind = 'bone') {
+  const source = String(canonicalName || '');
+  if (kind === 'muscle') return muscleNameZh(source);
+  const term = structureTerms[normalizeMuscleName(source)];
+  if (term) return lateralityPrefix(source) + term;
+  return lateralityPrefix(source) + (kind === 'connective' ? '结缔结构' : kind === 'bone' ? '骨骼结构' : '人体结构');
+}
+
+// Shared structure search: matches the Chinese display name or the Latin canonical name.
+// Muscles rank before other structures so muscle-centric queries keep their meaning.
+export function searchStructures(entries, query) {
+  const normalized = String(query || '').trim().toLowerCase();
+  if (!normalized) return [];
+  const matched = [];
+  const others = [];
+  for (const entry of entries || []) {
+    const canonical = String(entry?.canonicalName || '').toLowerCase();
+    const display = String(entry?.displayNameZh || '');
+    if (!canonical.includes(normalized) && !display.includes(normalized)) continue;
+    (entry?.kind === 'muscle' ? matched : others).push(entry);
+  }
+  return [...matched, ...others];
+}
+
 export function hasChineseMuscleName(canonicalName) {
   return Object.hasOwn(muscleTerms, normalizeMuscleName(canonicalName));
 }
@@ -220,6 +428,5 @@ export function hasChineseMuscleName(canonicalName) {
 export function muscleNameZh(canonicalName) {
   const source = String(canonicalName || '');
   const term = muscleTerms[normalizeMuscleName(source)] || '肌肉结构';
-  const side = /\bleft\b/i.test(source) ? '左侧' : /\bright\b/i.test(source) ? '右侧' : '';
-  return side + term;
+  return lateralityPrefix(source) + term;
 }
