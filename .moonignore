@@ -8,4 +8,5 @@
 /moonbit/*
 !/moonbit/motion/
 !/moonbit/anatomy/
+!/moonbit/agent/
 !/moonbit/examples/

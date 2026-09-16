@@ -84,8 +84,33 @@ let hits = @anatomy.search_structures(entries, "腰大肌")      // 肌肉排在
 
 术语采用通用解剖学中文命名（如筛骨、大多角骨、环杓后肌），是展示用译名，不是医学诊断或临床术语标准的替代。
 
+## AI 动作护栏包 `lqyq666/bodymate/agent`
+
+与领域无关的 LLM 输出约束：宿主声明允许的命令与字段，模型提议只能收敛为 `None`、`Command` 或 `Lookup`，任何未声明的 id、字段或非有限数值都被丢弃。BodyMate 的本地代理与浏览器都用它，同一份规则在两端生效。
+
+```moonbit
+// moon.pkg: import { "lqyq666/bodymate/agent" }
+let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceWidth")
+@agent.guard_command("push_up", [("handWidth", 1.8), ("invented", 7.0)], allowed)
+// Command("push_up", [("handWidth", 1.8)])
+@agent.guard_command("run_marathon", [], allowed)   // None
+@agent.guard_lookup("  胸大肌 ", 80)                 // Lookup("胸大肌")
+@agent.action_wire(...)                              // "command|push_up|handWidth=1.8"
+```
+
+| API | 返回与边界 |
+| --- | --- |
+| `parse_allowlist(wire)` / `allowlist_wire(allowed)` | `id^key,key~id^key`；非法 id/键、重复项与畸形记录直接丢弃 |
+| `parse_fields(wire)` | `key=value,...`；只保留标识符键与有限数值，重复键取首个 |
+| `guard_command(id, fields, allowed)` | id 不在白名单 → `None`；否则按白名单字段顺序保留候选中的有限数值 |
+| `guard_lookup(text, max_chars)` | 修剪并按字符截断；为空 → `None` |
+| `is_valid_command_id` / `is_valid_field_key` / `bound_text` | 无正则依赖的标识符与文本约束，可单独复用 |
+| `action_wire(action)` | `none` / `command\|id\|k=v,...` / `lookup\|text`，宿主按此解码 |
+
+它不解析 JSON，也不生成提示词：宿主负责把不可信文本解成候选值再交给护栏，护栏负责决定什么可以执行。
+
 ## 发布边界
 
-发布配置只打包 motion 与 anatomy 两个库、测试、三个示例和 MIT 许可证。`moon package --list` 可查看准确清单；人体及环境资产、浏览器 JS、旧颈肩兼容模块不进入 Mooncakes 包。
+发布配置只打包 motion、anatomy、agent 三个库、测试、三个示例和 MIT 许可证。`moon package --list` 可查看准确清单；人体及环境资产、浏览器 JS、旧颈肩兼容模块不进入 Mooncakes 包。
 
 仓库地址：https://github.com/lqyq666/bodymate 。本地打包或通过测试不代表已经发布；发布状态应以 Mooncakes 的实际版本记录为准。

@@ -1,6 +1,9 @@
+import { guardCommand, guardLookup } from './agent-guard.mjs';
+
 const MAX_MESSAGE_LENGTH = 800;
 const MAX_HISTORY_ITEMS = 6;
 const MAX_REPLY_LENGTH = 600;
+const MAX_QUERY_LENGTH = 80;
 
 export class ChatProtocolError extends Error {
   constructor(code, message) {
@@ -131,13 +134,11 @@ function jsonFromModel(content) {
 function actionFor(value, catalog) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return actionNone();
   if (value.kind === 'motion') {
-    const id = text(value.id, 64);
-    const motion = catalog.find((candidate) => candidate.id === id);
-    if (!motion) return actionNone();
-    return Object.freeze({ kind: 'motion', id, parameters: parametersFor(value.parameters, motion.parameters) });
+    const guarded = guardCommand(value.id, value.parameters, catalog.map((motion) => ({ id: motion.id, fields: motion.parameters.map((field) => field.key) })));
+    return guarded ? Object.freeze({ kind: 'motion', id: guarded.id, parameters: Object.freeze(guarded.parameters) }) : actionNone();
   }
   if (value.kind === 'muscle') {
-    const query = text(value.query, 80);
+    const query = guardLookup(value.query, MAX_QUERY_LENGTH);
     return query ? Object.freeze({ kind: 'muscle', query }) : actionNone();
   }
   return actionNone();

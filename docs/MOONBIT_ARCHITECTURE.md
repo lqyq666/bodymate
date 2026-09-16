@@ -37,6 +37,8 @@
 
 `moonbit/anatomy` 是第二个可复用库：376 条归一化拉丁名 → 中文术语（206 条肌肉、170 条骨/椎间盘/肋/牙/软骨/筋膜），`normalize_name` 去除左右侧别词，`structure_name_zh(name, kind)` 按结构类别回退，`search_structures` 同时匹配中文与拉丁名并把肌肉排在前面；词典本身通过 `muscle_terms()` / `structure_terms()` 公开。`moonbit/core/anatomy_names.mbt` 以 `bodymate_anatomy_name_v1` / `bodymate_anatomy_has_name_v1` / `bodymate_anatomy_search_v1` 三个无状态 wire 导出给浏览器；`src/full-muscle/anatomy-name-zh.mjs` 只编解码字符串，Node 侧（测试、注册表生成）通过 `scripts/load-moonbit-core.mjs` 加载同一份生成 bundle，因此 JS 中不再保存第二份术语表。
 
+`moonbit/agent` 是第三个可复用库，也是“AI 输出不是执行权限”这条规则的唯一实现：`GuardedAction` 只能是 `None`、`Command(id, 有限数值字段)` 或 `Lookup(有界文本)`；`parse_allowlist` 校验命令 id（`^[a-z][a-z0-9_]*$`）与字段键（`^[A-Za-z][A-Za-z0-9_]*$`），`guard_command` 只保留白名单内的 id 及其声明字段中的有限数值，`guard_lookup` 只接受修剪、截断后仍非空的文本。`moonbit/core/agent_guard.mbt` 以 `bodymate_agent_guard_command_v1` / `bodymate_agent_guard_lookup_v1` 导出；`src/ai/agent-guard.mjs` 是唯一的 JS 编解码器，被本地代理（服务端，经 `load-moonbit-core.mjs`）和浏览器适配器（`applyAiAction`）共同调用，因此模型建议在服务端和页面端接受的是同一份 MoonBit 规则。库本身与动作、肌肉无关，任何 MoonBit Agent 应用都可以用它约束 LLM 提议。
+
 `moonbit/core/environment_scene.mbt` 决定环境方位扇区混合、距离滞回、质量、视差、灯光和 reduced-motion。`environment-domain.mjs` 解析 frame，`lab-environment.mjs` 加载并呈现四个本地环境 GLB。
 
 `moonbit/core/ui_feedback.mbt` 规范化指针样本、平移/倾斜/时长及 reduced-motion/coarse-pointer 决策。`visual-lab-shell.js` 采集 DOM 坐标并应用 CSS 值。布局、颜色、聚焦和页面语义继续由 HTML/CSS 负责。
@@ -51,7 +53,7 @@ JS 负责线协议解析、NFKC 文本规范化、DOM、事件适配和资源生
 
 ## 分发与验证
 
-`.moonignore` 只让 motion 库、anatomy 术语库、公开接口、测试、三个示例及说明/许可证进入 Mooncakes ZIP。完整应用及人体/环境资产留在 GitHub 项目中；库没有 DOM、Three.js、GLB、npm 包或网络依赖，执行 JS target 仍需要 Node.js。
+`.moonignore` 只让 motion 库、anatomy 术语库、agent 护栏库、公开接口、测试、三个示例及说明/许可证进入 Mooncakes ZIP。完整应用及人体/环境资产留在 GitHub 项目中；库没有 DOM、Three.js、GLB、npm 包或网络依赖，执行 JS target 仍需要 Node.js。
 
 `npm run check` 验证完整应用、MoonBit/Node 测试、生成物、冻结人体和规模基线；`npm run moonbit:package-check` 验证真实 ZIP 的路径/体积与隔离后的 check/build/test/run。公开 API `pkg.generated.mbti` 是生成物，修改 API 后先生成再审查。
 

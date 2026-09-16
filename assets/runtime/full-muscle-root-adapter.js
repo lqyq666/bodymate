@@ -168,16 +168,18 @@
   const applyAiAction = (action) => {
     if (!action || typeof action !== 'object') return '';
     if (action.kind === 'motion') {
-      const motion = runtime.motionDefinitions.find((candidate) => candidate.id === action.id); if (!motion) return '';
-      const fields = runtime.parameterDefinitions[motion.id] || [], parameters = {};
-      for (const field of fields) if (Number.isFinite(action.parameters?.[field.key])) parameters[field.key] = action.parameters[field.key];
-      const result = start(motion.id, parameters);
+      const allowlist = runtime.motionDefinitions.map((motion) => ({ id: motion.id, fields: (runtime.parameterDefinitions[motion.id] || []).map((field) => field.key) }));
+      const guarded = runtime.guardAiCommand(action.id, action.parameters, allowlist);
+      if (!guarded) return '';
+      const result = start(guarded.id, guarded.parameters);
       return result ? `已播放${result.title}，并高亮当前动作的定性参与肌群。` : '';
     }
-    if (action.kind === 'muscle' && typeof action.query === 'string') {
-      const matches = viewer.findAll(action.query.slice(0, 80));
+    if (action.kind === 'muscle') {
+      const query = runtime.guardAiLookup(action.query, 80);
+      if (!query) return '';
+      const matches = viewer.findAll(query);
       if (!matches.length) return '';
-      viewer.selectGroup(matches, { notify: false }); show(action.query, '已高亮 ' + matches.length + ' 个相关结构，可旋转模型观察。'); if (context) context.textContent = action.query;
+      viewer.selectGroup(matches, { notify: false }); show(query, '已高亮 ' + matches.length + ' 个相关结构，可旋转模型观察。'); if (context) context.textContent = query;
       return `已定位 ${matches.length} 个相关结构。`;
     }
     return '';

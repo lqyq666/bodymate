@@ -4,6 +4,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, isAbsolute, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildChatMessages, normalizeAssistantResponse, normalizeChatRequest } from '../src/ai/bodymate-chat-protocol.mjs';
+import { loadMoonBitCore } from './load-moonbit-core.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const dpapiScript = fileURLToPath(new URL('./bodymate-ai-dpapi.ps1', import.meta.url));
@@ -166,6 +167,7 @@ export async function completeAiChat(payload, { config, fetchImpl = globalThis.f
   }
   let upstreamPayload;
   try { upstreamPayload = await upstream.json(); } catch { throw new AiServerError(502, 'AI 服务返回的数据无法读取。'); }
+  await loadMoonBitCore({ probe: 'bodymate_agent_guard_command_v1' });
   return normalizeAssistantResponse(modelContent(upstreamPayload), request.catalog);
 }
 

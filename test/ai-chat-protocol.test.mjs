@@ -2,6 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { aiConfig, completeAiChat, configuredEnvironment, createBodyMateAiServer, healthPayload, parseEncryptedProviderFile, parseLocalEnv, parseUpstreamErrorDetail, readEncryptedProviderEnvironment } from '../scripts/serve-bodymate-ai.mjs';
 import { buildChatMessages, normalizeAssistantResponse, normalizeChatRequest } from '../src/ai/bodymate-chat-protocol.mjs';
+import { loadMoonBitCore } from '../scripts/load-moonbit-core.mjs';
+
+await loadMoonBitCore({ probe: 'bodymate_agent_guard_command_v1' });
 
 const catalog = [{
   id: 'push_up', title: '俯卧撑',

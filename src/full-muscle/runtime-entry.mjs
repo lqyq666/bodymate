@@ -25,6 +25,7 @@ export async function mountNavigator(options) { const gltf = await loadRiggedAss
 
 export { motionDefinitions, motionForQuery, motionPhaseGuides };
 export { parameterDefinitions, motionPresets, motionParameterComparison, parseMotionParameters } from './motion-parameters.mjs';
+export { guardCommand as guardAiCommand, guardLookup as guardAiLookup } from '../ai/agent-guard.mjs';
 const aliases = [
   ['胸大肌', 'pectoralis major'], ['胸小肌', 'pectoralis minor'], ['胸部', 'pectoralis'], ['三角肌', 'deltoid'], ['肩部', 'deltoid'],
   ['斜方肌', 'trapezius'], ['肱二头肌', 'biceps brachii'], ['肱三头肌', 'triceps brachii'],

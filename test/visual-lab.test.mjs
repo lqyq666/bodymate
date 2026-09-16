@@ -29,6 +29,8 @@ test('model status derives real counts and UI actions use existing controllers',
   assert.match(full, /\/api\/ai\/chat/);
   assert.match(full, /capabilityCatalog/);
   assert.match(full, /applyAiAction/);
+  assert.match(full, /runtime\.guardAiCommand\(action\.id, action\.parameters, allowlist\)/);
+  assert.match(full, /runtime\.guardAiLookup\(action\.query, 80\)/);
   assert.match(full, /const history = dialogueHistory\.slice\(\);\s+input\.value = ''; appendDialogue\('user', query\);/);
   assert.match(full, /askAi\(query, history\)/);
   assert.match(full, /anatomy-conversation/);

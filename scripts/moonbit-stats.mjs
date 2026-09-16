@@ -29,9 +29,10 @@ const stats = Object.freeze({ productionFiles: production.length, productionEffe
 const groups = [
   ['Reusable motion library', production.filter((file) => file.startsWith('motion/'))],
   ['Reusable anatomy terminology library', production.filter((file) => file.startsWith('anatomy/'))],
+  ['Reusable agent action guard library', production.filter((file) => file.startsWith('agent/'))],
   ['Full-body environment and UI policies', production.filter((file) => /core\/(environment_scene|ui_feedback)\.mbt$/.test(file))],
-  ['Browser wire adapters (motion, session, anatomy)', production.filter((file) => /core\/(full_body_motion|motion_session|anatomy_names)\.mbt$/.test(file))],
-  ['Retained anatomy contracts', production.filter((file) => file.startsWith('core/') && !/\/(environment_scene|ui_feedback|full_body_motion|motion_session|anatomy_names)\.mbt$/.test(file))],
+  ['Browser wire adapters (motion, session, anatomy, agent)', production.filter((file) => /core\/(full_body_motion|motion_session|anatomy_names|agent_guard)\.mbt$/.test(file))],
+  ['Retained anatomy contracts', production.filter((file) => file.startsWith('core/') && !/\/(environment_scene|ui_feedback|full_body_motion|motion_session|anatomy_names|agent_guard)\.mbt$/.test(file))],
 ];
 const breakdown = groups.map(([name, selected]) => ({ name, files: selected.length, effectiveLoc: total(selected) }));
 const text = [

@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "lqyq666/bodymate/agent"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn action_wire(GuardedAction) -> String
+
+pub fn allowlist_wire(Array[AllowedCommand]) -> String
+
+pub fn bound_text(String, Int) -> String
+
+pub fn guard_command(String, Array[(String, Double)], Array[AllowedCommand]) -> GuardedAction
+
+pub fn guard_lookup(String, Int) -> GuardedAction
+
+pub fn is_valid_command_id(String) -> Bool
+
+pub fn is_valid_field_key(String) -> Bool
+
+pub fn parse_allowlist(String) -> Array[AllowedCommand]
+
+pub fn parse_fields(String) -> Array[(String, Double)]
+
+// Errors
+
+// Types and methods
+pub(all) struct AllowedCommand {
+  id : String
+  fields : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum GuardedAction {
+  None
+  Command(String, Array[(String, Double)])
+  Lookup(String)
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

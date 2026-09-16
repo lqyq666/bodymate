@@ -27,7 +27,7 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
         path = entry.filename.replace('\\\\', '/')
         if entry.is_dir():
             continue
-        allowed = path in ['moon.mod', 'LICENSE', 'README.md'] or re.fullmatch(r'moonbit/(motion|anatomy|examples)/[A-Za-z0-9_./-]+\\.(mbt|mbti|pkg|md)', path)
+        allowed = path in ['moon.mod', 'LICENSE', 'README.md'] or re.fullmatch(r'moonbit/(motion|anatomy|agent|examples)/[A-Za-z0-9_./-]+\\.(mbt|mbti|pkg|md)', path)
         if not allowed or '..' in pathlib.PurePosixPath(path).parts:
             raise RuntimeError('Unexpected archive member: ' + path)
         target = (destination / path).resolve()
@@ -37,7 +37,7 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
         target.write_bytes(archive.read(entry))
         names.append(path)
         total += entry.file_size
-    required = ['moon.mod', 'LICENSE', 'moonbit/motion/moon.pkg', 'moonbit/motion/motion_test.mbt', 'moonbit/anatomy/moon.pkg', 'moonbit/anatomy/anatomy_test.mbt']
+    required = ['moon.mod', 'LICENSE', 'moonbit/motion/moon.pkg', 'moonbit/motion/motion_test.mbt', 'moonbit/anatomy/moon.pkg', 'moonbit/anatomy/anatomy_test.mbt', 'moonbit/agent/moon.pkg', 'moonbit/agent/agent_test.mbt']
     required += ['moonbit/examples/' + scenario + '/main.mbt' for scenario in ['parameters', 'sessions', 'sampling']]
     if any(path not in names for path in required):
         raise RuntimeError('Incomplete MoonBit archive')
