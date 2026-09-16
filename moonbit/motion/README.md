@@ -98,9 +98,13 @@ let hits = @anatomy.search_structures(entries, "腰大肌")      // 肌肉排在
 
 ```moonbit
 // moon.pkg: import { "lqyq666/bodymate/agent" }
-let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceWidth")
-@agent.guard_command("push_up", [("handWidth", 1.8), ("invented", 7.0)], allowed)
-// Command("push_up", [("handWidth", 1.8)])
+let allowed = @agent.parse_allowlist("push_up^handWidth:0.8:1.8,elbowAngle:15:70~squat^stanceWidth")
+@agent.guard_command("push_up", [("handWidth", 2.5), ("invented", 7.0)], allowed)
+// Command("push_up", [("handWidth", 1.8)])   —— 越界值默认截断到边界，未声明字段丢弃
+@agent.guard_command_with("push_up", [("handWidth", 2.5)], allowed, Reject)
+// Command("push_up", [])                      —— 严格策略：越界值直接丢弃
+@agent.explain_command("push_up", [("handWidth", 2.5), ("invented", 7.0)], allowed, Clamp).reasons
+// ["clamped:handWidth:2.5->1.8", "unknown_field:invented"]
 @agent.guard_command("run_marathon", [], allowed)   // None
 @agent.guard_lookup("  胸大肌 ", 80)                 // Lookup("胸大肌")
 @agent.action_wire(...)                              // "command|push_up|handWidth=1.8"
@@ -108,11 +112,14 @@ let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceW
 
 | API | 返回与边界 |
 | --- | --- |
-| `parse_allowlist(wire)` / `allowlist_wire(allowed)` | `id^key,key~id^key`；非法 id/键、重复项与畸形记录直接丢弃 |
+| `parse_allowlist(wire)` / `allowlist_wire(allowed)` | `id^key,key:min:max,key:min:,key::max~id^key`；边界可选、可单侧；非法 id/键、上下界倒置、重复项与畸形记录直接丢弃 |
+| `FieldSpec::unbounded(key)` / `FieldSpec::bounded(key, min, max)` | 程序化构造允许字段 |
 | `parse_fields(wire)` | `key=value,...`；只保留标识符键与有限数值，重复键取首个 |
-| `guard_command(id, fields, allowed)` | id 不在白名单 → `None`；否则按白名单字段顺序保留候选中的有限数值 |
+| `guard_command(id, fields, allowed)` | id 不在白名单 → `None`；否则按白名单字段顺序保留候选中的有限数值，越界值截断到边界 |
+| `guard_command_with(..., policy)` | `Clamp`（默认）或 `Reject`（越界字段丢弃） |
+| `explain_command(...) -> GuardReport` / `explain_lookup(...)` | 同上并附机器可读原因：`unknown_id:`、`unknown_field:`、`non_finite:`、`clamped:key:from->to`、`out_of_range:key:value`、`empty_lookup` |
 | `guard_lookup(text, max_chars)` | 修剪并按字符截断；为空 → `None` |
-| `is_valid_command_id` / `is_valid_field_key` / `bound_text` | 无正则依赖的标识符与文本约束，可单独复用 |
+| `is_valid_command_id` / `is_valid_field_key` / `bound_text` / `policy_from_string` | 无正则依赖的标识符与文本约束，可单独复用 |
 | `action_wire(action)` | `none` / `command\|id\|k=v,...` / `lookup\|text`，宿主按此解码 |
 
 它不解析 JSON，也不生成提示词：宿主负责把不可信文本解成候选值再交给护栏，护栏负责决定什么可以执行。

@@ -1,4 +1,4 @@
-import { guardCommand, guardLookup } from './agent-guard.mjs';
+import { explainCommand, guardLookup } from './agent-guard.mjs';
 
 const MAX_MESSAGE_LENGTH = 800;
 const MAX_HISTORY_ITEMS = 6;
@@ -131,11 +131,13 @@ function jsonFromModel(content) {
   return JSON.parse(fenced ? fenced[1] : source);
 }
 
-function actionFor(value, catalog) {
+function actionFor(value, catalog, log) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return actionNone();
   if (value.kind === 'motion') {
-    const guarded = guardCommand(value.id, value.parameters, catalog.map((motion) => ({ id: motion.id, fields: motion.parameters.map((field) => field.key) })));
-    return guarded ? Object.freeze({ kind: 'motion', id: guarded.id, parameters: Object.freeze(guarded.parameters) }) : actionNone();
+    const allowlist = catalog.map((motion) => ({ id: motion.id, fields: motion.parameters.map((field) => ({ key: field.key, min: field.min, max: field.max })) }));
+    const { action, reasons } = explainCommand(value.id, value.parameters, allowlist, 'clamp');
+    if (reasons.length && typeof log === 'function') log(`[bodymate-ai] 护栏调整 ${reasons.join(' ')}`);
+    return action ? Object.freeze({ kind: 'motion', id: action.id, parameters: Object.freeze(action.parameters) }) : actionNone();
   }
   if (value.kind === 'muscle') {
     const query = guardLookup(value.query, MAX_QUERY_LENGTH);
@@ -144,9 +146,9 @@ function actionFor(value, catalog) {
   return actionNone();
 }
 
-export function normalizeAssistantResponse(content, catalog) {
+export function normalizeAssistantResponse(content, catalog, { log } = {}) {
   let parsed;
   try { parsed = jsonFromModel(content); } catch { return Object.freeze({ reply: '我没有取得可用的结构化答复，请换一种说法。', action: actionNone() }); }
   const reply = text(parsed?.reply, MAX_REPLY_LENGTH) || '我已理解你的问题，可以选择一个当前支持的动作或肌肉继续观察。';
-  return Object.freeze({ reply, action: actionFor(parsed.action, catalog) });
+  return Object.freeze({ reply, action: actionFor(parsed.action, catalog, log) });
 }

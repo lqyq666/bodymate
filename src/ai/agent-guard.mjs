@@ -1,9 +1,9 @@
 // Thin adapter over the MoonBit agent guard (lqyq666/bodymate/agent) exposed by
 // assets/runtime/moonbit-core.js. MoonBit decides which model-proposed actions survive
-// (allowlisted ids, declared finite fields, bounded lookup text); this file only encodes
-// the wire, so the server proxy and the browser share one rule set.
+// (allowlisted ids, declared finite fields, bounds, bounded lookup text); this file only
+// encodes the wire, so the server proxy and the browser share one rule set.
 const core = globalThis;
-const WIRE_UNSAFE = /[|^~,=]/;
+const WIRE_UNSAFE = /[|^~,=:]/;
 
 function call(name, ...args) {
   if (typeof core[name] !== 'function') throw Error(`MoonBit agent guard is unavailable: ${name}`);
@@ -16,12 +16,25 @@ function payload(wire, version) {
   return parts.slice(2).join('|');
 }
 
-// [{ id, fields: [key] }] -> "id^key,key~id^key"
+const finite = (value) => typeof value === 'number' && Number.isFinite(value);
+
+// A field is either a key string or { key, min?, max? }; bounds travel as `key:min:max`
+// (one-sided bounds leave the other side empty) so MoonBit can clamp or reject.
+function fieldWire(field) {
+  const spec = typeof field === 'string' ? { key: field } : field || {};
+  const key = String(spec.key ?? '');
+  if (!key || WIRE_UNSAFE.test(key)) return '';
+  const min = finite(spec.min) ? String(spec.min) : '';
+  const max = finite(spec.max) ? String(spec.max) : '';
+  return min || max ? `${key}:${min}:${max}` : key;
+}
+
+// [{ id, fields }] -> "id^key:min:max,key~id^key"
 export function allowlistWire(commands) {
   return (Array.isArray(commands) ? commands : [])
-    .map((command) => ({ id: String(command?.id ?? ''), fields: Array.isArray(command?.fields) ? command.fields.map(String) : [] }))
+    .map((command) => ({ id: String(command?.id ?? ''), fields: Array.isArray(command?.fields) ? command.fields : [] }))
     .filter((command) => command.id && !WIRE_UNSAFE.test(command.id))
-    .map((command) => `${command.id}^${command.fields.filter((key) => key && !WIRE_UNSAFE.test(key)).join(',')}`)
+    .map((command) => `${command.id}^${command.fields.map(fieldWire).filter(Boolean).join(',')}`)
     .join('~');
 }
 
@@ -34,8 +47,8 @@ export function fieldsWire(parameters) {
     .join(',');
 }
 
-function decode(wire) {
-  const [kind, ...rest] = payload(wire, 'agent-guard-v1').split('|');
+function decodeAction(body) {
+  const [kind, ...rest] = body.split('|');
   if (kind === 'command') {
     const parameters = {};
     for (const pair of (rest[1] || '').split(',')) {
@@ -49,16 +62,30 @@ function decode(wire) {
   return { kind: 'none' };
 }
 
-// Returns { id, parameters } when MoonBit accepts the command, otherwise null.
+// Returns { id, parameters } when MoonBit accepts the command (out-of-range values clamped), otherwise null.
 export function guardCommand(candidateId, parameters, commands) {
   const id = String(candidateId ?? '');
   if (!id || WIRE_UNSAFE.test(id)) return null;
-  const decoded = decode(call('bodymate_agent_guard_command_v1', id, fieldsWire(parameters), allowlistWire(commands)));
+  const decoded = decodeAction(payload(call('bodymate_agent_guard_command_v1', id, fieldsWire(parameters), allowlistWire(commands)), 'agent-guard-v1'));
   return decoded.kind === 'command' ? { id: decoded.id, parameters: decoded.parameters } : null;
+}
+
+// Like guardCommand but also returns MoonBit's reason codes; policy is 'clamp' (default) or 'reject'.
+export function explainCommand(candidateId, parameters, commands, policy = 'clamp') {
+  const id = String(candidateId ?? '');
+  if (!id || WIRE_UNSAFE.test(id)) return { action: null, reasons: ['unknown_id:'] };
+  const body = payload(call('bodymate_agent_explain_command_v1', id, fieldsWire(parameters), allowlistWire(commands), String(policy)), 'agent-explain-v1');
+  const separator = body.lastIndexOf('|');
+  const reasons = separator >= 0 ? body.slice(separator + 1) : '';
+  const decoded = decodeAction(separator >= 0 ? body.slice(0, separator) : body);
+  return {
+    action: decoded.kind === 'command' ? { id: decoded.id, parameters: decoded.parameters } : null,
+    reasons: reasons ? reasons.split(';').filter(Boolean) : [],
+  };
 }
 
 // Returns the trimmed, capped lookup text when MoonBit accepts it, otherwise null.
 export function guardLookup(query, maxChars = 80) {
-  const decoded = decode(call('bodymate_agent_guard_lookup_v1', String(query ?? ''), Math.max(0, Math.trunc(Number(maxChars) || 0))));
+  const decoded = decodeAction(payload(call('bodymate_agent_guard_lookup_v1', String(query ?? ''), Math.max(0, Math.trunc(Number(maxChars) || 0))), 'agent-guard-v1'));
   return decoded.kind === 'lookup' ? decoded.query : null;
 }

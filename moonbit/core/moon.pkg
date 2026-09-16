@@ -64,6 +64,7 @@ options(
         "bodymate_anatomy_has_name_v1",
         "bodymate_anatomy_search_v1",
         "bodymate_agent_guard_command_v1",
+        "bodymate_agent_explain_command_v1",
         "bodymate_agent_guard_lookup_v1",
       ],
       "format": "iife",

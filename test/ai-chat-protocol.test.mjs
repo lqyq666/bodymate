@@ -37,6 +37,19 @@ test('AI directives are restricted to the provided catalog and finite known para
   assert.deepEqual(normalizeAssistantResponse('not json', catalog).action, { kind: 'none' });
 });
 
+test('MoonBit guard clamps out-of-range model parameters and reports why', () => {
+  const logs = [];
+  const response = normalizeAssistantResponse(
+    JSON.stringify({ reply: '演示。', action: { kind: 'motion', id: 'push_up', parameters: { handWidth: 2.5, invented: 3 } } }),
+    normalizeChatRequest({ message: 'x', catalog }).catalog,
+    { log: (line) => logs.push(line) },
+  );
+  assert.deepEqual(response.action, { kind: 'motion', id: 'push_up', parameters: { handWidth: 1.8 } });
+  assert.equal(logs.length, 1);
+  assert.match(logs[0], /clamped:handWidth:2\.5->1\.8/);
+  assert.match(logs[0], /unknown_field:invented/);
+});
+
 test('current-user encrypted provider config is decrypted only at the local server boundary', async () => {
   const envelope = JSON.stringify({ format: 'bodymate-ai-dpapi-v1', ciphertext: 'cHJvdGVjdGVkLXRlc3Q=' });
   const environment = await readEncryptedProviderEnvironment({

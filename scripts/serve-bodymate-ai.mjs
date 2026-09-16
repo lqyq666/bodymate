@@ -168,7 +168,7 @@ export async function completeAiChat(payload, { config, fetchImpl = globalThis.f
   let upstreamPayload;
   try { upstreamPayload = await upstream.json(); } catch { throw new AiServerError(502, 'AI 服务返回的数据无法读取。'); }
   await loadMoonBitCore({ probe: 'bodymate_agent_guard_command_v1' });
-  return normalizeAssistantResponse(modelContent(upstreamPayload), request.catalog);
+  return normalizeAssistantResponse(modelContent(upstreamPayload), request.catalog, { log });
 }
 
 // The DPAPI file is re-read whenever its size or mtime changes, so reconfiguring or deleting it

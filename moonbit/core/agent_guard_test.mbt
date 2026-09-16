@@ -1,7 +1,11 @@
 test "agent guard wire keeps only allowlisted commands and declared finite fields" {
-  let allowlist = "push_up^handWidth,elbowAngle~squat^stanceWidth,toeAngle,squatDepth~curl^"
+  let allowlist = "push_up^handWidth:0.8:1.8,elbowAngle:15:70~squat^stanceWidth,toeAngle,squatDepth~curl^"
   assert_eq(
     agent_guard_command_v1("push_up", "handWidth=1.8,invented=7,elbowAngle=NaN", allowlist),
+    "ok|agent-guard-v1|command|push_up|handWidth=1.8",
+  )
+  assert_eq(
+    agent_guard_command_v1("push_up", "handWidth=2.5", allowlist),
     "ok|agent-guard-v1|command|push_up|handWidth=1.8",
   )
   assert_eq(
@@ -10,6 +14,22 @@ test "agent guard wire keeps only allowlisted commands and declared finite field
   )
   assert_eq(agent_guard_command_v1("curl", "handWidth=1.8", allowlist), "ok|agent-guard-v1|command|curl|")
   assert_eq(agent_guard_command_v1("push_up", "", ""), "ok|agent-guard-v1|none")
+}
+
+test "agent explain wire carries the policy outcome and reasons" {
+  let allowlist = "push_up^handWidth:0.8:1.8,elbowAngle:15:70"
+  assert_eq(
+    agent_explain_command_v1("push_up", "handWidth=2.5,invented=7", allowlist, "clamp"),
+    "ok|agent-explain-v1|command|push_up|handWidth=1.8|clamped:handWidth:2.5->1.8;unknown_field:invented",
+  )
+  assert_eq(
+    agent_explain_command_v1("push_up", "handWidth=2.5", allowlist, "reject"),
+    "ok|agent-explain-v1|command|push_up||out_of_range:handWidth:2.5",
+  )
+  assert_eq(
+    agent_explain_command_v1("run_marathon", "", allowlist, "clamp"),
+    "ok|agent-explain-v1|none|unknown_id:run_marathon",
+  )
 }
 
 test "agent guard wire bounds lookups" {
