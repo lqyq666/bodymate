@@ -26,7 +26,8 @@
     "start": "node scripts/start-bodymate.mjs",
     "ai:configure-glm": "powershell.exe -NoProfile -NonInteractive -File scripts/save-bodymate-glm-from-clipboard.ps1",
     "moonbit:examples": "node scripts/run-moonbit-examples.mjs",
-    "moonbit:package-check": "node scripts/verify-moonbit-package.mjs"
+    "moonbit:package-check": "node scripts/verify-moonbit-package.mjs",
+    "moonbit:install-check": "node scripts/verify-mooncakes-install.mjs"
   },
   "dependencies": {
     "@gltf-transform/core": "4.5.0",
