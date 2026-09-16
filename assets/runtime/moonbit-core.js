@@ -10748,10 +10748,16 @@
                 }
               }
               if (BigInt.asIntN(64, unit) >= BigInt.asIntN(64, 10000n)) {
-                if (BigInt.asUintN(64, BigInt.asUintN(64, section.val + current.val)) === BigInt.asUintN(64, 0n)) {
-                  return undefined;
+                const pending = BigInt.asUintN(64, section.val + current.val);
+                if (BigInt.asUintN(64, pending) === BigInt.asUintN(64, 0n)) {
+                  if (BigInt.asIntN(64, total.val) > BigInt.asIntN(64, 0n) && BigInt.asIntN(64, total.val) < BigInt.asIntN(64, unit)) {
+                    total.val = BigInt.asUintN(64, total.val * unit);
+                  } else {
+                    return undefined;
+                  }
+                } else {
+                  total.val = BigInt.asUintN(64, total.val + BigInt.asUintN(64, pending * unit));
                 }
-                total.val = BigInt.asUintN(64, total.val + BigInt.asUintN(64, BigInt.asUintN(64, section.val + current.val) * unit));
                 section.val = 0n;
                 current.val = 0n;
               } else {
@@ -10787,13 +10793,19 @@
     if (run.length === 1 && _M0MPC15array5Array2atGcE(run, 0) === 21322) {
       return { _0: "0", _1: "5" };
     }
+    const negative = run.length > 1 && _M0MPC15array5Array2atGcE(run, 0) === 36127;
+    const body = negative ? _M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(run, 1, undefined)) : run;
+    const sign = negative ? "-" : "";
+    if (body.length === 1 && _M0MPC15array5Array2atGcE(body, 0) === 21322) {
+      return { _0: `${sign}0`, _1: "5" };
+    }
     const point = new _M0TPB8MutLocalGiE(-1);
-    const _bind = run.length;
+    const _bind = body.length;
     let _tmp = 0;
     while (true) {
       const index = _tmp;
       if (index < _bind) {
-        const ch = run[index];
+        const ch = body[index];
         if (ch === 28857) {
           if (point.val >= 0) {
             return undefined;
@@ -10806,8 +10818,8 @@
         break;
       }
     }
-    const integer_chars = point.val >= 0 ? _M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(run, 0, point.val)) : run;
-    const fraction_chars = point.val >= 0 ? _M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(run, point.val + 1 | 0, undefined)) : [];
+    const integer_chars = point.val >= 0 ? _M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(body, 0, point.val)) : body;
+    const fraction_chars = point.val >= 0 ? _M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(body, point.val + 1 | 0, undefined)) : [];
     if (point.val >= 0 && (integer_chars.length === 0 || fraction_chars.length === 0)) {
       return undefined;
     }
@@ -10846,7 +10858,7 @@
         break;
       }
     }
-    return { _0: _M0MPC15int645Int6418to__string_2einner(integer, 10), _1: _M0MPB13StringBuilder10to__string(fraction) };
+    return { _0: `${sign}${_M0MPC15int645Int6418to__string_2einner(integer, 10)}`, _1: _M0MPB13StringBuilder10to__string(fraction) };
   }
   function _M0FP37lqyq6668bodymate5zhnum27ascii__digit__of__fullwidth(ch) {
     return ch >= 65296 && ch <= 65305 ? (ch - 65296 | 0) + 48 | 0 : -1;
@@ -10873,10 +10885,14 @@
     return true;
   }
   function _M0FP37lqyq6668bodymate5zhnum20numeral__run__length(chars, index) {
-    if (index < chars.length && _M0MPC15array5Array2atGcE(chars, index) === 21322) {
-      return 1;
+    const start = new _M0TPB8MutLocalGiE(index);
+    if (start.val < chars.length && (_M0MPC15array5Array2atGcE(chars, start.val) === 36127 && ((start.val + 1 | 0) < chars.length && (_M0FP37lqyq6668bodymate5zhnum17is__numeral__char(_M0MPC15array5Array2atGcE(chars, start.val + 1 | 0)) || _M0MPC15array5Array2atGcE(chars, start.val + 1 | 0) === 21322)))) {
+      start.val = start.val + 1 | 0;
     }
-    const end = new _M0TPB8MutLocalGiE(index);
+    if (start.val < chars.length && _M0MPC15array5Array2atGcE(chars, start.val) === 21322) {
+      return (start.val + 1 | 0) - index | 0;
+    }
+    const end = new _M0TPB8MutLocalGiE(start.val);
     while (true) {
       if (end.val < chars.length) {
         const ch = _M0MPC15array5Array2atGcE(chars, end.val);
@@ -10886,7 +10902,7 @@
           _L: {
             _L$2: {
               if (ch === 28857) {
-                if (end.val > index) {
+                if (end.val > start.val) {
                   if ((end.val + 1 | 0) < chars.length) {
                     const _bind = _M0FP37lqyq6668bodymate5zhnum12digit__value(_M0MPC15array5Array2atGcE(chars, end.val + 1 | 0));
                     if (_bind === undefined) {
@@ -10912,6 +10928,9 @@
       } else {
         break;
       }
+    }
+    if (end.val === start.val) {
+      return 0;
     }
     return end.val - index | 0;
   }

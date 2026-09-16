@@ -131,15 +131,17 @@ let allowed = @agent.parse_allowlist("push_up^handWidth:0.8:1.8,elbowAngle:15:70
 ```moonbit
 // moon.pkg: import { "lqyq666/bodymate/zhnum" }
 @zhnum.parse_numeral("三万五千")                          // Some(35000.0)
-@zhnum.parse_numeral("三点一四")                          // Some(3.14)
+@zhnum.parse_numeral("负零点五")                          // Some(-0.5)
+@zhnum.format_numeral(120000000L)                        // "一亿二千万"
 @zhnum.normalize_numerals("夹角六十度，深度百分之八十")   // "夹角60度，深度80%"
 @zhnum.quantity_before_unit("夹角六十度", ["度", "°"])   // Some(60.0)
 ```
 
 | API | 返回与边界 |
 | --- | --- |
-| `parse_numeral(text)` | 零〇一…九、壹…玖、两，十百千万亿（含繁体/大写），`点` 小数，`半`=0.5；空串、非数字字符、`点五`/`一点` 等畸形输入返回 `None`，不猜测 |
-| `normalize_numerals(text)` | 逐段改写中文数字、全角数字（`１２．５`→`12.5`、`％`→`%`）和 `百分之X`→`X%`；不含数字的文本原样返回。所有数字段都会被改写（含“十分”这类惯用语），语义应由调用方结合单位判断 |
+| `parse_numeral(text)` | 零〇一…九、壹…玖、两，十百千万亿（含繁体/大写、`一万亿` 复合单位），`点` 小数，`半`=0.5，`负` 前缀；空串、非数字字符、`点五`/`一点`/`万` 等畸形输入返回 `None`，不猜测 |
+| `format_numeral(value)` | 整数的标准中文读法：15→十五、110→一百一十、1005→一千零五、10500→一万零五百、-3→负三，支持到万亿；**0–10999 全部整数与多组大数经 `parse_numeral` 往返一致**（测试覆盖） |
+| `normalize_numerals(text)` | 逐段改写中文数字（含 `负`）、全角数字（`１２．５`→`12.5`、`％`→`%`）和 `百分之X`→`X%`；不含数字的文本原样返回。所有数字段都会被改写（含“十分”这类惯用语），语义应由调用方结合单位判断 |
 | `quantity_before_unit(text, units)` | 先归一化，再返回第一个紧跟（可隔空白）给定单位之一的数字；无则 `None` |
 
 它只做数字层面的规范化，不理解量词语义、不做区间校验；范围与单位约束仍由调用方（如 `motion.normalize`）负责。
