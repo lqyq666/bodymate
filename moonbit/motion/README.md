@@ -1,8 +1,15 @@
-# BodyMate Motion
+# BodyMate MoonBit 库套件
 
-BodyMate 的 MoonBit 动作领域库，包路径 `lqyq666/bodymate/motion`，当前支持 JS target。提供三个有边界的教学动作（俯卧撑、深蹲、弯举）的参数规则、中文指令解析、独立播放会话、参与提示、关键阶段讲解及确定性姿态标量。
+`lqyq666/bodymate` 提供四个无依赖、可单独导入的 MoonBit 包（当前支持 JS target）：
 
-这是 BodyMate 新项目的一部分：完整人体页面和纯 MoonBit 示例使用同一份库。库不依赖 DOM、Three.js、GLB、网络、账号或 npm 包；调用方负责渲染。它不是通用骨骼求解器，姿态标量使用 BodyMate 的固定教学骨架尺寸，也不提供生物力学、肌电、诊断或训练处方。
+| 包 | 一句话 |
+| --- | --- |
+| `lqyq666/bodymate/agent` | LLM 提议的执行护栏：白名单命令与数值字段，其余一律丢弃 |
+| `lqyq666/bodymate/zhnum` | 中文数字与数量表达解析、文本内数字归一化 |
+| `lqyq666/bodymate/anatomy` | Human Atlas / BodyParts3D 376 条双语术语、侧别处理与检索 |
+| `lqyq666/bodymate/motion` | 三个教学动作的参数规则、中文指令解析、独立播放会话、阶段讲解与确定性姿态标量 |
+
+它们都不依赖 DOM、Three.js、GLB、网络、账号或 npm 包；调用方负责渲染与 I/O。`agent` 与 `zhnum` 与人体领域无关。`motion` 不是通用骨骼求解器，姿态标量使用 BodyMate 的固定教学骨架尺寸；整套库不提供生物力学、肌电、诊断或训练处方。下文先介绍 `motion`，其余三个包在后半部分各有独立章节。
 
 ## 本地运行
 

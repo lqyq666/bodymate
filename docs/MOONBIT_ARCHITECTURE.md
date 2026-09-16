@@ -2,20 +2,21 @@
 
 ## 当前产品与复用边界
 
-当前只有完整人体实验室 `/?view=full-body`。核心可复用包为 `lqyq666/bodymate/motion`，产品用这个包计算动作；三个纯 MoonBit 可执行示例也是它的消费者。它们属于同一个 BodyMate 项目。
+模块 `lqyq666/bodymate` 发布四个无依赖的可复用包——`agent`（LLM 提议护栏）、`zhnum`（中文数量解析）、`anatomy`（双语解剖术语与检索）、`motion`（参数化动作会话与确定性姿态）——以及使用它们的完整人体实验室 `/?view=full-body`。四个纯 MoonBit 可执行示例是这些包的第二类消费者。它们属于同一个 BodyMate 项目。
 
 ```text
-                    moonbit/motion
-          目录 / 参数 / 中文解析 / 定性参与
-            独立 Session / 确定性 PoseIntent
-                       ↑         ↑
-       MoonBit 示例直接导入       moonbit/core 的 V1 wire 适配器
-                                 ↓
-                        编译后的 moonbit-core.js
-                                 ↓
-                  src/full-muscle/motion-domain.mjs
-                                 ↓
-                    Three.js 人体与网页交互
+   moonbit/agent        moonbit/zhnum        moonbit/anatomy        moonbit/motion
+  提议白名单护栏       中文数字归一化        双语术语 / 检索        目录 / 参数 / 会话 / PoseIntent
+        ↑                    ↑ (motion.parse_query 内部调用)   ↑              ↑
+   MoonBit 示例直接导入 ────────────────────────────────────────────────────────┘
+                                 moonbit/core 的无状态 wire 导出
+                                            ↓
+                                 编译后的 moonbit-core.js
+                            ↓                   ↓                    ↓
+              src/ai/agent-guard.mjs   src/full-muscle/anatomy-name-zh.mjs   src/full-muscle/motion-domain.mjs
+              （服务端 + 浏览器共用）        （浏览器 + Node 构建脚本）             （浏览器）
+                                            ↓
+                                 Three.js 人体与网页交互
 ```
 
 ## 动作库职责
