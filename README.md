@@ -57,6 +57,8 @@ npm run ai:configure-glm
 npm run ai:serve
 ```
 
+日常使用可以改用一键启动：`npm start` 会启动同一个本地服务并自动打开完整人体页（端口已被占用时只打开页面）；Windows 上也可以直接双击 `scripts\start-bodymate.cmd`。
+
 浏览器只调用本地代理；代理只向你配置的模型服务发送当前对话、当前动作状态和受限动作目录。模型提出的动作或肌肉展示建议会被现有 MoonBit 目录再次验证，动画与参与肌群高亮仍在本地页面完成。未配置 AI 时，`python -m http.server` 的离线动作与肌肉检索仍可使用。
 
 `moonbit:package-check` 检查实际发布 ZIP、排除应用资产并在隔离目录重新 check/build/test/run；只执行本地验证。Mooncakes 发布状态与正式申报状态见 [申报清单](docs/SUBMISSION_CHECKLIST.md)，本地成功不代表已发布或已获资格。

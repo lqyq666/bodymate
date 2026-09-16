@@ -187,6 +187,10 @@ http://127.0.0.1:4174/?view=full-body
 
 `scripts/build-human-atlas-full.mjs` 原 `localizedName` 只翻左右侧别，`src/anatomy/full-muscle-registry.mjs` 与 `assets/anatomy/human-atlas/full-muscles.manifest.json` 里 401 条 `displayNameZh` 是“左侧 inferior oblique”式半英文。改为 `structureNameZh(part.name, 'muscle')` 后用系统临时目录里的 Human Atlas 源缓存离线完整重建：冻结 `full-muscles.glb` 字节不变（SHA-256 仍为 `03F01F82…`），清单差异恰好 802 行且全部是 `displayNameZh`，`--from-committed` 校验通过；`test/full-muscle-atlas.test.mjs` 新增“注册表与清单名称纯中文、带侧别、二者一致”断言。
 
+### 2026-09-16 更新：一键启动
+
+新增 `npm start`（`scripts/start-bodymate.mjs`）：启动本地 AI 服务并用系统默认浏览器打开完整人体页；端口已被占用（`EADDRINUSE`）时视为服务已在运行，只打开页面；其他启动错误照常抛出。`scripts/start-bodymate.cmd` 供 Windows 双击。`test/start-bodymate.test.mjs` 三条测试覆盖平台打开命令、正常启动、端口复用与错误透传；已加入 `verify` 列表。README 同步。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：
