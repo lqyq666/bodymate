@@ -1,5 +1,7 @@
 # BodyMate MoonBit 库套件
 
+> **English.** Four dependency-free MoonBit packages under `lqyq666/bodymate` (js target): `agent` — guard untrusted LLM proposals down to allowlisted commands with bounded numeric fields or bounded lookups, with explainable reasons; `zhnum` — parse and format Chinese numerals and normalize numbers inside Chinese text; `anatomy` — 376 bilingual Human Atlas / BodyParts3D terms with laterality handling and muscle-first search; `motion` — parameterized teaching-motion sessions with Chinese command parsing and deterministic pose intents. Each section below documents one package in Chinese; the code samples are language-neutral.
+
 `lqyq666/bodymate` 提供四个无依赖、可单独导入的 MoonBit 包（当前支持 JS target）：
 
 | 包 | 一句话 |

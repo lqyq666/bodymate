@@ -1,5 +1,7 @@
 # BodyMate｜MoonBit 基础库套件与全身参考应用
 
+> **English summary.** `lqyq666/bodymate` ships four dependency-free MoonBit packages you can `moon add` individually — `agent` (a guard that turns untrusted LLM proposals into allowlisted commands with bounded numeric fields, or nothing), `zhnum` (Chinese numeral parsing, formatting and in-text normalization), `anatomy` (376 bilingual Human Atlas / BodyParts3D terms with laterality and search) and `motion` (parameterized motion sessions with deterministic pose intents) — plus an offline full-body Three.js reference application that proves the same MoonBit code drives the browser, a local AI proxy and command-line examples. Published on [mooncakes.io](https://mooncakes.io/docs/lqyq666/bodymate); API docs are in the [library README](moonbit/motion/README.md).
+
 `lqyq666/bodymate` 是一组无依赖、可单独 `moon add` 的 MoonBit 库，外加一个使用它们的离线全身三维参考应用。库是主体，应用是证明：同一份 MoonBit 代码同时驱动浏览器页面、本地 AI 代理和纯命令行示例。
 
 ```sh
