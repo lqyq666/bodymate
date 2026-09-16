@@ -156,7 +156,8 @@
   const start = (id, parameters = {}, notices = []) => {
     const result = viewer.playMotion(id, parameters); if (!result) return;
     describeMotion(result);
-    if (notices.length) { adjustments.open = true; parameterNotice.textContent = [...result.notices, ...notices].join(' '); }
+    if (notices.length) parameterNotice.textContent = [...result.notices, ...notices].join(' ');
+    if (notices.length || !runtime.motionParameterComparison(id, result.parameters).isBaseline) adjustments.open = true;
     return result;
   };
   const capabilityCatalog = () => runtime.motionDefinitions.map((motion) => ({

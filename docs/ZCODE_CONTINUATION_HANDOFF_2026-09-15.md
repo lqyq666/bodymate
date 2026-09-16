@@ -179,6 +179,10 @@ http://127.0.0.1:4174/?view=full-body
 - `test/ai-chat-protocol.test.mjs` 新增 4 条：1305/500/401 分流与日志、配置文件变化/消失时的加载行为、`.env.local` 局部覆盖保留密钥、health 载荷不泄露密钥。共 13 条通过。
 - 文档 `docs/AI_CHAT_SETUP.md` 同步。
 
+### 2026-09-16 更新：AI 驱动动作时自动展开“动作调整”面板
+
+此前 `start()` 只在有参数提示或本地中文解析出参数时展开 `<details>动作调整`，模型建议的宽距俯卧撑不满足两者，面板保持折叠——用户看不到预设已生效，这也是此前“参数面板从 ARIA 快照消失、DOM 却在”的真正原因。修复：`start()` 改为“有提示 或 `motionParameterComparison(...).isBaseline === false`”即展开（`assets/runtime/full-muscle-root-adapter.js`），`test/visual-lab.test.mjs` 增加源级断言。页面实测：发送前 `open=false`，AI 播放宽距俯卧撑后 `open=true`、“宽距”预设按下、比较状态行可见。已提交范围之外的新改动，未提交。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：

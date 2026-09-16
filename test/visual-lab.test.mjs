@@ -25,6 +25,7 @@ test('model status derives real counts and UI actions use existing controllers',
   assert.match(shell, /requestSubmit\(\)/);
   assert.match(full, /motionPhaseGuides/);
   assert.match(full, /motionParameterComparison/);
+  assert.match(full, /if \(notices\.length \|\| !runtime\.motionParameterComparison\(id, result\.parameters\)\.isBaseline\) adjustments\.open = true;/);
   assert.match(full, /\/api\/ai\/chat/);
   assert.match(full, /capabilityCatalog/);
   assert.match(full, /applyAiAction/);
