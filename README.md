@@ -1,127 +1,100 @@
-# lqyq666/bodymate｜MoonBit 基础库套件与 MoonRig Console
+# lqyq666/bodymate｜LLM 工具调用护栏与 MoonBit 库套件
 
-> **English summary.** `lqyq666/bodymate` ships four dependency-free MoonBit packages you can `moon add` individually — `agent` (a guard that turns untrusted LLM proposals into allowlisted commands with bounded numeric fields, or nothing), `zhnum` (Chinese numeral parsing, formatting and in-text normalization), `anatomy` (376 bilingual Human Atlas / BodyParts3D terms with laterality and search) and `motion` (parameterized motion sessions with deterministic pose intents) — plus an offline full-body Three.js reference application that proves the same MoonBit code drives the browser, a local AI proxy and command-line examples. Published on [mooncakes.io](https://mooncakes.io/docs/lqyq666/bodymate); API docs are in the [library README](moonbit/motion/README.md).
+> **English.** A dependency-free MoonBit library that guards LLM tool calls — the model can only invoke commands you declared, with fields you defined, within bounds you set. Anything else is clamped, rejected or silently dropped with a machine-readable reason. Plus a drop-in OpenAI-compatible gateway (`npm run guard:serve`) so any application gets the guard by changing one line: `base_url`. Three companion packages (Chinese numerals, bilingual anatomy terms, parameterized motion sessions) prove the guard is part of a reusable library suite, not a one-off. Published on [mooncakes.io](https://mooncakes.io/docs/lqyq666/bodymate).
 
-`lqyq666/bodymate` 是一组无依赖、可单独 `moon add` 的 MoonBit 库，外加一个使用它们的离线三维参照骨架应用（MoonRig Console）。库是主体，应用是证明：同一份 MoonBit 代码同时驱动浏览器页面、本地 AI 代理和纯命令行示例。
+`lqyq666/bodymate` 的主体是一个**LLM 工具调用执行护栏**——"模型输出不是执行权限"。宿主声明允许的工具与字段约束，模型提议只能收敛为白名单命令；越界数值被截断或拒绝，非法枚举被丢弃，幻觉工具被整体拒绝，每一步都给出机器可读的原因码。外加三个可单独 `moon add` 的 MoonBit 库（中文数量解析、双语解剖术语、参数化动作会话）证明这是一套可复用的库套件而非一次性工具。
 
-![MoonRig Console（工程主题）：宽距俯卧撑停在最低点关键帧，胸大肌与肱三头肌按定性参与映射高亮，右侧为参数契约与指令面板](docs/media/full-body-lab.png)
+![LLM 工具调用护栏：网关拦截幻觉命令（delete_database）并截断越界参数（brightness 200→100, mode disco 丢弃）](docs/media/console.png)
+
+## 30 秒看懂
+
+```moonbit
+// moon add lqyq666/bodymate
+let allowed = @agent.parse_allowlist("set_light^brightness:0:100,mode?warm?cool?auto~move_robot^distance:0:10,speed?slow?normal?fast")
+
+// 模型返回 set_light({brightness: 200, mode: "disco"})
+@agent.explain_command("set_light", [("brightness", @agent.FieldValue::Num(200.0)), ("mode", @agent.FieldValue::Str("disco"))], allowed, Clamp)
+// → Command("set_light", [("brightness", Num(100))])       200 被截断到 100
+// → reasons: ["clamped:brightness:200->100", "unknown_option:mode:disco"]
+
+// 模型幻觉了 delete_database
+@agent.explain_command("delete_database", [], allowed, Clamp).action
+// → None                                                  整条拒绝，不猜测
+```
+
+## 一行接入：OpenAI 兼容网关
+
+任何 OpenAI SDK 只改 `base_url`，发出的每个 `tool_calls` 响应先过 MoonBit 护栏再回到应用：
 
 ```sh
-moon add lqyq666/bodymate
+npm run guard:serve          # 启动 127.0.0.1:4175
 ```
+
+```python
+# 应用侧：只需改 base_url
+client = OpenAI(base_url="http://127.0.0.1:4175/v1", api_key="your-key")
+```
+
+网关从请求的 `tools` 定义（JSON Schema：数值边界、字符串枚举）自动生成护栏白名单；响应中的 `tool_calls` 被逐条校验后改写——截断越界数值、丢弃非法枚举、拒绝幻觉工具名——并在 `x-guard-verdicts` 响应头返回逐条裁决与原因码。
+
+**演示**：`node scripts/demo-guard-interception.mjs --mock`（无需 API Key，完整展示拦截链路）：
+
+```text
+用户请求: set_light(200, disco) + move_robot(50, turbo) + delete_database()
+应用收到: set_light(100)  +  move_robot(10)  +  guard_rejected(delete_database)
+原因码:   clamped:brightness:200->100; unknown_option:mode:disco
+         clamped:distance:50->10;       unknown_option:speed:turbo
+         unknown_id:delete_database
+```
+
+## 四个包
 
 | 包 | 解决的问题 | 谁会用 |
 | --- | --- | --- |
-| `lqyq666/bodymate/agent` | **LLM 输出的执行护栏**：宿主声明允许的命令与数值字段，模型提议只能收敛为 `None` / `Command` / `Lookup`，未声明的 id、字段、非有限数值一律丢弃 | 任何用 MoonBit 写 Agent / 工具调用 / 对话式控制的项目 |
-| `lqyq666/bodymate/zhnum` | **中文数字与数量表达**：`三万五千`、`三点一四`、`半`、全角数字、`百分之八十` → ASCII 数字；单位前取数 | 中文 UI 指令、语音/聊天输入、配置与表单解析 |
-| `lqyq666/bodymate/anatomy` | **Human Atlas / BodyParts3D 双语术语库**：376 条归一化拉丁名 → 中文，覆盖 415 肌肉与 282 骨/椎间盘/肋/牙/软骨/筋膜，含侧别与检索 | 医学、体育、康复教育与可视化项目 |
-| `lqyq666/bodymate/motion` | **参数化动作会话引擎**：类型化参数与限幅、中文指令解析、独立 `Session`、相位讲解、确定性姿态意图 | 动作回放工具、动画/仿真状态机、需要可复现姿态帧的工具 |
+| `lqyq666/bodymate/agent` | **LLM 工具调用护栏**：白名单命令 + 带上下界的数值字段 + 枚举选项 + 有界文本；Clamp/Reject 策略；机器可读原因码 | 任何用大模型做工具调用 / Agent / 对话式控制的 MoonBit 或 JavaScript 项目 |
+| `lqyq666/bodymate/zhnum` | **中文数量表达**：`三万五千`、`三点一四`、`负`、`半`、`一万亿`、全角数字、`百分之八十` → ASCII 数字；格式化回读 | 中文 UI 指令、语音/聊天输入、配置与表单解析 |
+| `lqyq666/bodymate/anatomy` | **Human Atlas / BodyParts3D 双语术语库**：376 条归一化拉丁名 → 中文，含侧别与肌肉优先检索 | 医学、体育、康复教育与可视化项目 |
+| `lqyq666/bodymate/motion` | **参数化动作会话引擎**：类型化参数与限幅、中文指令解析（经 zhnum）、独立 `Session`、关键帧标注、确定性姿态意图 | 动作回放工具、动画/仿真状态机 |
 
-四个包都不依赖 DOM、Three.js、GLB、网络或 npm；`agent` 与 `zhnum` 与人体领域无关，`anatomy` 与 `motion` 是领域库但同样脱离页面可用。
+四个包都不依赖 DOM、Three.js、GLB、网络或 npm；`agent` 与 `zhnum` 与人体领域无关。
 
-## 各库三行上手
+## 生态空缺与竞品
 
-```moonbit
-// agent：模型提议 → 受控动作
-let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle~squat^stanceWidth")
-@agent.guard_command("push_up", [("handWidth", 1.8), ("invented", 7.0)], allowed) // Command("push_up", [("handWidth", 1.8)])
-@agent.guard_command("run_marathon", [], allowed)                                  // None
+截至 2026-09-16 的调研：
 
-// zhnum：中文数字 → 数字
-@zhnum.normalize_numerals("手距一点五倍肩宽，夹角六十度，深度百分之八十") // "手距1.5倍肩宽，夹角60度，深度80%"
-@zhnum.quantity_before_unit("夹角六十度", ["度", "°"])                  // Some(60.0)
+| 维度 | NeMo Guardrails | Guardrails AI | moon_zod / moonschema | **本库** |
+| --- | --- | --- | --- | --- |
+| 语言/平台 | Python | Python | MoonBit | **MoonBit + JS wire** |
+| 工具调用校验 | ✓（Colang 状态机内嵌） | [开放 issue #1601](https://github.com/guardrails-ai/guardrails/issues/1601) | 通用 schema 校验，无动作语义 | ✓ 白名单命令 + Clamp/Reject + 原因码 |
+| 可独立复用 | 需要整个框架 | Python 库 | ✓ 但不含策略 | ✓ 无依赖 MoonBit 包 + JS wire 导出 |
+| 网关接入 | — | — | — | ✓ `npm run guard:serve`，改一行 base_url |
+| MoonBit 生态 | — | — | ✓ | **mooncakes.io 上唯一的工具调用护栏原语** |
 
-// anatomy：拉丁名 → 中文，含侧别与检索
-@anatomy.structure_name_zh("Left femur", @anatomy.kind_from_string("bone")) // "左侧股骨"
-@anatomy.search_structures(entries, "腰大肌")                               // 肌肉优先的匹配列表
+Guardrails AI 社区明确在要工具调用校验（issue #1601），NeMo 的实现需要整个 Colang 状态机框架；mooncakes.io 全注册表扫描没有任何同类包。
 
-// motion：中文指令 → 类型化参数 → 确定性姿态
-let parsed = @motion.parse_query("push_up", "手距一点五倍肩宽，夹角六十度", []).unwrap()
-@motion.pose_intent("push_up", 0.5, parsed.values)                          // 同输入同输出
-```
+## 验证
 
-完整 API、边界与错误语义见 [库说明](moonbit/motion/README.md)（Mooncakes 同步展示）。
+- MoonBit 79 项测试 · Node 149 项测试 · CI 每个 PR 全绿
+- `npm run moonbit:package-check`：真实发布 ZIP 在隔离目录 check/build/test/run
+- `npm run moonbit:install-check`：从 mooncakes.io 真实 `moon add lqyq666/bodymate@0.4.0` 并运行四个包
+- `node scripts/demo-guard-interception.mjs --mock`：完整拦截链路演示（无需 API Key）
 
-## 四个不依赖网页的可运行示例
+## 参考应用：MoonRig Console
 
-需要 MoonBit `0.1.20260904` 和 Node.js：
+[**库工作台（在线）**](https://lqyq666.github.io/bodymate/console.html)：三个面板直接调用页面内 MoonBit 编译产物——agent 面板对模型提议做白名单裁决并给出原因码，zhnum 面板做中文数量归一化并联动 `motion.parse_query`，motion 面板按参数契约重算确定性姿态帧、导出 CSV。
 
-```sh
-moon run moonbit/examples/parameters --target js   # 中文参数解析与越界调整
-moon run moonbit/examples/sessions --target js     # 两个会话独立播放与暂停
-moon run moonbit/examples/sampling --target js     # 五个相位的确定性姿态采样
-moon run moonbit/examples/export --target js       # 四库串联：指令 → 护栏 → 命名 → 姿态帧 CSV
-```
+[**3D 回放视图（在线）**](https://lqyq666.github.io/bodymate/?view=full-body)：415 肌肉、282 骨骼及相关结构的参照骨架回放。参数契约、关键帧标注、定性参与映射全部由 MoonBit 会话计算；可选本地 AI 对话（服务端与浏览器同一份护栏规则）。
 
-每个示例含断言，成功输出 `PASS`；`export` 的 CSV 可直接落盘作为标注卡片数据或回归基线。工具链不在 PATH 时用 `npm run moonbit:examples`。
+![MoonRig Console（工程主题）：宽距俯卧撑停在最低点关键帧](docs/media/full-body-lab.png)
 
-## 生态贡献与边界
+## 来源、AI 辅助与限制
 
-- **补空缺，不重复**：截至 2026-09-16，mooncakes.io 上没有面向 LLM 应用的动作白名单原语，中文数字方向只有“数字→中文大写金额”的格式化包而没有反向解析库，也没有解剖学术语字典；这三项都是从真实应用需求中抽出的、边界清晰的独立包。
-- **单一事实来源**：术语表、护栏规则、动作目录只存在于 MoonBit；浏览器与 Node 侧的 JavaScript 只做字符串编解码（见 [架构](docs/MOONBIT_ARCHITECTURE.md)）。
-- **可验证**：MoonBit 76 项测试、Node 143 项测试、生成物新鲜度检查、冻结人体资产哈希、仓库卫生审计、真实发布 ZIP 的隔离 check/build/test/run；`npm run moonbit:install-check` 会在临时模块里从 mooncakes.io 真实 `moon add lqyq666/bodymate` 并运行四个包（需要网络）。规模基线见 [实时基线](docs/MOONBIT_ENGINE_BASELINE.md)。
-- **诚实边界**：`motion` 的姿态标量绑定当前参照骨架尺寸，不是通用骨骼求解器；`anatomy` 是展示用译名，不是临床术语标准；整套项目不提供医疗诊断、疼痛判断、训练处方或实测发力结论。
-
-## MoonRig Console：库工作台 + 3D 回放视图
-
-**库工作台（在线）：https://lqyq666.github.io/bodymate/console.html** ——三个面板直接调用页面内的 MoonBit 编译产物，没有服务器：`agent` 面板粘贴模型提议 JSON、编辑白名单与越界策略，实时得到裁决与原因码；`zhnum` 面板把中文数量归一化并联动 `motion.parse_query`；`motion` 面板改参数即重算九个相位的确定性姿态帧，可导出 CSV 作为回归基线，或按“回放此帧”深链接跳到 3D 视图（`index.html?motion=…&params=…&phase=…`）。底部是每一次 wire 调用的记录。
-
-![MoonRig Console 库工作台：agent 护栏裁决与原因码、zhnum 归一化、motion 姿态帧表](docs/media/console.png)
-
-**3D 回放视图（在线）：https://lqyq666.github.io/bodymate/?view=full-body** ——参照骨架、参数契约、关键帧标注与定性参与映射；无 AI 代理时由内置 MoonBit 引擎接管。首次加载需下载约 60 MB 人体与环境模型。
-
-`/?view=full-body`：415 条肌肉、282 个骨骼及相关结构、21 关节参照骨架；俯卧撑、深蹲、弯举的播放、暂停、进度、速度、姿势预设与参数比较、四个关键帧标注、中英文结构检索与点选、定性参与映射高亮；可选的本地 AI 对话。
-
-```text
-用户输入 / 模型提议 / 参数控件 / 每帧经过时间
-  → MoonBit zhnum：中文数字归一化
-  → MoonBit motion：识别 → 参数校验 → 会话状态 → 姿态意图
-  → MoonBit agent：模型提议护栏（服务端与浏览器同一份规则）
-  → MoonBit anatomy：结构中文名与检索
-  → MoonBit core：wire 导出
-  → JavaScript 编解码 → Three.js 骨架 / 材质 / DOM
-```
-
-Three.js 负责资产加载、几何 IK、相机、材质和绘制；DOM 与事件适配留在 JavaScript。旧颈肩领域模块保留为兼容与回归代码，旧页面已退役。
-
-### 运行
-
-环境：Node.js 24、MoonBit `0.1.20260904`、Python 3（包审计）、支持 WebGL 的 Chromium 浏览器。
-
-```sh
-npm ci
-npm run build
-npm run check
-npm start                      # 启动本地服务并打开页面；端口占用时只打开页面
-```
-
-也可以 `python -m http.server 4174 --bind 127.0.0.1` 后打开 `http://127.0.0.1:4174/?view=full-body`：离线动作与检索全部可用，只是没有 AI 代理。正常运行不请求 CDN、远程模型或后台；首次安装工具链与 npm 依赖需要网络。
-
-### 可选：本地 AI 对话
-
-按 [AI 对话接入说明](docs/AI_CHAT_SETUP.md) 在本机配置一个 Chat Completions 兼容服务。Windows 上 GLM Key 已在剪贴板时：
-
-```sh
-npm run ai:configure-glm
-npm run ai:serve
-```
-
-浏览器只调用回环地址上的本地代理；代理只发送当前对话、当前动作状态和受限动作目录。模型提议在服务端与浏览器各经过一次 `agent` 护栏，再由 `motion` 目录校验后播放。
+自有代码 MIT；人体几何保留 Human Atlas / BodyParts3D 的 CC BY 4.0 归属。ChatGPT / Codex / ZCode 参与设计、实现、测试与文档。`anatomy` 是展示译名，不是临床术语标准。不提供医疗诊断、训练处方或实测发力结论。
 
 ## 评审入口
 
 - [库说明（四个包的 API、边界、示例）](moonbit/motion/README.md)
-- [评委快速开始](docs/REVIEWER_QUICKSTART.md) · [MoonBit 技术审查](docs/MOONBIT_REVIEW_GUIDE.md) · [在线库工作台](https://lqyq666.github.io/bodymate/console.html) · [在线库工作台](https://lqyq666.github.io/bodymate/console.html)
-- [架构](docs/MOONBIT_ARCHITECTURE.md) · [测试矩阵](docs/TEST_MATRIX.md) · [实时规模基线](docs/MOONBIT_ENGINE_BASELINE.md)
+- [评委快速开始](docs/REVIEWER_QUICKSTART.md) · [MoonBit 技术审查](docs/MOONBIT_REVIEW_GUIDE.md)
+- [在线库工作台](https://lqyq666.github.io/bodymate/console.html)
 - [演示讲稿](docs/DEMO_SCRIPT.md) · [一页项目说明](docs/ONE_PAGE_PROJECT.md) · [申报清单](docs/SUBMISSION_CHECKLIST.md)
-- [更新日志](CHANGELOG.md) · [参与开发（含新增包清单）](CONTRIBUTING.md)
-
-`npm run moonbit:package-check` 检查实际发布 ZIP、排除应用资产并在隔离目录重新 check/build/test/run；只执行本地验证，本地成功不代表已发布或已获资格。
-
-## 来源、AI 辅助与限制
-
-自有代码为 MIT；Human Atlas / BodyParts3D 几何及相关衍生表面保留各自 CC BY 4.0 归属，见 [人体来源](assets/anatomy/human-atlas/RIGGED_BODY_ATTRIBUTION.md)。环境为用户提供的 Tripo 导出，哈希与处理过程见 [环境清单](assets/environment/ASSET_MANIFEST.md)。环境资产与应用代码不进入 Mooncakes 库包。
-
-ChatGPT / Codex / ZCode 参与设计、实现、测试与文档，见 [开发复盘](docs/DEVELOPMENT_RETROSPECTIVE.md)。参赛者理解并解释最终实现、数据来源、技术边界与验证结果。
-
-当前是三种预设样例动作，不模拟软组织或独立手指脚趾；颜色与参与 profile 只用于定性视觉强调，不是实测肌电、受力、诊断或训练处方。
+- [更新日志](CHANGELOG.md) · [参与开发](CONTRIBUTING.md)
