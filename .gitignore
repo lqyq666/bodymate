@@ -21,3 +21,6 @@ docs/CODEX_UI_OPTIMIZATION_HANDOFF_2026-09-13.md
 
 # Original environment exports remain local; processed/runtime copies and hashes are published.
 assets/environment/source/
+
+# Application documents carry personal contact details and stay local.
+docs/BodyMate_项目申报书*.md
