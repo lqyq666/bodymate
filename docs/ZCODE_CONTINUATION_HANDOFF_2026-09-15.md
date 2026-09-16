@@ -232,6 +232,12 @@ http://127.0.0.1:4174/?view=full-body
 - 新增 `.github/workflows/pages.yml`：每次推送 `main` 把 `index.html` + 已提交资产（143 MB，排除 `assets/environment/source/`）发布到 GitHub Pages；仓库 Pages 已用 API 启用（build type: workflow）。首次部署成功，**在线演示 https://lqyq666.github.io/bodymate/?view=full-body** 实测：模型加载、MoonBit 导出可调、中文数字指令解析正常；无 AI 代理时对话框显示“本地动作引擎已接管”并正常播放宽距俯卧撑（与文档一致）。`ci.yml` 推送触发增加 `zcode/**`。
 - README、评委快速开始、申报书（本地）已加在线演示链接。本机到 github.com/github.io 的连接偶发 TLS 超时，重试即可。
 
+### 2026-09-16 更新：成熟度材料与 Release
+
+- PR #32（`main = 255b2c4`）：`CHANGELOG.md`（0.1.0 → 0.3.0，含 agent `FieldSpec` API 变更）、`CONTRIBUTING.md`（工具链、日常命令、**新增 MoonBit 包七步清单**、PR 流程、边界）、README 首屏截图 `docs/media/full-body-lab.png`（在线演示宽距俯卧撑最低点，817 KB；`docs/` 不进 Mooncakes 包）。
+- GitHub Release **v0.3.0**：tag 指向 `3831e3c`（PR #28 合并提交，即发布到 Mooncakes 的 0.3.0 内容），说明含 `moon add` 与在线演示链接。
+- 用户仅剩动作不变：9 月 24 日 24:00 前重提飞书表单（申报书已含在线演示、0.3.0、安装验证）。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：
