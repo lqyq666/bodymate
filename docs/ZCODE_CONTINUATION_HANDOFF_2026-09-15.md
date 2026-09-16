@@ -217,6 +217,15 @@ http://127.0.0.1:4174/?view=full-body
 - **第 6 步：申报书重写**（本地 `docs/BodyMate_项目申报书.md`，gitignore）：新增“针对上一次申报意见的调整”一节，逐条回应“教学类 / 生态意义 / 复用性”，数字以当前基线为准（MoonBit 生产 3189 行、可复用库 1351 行、70 项测试；Node 142；包审计 37 文件）。
 - **仍需用户动作**：① `moon publish` 发布 0.2.0 到 Mooncakes（需登录）；② 推送本地提交到 GitHub；③ 在 9 月 24 日前用新申报书重新提交飞书表单；④ 可选 GitHub Pages 静态部署（工作流未加，需推送权限）。
 
+### 2026-09-16 更新：推送、发布与第二轮加固（0.3.0）
+
+- **推送流程**：`main` 受保护（必须 PR + CI `check`）。PR #27（库套件转向，18 提交）与 PR #28（0.3.0，4 提交）均 CI 通过后以合并提交合入；`origin/main = 3831e3c`。GitHub 仓库描述与主题（moonbit、mooncakes、llm-guardrails、chinese-numerals、anatomy、threejs）已更新。
+- **发布**：用户 `moon login` 后自行发布了 0.2.0；助手随后发布 0.3.0（服务器 200）。`npm run moonbit:install-check`（新脚本 `scripts/verify-mooncakes-install.mjs`）在临时模块中从 mooncakes.io 真实 `moon add lqyq666/bodymate@0.3.0` 并运行四个包，通过。
+- **agent 0.3.0**：`FieldSpec` 带可选上下界（wire `key:min:max`，可单侧）、`Clamp`/`Reject` 策略、`explain_command`/`explain_lookup` 机器可读原因；新导出 `bodymate_agent_explain_command_v1`；代理与浏览器传入真实参数范围，代理日志记录调整原因。
+- **zhnum 0.3.0**：`format_numeral`（标准读法到万亿）、`负` 前缀、`一万亿` 复合单位；0–10999 全量往返测试。
+- **基线**：MoonBit 生产 3429 行（可复用库 1573 行）、测试 927 行、76 项；Node 143；包审计 37 文件约 119 KB。README/库 README 增加英文概述。申报书（本地）已同步为 0.3.0 数字。
+- **仍需用户动作**：仅剩在 9 月 24 日 24:00 前用新申报书重新提交飞书表单。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：
