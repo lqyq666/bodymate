@@ -226,6 +226,12 @@ http://127.0.0.1:4174/?view=full-body
 - **基线**：MoonBit 生产 3429 行（可复用库 1573 行）、测试 927 行、76 项；Node 143；包审计 37 文件约 119 KB。README/库 README 增加英文概述。申报书（本地）已同步为 0.3.0 数字。
 - **仍需用户动作**：仅剩在 9 月 24 日 24:00 前用新申报书重新提交飞书表单。
 
+### 2026-09-16 更新：评委文档重写与 GitHub Pages 在线演示
+
+- PR #30（`main = 3353a57`）：评委快速开始（`moon add` 路线优先）、一页说明、申报清单、测试矩阵（逐包行 + AI/服务/安装检查）、讲稿、技术审查路线、复现说明全部改为四包库套件叙事；2026-09-13 申报稿保留为历史并加指向说明。
+- 新增 `.github/workflows/pages.yml`：每次推送 `main` 把 `index.html` + 已提交资产（143 MB，排除 `assets/environment/source/`）发布到 GitHub Pages；仓库 Pages 已用 API 启用（build type: workflow）。首次部署成功，**在线演示 https://lqyq666.github.io/bodymate/?view=full-body** 实测：模型加载、MoonBit 导出可调、中文数字指令解析正常；无 AI 代理时对话框显示“本地动作引擎已接管”并正常播放宽距俯卧撑（与文档一致）。`ci.yml` 推送触发增加 `zcode/**`。
+- README、评委快速开始、申报书（本地）已加在线演示链接。本机到 github.com/github.io 的连接偶发 TLS 超时，重试即可。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：
