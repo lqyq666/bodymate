@@ -4,6 +4,8 @@
 
 `lqyq666/bodymate` 是一组无依赖、可单独 `moon add` 的 MoonBit 库，外加一个使用它们的离线全身三维参考应用。库是主体，应用是证明：同一份 MoonBit 代码同时驱动浏览器页面、本地 AI 代理和纯命令行示例。
 
+![全身动作实验室：宽距俯卧撑停在最低点，胸大肌与肱三头肌以定性颜色高亮](docs/media/full-body-lab.png)
+
 ```sh
 moon add lqyq666/bodymate
 ```
@@ -108,6 +110,7 @@ npm run ai:serve
 - [评委快速开始](docs/REVIEWER_QUICKSTART.md) · [MoonBit 技术审查](docs/MOONBIT_REVIEW_GUIDE.md)
 - [架构](docs/MOONBIT_ARCHITECTURE.md) · [测试矩阵](docs/TEST_MATRIX.md) · [实时规模基线](docs/MOONBIT_ENGINE_BASELINE.md)
 - [演示讲稿](docs/DEMO_SCRIPT.md) · [一页项目说明](docs/ONE_PAGE_PROJECT.md) · [申报清单](docs/SUBMISSION_CHECKLIST.md)
+- [更新日志](CHANGELOG.md) · [参与开发（含新增包清单）](CONTRIBUTING.md)
 
 `npm run moonbit:package-check` 检查实际发布 ZIP、排除应用资产并在隔离目录重新 check/build/test/run；只执行本地验证，本地成功不代表已发布或已获资格。
 
