@@ -1,0 +1,17 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "lqyq666/bodymate/zhnum"
+
+// Values
+pub fn normalize_numerals(String) -> String
+
+pub fn parse_numeral(String) -> Double?
+
+pub fn quantity_before_unit(String, Array[String]) -> Double?
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

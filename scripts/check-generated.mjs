@@ -9,7 +9,7 @@ const start = '<!-- MOONBIT_CORE_START -->';
 const end = '<!-- MOONBIT_CORE_END -->';
 try {
   verifyMoonVersion({ cwd: root });
-  for (const pkg of ['moonbit/motion', 'moonbit/anatomy', 'moonbit/agent']) {
+  for (const pkg of ['moonbit/motion', 'moonbit/anatomy', 'moonbit/agent', 'moonbit/zhnum']) {
     const interfacePath = join(root, pkg, 'pkg.generated.mbti');
     const interfaceBefore = await readFile(interfacePath, 'utf8');
     runMoon(['info', pkg, '--target', 'js'], { cwd: root });

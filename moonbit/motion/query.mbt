@@ -51,7 +51,8 @@ fn apply_matching_preset(motion : MotionDefinition, text : String, values : Arra
 ///| Parse supported Chinese parameter instructions without leaking the vocabulary into JS.
 pub fn parse_query(id : String, query : String, base : Array[MotionParameterValue]) -> Result[ParsedParameters, MotionError] {
   guard definition(id) is Some(motion) else { return Err(UnknownMotion(id)) }
-  let text = query.trim().to_owned()
+  // Chinese numerals, fullwidth digits and 百分之X become ASCII numbers before the bounded patterns run.
+  let text = @zhnum.normalize_numerals(query.trim().to_owned())
   let (preset_values, preset_recognized) = apply_matching_preset(motion, text, base)
   let mut values = preset_values
   let mut recognized = preset_recognized

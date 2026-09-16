@@ -211,6 +211,7 @@ http://127.0.0.1:4174/?view=full-body
 
 - **第 2 步：AI 动作护栏库 `moonbit/agent`**（领域无关，169 有效行，7 条测试）：`GuardedAction = None | Command(id, 有限数值字段) | Lookup(有界文本)`，白名单 wire `id^key,key~…`，标识符校验无正则依赖。`moonbit/core/agent_guard.mbt` 两个导出；`src/ai/agent-guard.mjs` 唯一 JS 编解码器；本地代理（`completeAiChat` 内经 `load-moonbit-core.mjs` 加载后调用）与浏览器适配器（`applyAiAction` 用 `runtime.guardAiCommand/guardAiLookup`）同用一份规则，JS 中不再保留第二份校验逻辑。已入 `.moonignore`、包审计、`check-generated`、stats 分组。结果：MoonBit 生产 2742 → 2930 行，MoonBit 测试 56 → 65，Node 142 全过，包审计 31 文件 85KB 通过；页面实测：浏览器内 `run_marathon` → none、`push_up` 只保留 `handWidth`；真实模型“请定位胸大肌”经两端护栏后定位 6 个结构。
 - 后续：`moonbit/zhnum` 中文数量解析 → MoonBit 原生 CLI 导出示例 → README/moon.mod 库优先改写 → 申报书重写。
+- **第 3 步：中文数量解析库 `moonbit/zhnum`**（259 有效行，4 条测试）：`parse_numeral` / `normalize_numerals` / `quantity_before_unit`；`motion.parse_query` 在匹配前归一化数字，因此“手距一点五倍肩宽，夹角六十度，深度百分之八十”“手距１．８倍肩宽”现在都能识别（motion 新增 1 条测试）。已入 `.moonignore`、包审计、`check-generated`、stats 分组。结果：MoonBit 生产 2930 → 3189 行，MoonBit 测试 65 → 70，Node 142 全过，包审计 35 文件 99KB。页面内 `bodymate_motion_parse_query_v1("push_up","手距一点五倍肩宽，夹角六十度","")` → `handWidth=1.5,elbowAngle=60`。
 
 ## 本地启动与验收命令
 

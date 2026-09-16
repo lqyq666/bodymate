@@ -39,6 +39,8 @@
 
 `moonbit/agent` 是第三个可复用库，也是“AI 输出不是执行权限”这条规则的唯一实现：`GuardedAction` 只能是 `None`、`Command(id, 有限数值字段)` 或 `Lookup(有界文本)`；`parse_allowlist` 校验命令 id（`^[a-z][a-z0-9_]*$`）与字段键（`^[A-Za-z][A-Za-z0-9_]*$`），`guard_command` 只保留白名单内的 id 及其声明字段中的有限数值，`guard_lookup` 只接受修剪、截断后仍非空的文本。`moonbit/core/agent_guard.mbt` 以 `bodymate_agent_guard_command_v1` / `bodymate_agent_guard_lookup_v1` 导出；`src/ai/agent-guard.mjs` 是唯一的 JS 编解码器，被本地代理（服务端，经 `load-moonbit-core.mjs`）和浏览器适配器（`applyAiAction`）共同调用，因此模型建议在服务端和页面端接受的是同一份 MoonBit 规则。库本身与动作、肌肉无关，任何 MoonBit Agent 应用都可以用它约束 LLM 提议。
 
+`moonbit/zhnum` 是第四个可复用库：中文数字（零〇一…九、壹…玖、两、十百千万亿、`点` 小数、`半`）解析、文本内数字归一化（全角数字、`百分之X`→`X%`）以及“单位前取数”。`motion.parse_query` 在匹配有界正则前先调用 `normalize_numerals`，所以中文数字指令与阿拉伯数字指令等价，而正则本身零改动。
+
 `moonbit/core/environment_scene.mbt` 决定环境方位扇区混合、距离滞回、质量、视差、灯光和 reduced-motion。`environment-domain.mjs` 解析 frame，`lab-environment.mjs` 加载并呈现四个本地环境 GLB。
 
 `moonbit/core/ui_feedback.mbt` 规范化指针样本、平移/倾斜/时长及 reduced-motion/coarse-pointer 决策。`visual-lab-shell.js` 采集 DOM 坐标并应用 CSS 值。布局、颜色、聚焦和页面语义继续由 HTML/CSS 负责。
@@ -53,7 +55,7 @@ JS 负责线协议解析、NFKC 文本规范化、DOM、事件适配和资源生
 
 ## 分发与验证
 
-`.moonignore` 只让 motion 库、anatomy 术语库、agent 护栏库、公开接口、测试、三个示例及说明/许可证进入 Mooncakes ZIP。完整应用及人体/环境资产留在 GitHub 项目中；库没有 DOM、Three.js、GLB、npm 包或网络依赖，执行 JS target 仍需要 Node.js。
+`.moonignore` 只让 motion 库、anatomy 术语库、agent 护栏库、zhnum 数量解析库、公开接口、测试、三个示例及说明/许可证进入 Mooncakes ZIP。完整应用及人体/环境资产留在 GitHub 项目中；库没有 DOM、Three.js、GLB、npm 包或网络依赖，执行 JS target 仍需要 Node.js。
 
 `npm run check` 验证完整应用、MoonBit/Node 测试、生成物、冻结人体和规模基线；`npm run moonbit:package-check` 验证真实 ZIP 的路径/体积与隔离后的 check/build/test/run。公开 API `pkg.generated.mbti` 是生成物，修改 API 后先生成再审查。
 

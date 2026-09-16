@@ -144,3 +144,18 @@ test "typed query parser preserves units and unsupported instructions" {
   assert_eq(wrong_unit.values[0].value, 1.2)
   assert_true(wrong_unit.notices.length() > 0)
 }
+
+test "chinese numerals in commands are normalized before matching" {
+  let push = @motion.parse_query("push_up", "手距一点五倍肩宽，夹角六十度", []).unwrap()
+  assert_true(push.recognized)
+  assert_eq(push.values[0].value, 1.5)
+  assert_eq(push.values[1].value, 60.0)
+  let squat = @motion.parse_query("squat", "站距一点二倍髋宽，脚尖外展二十度，深度百分之八十", []).unwrap()
+  assert_true(squat.recognized)
+  assert_eq(squat.values[0].value, 1.2)
+  assert_eq(squat.values[1].value, 20.0)
+  assert_eq(squat.values[2].value, 80.0)
+  let fullwidth = @motion.parse_query("push_up", "手距１．８倍肩宽", []).unwrap()
+  assert_true(fullwidth.recognized)
+  assert_eq(fullwidth.values[0].value, 1.8)
+}
