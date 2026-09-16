@@ -191,6 +191,10 @@ http://127.0.0.1:4174/?view=full-body
 
 新增 `npm start`（`scripts/start-bodymate.mjs`）：启动本地 AI 服务并用系统默认浏览器打开完整人体页；端口已被占用（`EADDRINUSE`）时视为服务已在运行，只打开页面；其他启动错误照常抛出。`scripts/start-bodymate.cmd` 供 Windows 双击。`test/start-bodymate.test.mjs` 三条测试覆盖平台打开命令、正常启动、端口复用与错误透传；已加入 `verify` 列表。README 同步。
 
+### 2026-09-16 更新：本地服务烟测与点文件防护
+
+新增 `test/server-smoke.test.mjs`（已入 `verify`）：起真实回环服务，断言首页与 `index.html` 引用的每个资源都能 200 返回且 MIME 正确、人体清单可读（415 肌肉 / 697 条目）、HEAD 无正文、未配置 AI 时 health 与 chat 均如实报告、缺失文件 404、非法方法 405。顺带修复：静态服务此前会返回 `/.gitignore`、`/.git/HEAD` 等点文件（回环内暴露 `.git/` 与可能存在的 `.env.local`），现在任何以点开头的路径段一律 403。浏览器级端到端仍是手动（引入 Playwright 需下载浏览器，留给用户决定）。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：

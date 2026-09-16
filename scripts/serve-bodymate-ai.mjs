@@ -216,6 +216,7 @@ function json(response, status, payload) {
 
 async function staticFile(rootPath, path) {
   const requested = path === '/' ? '/index.html' : decodeURIComponent(path);
+  if (requested.split('/').some((segment) => segment.startsWith('.'))) throw new AiServerError(403, '不允许访问该文件。');
   const file = resolve(rootPath, `.${requested}`);
   const traversal = relative(rootPath, file);
   if (traversal.startsWith('..') || isAbsolute(traversal)) throw new AiServerError(403, '不允许访问该文件。');
