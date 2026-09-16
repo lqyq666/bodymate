@@ -18,12 +18,17 @@ function payload(wire, version) {
 
 const finite = (value) => typeof value === 'number' && Number.isFinite(value);
 
-// A field is either a key string or { key, min?, max? }; bounds travel as `key:min:max`
-// (one-sided bounds leave the other side empty) so MoonBit can clamp or reject.
+// A field is either a key string, { key, min?, max? } or { key, options };
+// bounds travel as `key:min:max` (one-sided leaves the other side empty),
+// enum options travel as `key?opt1?opt2` so MoonBit can clamp, reject or match.
 function fieldWire(field) {
   const spec = typeof field === 'string' ? { key: field } : field || {};
   const key = String(spec.key ?? '');
   if (!key || WIRE_UNSAFE.test(key)) return '';
+  if (Array.isArray(spec.options) && spec.options.length > 0) {
+    const options = spec.options.map(String).filter((option) => !WIRE_UNSAFE.test(option));
+    return options.length > 0 ? `${key}?${options.join('?')}` : '';
+  }
   const min = finite(spec.min) ? String(spec.min) : '';
   const max = finite(spec.max) ? String(spec.max) : '';
   return min || max ? `${key}:${min}:${max}` : key;
