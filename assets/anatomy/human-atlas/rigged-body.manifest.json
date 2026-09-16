@@ -251,6 +251,7 @@
       "presets": [
         {
           "title": "窄距",
+          "isBaseline": false,
           "parameters": {
             "handWidth": 0.85,
             "elbowAngle": 25
@@ -258,6 +259,7 @@
         },
         {
           "title": "标准",
+          "isBaseline": true,
           "parameters": {
             "handWidth": 1.5,
             "elbowAngle": 45
@@ -265,6 +267,7 @@
         },
         {
           "title": "宽距",
+          "isBaseline": false,
           "parameters": {
             "handWidth": 1.8,
             "elbowAngle": 60
@@ -318,6 +321,7 @@
       "presets": [
         {
           "title": "窄站距",
+          "isBaseline": false,
           "parameters": {
             "stanceWidth": 0.8,
             "toeAngle": 10,
@@ -326,6 +330,7 @@
         },
         {
           "title": "标准",
+          "isBaseline": true,
           "parameters": {
             "stanceWidth": 1.2,
             "toeAngle": 20,
@@ -334,6 +339,7 @@
         },
         {
           "title": "宽站距",
+          "isBaseline": false,
           "parameters": {
             "stanceWidth": 1.8,
             "toeAngle": 30,

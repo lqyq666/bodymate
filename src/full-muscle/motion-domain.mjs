@@ -37,8 +37,8 @@ function parseRegistry() {
       id, title, duration: Number(duration), aliases: Object.freeze(aliases.split(';')), muscles: Object.freeze(muscles.split(';')),
       match: pattern(match), parameters: Object.freeze(parameters),
       presets: Object.freeze(presets ? presets.split(';').map((preset) => {
-        const index = preset.indexOf('@');
-        return Object.freeze({ title: preset.slice(0, index), parameters: valuesFromWire(preset.slice(index + 1)) });
+        const [title, baseline, ...values] = preset.split('@');
+        return Object.freeze({ title, isBaseline: baseline === 'true', parameters: valuesFromWire(values.join('@')) });
       }) : []),
     });
   });
@@ -47,6 +47,7 @@ function parseRegistry() {
 export const motionDefinitions = Object.freeze(parseRegistry());
 export const parameterDefinitions = Object.freeze(Object.fromEntries(motionDefinitions.map((motion) => [motion.id, motion.parameters])));
 export const motionPresets = Object.freeze(Object.fromEntries(motionDefinitions.map((motion) => [motion.id, motion.presets])));
+const phaseGuidesByMotion = new Map();
 
 export function motionForQuery(query) {
   const [, , id] = result(call('bodymate_motion_resolve_v1', String(query).normalize('NFKC')), 'motion-resolve-v1');
@@ -56,6 +57,24 @@ export function motionForQuery(query) {
 export function normalizeMotionParameters(id, input = {}) {
   const [, , values, notices = ''] = result(call('bodymate_motion_parameters_v1', id, valuesToWire(input)), 'motion-parameters-v1');
   return { parameters: valuesFromWire(values), notices: notices ? notices.split('~') : [] };
+}
+
+export function motionParameterComparison(id, input = {}) {
+  const motion = motionDefinitions.find((candidate) => candidate.id === id);
+  if (!motion) throw Error(`Unknown motion comparison: ${id}`);
+  const { parameters } = normalizeMotionParameters(id, input);
+  const baseline = motion.presets.find((preset) => preset.isBaseline);
+  if (!baseline) return Object.freeze({ title: '', baselineTitle: '', isBaseline: true, deltas: Object.freeze([]) });
+  const deltas = [];
+  for (const field of motion.parameters) {
+    const delta = Math.round((parameters[field.key] - baseline.parameters[field.key]) * 1e6) / 1e6;
+    if (delta !== 0) deltas.push(Object.freeze({ key: field.key, label: field.label, unit: field.unit, delta }));
+  }
+  const currentPreset = motion.presets.find((preset) => motion.parameters.every((field) => parameters[field.key] === preset.parameters[field.key]));
+  return Object.freeze({
+    title: currentPreset?.title || '自定义', baselineTitle: baseline.title,
+    isBaseline: deltas.length === 0, deltas: Object.freeze(deltas),
+  });
 }
 
 export function parseMotionParameters(id, query, base = {}) {
@@ -76,6 +95,18 @@ export function muscleProfileForMotion(id, input = {}) {
       return { url: record.slice(0, index), scope: record.slice(index + 1) };
     }) : [],
   };
+}
+
+export function motionPhaseGuides(id) {
+  const key = String(id);
+  if (phaseGuidesByMotion.has(key)) return phaseGuidesByMotion.get(key);
+  const [, , records = ''] = result(call('bodymate_motion_phase_guides_v1', key), 'motion-phase-guides-v1');
+  const guides = Object.freeze(records ? records.split('~').map((record) => {
+    const [guideId, phase, start, end, title, detail] = record.split('^');
+    return Object.freeze({ id: guideId, phase: Number(phase), start: Number(start), end: Number(end), title, detail });
+  }) : []);
+  phaseGuidesByMotion.set(key, guides);
+  return guides;
 }
 
 export function poseIntent(id, phase, input = {}) {

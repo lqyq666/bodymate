@@ -199,6 +199,7 @@
   const _M0FPB19int__to__string__js = (x, radix) => {
     return x.toString(radix);
   };
+  const _M0FPB21int64__to__string__js = (num, radix) => BigInt.asIntN(64, num).toString(radix);
   function _M0TPB4IterGRPC16string10StringViewE(param0, param1) {
     this.f = param0;
     this.size_hint = param1;
@@ -240,6 +241,11 @@
   }
   const _M0MPB7JSArray4copy = (arr) => arr.slice(0);
   const _M0MPC16double6Double8mod__ffi = (a, b) => (a % b);
+  function _M0TPB9ArrayViewGcE(param0, param1, param2) {
+    this.buf = param0;
+    this.start = param1;
+    this.end = param2;
+  }
   const _M0MPB7JSArray11set__length = (arr, len) => { arr.length = len; };
   const _M0MPB7JSArray3pop = (arr) => arr.pop();
   function _M0TPB9ArrayViewGsE(param0, param1, param2) {
@@ -605,6 +611,28 @@
     this.pat = param0;
     this.re = param1;
   }
+  function _M0TP37lqyq6668bodymate5agent14AllowedCommand(param0, param1) {
+    this.id = param0;
+    this.fields = param1;
+  }
+  function _M0DTP37lqyq6668bodymate5agent13GuardedAction4None() {}
+  _M0DTP37lqyq6668bodymate5agent13GuardedAction4None.prototype.$tag = 0;
+  const _M0DTP37lqyq6668bodymate5agent13GuardedAction4None__ = new _M0DTP37lqyq6668bodymate5agent13GuardedAction4None();
+  function _M0DTP37lqyq6668bodymate5agent13GuardedAction7Command(param0, param1) {
+    this._0 = param0;
+    this._1 = param1;
+  }
+  _M0DTP37lqyq6668bodymate5agent13GuardedAction7Command.prototype.$tag = 1;
+  function _M0DTP37lqyq6668bodymate5agent13GuardedAction6Lookup(param0) {
+    this._0 = param0;
+  }
+  _M0DTP37lqyq6668bodymate5agent13GuardedAction6Lookup.prototype.$tag = 2;
+  function _M0TPB8MutLocalGlE(param0) {
+    this.val = param0;
+  }
+  function _M0TPB8MutLocalGbE(param0) {
+    this.val = param0;
+  }
   function _M0TP37lqyq6668bodymate6motion7Session(param0, param1, param2, param3, param4, param5, param6) {
     this.motion_id = param0;
     this.phase = param1;
@@ -642,9 +670,10 @@
     this.parameters = param6;
     this.presets = param7;
   }
-  function _M0TP37lqyq6668bodymate6motion12MotionPreset(param0, param1) {
+  function _M0TP37lqyq6668bodymate6motion12MotionPreset(param0, param1, param2) {
     this.title = param0;
-    this.values = param1;
+    this.is_baseline = param1;
+    this.values = param2;
   }
   function _M0TP37lqyq6668bodymate6motion20MotionParameterValue(param0, param1) {
     this.key = param0;
@@ -665,9 +694,6 @@
   function _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion() {}
   _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion.prototype.$tag = 1;
   const _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion__ = new _M0DTP37lqyq6668bodymate6motion11MotionError14NoActiveMotion();
-  function _M0TPB8MutLocalGbE(param0) {
-    this.val = param0;
-  }
   function _M0TP37lqyq6668bodymate6motion20NormalizedParameters(param0, param1) {
     this.values = param0;
     this.notices = param1;
@@ -750,6 +776,22 @@
     this.upper_arm_x = param13;
     this.forearm_x = param14;
   }
+  function _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err.prototype.$tag = 0;
+  function _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok(param0) {
+    this._0 = param0;
+  }
+  _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok.prototype.$tag = 1;
+  function _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide(param0, param1, param2, param3, param4, param5) {
+    this.id = param0;
+    this.phase = param1;
+    this.start = param2;
+    this.end = param3;
+    this.title = param4;
+    this.detail = param5;
+  }
   function _M0TP37lqyq6668bodymate4core12DomainAction(param0, param1, param2, param3) {
     this.kind = param0;
     this.structure_id = param1;
@@ -809,9 +851,16 @@
     this.only_right = param4;
     this.union_structure_ids = param5;
   }
+  function _M0TP37lqyq6668bodymate7anatomy14StructureEntry(param0, param1, param2) {
+    this.structure_id = param0;
+    this.canonical_name = param1;
+    this.kind = param2;
+  }
   const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger = { method_0: _M0IPB13StringBuilderPB6Logger13write__string, method_1: _M0IP016_24default__implPB6Logger16write__substringGRPB13StringBuilderE, method_2: _M0IPB13StringBuilderPB6Logger11write__view, method_3: _M0IPB13StringBuilderPB6Logger11write__char, method_4: _M0IP016_24default__implPB6Logger28write__string__interpolationGRPB13StringBuilderE, method_5: _M0IP016_24default__implPB6Logger5writeGRPB13StringBuilderE };
   const _M0MPC16string10StringView4trimN7_2abindS6760 = "\t\n\r ";
   const _M0MPC16string6String4trimN7_2abindS6861 = "\t\n\r ";
+  const _M0FPB18double__max__value = $i64_reinterpret_f64(9218868437227405311n);
+  const _M0FPB18double__min__value = $i64_reinterpret_f64(18442240474082181119n);
   const _M0MPB4Iter4nextN6constrS9855GRPC16string10StringViewE = 0;
   const _M0MPB4Iter4nextN6constrS9856GRPC16string10StringViewE = 0;
   const _M0MPB4Iter4nextN6constrS9855GcE = 0;
@@ -907,6 +956,8 @@
   const _M0FPC46string8internal13regex__engine3ast5empty = new _M0TPC46string8internal13regex__engine3ast7Pattern(new _M0DTPC46string8internal13regex__engine3ast11PatternDesc11Alternation([]), false);
   const _M0FPC46string8internal13regex__engine3ast7epsilon = new _M0TPC46string8internal13regex__engine3ast7Pattern(new _M0DTPC46string8internal13regex__engine3ast11PatternDesc8Sequence([]), true);
   const _M0FPC36string8internal13regex__engine18pending__state__id = 18446744073709551615n;
+  const _M0FP37lqyq6668bodymate7anatomy19muscle__term__table = [{ _0: "abdominal part of pectoralis major", _1: "胸大肌腹部" }, { _0: "abductor digiti minimi of foot", _1: "足小趾展肌" }, { _0: "abductor digiti minimi of hand", _1: "手小指展肌" }, { _0: "abductor hallucis", _1: "拇展肌" }, { _0: "abductor pollicis brevis", _1: "拇短展肌" }, { _0: "abductor pollicis longus", _1: "拇长展肌" }, { _0: "acromial part of deltoid", _1: "三角肌肩峰部" }, { _0: "adductor brevis", _1: "短收肌" }, { _0: "adductor longus", _1: "长收肌" }, { _0: "adductor magnus", _1: "大收肌" }, { _0: "adductor minimus", _1: "小收肌" }, { _0: "anconeus", _1: "肘肌" }, { _0: "anterior papillary muscle of ventricle", _1: "心室前乳头肌" }, { _0: "anterolateral head of lateral papillary muscle of ventricle", _1: "心室外侧乳头肌前外侧头" }, { _0: "aryepiglotticus", _1: "杓会厌肌" }, { _0: "ascending part of trapezius", _1: "斜方肌升部" }, { _0: "brachialis", _1: "肱肌" }, { _0: "brachioradialis", _1: "肱桡肌" }, { _0: "cervical rotator", _1: "颈旋转肌" }, { _0: "clavicular part of deltoid", _1: "三角肌锁骨部" }, { _0: "clavicular part of pectoralis major", _1: "胸大肌锁骨部" }, { _0: "coccygeus", _1: "尾骨肌" }, { _0: "coracobrachialis", _1: "喙肱肌" }, { _0: "descending part of trapezius", _1: "斜方肌降部" }, { _0: "diaphragm", _1: "膈肌" }, { _0: "digastric", _1: "二腹肌" }, { _0: "extensor carpi radialis brevis", _1: "桡侧腕短伸肌" }, { _0: "extensor carpi radialis longus", _1: "桡侧腕长伸肌" }, { _0: "extensor carpi ulnaris", _1: "尺侧腕伸肌" }, { _0: "extensor digiti minimi", _1: "小指伸肌" }, { _0: "extensor digitorum", _1: "指伸肌" }, { _0: "extensor digitorum longus", _1: "趾长伸肌" }, { _0: "extensor hallucis brevis", _1: "拇趾短伸肌" }, { _0: "extensor hallucis longus", _1: "拇趾长伸肌" }, { _0: "extensor indicis", _1: "食指伸肌" }, { _0: "extensor pollicis brevis", _1: "拇短伸肌" }, { _0: "extensor pollicis longus", _1: "拇长伸肌" }, { _0: "external anal sphincter", _1: "肛门外括约肌" }, { _0: "external intercostal muscle", _1: "肋间外肌" }, { _0: "external oblique", _1: "腹外斜肌" }, { _0: "fibularis brevis", _1: "腓骨短肌" }, { _0: "fibularis longus", _1: "腓骨长肌" }, { _0: "fibularis tertius", _1: "第三腓骨肌" }, { _0: "first lumbrical of foot", _1: "足第一蚓状肌" }, { _0: "first plantar interosseous of foot", _1: "足第一跖侧骨间肌" }, { _0: "flexor accessorius", _1: "足底方肌" }, { _0: "flexor carpi radialis", _1: "桡侧腕屈肌" }, { _0: "flexor digiti minimi brevis of foot", _1: "足小趾短屈肌" }, { _0: "flexor digiti minimi brevis of hand", _1: "手小指短屈肌" }, { _0: "flexor digitorum brevis", _1: "趾短屈肌" }, { _0: "flexor digitorum longus", _1: "趾长屈肌" }, { _0: "flexor digitorum profundus", _1: "指深屈肌" }, { _0: "flexor digitorum superficialis", _1: "指浅屈肌" }, { _0: "flexor hallucis longus", _1: "拇趾长屈肌" }, { _0: "flexor pollicis brevis", _1: "拇短屈肌" }, { _0: "flexor pollicis longus", _1: "拇长屈肌" }, { _0: "fourth lumbrical of foot", _1: "足第四蚓状肌" }, { _0: "gemellus inferior", _1: "下孖肌" }, { _0: "gemellus superior", _1: "上孖肌" }, { _0: "genioglossus", _1: "颏舌肌" }, { _0: "geniohyoid", _1: "颏舌骨肌" }, { _0: "gluteus maximus", _1: "臀大肌" }, { _0: "gluteus medius", _1: "臀中肌" }, { _0: "gluteus minimus", _1: "臀小肌" }, { _0: "gracilis", _1: "股薄肌" }, { _0: "humeral head of flexor carpi ulnaris", _1: "尺侧腕屈肌肱骨头" }, { _0: "humeral head of pronator teres", _1: "旋前圆肌肱骨头" }, { _0: "hyoglossus", _1: "舌骨舌肌" }, { _0: "iliacus", _1: "髂肌" }, { _0: "iliococcygeus", _1: "髂尾肌" }, { _0: "iliocostalis cervicis", _1: "颈髂肋肌" }, { _0: "iliocostalis lumborum", _1: "腰髂肋肌" }, { _0: "iliocostalis thoracis", _1: "胸髂肋肌" }, { _0: "inferior oblique", _1: "下斜肌" }, { _0: "inferior oblique part of longus colli", _1: "颈长肌下斜部" }, { _0: "inferior rectus", _1: "下直肌" }, { _0: "infraspinatus muscle", _1: "冈下肌" }, { _0: "innermost intercostal muscle", _1: "肋间最内肌" }, { _0: "internal intercostal muscle", _1: "肋间内肌" }, { _0: "interspinalis thoracis", _1: "胸棘间肌" }, { _0: "lateral crico-arytenoid", _1: "环杓侧肌" }, { _0: "lateral head of flexor hallucis brevis", _1: "拇趾短屈肌外侧头" }, { _0: "lateral head of gastrocnemius", _1: "腓肠肌外侧头" }, { _0: "lateral head of triceps brachii", _1: "肱三头肌外侧头" }, { _0: "lateral lumbar intertransversarius", _1: "腰外侧横突间肌" }, { _0: "lateral papillary muscle of ventricle", _1: "心室外侧乳头肌" }, { _0: "lateral rectus", _1: "外直肌" }, { _0: "levator palpebrae superioris", _1: "上睑提肌" }, { _0: "levator scapulae", _1: "肩胛提肌" }, { _0: "levator veli palatini", _1: "腭帆提肌" }, { _0: "long head of biceps brachii", _1: "肱二头肌长头" }, { _0: "long head of biceps femoris", _1: "股二头肌长头" }, { _0: "long head of triceps brachii", _1: "肱三头肌长头" }, { _0: "longissimus capitis", _1: "头最长肌" }, { _0: "longissimus cervicis", _1: "颈最长肌" }, { _0: "longissimus thoracis", _1: "胸最长肌" }, { _0: "longus capitis", _1: "头长肌" }, { _0: "lumbar rotator", _1: "腰旋转肌" }, { _0: "medial head of flexor hallucis brevis", _1: "拇趾短屈肌内侧头" }, { _0: "medial head of gastrocnemius", _1: "腓肠肌内侧头" }, { _0: "medial head of triceps brachii", _1: "肱三头肌内侧头" }, { _0: "medial lumbar intertransversarius", _1: "腰内侧横突间肌" }, { _0: "medial rectus", _1: "内直肌" }, { _0: "mylohyoid", _1: "下颌舌骨肌" }, { _0: "oblique arytenoid", _1: "杓斜肌" }, { _0: "oblique head of adductor hallucis", _1: "拇趾收肌斜头" }, { _0: "oblique head of adductor pollicis", _1: "拇收肌斜头" }, { _0: "oblique part of cricothyroid", _1: "环甲肌斜部" }, { _0: "obliquus capitis inferior", _1: "头下斜肌" }, { _0: "obliquus capitis superior", _1: "头上斜肌" }, { _0: "obturator externus", _1: "闭孔外肌" }, { _0: "obturator internus", _1: "闭孔内肌" }, { _0: "omohyoid", _1: "肩胛舌骨肌" }, { _0: "opponens digiti minimi of foot", _1: "足小趾对跖肌" }, { _0: "opponens digiti minimi of hand", _1: "手小指对掌肌" }, { _0: "opponens pollicis", _1: "拇对掌肌" }, { _0: "palmaris longus", _1: "掌长肌" }, { _0: "pectineus", _1: "耻骨肌" }, { _0: "pectoralis minor", _1: "胸小肌" }, { _0: "piriformis", _1: "梨状肌" }, { _0: "plantaris", _1: "跖肌" }, { _0: "platysma", _1: "颈阔肌" }, { _0: "popliteus", _1: "腘肌" }, { _0: "posterior crico-arytenoid", _1: "环杓后肌" }, { _0: "posterior papillary muscle of ventricle", _1: "心室后乳头肌" }, { _0: "pronator quadratus", _1: "旋前方肌" }, { _0: "psoas major", _1: "腰大肌" }, { _0: "pubococcygeus", _1: "耻尾肌" }, { _0: "puborectalis", _1: "耻骨直肠肌" }, { _0: "quadratus femoris", _1: "股方肌" }, { _0: "rectus capitis anterior", _1: "头前直肌" }, { _0: "rectus capitis lateralis", _1: "头外侧直肌" }, { _0: "rectus capitis posterior major", _1: "头后大直肌" }, { _0: "rectus capitis posterior minor", _1: "头后小直肌" }, { _0: "rectus femoris", _1: "股直肌" }, { _0: "rhomboid major", _1: "大菱形肌" }, { _0: "rhomboid minor", _1: "小菱形肌" }, { _0: "sartorius", _1: "缝匠肌" }, { _0: "scalenus anterior", _1: "前斜角肌" }, { _0: "scalenus medius", _1: "中斜角肌" }, { _0: "scalenus posterior", _1: "后斜角肌" }, { _0: "second lumbrical of foot", _1: "足第二蚓状肌" }, { _0: "second plantar interosseous of foot", _1: "足第二跖侧骨间肌" }, { _0: "semimembranosus", _1: "半膜肌" }, { _0: "semispinalis capitis", _1: "头半棘肌" }, { _0: "semispinalis cervicis", _1: "颈半棘肌" }, { _0: "semispinalis thoracis", _1: "胸半棘肌" }, { _0: "semitendinosus", _1: "半腱肌" }, { _0: "septal papillary muscle of ventricle", _1: "心室间隔乳头肌" }, { _0: "serratus anterior", _1: "前锯肌" }, { _0: "serratus posterior inferior", _1: "下后锯肌" }, { _0: "serratus posterior superior", _1: "上后锯肌" }, { _0: "set of anterior cervical intertransversarii", _1: "颈前横突间肌群" }, { _0: "set of dorsal interossei of hand", _1: "手背侧骨间肌群" }, { _0: "set of interspinales cervicis", _1: "颈棘间肌群" }, { _0: "set of interspinales lumborum", _1: "腰棘间肌群" }, { _0: "set of levatores costarum breves", _1: "短肋提肌群" }, { _0: "set of levatores costarum longi", _1: "长肋提肌群" }, { _0: "set of lumbricals of hand", _1: "手蚓状肌群" }, { _0: "set of palmar interossei of hand", _1: "手掌侧骨间肌群" }, { _0: "set of posterior cervical intertransversarii", _1: "颈后横突间肌群" }, { _0: "short head of biceps brachii", _1: "肱二头肌短头" }, { _0: "short head of biceps femoris", _1: "股二头肌短头" }, { _0: "soleus", _1: "比目鱼肌" }, { _0: "spinal part of deltoid", _1: "三角肌肩胛冈部" }, { _0: "spinalis", _1: "棘肌" }, { _0: "spinalis thoracis", _1: "胸棘肌" }, { _0: "splenius capitis", _1: "头夹肌" }, { _0: "splenius cervicis", _1: "颈夹肌" }, { _0: "sternocleidomastoid", _1: "胸锁乳突肌" }, { _0: "sternocostal part of pectoralis major", _1: "胸大肌胸肋部" }, { _0: "sternohyoid", _1: "胸骨舌骨肌" }, { _0: "sternothyroid", _1: "胸骨甲状肌" }, { _0: "straight part of cricothyroid", _1: "环甲肌直部" }, { _0: "stylohyoid", _1: "茎突舌骨肌" }, { _0: "subclavius", _1: "锁骨下肌" }, { _0: "subscapularis", _1: "肩胛下肌" }, { _0: "superficial head of flexor pollicis brevis", _1: "拇短屈肌浅头" }, { _0: "superior oblique", _1: "上斜肌" }, { _0: "superior oblique part of longus colli", _1: "颈长肌上斜部" }, { _0: "superior rectus", _1: "上直肌" }, { _0: "supinator", _1: "旋后肌" }, { _0: "supraspinatus", _1: "冈上肌" }, { _0: "tensor veli palatini", _1: "腭帆张肌" }, { _0: "teres major", _1: "大圆肌" }, { _0: "teres minor", _1: "小圆肌" }, { _0: "third lumbrical of foot", _1: "足第三蚓状肌" }, { _0: "third plantar interosseous of foot", _1: "足第三跖侧骨间肌" }, { _0: "thoracic rotator", _1: "胸旋转肌" }, { _0: "thyro-arytenoid", _1: "甲杓肌" }, { _0: "thyrohyoid", _1: "甲状舌骨肌" }, { _0: "tibialis anterior", _1: "胫骨前肌" }, { _0: "tibialis posterior", _1: "胫骨后肌" }, { _0: "transverse arytenoid", _1: "杓横肌" }, { _0: "transverse head of adductor hallucis", _1: "拇趾收肌横头" }, { _0: "transverse head of adductor pollicis", _1: "拇收肌横头" }, { _0: "transverse part of trapezius", _1: "斜方肌横部" }, { _0: "transversus thoracis", _1: "胸横肌" }, { _0: "ulnar head of flexor carpi ulnaris", _1: "尺侧腕屈肌尺骨头" }, { _0: "ulnar head of pronator teres", _1: "旋前圆肌尺骨头" }, { _0: "uvular muscle", _1: "悬雍垂肌" }, { _0: "vastus intermedius", _1: "中间广肌" }, { _0: "vastus lateralis", _1: "外侧广肌" }, { _0: "vastus medialis", _1: "内侧广肌" }, { _0: "vertical intermediate part of longus colli", _1: "颈长肌垂直中间部" }, { _0: "vocalis", _1: "声带肌" }];
+  const _M0FP37lqyq6668bodymate7anatomy22structure__term__table = [{ _0: "arytenoid cartilage", _1: "杓状软骨" }, { _0: "atlas", _1: "寰椎" }, { _0: "axis", _1: "枢椎" }, { _0: "body of sternum", _1: "胸骨体" }, { _0: "calcaneus", _1: "跟骨" }, { _0: "capitate", _1: "头状骨" }, { _0: "clavicle", _1: "锁骨" }, { _0: "corniculate cartilage", _1: "小角软骨" }, { _0: "cricoid cartilage", _1: "环状软骨" }, { _0: "cuboid bone", _1: "骰骨" }, { _0: "cuneiform cartilage", _1: "楔状软骨" }, { _0: "distal phalanx of big toe", _1: "拇趾远节趾骨" }, { _0: "distal phalanx of fourth toe", _1: "第四趾远节趾骨" }, { _0: "distal phalanx of index finger", _1: "示指远节指骨" }, { _0: "distal phalanx of little finger", _1: "小指远节指骨" }, { _0: "distal phalanx of little toe", _1: "小趾远节趾骨" }, { _0: "distal phalanx of middle finger", _1: "中指远节指骨" }, { _0: "distal phalanx of ring finger", _1: "环指远节指骨" }, { _0: "distal phalanx of second toe", _1: "第二趾远节趾骨" }, { _0: "distal phalanx of third toe", _1: "第三趾远节趾骨" }, { _0: "distal phalanx of thumb", _1: "拇指远节指骨" }, { _0: "eighth rib", _1: "第八肋骨" }, { _0: "eighth thoracic vertebra", _1: "第八胸椎" }, { _0: "eleventh rib", _1: "第十一肋骨" }, { _0: "eleventh thoracic vertebra", _1: "第十一胸椎" }, { _0: "ethmoid", _1: "筛骨" }, { _0: "femur", _1: "股骨" }, { _0: "fibula", _1: "腓骨" }, { _0: "fifth cervical vertebra", _1: "第五颈椎" }, { _0: "fifth costal cartilage", _1: "第五肋软骨" }, { _0: "fifth lumbar vertebra", _1: "第五腰椎" }, { _0: "fifth metacarpal bone", _1: "第五掌骨" }, { _0: "fifth metatarsal bone", _1: "第五跖骨" }, { _0: "fifth rib", _1: "第五肋骨" }, { _0: "fifth thoracic vertebra", _1: "第五胸椎" }, { _0: "first costal cartilage", _1: "第一肋软骨" }, { _0: "first lumbar vertebra", _1: "第一腰椎" }, { _0: "first metacarpal bone", _1: "第一掌骨" }, { _0: "first metatarsal bone", _1: "第一跖骨" }, { _0: "first rib", _1: "第一肋骨" }, { _0: "first thoracic vertebra", _1: "第一胸椎" }, { _0: "fourth cervical vertebra", _1: "第四颈椎" }, { _0: "fourth costal cartilage", _1: "第四肋软骨" }, { _0: "fourth lumbar vertebra", _1: "第四腰椎" }, { _0: "fourth metacarpal bone", _1: "第四掌骨" }, { _0: "fourth metatarsal bone", _1: "第四跖骨" }, { _0: "fourth rib", _1: "第四肋骨" }, { _0: "fourth thoracic vertebra", _1: "第四胸椎" }, { _0: "frontal bone", _1: "额骨" }, { _0: "gingiva of lower jaw", _1: "下颌牙龈" }, { _0: "gingiva of upper jaw", _1: "上颌牙龈" }, { _0: "hamate", _1: "钩骨" }, { _0: "hip bone", _1: "髋骨" }, { _0: "humerus", _1: "肱骨" }, { _0: "hyoid bone", _1: "舌骨" }, { _0: "iliotibial tract", _1: "髂胫束" }, { _0: "intermediate cuneiform bone", _1: "中间楔骨" }, { _0: "intervertebral disk", _1: "椎间盘" }, { _0: "intervertebral disk of axis", _1: "枢椎椎间盘" }, { _0: "intervertebral disk of eighth thoracic vertebra", _1: "第八胸椎椎间盘" }, { _0: "intervertebral disk of eleventh thoracic vertebra", _1: "第十一胸椎椎间盘" }, { _0: "intervertebral disk of fifth cervical vertebra", _1: "第五颈椎椎间盘" }, { _0: "intervertebral disk of fifth lumbar vertebra", _1: "第五腰椎椎间盘" }, { _0: "intervertebral disk of fifth thoracic vertebra", _1: "第五胸椎椎间盘" }, { _0: "intervertebral disk of first lumbar vertebra", _1: "第一腰椎椎间盘" }, { _0: "intervertebral disk of first thoracic vertebra", _1: "第一胸椎椎间盘" }, { _0: "intervertebral disk of fourth cervical vertebra", _1: "第四颈椎椎间盘" }, { _0: "intervertebral disk of fourth lumbar vertebra", _1: "第四腰椎椎间盘" }, { _0: "intervertebral disk of fourth thoracic vertebra", _1: "第四胸椎椎间盘" }, { _0: "intervertebral disk of ninth thoracic vertebra", _1: "第九胸椎椎间盘" }, { _0: "intervertebral disk of second lumbar vertebra", _1: "第二腰椎椎间盘" }, { _0: "intervertebral disk of second thoracic vertebra", _1: "第二胸椎椎间盘" }, { _0: "intervertebral disk of seventh cervical vertebra", _1: "第七颈椎椎间盘" }, { _0: "intervertebral disk of seventh thoracic vertebra", _1: "第七胸椎椎间盘" }, { _0: "intervertebral disk of sixth cervical vertebra", _1: "第六颈椎椎间盘" }, { _0: "intervertebral disk of sixth thoracic vertebra", _1: "第六胸椎椎间盘" }, { _0: "intervertebral disk of tenth thoracic vertebra", _1: "第十胸椎椎间盘" }, { _0: "intervertebral disk of third cervical vertebra", _1: "第三颈椎椎间盘" }, { _0: "intervertebral disk of third lumbar vertebra", _1: "第三腰椎椎间盘" }, { _0: "intervertebral disk of third thoracic vertebra", _1: "第三胸椎椎间盘" }, { _0: "lateral cuneiform bone", _1: "外侧楔骨" }, { _0: "lower central secondary incisor tooth", _1: "下颌中切牙" }, { _0: "lower first secondary molar tooth", _1: "下颌第一磨牙" }, { _0: "lower first secondary premolar tooth", _1: "下颌第一前磨牙" }, { _0: "lower lateral secondary incisor tooth", _1: "下颌侧切牙" }, { _0: "lower second secondary molar tooth", _1: "下颌第二磨牙" }, { _0: "lower second secondary premolar tooth", _1: "下颌第二前磨牙" }, { _0: "lower secondary canine tooth", _1: "下颌尖牙" }, { _0: "lunate", _1: "月骨" }, { _0: "major alar cartilage", _1: "鼻翼大软骨" }, { _0: "mandible", _1: "下颌骨" }, { _0: "manubrium", _1: "胸骨柄" }, { _0: "maxilla", _1: "上颌骨" }, { _0: "medial cuneiform bone", _1: "内侧楔骨" }, { _0: "middle phalanx of fourth toe", _1: "第四趾中节趾骨" }, { _0: "middle phalanx of index finger", _1: "示指中节指骨" }, { _0: "middle phalanx of little finger", _1: "小指中节指骨" }, { _0: "middle phalanx of little toe", _1: "小趾中节趾骨" }, { _0: "middle phalanx of middle finger", _1: "中指中节指骨" }, { _0: "middle phalanx of ring finger", _1: "环指中节指骨" }, { _0: "middle phalanx of second toe", _1: "第二趾中节趾骨" }, { _0: "middle phalanx of third toe", _1: "第三趾中节趾骨" }, { _0: "nasal bone", _1: "鼻骨" }, { _0: "navicular bone of foot", _1: "足舟骨" }, { _0: "ninth rib", _1: "第九肋骨" }, { _0: "ninth thoracic vertebra", _1: "第九胸椎" }, { _0: "occipital bone", _1: "枕骨" }, { _0: "palatine bone", _1: "腭骨" }, { _0: "parietal bone", _1: "顶骨" }, { _0: "patella", _1: "髌骨" }, { _0: "pisiform", _1: "豌豆骨" }, { _0: "proximal phalanx of big toe", _1: "拇趾近节趾骨" }, { _0: "proximal phalanx of fourth toe", _1: "第四趾近节趾骨" }, { _0: "proximal phalanx of index finger", _1: "示指近节指骨" }, { _0: "proximal phalanx of little finger", _1: "小指近节指骨" }, { _0: "proximal phalanx of little toe", _1: "小趾近节趾骨" }, { _0: "proximal phalanx of middle finger", _1: "中指近节指骨" }, { _0: "proximal phalanx of ring finger", _1: "环指近节指骨" }, { _0: "proximal phalanx of second toe", _1: "第二趾近节趾骨" }, { _0: "proximal phalanx of third toe", _1: "第三趾近节趾骨" }, { _0: "proximal phalanx of thumb", _1: "拇指近节指骨" }, { _0: "radius", _1: "桡骨" }, { _0: "sacrum", _1: "骶骨" }, { _0: "scaphoid", _1: "手舟骨" }, { _0: "scapula", _1: "肩胛骨" }, { _0: "second costal cartilage", _1: "第二肋软骨" }, { _0: "second lumbar vertebra", _1: "第二腰椎" }, { _0: "second metacarpal bone", _1: "第二掌骨" }, { _0: "second metatarsal bone", _1: "第二跖骨" }, { _0: "second rib", _1: "第二肋骨" }, { _0: "second thoracic vertebra", _1: "第二胸椎" }, { _0: "sesamoid bone of foot", _1: "足籽骨" }, { _0: "seventh cervical vertebra", _1: "第七颈椎" }, { _0: "seventh costal cartilage", _1: "第七肋软骨" }, { _0: "seventh rib", _1: "第七肋骨" }, { _0: "seventh thoracic vertebra", _1: "第七胸椎" }, { _0: "sixth cervical vertebra", _1: "第六颈椎" }, { _0: "sixth costal cartilage", _1: "第六肋软骨" }, { _0: "sixth rib", _1: "第六肋骨" }, { _0: "sixth thoracic vertebra", _1: "第六胸椎" }, { _0: "sphenoid bone", _1: "蝶骨" }, { _0: "talus", _1: "距骨" }, { _0: "temporal bone", _1: "颞骨" }, { _0: "tenth rib", _1: "第十肋骨" }, { _0: "tenth thoracic vertebra", _1: "第十胸椎" }, { _0: "third cervical vertebra", _1: "第三颈椎" }, { _0: "third costal cartilage", _1: "第三肋软骨" }, { _0: "third lumbar vertebra", _1: "第三腰椎" }, { _0: "third metacarpal bone", _1: "第三掌骨" }, { _0: "third metatarsal bone", _1: "第三跖骨" }, { _0: "third rib", _1: "第三肋骨" }, { _0: "third thoracic vertebra", _1: "第三胸椎" }, { _0: "thyroid cartilage", _1: "甲状软骨" }, { _0: "tibia", _1: "胫骨" }, { _0: "trapezium", _1: "大多角骨" }, { _0: "trapezoid", _1: "小多角骨" }, { _0: "triquetral", _1: "三角骨" }, { _0: "twelfth rib", _1: "第十二肋骨" }, { _0: "twelfth thoracic vertebra", _1: "第十二胸椎" }, { _0: "ulna", _1: "尺骨" }, { _0: "upper central secondary incisor tooth", _1: "上颌中切牙" }, { _0: "upper first secondary molar tooth", _1: "上颌第一磨牙" }, { _0: "upper first secondary premolar tooth", _1: "上颌第一前磨牙" }, { _0: "upper lateral secondary incisor tooth", _1: "上颌侧切牙" }, { _0: "upper second secondary molar tooth", _1: "上颌第二磨牙" }, { _0: "upper second secondary premolar tooth", _1: "上颌第二前磨牙" }, { _0: "upper secondary canine tooth", _1: "上颌尖牙" }, { _0: "vomer", _1: "犁骨" }, { _0: "xiphoid process", _1: "剑突" }, { _0: "zygomatic bone", _1: "颧骨" }];
   const _M0FP37lqyq6668bodymate4core19canonical__registry = [new _M0TP37lqyq6668bodymate4core9Structure("scm_r", "bodymate.neck.sternocleidomastoid.right", "右侧胸锁乳突肌", "right sternocleidomastoid", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1595", "FMA13408", "body-5.bin", true), new _M0TP37lqyq6668bodymate4core9Structure("scm_l", "bodymate.neck.sternocleidomastoid.left", "左侧胸锁乳突肌", "left sternocleidomastoid", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1573", "FMA13409", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("trapezius_r", "bodymate.neck.trapezius.upper.right", "右侧斜方肌上部", "descending part of right trapezius", "neck", 0, 1, 1, "Human Atlas / BodyParts3D 4.0", "FJ1521", "FMA33586", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("trapezius_l", "bodymate.neck.trapezius.upper.left", "左侧斜方肌上部", "descending part of left trapezius", "neck", 0, 0, 1, "Human Atlas / BodyParts3D 4.0", "FJ1521M", "FMA33587", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("levator_r", "bodymate.neck.levator-scapulae.right", "右侧肩胛提肌", "right levator scapulae", "neck", 0, 1, 1, "Human Atlas / BodyParts3D 4.0", "FJ1532", "FMA32540", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("levator_l", "bodymate.neck.levator-scapulae.left", "左侧肩胛提肌", "left levator scapulae", "neck", 0, 0, 1, "Human Atlas / BodyParts3D 4.0", "FJ1532M", "FMA32541", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_anterior_r", "bodymate.neck.scalene.anterior.right", "右侧前斜角肌", "right scalenus anterior", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1592", "FMA13392", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_anterior_l", "bodymate.neck.scalene.anterior.left", "左侧前斜角肌", "left scalenus anterior", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1570", "FMA13393", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_medius_r", "bodymate.neck.scalene.medius.right", "右侧中斜角肌", "right scalenus medius", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1593", "FMA13390", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_medius_l", "bodymate.neck.scalene.medius.left", "左侧中斜角肌", "left scalenus medius", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1571", "FMA13391", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_posterior_r", "bodymate.neck.scalene.posterior.right", "右侧后斜角肌", "right scalenus posterior", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1594", "FMA13388", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("scalene_posterior_l", "bodymate.neck.scalene.posterior.left", "左侧后斜角肌", "left scalenus posterior", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1572", "FMA13389", "body-5.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("splenius_capitis_r", "bodymate.neck.splenius.capitis.right", "右侧头夹肌", "right splenius capitis", "neck", 0, 1, 0, "Human Atlas / BodyParts3D 4.0", "FJ1545", "FMA22728", "body-4.bin", false), new _M0TP37lqyq6668bodymate4core9Structure("splenius_capitis_l", "bodymate.neck.splenius.capitis.left", "左侧头夹肌", "left splenius capitis", "neck", 0, 0, 0, "Human Atlas / BodyParts3D 4.0", "FJ1545M", "FMA22729", "body-4.bin", false)];
   const _M0FP37lqyq6668bodymate4core5state = new _M0TP37lqyq6668bodymate4core11DomainState([], "", "", 0, false, true, 0, undefined, [], undefined, undefined, 0, []);
   const _M0FP37lqyq6668bodymate4core18movement__mappings = [new _M0TP37lqyq6668bodymate4core15MovementMapping("shoulder_girdle_elevation", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.right", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.trapezius.upper.left", 0, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.right", 1, ["ev.scapula.elevation"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.levator-scapulae.left", 1, ["ev.scapula.elevation"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_right", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.right", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_rotation_left", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.splenius.capitis.left", 1, ["ev.neck.rotation-flexion"])]), new _M0TP37lqyq6668bodymate4core15MovementMapping("cervical_flexion", [new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.right", 0, ["ev.neck.rotation-flexion"]), new _M0TP37lqyq6668bodymate4core24MovementStructureMapping("bodymate.neck.sternocleidomastoid.left", 0, ["ev.neck.rotation-flexion"])])];
@@ -1002,6 +1053,45 @@
     self.acc = (self.acc >>> 0) + (4 >>> 0) | 0;
     _M0MPB6Hasher8consume4(self, value);
   }
+  function _M0MPC15array10FixedArray12unsafe__blitGRPB17UnsafeMaybeUninitGcEE(dst, dst_offset, src, src_offset, len) {
+    if (dst === src && dst_offset < src_offset) {
+      let _tmp = 0;
+      while (true) {
+        const i = _tmp;
+        if (i < len) {
+          const _tmp$2 = dst_offset + i | 0;
+          const _tmp$3 = src_offset + i | 0;
+          if (_tmp$2 >>> 0 < dst.length) {
+            dst[_tmp$2] = _tmp$3 >>> 0 < src.length ? src[_tmp$3] : $oob();
+          } else {
+            $oob();
+          }
+          _tmp = i + 1 | 0;
+          continue;
+        } else {
+          return;
+        }
+      }
+    } else {
+      let _tmp = len - 1 | 0;
+      while (true) {
+        const i = _tmp;
+        if (i >= 0) {
+          const _tmp$2 = dst_offset + i | 0;
+          const _tmp$3 = src_offset + i | 0;
+          if (_tmp$2 >>> 0 < dst.length) {
+            dst[_tmp$2] = _tmp$3 >>> 0 < src.length ? src[_tmp$3] : $oob();
+          } else {
+            $oob();
+          }
+          _tmp = i - 1 | 0;
+          continue;
+        } else {
+          return;
+        }
+      }
+    }
+  }
   function _M0MPC15array10FixedArray12unsafe__blitGRPC38internal13regex__engine8automata5StateE(dst, dst_offset, src, src_offset, len) {
     if (dst === src && dst_offset < src_offset) {
       let _tmp = 0;
@@ -1040,6 +1130,9 @@
         }
       }
     }
+  }
+  function _M0MPB18UninitializedArray12unsafe__blitGcE(dst, dst_offset, src, src_offset, len) {
+    _M0MPC15array10FixedArray12unsafe__blitGRPB17UnsafeMaybeUninitGcEE(dst, dst_offset, src, src_offset, len);
   }
   function _M0MPB13StringBuilder13write__objectGsE(self, obj) {
     _M0IP016_24default__implPB4Show6outputGsE(obj, { self: self, method_table: _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang_2fcore_2fbuiltin_2eLogger });
@@ -1330,6 +1423,9 @@
   }
   function _M0MPC13int3Int18to__string_2einner(self, radix) {
     return _M0FPB19int__to__string__js(self, radix);
+  }
+  function _M0MPC15int645Int6418to__string_2einner(self, radix) {
+    return _M0FPB21int64__to__string__js(self, radix);
   }
   function _M0MPB4Iter3newGRPC16string10StringViewE(f, size_hint) {
     let size_hint$2;
@@ -1807,6 +1903,9 @@
   function _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(self, value) {
     _M0MPB7JSArray4push(self, value);
   }
+  function _M0MPC15array5Array4pushGcE(self, value) {
+    _M0MPB7JSArray4push(self, value);
+  }
   function _M0MPC15array5Array4pushGiE(self, value) {
     _M0MPB7JSArray4push(self, value);
   }
@@ -2105,6 +2204,27 @@
   }
   function _M0MPC16string10StringView9is__empty(self) {
     return (self.end - self.start | 0) === 0;
+  }
+  function _M0MPC16string6String4iter(self) {
+    const len = self.length;
+    const index = new _M0TPB8MutLocalGiE(0);
+    return _M0MPB4Iter3newGcE(() => {
+      if (index.val < len) {
+        const c1 = self.charCodeAt(index.val);
+        if (_M0MPC16uint166UInt1622is__leading__surrogate(c1) && (index.val + 1 | 0) < len) {
+          const c2 = self.charCodeAt(index.val + 1 | 0);
+          if (_M0MPC16uint166UInt1623is__trailing__surrogate(c2)) {
+            const c = _M0FPB32code__point__of__surrogate__pair(c1, c2);
+            index.val = index.val + 2 | 0;
+            return c;
+          }
+        }
+        index.val = index.val + 1 | 0;
+        return _M0MPC16uint166UInt1616unsafe__to__char(c1);
+      } else {
+        return -1;
+      }
+    }, undefined);
   }
   function _M0MPB4Iter3mapGcRPC16string10StringViewE(self, f) {
     return new _M0TPB4IterGRPC16string10StringViewE(() => {
@@ -2559,6 +2679,15 @@
       return _t;
     }
   }
+  function _M0MPC15array5Array31unsafe__make__and__blit_2einnerGcE(src, allocate_len, len, src_offset, dst_offset) {
+    const dst = new Array(allocate_len);
+    _M0MPB18UninitializedArray12unsafe__blitGcE(dst, dst_offset, src, src_offset, len);
+    return dst;
+  }
+  function _M0MPC15array9ArrayView9to__ownedGcE(self) {
+    const len = self.end - self.start | 0;
+    return len === 0 ? [] : _M0MPC15array5Array31unsafe__make__and__blit_2einnerGcE(self.buf, len, len, self.start, 0);
+  }
   function _M0MPC13int3Int20next__power__of__two(self) {
     if (self >= 0) {
       if (self <= 1) {
@@ -2691,8 +2820,29 @@
   function _M0MPC16double6Double7is__nan(self) {
     return self !== self;
   }
+  function _M0MPC16double6Double7is__inf(self) {
+    return self > _M0FPB18double__max__value || self < _M0FPB18double__min__value;
+  }
   function _M0IPC16double6DoublePB4Show10to__string(self) {
     return String(self);
+  }
+  function _M0MPC15array5Array12view_2einnerGcE(self, start, end) {
+    const len = self.length;
+    let end$2;
+    if (end === undefined) {
+      end$2 = len;
+    } else {
+      const _Some = end;
+      const _end = _Some;
+      end$2 = _end;
+    }
+    if (start >= 0 && (start <= end$2 && end$2 <= len)) {
+      const _bind = self;
+      const _bind$2 = end$2 - start | 0;
+      return new _M0TPB9ArrayViewGcE(_bind, start, start + _bind$2 | 0);
+    } else {
+      return _M0FPC15abort5abortGRPC16string10StringViewE("View index out of bounds");
+    }
   }
   function _M0MPC15array9ArrayView4eachGURPC38internal13regex__engine8automata5StateRPC36string8internal13regex__engine7StateIdEE(self, f) {
     const _bind = self.end - self.start | 0;
@@ -2765,6 +2915,10 @@
     return _M0MPB7JSArray4copy(self);
   }
   function _M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(self, index) {
+    const len = self.length;
+    return index >= 0 && index < len ? self[index] : $panic();
+  }
+  function _M0MPC15array5Array2atGcE(self, index) {
     const len = self.length;
     return index >= 0 && index < len ? self[index] : $panic();
   }
@@ -9678,6 +9832,1054 @@
   function _M0FPC14math3cos(_tmp) {
     return Math.cos(_tmp);
   }
+  function _M0FP37lqyq6668bodymate5agent9is__lower(ch) {
+    return ch >= 97 && ch <= 122;
+  }
+  function _M0FP37lqyq6668bodymate5agent9is__alpha(ch) {
+    return _M0FP37lqyq6668bodymate5agent9is__lower(ch) || ch >= 65 && ch <= 90;
+  }
+  function _M0FP37lqyq6668bodymate5agent9is__digit(ch) {
+    return ch >= 48 && ch <= 57;
+  }
+  function _M0FP37lqyq6668bodymate5agent16identifier__like(text, first, rest) {
+    const count = new _M0TPB8MutLocalGiE(0);
+    const _it = _M0MPC16string6String4iter(text);
+    while (true) {
+      let ch;
+      _L: {
+        const _bind = _M0MPB4Iter4nextGcE(_it);
+        if (_bind === -1) {
+          break;
+        } else {
+          const _Some = _bind;
+          const _ch = _Some;
+          ch = _ch;
+          break _L;
+        }
+      }
+      count.val = count.val + 1 | 0;
+      if (count.val > 64) {
+        return false;
+      }
+      if (count.val === 1) {
+        if (!first(ch)) {
+          return false;
+        }
+      } else {
+        if (!rest(ch)) {
+          return false;
+        }
+      }
+      continue;
+    }
+    return count.val > 0;
+  }
+  function _M0FP37lqyq6668bodymate5agent22is__valid__command__id(id) {
+    return _M0FP37lqyq6668bodymate5agent16identifier__like(id, _M0FP37lqyq6668bodymate5agent9is__lower, (ch) => _M0FP37lqyq6668bodymate5agent9is__lower(ch) || (_M0FP37lqyq6668bodymate5agent9is__digit(ch) || ch === 95));
+  }
+  function _M0FP37lqyq6668bodymate5agent21is__valid__field__key(key) {
+    return _M0FP37lqyq6668bodymate5agent16identifier__like(key, _M0FP37lqyq6668bodymate5agent9is__alpha, (ch) => _M0FP37lqyq6668bodymate5agent9is__alpha(ch) || (_M0FP37lqyq6668bodymate5agent9is__digit(ch) || ch === 95));
+  }
+  function _M0FP37lqyq6668bodymate5agent11bound__text(text, max_chars) {
+    if (max_chars <= 0) {
+      return "";
+    }
+    const builder = _M0MPB13StringBuilder21StringBuilder_2einner(0);
+    const count = new _M0TPB8MutLocalGiE(0);
+    const _it = _M0MPC16string6String4iter(_M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(text, undefined)));
+    while (true) {
+      let ch;
+      _L: {
+        const _bind = _M0MPB4Iter4nextGcE(_it);
+        if (_bind === -1) {
+          break;
+        } else {
+          const _Some = _bind;
+          const _ch = _Some;
+          ch = _ch;
+          break _L;
+        }
+      }
+      if (count.val >= max_chars) {
+        break;
+      }
+      _M0IPB13StringBuilderPB6Logger11write__char(builder, ch);
+      count.val = count.val + 1 | 0;
+      continue;
+    }
+    return _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPB13StringBuilder10to__string(builder), undefined));
+  }
+  function _M0FP37lqyq6668bodymate5agent13parse__finite(value) {
+    let parsed;
+    let _try_err;
+    _L: {
+      _L$2: {
+        const _bind = _M0FPC28internal7strconv13parse__double(value);
+        let _tmp;
+        if (_bind.$tag === 1) {
+          const _ok = _bind;
+          _tmp = _ok._0;
+        } else {
+          const _err = _bind;
+          _try_err = _err._0;
+          break _L$2;
+        }
+        parsed = new _M0DTPC16option6OptionGdE4Some(_tmp);
+        break _L;
+      }
+      parsed = _M0DTPC16option6OptionGdE4None__;
+    }
+    let number;
+    _L$2: {
+      if (parsed.$tag === 1) {
+        const _Some = parsed;
+        const _number = _Some._0;
+        number = _number;
+        break _L$2;
+      } else {
+        return _M0DTPC16option6OptionGdE4None__;
+      }
+    }
+    return _M0MPC16double6Double7is__nan(number) || _M0MPC16double6Double7is__inf(number) ? _M0DTPC16option6OptionGdE4None__ : new _M0DTPC16option6OptionGdE4Some(number);
+  }
+  function _M0FP37lqyq6668bodymate5agent16parse__allowlist(wire) {
+    const allowed = [];
+    const seen_ids = [];
+    const _bind = "~";
+    const _it = _M0MPC16string6String5split(wire, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let record;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _record = _Some;
+          record = _record;
+          break _L;
+        }
+      }
+      const _bind$2 = "^";
+      const parts = _M0MPB4Iter9to__arrayGRPC16string10StringViewE(_M0MPC16string10StringView5split(record, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length)));
+      if (parts.length === 0) {
+        continue;
+      }
+      const id = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(parts, 0)), undefined));
+      if (!_M0FP37lqyq6668bodymate5agent22is__valid__command__id(id) || _M0MPC15array5Array8containsGsE(seen_ids, id)) {
+        continue;
+      }
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(seen_ids, id);
+      const fields = [];
+      if (parts.length >= 2) {
+        const _tmp = _M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(parts, 1));
+        const _bind$3 = ",";
+        const _it$2 = _M0MPC16string6String5split(_tmp, new _M0TPC16string10StringView(_bind$3, 0, _bind$3.length));
+        while (true) {
+          let raw;
+          _L$2: {
+            const _bind$4 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it$2);
+            if (_bind$4 === undefined) {
+              break;
+            } else {
+              const _Some = _bind$4;
+              const _raw = _Some;
+              raw = _raw;
+              break _L$2;
+            }
+          }
+          const key = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string10StringView9to__owned(raw), undefined));
+          if (_M0FP37lqyq6668bodymate5agent21is__valid__field__key(key) && !_M0MPC15array5Array8containsGsE(fields, key)) {
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(fields, key);
+          }
+          continue;
+        }
+      }
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(allowed, new _M0TP37lqyq6668bodymate5agent14AllowedCommand(id, fields));
+      continue;
+    }
+    return allowed;
+  }
+  function _M0FP37lqyq6668bodymate5agent13parse__fields(wire) {
+    const fields = [];
+    const seen = [];
+    const _bind = ",";
+    const _it = _M0MPC16string6String5split(wire, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let pair;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _pair = _Some;
+          pair = _pair;
+          break _L;
+        }
+      }
+      const _bind$2 = "=";
+      const parts = _M0MPB4Iter9to__arrayGRPC16string10StringViewE(_M0MPC16string10StringView5split(pair, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length)));
+      if (parts.length !== 2) {
+        continue;
+      }
+      const key = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(parts, 0)), undefined));
+      if (!_M0FP37lqyq6668bodymate5agent21is__valid__field__key(key) || _M0MPC15array5Array8containsGsE(seen, key)) {
+        continue;
+      }
+      let value;
+      _L$2: {
+        _L$3: {
+          const _bind$3 = _M0FP37lqyq6668bodymate5agent13parse__finite(_M0MPC16string10StringView4trim(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(parts, 1), undefined));
+          if (_bind$3.$tag === 1) {
+            const _Some = _bind$3;
+            const _value = _Some._0;
+            value = _value;
+            break _L$3;
+          }
+          break _L$2;
+        }
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(seen, key);
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(fields, { _0: key, _1: value });
+      }
+      continue;
+    }
+    return fields;
+  }
+  function _M0FP37lqyq6668bodymate5agent14guard__command(candidate_id, candidate_fields, allowed) {
+    const id = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(candidate_id, undefined));
+    const _bind = allowed.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const command = allowed[_];
+        _L: {
+          if (_M0IP016_24default__implPB2Eq10not__equalGsE(command.id, id)) {
+            break _L;
+          }
+          const kept = [];
+          const _bind$2 = command.fields;
+          const _bind$3 = _bind$2.length;
+          let _tmp$2 = 0;
+          while (true) {
+            const _$2 = _tmp$2;
+            if (_$2 < _bind$3) {
+              const key = _bind$2[_$2];
+              const _bind$4 = candidate_fields.length;
+              let _tmp$3 = 0;
+              while (true) {
+                const _$3 = _tmp$3;
+                if (_$3 < _bind$4) {
+                  const field = candidate_fields[_$3];
+                  if (field._0 === key && (!_M0MPC16double6Double7is__nan(field._1) && !_M0MPC16double6Double7is__inf(field._1))) {
+                    _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(kept, { _0: key, _1: field._1 });
+                    break;
+                  }
+                  _tmp$3 = _$3 + 1 | 0;
+                  continue;
+                } else {
+                  break;
+                }
+              }
+              _tmp$2 = _$2 + 1 | 0;
+              continue;
+            } else {
+              break;
+            }
+          }
+          return new _M0DTP37lqyq6668bodymate5agent13GuardedAction7Command(id, kept);
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return _M0DTP37lqyq6668bodymate5agent13GuardedAction4None__;
+  }
+  function _M0FP37lqyq6668bodymate5agent13guard__lookup(query, max_chars) {
+    const text = _M0FP37lqyq6668bodymate5agent11bound__text(query, max_chars);
+    return text === "" ? _M0DTP37lqyq6668bodymate5agent13GuardedAction4None__ : new _M0DTP37lqyq6668bodymate5agent13GuardedAction6Lookup(text);
+  }
+  function _M0FP37lqyq6668bodymate5agent12action__wire(action) {
+    let text;
+    _L: {
+      let id;
+      let fields;
+      _L$2: {
+        switch (action.$tag) {
+          case 0: {
+            return "none";
+          }
+          case 1: {
+            const _Command = action;
+            const _id = _Command._0;
+            const _fields = _Command._1;
+            id = _id;
+            fields = _fields;
+            break _L$2;
+          }
+          default: {
+            const _Lookup = action;
+            const _text = _Lookup._0;
+            text = _text;
+            break _L;
+          }
+        }
+      }
+      const pairs = [];
+      const _bind = fields.length;
+      let _tmp = 0;
+      while (true) {
+        const _ = _tmp;
+        if (_ < _bind) {
+          const field = fields[_];
+          _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(pairs, `${field._0}=${String(field._1)}`);
+          _tmp = _ + 1 | 0;
+          continue;
+        } else {
+          break;
+        }
+      }
+      const _bind$2 = ",";
+      return `command|${id}|${_M0MPC15array5Array4joinGsE(pairs, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))}`;
+    }
+    return `lookup|${text}`;
+  }
+  function _M0IP37lqyq6668bodymate7anatomy13StructureKindPB2Eq5equal(_x_33, _x_34) {
+    switch (_x_33) {
+      case 0: {
+        if (_x_34 === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      case 1: {
+        if (_x_34 === 1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      case 2: {
+        if (_x_34 === 2) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      default: {
+        if (_x_34 === 3) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate7anatomy18laterality__prefix(canonical) {
+    const _tmp = _M0MPC16string6String9to__lower(canonical);
+    const _bind = " ";
+    const _it = _M0MPC16string6String5split(_tmp, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let part;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _part = _Some;
+          part = _part;
+          break _L;
+        }
+      }
+      const word = _M0MPC16string10StringView9to__owned(part);
+      if (word === "left") {
+        return "左侧";
+      }
+      if (word === "right") {
+        return "右侧";
+      }
+      continue;
+    }
+    return "";
+  }
+  function _M0FP37lqyq6668bodymate7anatomy6lookup(terms, key) {
+    const _bind = terms.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const term = terms[_];
+        if (term._0 === key) {
+          return term._1;
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return undefined;
+  }
+  function _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical) {
+    const words = [];
+    const _tmp = _M0MPC16string6String9to__lower(canonical);
+    const _bind = " ";
+    const _it = _M0MPC16string6String5split(_tmp, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let part;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _part = _Some;
+          part = _part;
+          break _L;
+        }
+      }
+      const word = _M0MPC16string10StringView9to__owned(part);
+      if (word === "" || (word === "left" || word === "right")) {
+        continue;
+      }
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(words, word);
+      continue;
+    }
+    const _bind$2 = " ";
+    return _M0MPC15array5Array4joinGsE(words, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length));
+  }
+  function _M0FP37lqyq6668bodymate7anatomy16muscle__name__zh(canonical) {
+    let term;
+    const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy19muscle__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+    if (_bind === undefined) {
+      term = "肌肉结构";
+    } else {
+      const _Some = _bind;
+      const _term = _Some;
+      term = _term;
+    }
+    return `${_M0FP37lqyq6668bodymate7anatomy18laterality__prefix(canonical)}${term}`;
+  }
+  function _M0FP37lqyq6668bodymate7anatomy19structure__name__zh(canonical, kind) {
+    if (kind === 0) {
+      return _M0FP37lqyq6668bodymate7anatomy16muscle__name__zh(canonical);
+    } else {
+      let term;
+      const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy22structure__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+      if (_bind === undefined) {
+        switch (kind) {
+          case 2: {
+            term = "结缔结构";
+            break;
+          }
+          case 1: {
+            term = "骨骼结构";
+            break;
+          }
+          default: {
+            term = "人体结构";
+          }
+        }
+      } else {
+        const _Some = _bind;
+        const _term = _Some;
+        term = _term;
+      }
+      return `${_M0FP37lqyq6668bodymate7anatomy18laterality__prefix(canonical)}${term}`;
+    }
+  }
+  function _M0MP37lqyq6668bodymate7anatomy14StructureEntry17display__name__zh(self) {
+    return _M0FP37lqyq6668bodymate7anatomy19structure__name__zh(self.canonical_name, self.kind);
+  }
+  function _M0FP37lqyq6668bodymate7anatomy18search__structures(entries, query) {
+    const normalized = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string6String9to__lower(query), undefined));
+    if (normalized === "") {
+      return [];
+    }
+    const muscles = [];
+    const others = [];
+    const _bind = entries.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const entry = entries[_];
+        const canonical = _M0MPC16string6String9to__lower(entry.canonical_name);
+        if (_M0MPC16string6String8contains(canonical, new _M0TPC16string10StringView(normalized, 0, normalized.length)) || _M0MPC16string6String8contains(_M0MP37lqyq6668bodymate7anatomy14StructureEntry17display__name__zh(entry), new _M0TPC16string10StringView(normalized, 0, normalized.length))) {
+          if (_M0IP37lqyq6668bodymate7anatomy13StructureKindPB2Eq5equal(entry.kind, 0)) {
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(muscles, entry);
+          } else {
+            _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(others, entry);
+          }
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const _bind$2 = others.length;
+    let _tmp$2 = 0;
+    while (true) {
+      const _ = _tmp$2;
+      if (_ < _bind$2) {
+        const entry = others[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(muscles, entry);
+        _tmp$2 = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return muscles;
+  }
+  function _M0FP37lqyq6668bodymate7anatomy18kind__from__string(kind) {
+    const _bind = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(_M0MPC16string6String9to__lower(kind), undefined));
+    switch (_bind) {
+      case "muscle": {
+        return 0;
+      }
+      case "bone": {
+        return 1;
+      }
+      case "connective": {
+        return 2;
+      }
+      default: {
+        return 3;
+      }
+    }
+  }
+  function _M0FP37lqyq6668bodymate7anatomy26has__chinese__muscle__name(canonical) {
+    const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy19muscle__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+    return !(_bind === undefined);
+  }
+  function _M0FP37lqyq6668bodymate7anatomy29has__chinese__structure__name(canonical, kind) {
+    if (kind === 0) {
+      return _M0FP37lqyq6668bodymate7anatomy26has__chinese__muscle__name(canonical);
+    } else {
+      const _bind = _M0FP37lqyq6668bodymate7anatomy6lookup(_M0FP37lqyq6668bodymate7anatomy22structure__term__table, _M0FP37lqyq6668bodymate7anatomy15normalize__name(canonical));
+      return !(_bind === undefined);
+    }
+  }
+  function _M0FP37lqyq6668bodymate5zhnum12digit__value(ch) {
+    _L: {
+      _L$2: {
+        _L$3: {
+          _L$4: {
+            _L$5: {
+              _L$6: {
+                _L$7: {
+                  _L$8: {
+                    _L$9: {
+                      _L$10: {
+                        switch (ch) {
+                          case 38646: {
+                            break _L$10;
+                          }
+                          case 12295: {
+                            break _L$10;
+                          }
+                          case 19968: {
+                            break _L$9;
+                          }
+                          case 22777: {
+                            break _L$9;
+                          }
+                          case 20108: {
+                            break _L$8;
+                          }
+                          case 36144: {
+                            break _L$8;
+                          }
+                          case 20004: {
+                            break _L$8;
+                          }
+                          case 19977: {
+                            break _L$7;
+                          }
+                          case 21441: {
+                            break _L$7;
+                          }
+                          case 22235: {
+                            break _L$6;
+                          }
+                          case 32902: {
+                            break _L$6;
+                          }
+                          case 20116: {
+                            break _L$5;
+                          }
+                          case 20237: {
+                            break _L$5;
+                          }
+                          case 20845: {
+                            break _L$4;
+                          }
+                          case 38470: {
+                            break _L$4;
+                          }
+                          case 19971: {
+                            break _L$3;
+                          }
+                          case 26578: {
+                            break _L$3;
+                          }
+                          case 20843: {
+                            break _L$2;
+                          }
+                          case 25420: {
+                            break _L$2;
+                          }
+                          case 20061: {
+                            break _L;
+                          }
+                          case 29590: {
+                            break _L;
+                          }
+                          default: {
+                            return undefined;
+                          }
+                        }
+                      }
+                      return 0;
+                    }
+                    return 1;
+                  }
+                  return 2;
+                }
+                return 3;
+              }
+              return 4;
+            }
+            return 5;
+          }
+          return 6;
+        }
+        return 7;
+      }
+      return 8;
+    }
+    return 9;
+  }
+  function _M0FP37lqyq6668bodymate5zhnum11unit__value(ch) {
+    _L: {
+      _L$2: {
+        _L$3: {
+          _L$4: {
+            _L$5: {
+              switch (ch) {
+                case 21313: {
+                  break _L$5;
+                }
+                case 25342: {
+                  break _L$5;
+                }
+                case 30334: {
+                  break _L$4;
+                }
+                case 20336: {
+                  break _L$4;
+                }
+                case 21315: {
+                  break _L$3;
+                }
+                case 20191: {
+                  break _L$3;
+                }
+                case 19975: {
+                  break _L$2;
+                }
+                case 33836: {
+                  break _L$2;
+                }
+                case 20159: {
+                  break _L;
+                }
+                case 20740: {
+                  break _L;
+                }
+                default: {
+                  return undefined;
+                }
+              }
+            }
+            return 10n;
+          }
+          return 100n;
+        }
+        return 1000n;
+      }
+      return 10000n;
+    }
+    return 100000000n;
+  }
+  function _M0FP37lqyq6668bodymate5zhnum17is__numeral__char(ch) {
+    const _bind = _M0FP37lqyq6668bodymate5zhnum12digit__value(ch);
+    if (_bind === undefined) {
+      const _bind$2 = _M0FP37lqyq6668bodymate5zhnum11unit__value(ch);
+      return !(_bind$2 === undefined);
+    } else {
+      return true;
+    }
+  }
+  function _M0FP37lqyq6668bodymate5zhnum16is__ascii__digit(ch) {
+    return ch >= 48 && ch <= 57;
+  }
+  function _M0FP37lqyq6668bodymate5zhnum14parse__integer(chars) {
+    if (chars.length === 0) {
+      return undefined;
+    }
+    const total = new _M0TPB8MutLocalGlE(0n);
+    const section = new _M0TPB8MutLocalGlE(0n);
+    const current = new _M0TPB8MutLocalGlE(0n);
+    const _bind = chars.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const ch = chars[_];
+        let digit;
+        _L: {
+          _L$2: {
+            const _bind$2 = _M0FP37lqyq6668bodymate5zhnum12digit__value(ch);
+            if (_bind$2 === undefined) {
+              let unit;
+              _L$3: {
+                const _bind$3 = _M0FP37lqyq6668bodymate5zhnum11unit__value(ch);
+                if (_bind$3 === undefined) {
+                  return undefined;
+                } else {
+                  const _Some = _bind$3;
+                  const _unit = _Some;
+                  unit = _unit;
+                  break _L$3;
+                }
+              }
+              if (BigInt.asIntN(64, unit) >= BigInt.asIntN(64, 10000n)) {
+                if (BigInt.asUintN(64, BigInt.asUintN(64, section.val + current.val)) === BigInt.asUintN(64, 0n)) {
+                  return undefined;
+                }
+                total.val = BigInt.asUintN(64, total.val + BigInt.asUintN(64, BigInt.asUintN(64, section.val + current.val) * unit));
+                section.val = 0n;
+                current.val = 0n;
+              } else {
+                if (BigInt.asUintN(64, current.val) === BigInt.asUintN(64, 0n) && BigInt.asUintN(64, section.val) === BigInt.asUintN(64, 0n)) {
+                  if (BigInt.asUintN(64, unit) === BigInt.asUintN(64, 10n)) {
+                    current.val = 1n;
+                  } else {
+                    return undefined;
+                  }
+                }
+                section.val = BigInt.asUintN(64, section.val + BigInt.asUintN(64, current.val * unit));
+                current.val = 0n;
+              }
+            } else {
+              const _Some = _bind$2;
+              const _digit = _Some;
+              digit = _digit;
+              break _L$2;
+            }
+            break _L;
+          }
+          current.val = BigInt.asUintN(64, BigInt(digit));
+        }
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return BigInt.asUintN(64, BigInt.asUintN(64, total.val + section.val) + current.val);
+  }
+  function _M0FP37lqyq6668bodymate5zhnum14numeral__parts(run) {
+    if (run.length === 1 && _M0MPC15array5Array2atGcE(run, 0) === 21322) {
+      return { _0: "0", _1: "5" };
+    }
+    const point = new _M0TPB8MutLocalGiE(-1);
+    const _bind = run.length;
+    let _tmp = 0;
+    while (true) {
+      const index = _tmp;
+      if (index < _bind) {
+        const ch = run[index];
+        if (ch === 28857) {
+          if (point.val >= 0) {
+            return undefined;
+          }
+          point.val = index;
+        }
+        _tmp = index + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const integer_chars = point.val >= 0 ? _M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(run, 0, point.val)) : run;
+    const fraction_chars = point.val >= 0 ? _M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(run, point.val + 1 | 0, undefined)) : [];
+    if (point.val >= 0 && (integer_chars.length === 0 || fraction_chars.length === 0)) {
+      return undefined;
+    }
+    let integer;
+    const _bind$2 = _M0FP37lqyq6668bodymate5zhnum14parse__integer(integer_chars);
+    if (_bind$2 === undefined) {
+      return undefined;
+    } else {
+      const _Some = _bind$2;
+      const _value = _Some;
+      integer = _value;
+    }
+    const fraction = _M0MPB13StringBuilder21StringBuilder_2einner(0);
+    const _bind$3 = fraction_chars.length;
+    let _tmp$2 = 0;
+    while (true) {
+      const _ = _tmp$2;
+      if (_ < _bind$3) {
+        const ch = fraction_chars[_];
+        let digit;
+        _L: {
+          const _bind$4 = _M0FP37lqyq6668bodymate5zhnum12digit__value(ch);
+          if (_bind$4 === undefined) {
+            return undefined;
+          } else {
+            const _Some = _bind$4;
+            const _digit = _Some;
+            digit = _digit;
+            break _L;
+          }
+        }
+        _M0IPB13StringBuilderPB6Logger13write__string(fraction, _M0MPC13int3Int18to__string_2einner(digit, 10));
+        _tmp$2 = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return { _0: _M0MPC15int645Int6418to__string_2einner(integer, 10), _1: _M0MPB13StringBuilder10to__string(fraction) };
+  }
+  function _M0FP37lqyq6668bodymate5zhnum27ascii__digit__of__fullwidth(ch) {
+    return ch >= 65296 && ch <= 65305 ? (ch - 65296 | 0) + 48 | 0 : -1;
+  }
+  function _M0FP37lqyq6668bodymate5zhnum16starts__with__at(chars, index, prefix) {
+    if ((index + prefix.length | 0) > chars.length) {
+      return false;
+    }
+    const _bind = prefix.length;
+    let _tmp = 0;
+    while (true) {
+      const offset = _tmp;
+      if (offset < _bind) {
+        const ch = prefix[offset];
+        if (_M0MPC15array5Array2atGcE(chars, index + offset | 0) !== ch) {
+          return false;
+        }
+        _tmp = offset + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return true;
+  }
+  function _M0FP37lqyq6668bodymate5zhnum20numeral__run__length(chars, index) {
+    if (index < chars.length && _M0MPC15array5Array2atGcE(chars, index) === 21322) {
+      return 1;
+    }
+    const end = new _M0TPB8MutLocalGiE(index);
+    while (true) {
+      if (end.val < chars.length) {
+        const ch = _M0MPC15array5Array2atGcE(chars, end.val);
+        if (_M0FP37lqyq6668bodymate5zhnum17is__numeral__char(ch)) {
+          end.val = end.val + 1 | 0;
+        } else {
+          _L: {
+            _L$2: {
+              if (ch === 28857) {
+                if (end.val > index) {
+                  if ((end.val + 1 | 0) < chars.length) {
+                    const _bind = _M0FP37lqyq6668bodymate5zhnum12digit__value(_M0MPC15array5Array2atGcE(chars, end.val + 1 | 0));
+                    if (_bind === undefined) {
+                      break _L$2;
+                    } else {
+                      end.val = end.val + 1 | 0;
+                    }
+                  } else {
+                    break _L$2;
+                  }
+                } else {
+                  break _L$2;
+                }
+              } else {
+                break _L$2;
+              }
+              break _L;
+            }
+            break;
+          }
+        }
+        continue;
+      } else {
+        break;
+      }
+    }
+    return end.val - index | 0;
+  }
+  function _M0FP37lqyq6668bodymate5zhnum26ascii__number__run__length(chars, index) {
+    const end = new _M0TPB8MutLocalGiE(index);
+    const seen_point = new _M0TPB8MutLocalGbE(false);
+    while (true) {
+      if (end.val < chars.length) {
+        const ch = _M0MPC15array5Array2atGcE(chars, end.val);
+        if (_M0FP37lqyq6668bodymate5zhnum16is__ascii__digit(ch)) {
+          end.val = end.val + 1 | 0;
+        } else {
+          if (ch === 46 && (!seen_point.val && (end.val > index && ((end.val + 1 | 0) < chars.length && _M0FP37lqyq6668bodymate5zhnum16is__ascii__digit(_M0MPC15array5Array2atGcE(chars, end.val + 1 | 0)))))) {
+            seen_point.val = true;
+            end.val = end.val + 1 | 0;
+          } else {
+            break;
+          }
+        }
+        continue;
+      } else {
+        break;
+      }
+    }
+    return end.val - index | 0;
+  }
+  function _M0FP37lqyq6668bodymate5zhnum19normalize__numerals(text) {
+    const chars = [];
+    const _it = _M0MPC16string6String4iter(text);
+    while (true) {
+      let ch;
+      _L: {
+        const _bind = _M0MPB4Iter4nextGcE(_it);
+        if (_bind === -1) {
+          break;
+        } else {
+          const _Some = _bind;
+          const _ch = _Some;
+          ch = _ch;
+          break _L;
+        }
+      }
+      let digit;
+      _L$2: {
+        _L$3: {
+          const _bind = _M0FP37lqyq6668bodymate5zhnum27ascii__digit__of__fullwidth(ch);
+          if (_bind === -1) {
+            if (ch === 65294) {
+              _M0MPC15array5Array4pushGcE(chars, 46);
+            } else {
+              if (ch === 65285) {
+                _M0MPC15array5Array4pushGcE(chars, 37);
+              } else {
+                _M0MPC15array5Array4pushGcE(chars, ch);
+              }
+            }
+          } else {
+            const _Some = _bind;
+            const _digit = _Some;
+            digit = _digit;
+            break _L$3;
+          }
+          break _L$2;
+        }
+        _M0MPC15array5Array4pushGcE(chars, digit);
+      }
+      continue;
+    }
+    const percent_prefix = [30334, 20998, 20043];
+    const output = _M0MPB13StringBuilder21StringBuilder_2einner(0);
+    const index = new _M0TPB8MutLocalGiE(0);
+    while (true) {
+      if (index.val < chars.length) {
+        if (_M0FP37lqyq6668bodymate5zhnum16starts__with__at(chars, index.val, percent_prefix)) {
+          const start = index.val + percent_prefix.length | 0;
+          const chinese = _M0FP37lqyq6668bodymate5zhnum20numeral__run__length(chars, start);
+          if (chinese > 0) {
+            let integer;
+            let fraction;
+            _L: {
+              _L$2: {
+                const _bind = _M0FP37lqyq6668bodymate5zhnum14numeral__parts(_M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(chars, start, start + chinese | 0)));
+                if (_bind === undefined) {
+                } else {
+                  const _Some = _bind;
+                  const _x = _Some;
+                  const _integer = _x._0;
+                  const _fraction = _x._1;
+                  integer = _integer;
+                  fraction = _fraction;
+                  break _L$2;
+                }
+                break _L;
+              }
+              _M0IPB13StringBuilderPB6Logger13write__string(output, fraction === "" ? integer : `${integer}.${fraction}`);
+              _M0IPB13StringBuilderPB6Logger11write__char(output, 37);
+              index.val = start + chinese | 0;
+              continue;
+            }
+          }
+          const ascii = _M0FP37lqyq6668bodymate5zhnum26ascii__number__run__length(chars, start);
+          if (ascii > 0) {
+            const _bind = _M0MPC15array5Array12view_2einnerGcE(chars, start, start + ascii | 0);
+            const _bind$2 = _bind.end - _bind.start | 0;
+            let _tmp = 0;
+            while (true) {
+              const _ = _tmp;
+              if (_ < _bind$2) {
+                const ch = _bind.buf[_bind.start + _ | 0];
+                _M0IPB13StringBuilderPB6Logger11write__char(output, ch);
+                _tmp = _ + 1 | 0;
+                continue;
+              } else {
+                break;
+              }
+            }
+            _M0IPB13StringBuilderPB6Logger11write__char(output, 37);
+            index.val = start + ascii | 0;
+            continue;
+          }
+        }
+        const run = _M0FP37lqyq6668bodymate5zhnum20numeral__run__length(chars, index.val);
+        if (run > 0) {
+          let integer;
+          let fraction;
+          _L: {
+            _L$2: {
+              const _bind = _M0FP37lqyq6668bodymate5zhnum14numeral__parts(_M0MPC15array9ArrayView9to__ownedGcE(_M0MPC15array5Array12view_2einnerGcE(chars, index.val, index.val + run | 0)));
+              if (_bind === undefined) {
+              } else {
+                const _Some = _bind;
+                const _x = _Some;
+                const _integer = _x._0;
+                const _fraction = _x._1;
+                integer = _integer;
+                fraction = _fraction;
+                break _L$2;
+              }
+              break _L;
+            }
+            _M0IPB13StringBuilderPB6Logger13write__string(output, fraction === "" ? integer : `${integer}.${fraction}`);
+            index.val = index.val + run | 0;
+            continue;
+          }
+        }
+        _M0IPB13StringBuilderPB6Logger11write__char(output, _M0MPC15array5Array2atGcE(chars, index.val));
+        index.val = index.val + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    return _M0MPB13StringBuilder10to__string(output);
+  }
   function _M0MP37lqyq6668bodymate6motion7Session3new() {
     return new _M0TP37lqyq6668bodymate6motion7Session("", 0, false, 1, [], [], 0);
   }
@@ -9701,7 +10903,7 @@
     return [new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("stanceWidth", "站距", "倍髋宽", 0.8, 1.8, 0.05, 1.2), new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("toeAngle", "脚尖外展", "°", 0, 35, 5, 20), new _M0TP37lqyq6668bodymate6motion25MotionParameterDefinition("squatDepth", "下蹲幅度", "%", 60, 110, 5, 100)];
   }
   function _M0FP37lqyq6668bodymate6motion7catalog() {
-    return [new _M0TP37lqyq6668bodymate6motion16MotionDefinition("push_up", "俯卧撑", ["俯卧撑", "卧撑", "push-up", "push up"], 4, ["胸部", "肩部", "上臂后侧"], "pectoralis major/deltoid/triceps brachii/serratus anterior", _M0FP37lqyq6668bodymate6motion20push__up__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 0.85), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 25)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.5), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 45)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 60)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("squat", "深蹲", ["深蹲", "squat"], 4.4, ["大腿前侧", "臀部", "大腿后侧"], "rectus femoris/vastus/gluteus/biceps femoris/semitendinosus/semimembranosus", _M0FP37lqyq6668bodymate6motion17squat__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄站距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 0.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 10), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.2), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 20), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽站距", [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 30), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("curl", "弯举", ["弯举", "二头弯举", "curl"], 3.6, ["上臂前侧", "前臂"], "biceps brachii/brachialis/brachioradialis", [], [])];
+    return [new _M0TP37lqyq6668bodymate6motion16MotionDefinition("push_up", "俯卧撑", ["俯卧撑", "卧撑", "push-up", "push up"], 4, ["胸部", "肩部", "上臂后侧"], "pectoralis major/deltoid/triceps brachii/serratus anterior", _M0FP37lqyq6668bodymate6motion20push__up__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 0.85), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 25)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", true, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.5), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 45)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("handWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("elbowAngle", 60)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("squat", "深蹲", ["深蹲", "squat"], 4.4, ["大腿前侧", "臀部", "大腿后侧"], "rectus femoris/vastus/gluteus/biceps femoris/semitendinosus/semimembranosus", _M0FP37lqyq6668bodymate6motion17squat__parameters(), [new _M0TP37lqyq6668bodymate6motion12MotionPreset("窄站距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 0.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 10), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("标准", true, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.2), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 20), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)]), new _M0TP37lqyq6668bodymate6motion12MotionPreset("宽站距", false, [new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("stanceWidth", 1.8), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("toeAngle", 30), new _M0TP37lqyq6668bodymate6motion20MotionParameterValue("squatDepth", 100)])]), new _M0TP37lqyq6668bodymate6motion16MotionDefinition("curl", "弯举", ["弯举", "二头弯举", "curl"], 3.6, ["上臂前侧", "前臂"], "biceps brachii/brachialis/brachioradialis", [], [])];
   }
   function _M0FP37lqyq6668bodymate6motion10definition(id) {
     const _bind = _M0FP37lqyq6668bodymate6motion7catalog();
@@ -10082,7 +11284,7 @@
         break _L;
       }
     }
-    const text = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(query, undefined));
+    const text = _M0FP37lqyq6668bodymate5zhnum19normalize__numerals(_M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(query, undefined)));
     let preset_values;
     let preset_recognized;
     _L$2: {
@@ -10436,88 +11638,109 @@
     }
     return new _M0DTPC16result6ResultGRP37lqyq6668bodymate6motion10PoseIntentRP37lqyq6668bodymate6motion11MotionErrorE2Ok(new _M0TP37lqyq6668bodymate6motion10PoseIntent(depth, excursion, root_y.val, root_z.val, torso_x.val, hand_width, elbow_angle, wrist_x.val, wrist_y.val, wrist_z.val, stance_width, toe_angle, ankle_x.val, upper_arm_x.val, forearm_x.val));
   }
-  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_599, _x_600) {
-    if (_x_599 === 0) {
-      if (_x_600 === 0) {
+  function _M0FP37lqyq6668bodymate6motion13phase__guides(id) {
+    const _bind = _M0FP37lqyq6668bodymate6motion10definition(id);
+    if (_bind === undefined) {
+      return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+    } else {
+      switch (id) {
+        case "push_up": {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_ready", 0, 0.875, 0.125, "准备姿势", "从头到脚保持教学模型的整体对齐；这一阶段用于观察起始位置。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_lower", 0.25, 0.125, 0.4375, "下降", "躯干向下移动，胸部与上臂后侧的参与提示开始显现。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_bottom", 0.5, 0.4375, 0.5625, "最低点", "动作到达示范最低位置；手距与肘部外展会改变当前教学姿态。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("push_up_rise", 0.75, 0.5625, 0.875, "推起", "躯干回到准备位置；颜色只表示定性参与，不表示实测受力。")]);
+        }
+        case "squat": {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_ready", 0, 0.875, 0.125, "准备姿势", "双脚站距与脚尖方向使用当前参数；此处是比较的起点。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_lower", 0.25, 0.125, 0.4375, "下降", "髋与膝共同屈曲；可在相同阶段切换站距、脚尖外展和幅度。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_bottom", 0.5, 0.4375, 0.5625, "最低点", "当前下蹲幅度达到最大；模型范围是教学约束，不是训练建议。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("squat_rise", 0.75, 0.5625, 0.875, "起身", "髋与膝伸展回到准备位置；观察臀部与大腿区域的定性提示。")]);
+        }
+        case "curl": {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE2Ok([new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_ready", 0, 0.875, 0.125, "准备姿势", "手臂位于教学模型的起始位置。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_flex", 0.25, 0.125, 0.4375, "屈肘", "前臂向上移动；上臂前侧为主要参与提示。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_top", 0.5, 0.4375, 0.5625, "最高点", "肘部屈曲达到示范最高位置；停在这里便于观察前臂与上臂关系。"), new _M0TP37lqyq6668bodymate6motion16MotionPhaseGuide("curl_extend", 0.75, 0.5625, 0.875, "伸肘", "前臂回到起始位置；颜色是教学提示，不代表力或肌电。")]);
+        }
+        default: {
+          return new _M0DTPC16result6ResultGRPB5ArrayGRP37lqyq6668bodymate6motion16MotionPhaseGuideERP37lqyq6668bodymate6motion11MotionErrorE3Err(new _M0DTP37lqyq6668bodymate6motion11MotionError13UnknownMotion(id));
+        }
+      }
+    }
+  }
+  function _M0IP37lqyq6668bodymate4core5LayerPB2Eq5equal(_x_622, _x_623) {
+    if (_x_622 === 0) {
+      if (_x_623 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_600 === 1) {
+      if (_x_623 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_595, _x_596) {
-    switch (_x_595) {
+  function _M0IP37lqyq6668bodymate4core10ActionKindPB2Eq5equal(_x_618, _x_619) {
+    switch (_x_618) {
       case 0: {
-        if (_x_596 === 0) {
+        if (_x_619 === 0) {
           return true;
         } else {
           return false;
         }
       }
       case 1: {
-        if (_x_596 === 1) {
+        if (_x_619 === 1) {
           return true;
         } else {
           return false;
         }
       }
       case 2: {
-        if (_x_596 === 2) {
+        if (_x_619 === 2) {
           return true;
         } else {
           return false;
         }
       }
       case 3: {
-        if (_x_596 === 3) {
+        if (_x_619 === 3) {
           return true;
         } else {
           return false;
         }
       }
       case 4: {
-        if (_x_596 === 4) {
+        if (_x_619 === 4) {
           return true;
         } else {
           return false;
         }
       }
       case 5: {
-        if (_x_596 === 5) {
+        if (_x_619 === 5) {
           return true;
         } else {
           return false;
         }
       }
       case 6: {
-        if (_x_596 === 6) {
+        if (_x_619 === 6) {
           return true;
         } else {
           return false;
         }
       }
       case 7: {
-        if (_x_596 === 7) {
+        if (_x_619 === 7) {
           return true;
         } else {
           return false;
         }
       }
       case 8: {
-        if (_x_596 === 8) {
+        if (_x_619 === 8) {
           return true;
         } else {
           return false;
         }
       }
       default: {
-        if (_x_596 === 9) {
+        if (_x_619 === 9) {
           return true;
         } else {
           return false;
@@ -10525,30 +11748,30 @@
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_591, _x_592) {
-    if (_x_591 === 0) {
-      if (_x_592 === 0) {
+  function _M0IP37lqyq6668bodymate4core4SidePB2Eq5equal(_x_614, _x_615) {
+    if (_x_614 === 0) {
+      if (_x_615 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_592 === 1) {
+      if (_x_615 === 1) {
         return true;
       } else {
         return false;
       }
     }
   }
-  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_571, _x_572) {
-    if (_x_571 === 0) {
-      if (_x_572 === 0) {
+  function _M0IP37lqyq6668bodymate4core17ParticipationRolePB2Eq5equal(_x_594, _x_595) {
+    if (_x_594 === 0) {
+      if (_x_595 === 0) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (_x_572 === 1) {
+      if (_x_595 === 1) {
         return true;
       } else {
         return false;
@@ -14339,7 +15562,10 @@
     return _M0FP37lqyq6668bodymate4core13session__wire(_M0MP37lqyq6668bodymate6motion7Session8snapshot(_M0FP37lqyq6668bodymate4core15motion__session));
   }
   function _M0FP37lqyq6668bodymate4core12preset__wire(preset) {
-    return `${preset.title}@${_M0FP37lqyq6668bodymate4core15parameter__wire(preset.values)}`;
+    return `${preset.title}@${_M0IPC14bool4BoolPB4Show10to__string(preset.is_baseline)}@${_M0FP37lqyq6668bodymate4core15parameter__wire(preset.values)}`;
+  }
+  function _M0FP37lqyq6668bodymate4core18phase__guide__wire(guide) {
+    return `${guide.id}^${String(guide.phase)}^${String(guide.start)}^${String(guide.end)}^${guide.title}^${guide.detail}`;
   }
   function _M0FP37lqyq6668bodymate4core12motion__wire(motion) {
     const fields = [];
@@ -14508,6 +15734,43 @@
     const _tmp$4 = value.note;
     const _bind$6 = "~";
     return `ok|motion-profile-v1|${_tmp$3}|${_tmp$4}|${_M0MPC15array5Array4joinGsE(evidence, new _M0TPC16string10StringView(_bind$6, 0, _bind$6.length))}`;
+  }
+  function _M0FP37lqyq6668bodymate4core25motion__phase__guides__v1(id) {
+    let guides;
+    _L: {
+      let error;
+      _L$2: {
+        const _bind = _M0FP37lqyq6668bodymate6motion13phase__guides(id);
+        if (_bind.$tag === 0) {
+          const _Err = _bind;
+          const _error = _Err._0;
+          error = _error;
+          break _L$2;
+        } else {
+          const _Ok = _bind;
+          const _guides = _Ok._0;
+          guides = _guides;
+          break _L;
+        }
+      }
+      return _M0FP37lqyq6668bodymate4core19motion__error__wire(error);
+    }
+    const records = [];
+    const _bind = guides.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind) {
+        const guide = guides[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(records, _M0FP37lqyq6668bodymate4core18phase__guide__wire(guide));
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const _bind$2 = "~";
+    return `ok|motion-phase-guides-v1|${_M0MPC15array5Array4joinGsE(records, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length))}`;
   }
   function _M0FP37lqyq6668bodymate4core24motion__pose__intent__v1(id, phase, input) {
     let p;
@@ -14826,6 +16089,62 @@
     }
     return _M0FP37lqyq6668bodymate4core18environment__frame(0, 0.25, _tmp);
   }
+  function _M0FP37lqyq6668bodymate4core17anatomy__name__v1(canonical, kind) {
+    return `ok|anatomy-name-v1|${_M0FP37lqyq6668bodymate7anatomy19structure__name__zh(canonical, _M0FP37lqyq6668bodymate7anatomy18kind__from__string(kind))}`;
+  }
+  function _M0FP37lqyq6668bodymate4core22anatomy__has__name__v1(canonical, kind) {
+    const covered = _M0FP37lqyq6668bodymate7anatomy29has__chinese__structure__name(canonical, _M0FP37lqyq6668bodymate7anatomy18kind__from__string(kind));
+    return `ok|anatomy-has-name-v1|${covered ? "true" : "false"}`;
+  }
+  function _M0FP37lqyq6668bodymate4core19anatomy__search__v1(entries, query) {
+    const parsed = [];
+    const _bind = "~";
+    const _it = _M0MPC16string6String5split(entries, new _M0TPC16string10StringView(_bind, 0, _bind.length));
+    while (true) {
+      let record;
+      _L: {
+        const _bind$2 = _M0MPB4Iter4nextGRPC16string10StringViewE(_it);
+        if (_bind$2 === undefined) {
+          break;
+        } else {
+          const _Some = _bind$2;
+          const _record = _Some;
+          record = _record;
+          break _L;
+        }
+      }
+      const _bind$2 = "^";
+      const fields = _M0MPB4Iter9to__arrayGRPC16string10StringViewE(_M0MPC16string10StringView5split(record, new _M0TPC16string10StringView(_bind$2, 0, _bind$2.length)));
+      if (fields.length < 3) {
+        continue;
+      }
+      _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(parsed, new _M0TP37lqyq6668bodymate7anatomy14StructureEntry(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(fields, 0)), _M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(fields, 2)), _M0FP37lqyq6668bodymate7anatomy18kind__from__string(_M0MPC16string10StringView9to__owned(_M0MPC15array5Array2atGRP37lqyq6668bodymate4core9StructureE(fields, 1)))));
+      continue;
+    }
+    const ids = [];
+    const _bind$2 = _M0FP37lqyq6668bodymate7anatomy18search__structures(parsed, query);
+    const _bind$3 = _bind$2.length;
+    let _tmp = 0;
+    while (true) {
+      const _ = _tmp;
+      if (_ < _bind$3) {
+        const entry = _bind$2[_];
+        _M0MPC15array5Array4pushGRP37lqyq6668bodymate4core9StructureE(ids, entry.structure_id);
+        _tmp = _ + 1 | 0;
+        continue;
+      } else {
+        break;
+      }
+    }
+    const _bind$4 = "~";
+    return `ok|anatomy-search-v1|${_M0MPC15array5Array4joinGsE(ids, new _M0TPC16string10StringView(_bind$4, 0, _bind$4.length))}`;
+  }
+  function _M0FP37lqyq6668bodymate4core25agent__guard__command__v1(candidate_id, fields, allowlist) {
+    return `ok|agent-guard-v1|${_M0FP37lqyq6668bodymate5agent12action__wire(_M0FP37lqyq6668bodymate5agent14guard__command(candidate_id, _M0FP37lqyq6668bodymate5agent13parse__fields(fields), _M0FP37lqyq6668bodymate5agent16parse__allowlist(allowlist)))}`;
+  }
+  function _M0FP37lqyq6668bodymate4core24agent__guard__lookup__v1(query, max_chars) {
+    return `ok|agent-guard-v1|${_M0FP37lqyq6668bodymate5agent12action__wire(_M0FP37lqyq6668bodymate5agent13guard__lookup(query, max_chars))}`;
+  }
   globalThis.bodymate_domain_registry_v1 = _M0FP37lqyq6668bodymate4core20domain__registry__v1;
   globalThis.bodymate_domain_reset = _M0FP37lqyq6668bodymate4core13domain__reset;
   globalThis.bodymate_domain_snapshot_v2 = _M0FP37lqyq6668bodymate4core20domain__snapshot__v2;
@@ -14864,6 +16183,7 @@
   globalThis.bodymate_motion_parameters_v1 = _M0FP37lqyq6668bodymate4core22motion__parameters__v1;
   globalThis.bodymate_motion_parse_query_v1 = _M0FP37lqyq6668bodymate4core24motion__parse__query__v1;
   globalThis.bodymate_motion_profile_v1 = _M0FP37lqyq6668bodymate4core19motion__profile__v1;
+  globalThis.bodymate_motion_phase_guides_v1 = _M0FP37lqyq6668bodymate4core25motion__phase__guides__v1;
   globalThis.bodymate_motion_pose_intent_v1 = _M0FP37lqyq6668bodymate4core24motion__pose__intent__v1;
   globalThis.bodymate_environment_reset_v1 = _M0FP37lqyq6668bodymate4core22environment__reset__v1;
   globalThis.bodymate_environment_set_quality_v1 = _M0FP37lqyq6668bodymate4core29environment__set__quality__v1;
@@ -14871,5 +16191,10 @@
   globalThis.bodymate_environment_sample_v1 = _M0FP37lqyq6668bodymate4core23environment__sample__v1;
   globalThis.bodymate_environment_tick_v1 = _M0FP37lqyq6668bodymate4core21environment__tick__v1;
   globalThis.bodymate_environment_frame_v1 = _M0FP37lqyq6668bodymate4core22environment__frame__v1;
+  globalThis.bodymate_anatomy_name_v1 = _M0FP37lqyq6668bodymate4core17anatomy__name__v1;
+  globalThis.bodymate_anatomy_has_name_v1 = _M0FP37lqyq6668bodymate4core22anatomy__has__name__v1;
+  globalThis.bodymate_anatomy_search_v1 = _M0FP37lqyq6668bodymate4core19anatomy__search__v1;
+  globalThis.bodymate_agent_guard_command_v1 = _M0FP37lqyq6668bodymate4core25agent__guard__command__v1;
+  globalThis.bodymate_agent_guard_lookup_v1 = _M0FP37lqyq6668bodymate4core24agent__guard__lookup__v1;
 })();
 //# sourceMappingURL=core.js.map

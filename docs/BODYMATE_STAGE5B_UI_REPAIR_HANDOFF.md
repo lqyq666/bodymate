@@ -155,13 +155,9 @@ git fetch origin
 git rev-parse origin/main
 ```
 
-The only known permitted long-lived local files are:
+The only known permitted long-lived local path is:
 
 ```text
-.agent-loop/
-.opencode/
-AGENT_LOOP.md
-agent-loop.ps1
 prototype/human-atlas-local/
 ```
 

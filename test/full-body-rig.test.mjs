@@ -29,6 +29,17 @@ test('clean-clone build verifies the committed rig without rewriting the large a
   assert.deepEqual(manifest.motions.map((motion) => motion.id), motionDefinitions.map((motion) => motion.id));
 });
 
+test('rigged-motion metadata retains one standard observation baseline for each adjustable motion', async () => {
+  const manifest = await verifyCommittedRiggedBody();
+  assert.deepEqual(manifest.motions.filter((motion) => motion.parameters.length).map((motion) => ({
+    id: motion.id,
+    baselines: motion.presets.filter((preset) => preset.isBaseline).map((preset) => preset.title),
+  })), [
+    { id: 'push_up', baselines: ['标准'] },
+    { id: 'squat', baselines: ['标准'] },
+  ]);
+});
+
 test('the displayed human has a shared skeleton and normalized vertex binding on every muscle', () => {
   const skins = document.getRoot().listSkins();
   assert.equal(skins.length, 1, 'The displayed human must have one shared skin, not independent rotating mesh groups.');

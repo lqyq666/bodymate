@@ -31,7 +31,12 @@ fn motion_error_wire(error : @motion.MotionError) -> String {
     @motion.NoActiveMotion => "error|no_active_motion"
   }
 }
-fn preset_wire(preset : @motion.MotionPreset) -> String { preset.title + "@" + parameter_wire(preset.values) }
+fn preset_wire(preset : @motion.MotionPreset) -> String {
+  preset.title + "@" + preset.is_baseline.to_string() + "@" + parameter_wire(preset.values)
+}
+fn phase_guide_wire(guide : @motion.MotionPhaseGuide) -> String {
+  guide.id + "^" + guide.phase.to_string() + "^" + guide.start.to_string() + "^" + guide.end.to_string() + "^" + guide.title + "^" + guide.detail
+}
 
 fn motion_wire(motion : @motion.MotionDefinition) -> String {
   let fields : Array[String] = []
@@ -84,6 +89,19 @@ pub fn motion_profile_v1(id : String, input : String) -> String {
       let evidence : Array[String] = []
       for item in value.evidence { evidence.push(item.url + "@" + item.scope) }
       "ok|motion-profile-v1|" + groups.join("~") + "|" + value.note + "|" + evidence.join("~")
+    }
+  }
+}
+
+///| Browser-facing teaching checkpoints. Phase labels remain owned by the motion domain.
+#export_name("bodymate_motion_phase_guides_v1")
+pub fn motion_phase_guides_v1(id : String) -> String {
+  match @motion.phase_guides(id) {
+    Err(error) => motion_error_wire(error)
+    Ok(guides) => {
+      let records : Array[String] = []
+      for guide in guides { records.push(phase_guide_wire(guide)) }
+      "ok|motion-phase-guides-v1|" + records.join("~")
     }
   }
 }

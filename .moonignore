@@ -1,4 +1,4 @@
-# Publish the reusable MoonBit library and executable examples only.
+# Publish the reusable MoonBit libraries and executable examples only.
 # The full-body application and attributed third-party models stay in GitHub.
 /*
 !/moon.mod
@@ -7,4 +7,7 @@
 !/moonbit/
 /moonbit/*
 !/moonbit/motion/
+!/moonbit/anatomy/
+!/moonbit/agent/
+!/moonbit/zhnum/
 !/moonbit/examples/

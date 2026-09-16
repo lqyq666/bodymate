@@ -1,0 +1,8 @@
+import {
+  "lqyq666/bodymate/motion",
+  "lqyq666/bodymate/agent",
+  "lqyq666/bodymate/anatomy",
+  "lqyq666/bodymate/zhnum",
+}
+pkgtype(kind: "executable")
+supported_targets = "js"

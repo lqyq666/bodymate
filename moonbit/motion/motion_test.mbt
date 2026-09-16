@@ -60,6 +60,18 @@ test "returned arrays cannot mutate the catalog or a running session" {
   assert_eq(session.snapshot().notices.length(), 1)
 }
 
+test "parameterized motions expose one observation baseline" {
+  for definition in @motion.catalog() {
+    let mut baselines = 0
+    for preset in definition.presets { if preset.is_baseline { baselines = baselines + 1 } }
+    if definition.parameters.length() == 0 {
+      assert_eq(baselines, 0)
+    } else {
+      assert_eq(baselines, 1)
+    }
+  }
+}
+
 test "parameter changes preserve paused position and speed" {
   let session = @motion.Session::new()
   ignore(session.play("push_up", []).unwrap())
@@ -107,6 +119,20 @@ test "pose sampler is deterministic and bounds non-finite phase" {
   }
 }
 
+test "phase guides describe four stable teaching checkpoints" {
+  for definition in @motion.catalog() {
+    let guides = @motion.phase_guides(definition.id).unwrap()
+    assert_eq(guides.length(), 4)
+    assert_eq(guides[0].phase, 0.0)
+    assert_eq(guides[2].phase, 0.5)
+    assert_true(guides[0].start > guides[0].end)
+  }
+  let bottom = @motion.phase_guides("push_up").unwrap()[2]
+  assert_eq(bottom.id, "push_up_bottom")
+  assert_eq(bottom.title, "最低点")
+  assert_true(@motion.phase_guides("invented") is Err(@motion.UnknownMotion("invented")))
+}
+
 test "typed query parser preserves units and unsupported instructions" {
   let parsed = @motion.parse_query("squat", "宽站距，脚尖外展25度，深度80%", []).unwrap()
   assert_true(parsed.recognized)
@@ -117,4 +143,19 @@ test "typed query parser preserves units and unsupported instructions" {
   assert_eq(wrong_unit.recognized, false)
   assert_eq(wrong_unit.values[0].value, 1.2)
   assert_true(wrong_unit.notices.length() > 0)
+}
+
+test "chinese numerals in commands are normalized before matching" {
+  let push = @motion.parse_query("push_up", "手距一点五倍肩宽，夹角六十度", []).unwrap()
+  assert_true(push.recognized)
+  assert_eq(push.values[0].value, 1.5)
+  assert_eq(push.values[1].value, 60.0)
+  let squat = @motion.parse_query("squat", "站距一点二倍髋宽，脚尖外展二十度，深度百分之八十", []).unwrap()
+  assert_true(squat.recognized)
+  assert_eq(squat.values[0].value, 1.2)
+  assert_eq(squat.values[1].value, 20.0)
+  assert_eq(squat.values[2].value, 80.0)
+  let fullwidth = @motion.parse_query("push_up", "手距１．８倍肩宽", []).unwrap()
+  assert_true(fullwidth.recognized)
+  assert_eq(fullwidth.values[0].value, 1.8)
 }

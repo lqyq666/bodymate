@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import '../assets/runtime/moonbit-core.js';
-import { motionDefinitions, motionForQuery, parameterDefinitions, motionPresets, normalizeMotionParameters, motionSession } from '../src/full-muscle/motion-domain.mjs';
+import { motionDefinitions, motionForQuery, motionParameterComparison, motionPhaseGuides, parameterDefinitions, motionPresets, normalizeMotionParameters, motionSession } from '../src/full-muscle/motion-domain.mjs';
 
 test('JavaScript consumes the MoonBit complete-body contract', () => {
   assert.deepEqual(motionDefinitions.map(({ id, title, duration }) => ({ id, title, duration })), [
@@ -13,6 +13,22 @@ test('JavaScript consumes the MoonBit complete-body contract', () => {
   assert.equal(motionForQuery('演示 push-up').id, 'push_up');
   assert.equal(parameterDefinitions.squat.length, 3);
   assert.equal(motionPresets.push_up[0].parameters.handWidth, .85);
+  assert.equal(motionPresets.push_up[1].isBaseline, true);
+  assert.deepEqual(motionParameterComparison('squat', { stanceWidth: 1.8, toeAngle: 30, squatDepth: 100 }), {
+    title: '宽站距', baselineTitle: '标准', isBaseline: false,
+    deltas: [
+      { key: 'stanceWidth', label: '站距', unit: '倍髋宽', delta: .6 },
+      { key: 'toeAngle', label: '脚尖外展', unit: '°', delta: 10 },
+    ],
+  });
+  assert.deepEqual(motionParameterComparison('push_up'), { title: '标准', baselineTitle: '标准', isBaseline: true, deltas: [] });
+  assert.deepEqual(motionPhaseGuides('curl').map(({ id, phase, title }) => ({ id, phase, title })), [
+    { id: 'curl_ready', phase: 0, title: '准备姿势' },
+    { id: 'curl_flex', phase: .25, title: '屈肘' },
+    { id: 'curl_top', phase: .5, title: '最高点' },
+    { id: 'curl_extend', phase: .75, title: '伸肘' },
+  ]);
+  assert.strictEqual(motionPhaseGuides('curl'), motionPhaseGuides('curl'));
   assert.deepEqual(normalizeMotionParameters('push_up', { handWidth: 9 }).parameters, { handWidth: 1.8, elbowAngle: 45 });
   motionSession.reset();
   assert.equal(motionSession.play('curl', {}, false, false).motion, 'curl');

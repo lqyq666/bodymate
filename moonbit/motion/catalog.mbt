@@ -15,9 +15,9 @@ pub fn catalog() -> Array[MotionDefinition] { [
     muscles: ["胸部", "肩部", "上臂后侧"], structure_pattern: "pectoralis major/deltoid/triceps brachii/serratus anterior",
     parameters: push_up_parameters(),
     presets: [
-      { title: "窄距", values: [{ key: "handWidth", value: 0.85 }, { key: "elbowAngle", value: 25.0 }] },
-      { title: "标准", values: [{ key: "handWidth", value: 1.5 }, { key: "elbowAngle", value: 45.0 }] },
-      { title: "宽距", values: [{ key: "handWidth", value: 1.8 }, { key: "elbowAngle", value: 60.0 }] },
+      { title: "窄距", is_baseline: false, values: [{ key: "handWidth", value: 0.85 }, { key: "elbowAngle", value: 25.0 }] },
+      { title: "标准", is_baseline: true, values: [{ key: "handWidth", value: 1.5 }, { key: "elbowAngle", value: 45.0 }] },
+      { title: "宽距", is_baseline: false, values: [{ key: "handWidth", value: 1.8 }, { key: "elbowAngle", value: 60.0 }] },
     ],
   },
   {
@@ -25,9 +25,9 @@ pub fn catalog() -> Array[MotionDefinition] { [
     muscles: ["大腿前侧", "臀部", "大腿后侧"], structure_pattern: "rectus femoris/vastus/gluteus/biceps femoris/semitendinosus/semimembranosus",
     parameters: squat_parameters(),
     presets: [
-      { title: "窄站距", values: [{ key: "stanceWidth", value: 0.8 }, { key: "toeAngle", value: 10.0 }, { key: "squatDepth", value: 100.0 }] },
-      { title: "标准", values: [{ key: "stanceWidth", value: 1.2 }, { key: "toeAngle", value: 20.0 }, { key: "squatDepth", value: 100.0 }] },
-      { title: "宽站距", values: [{ key: "stanceWidth", value: 1.8 }, { key: "toeAngle", value: 30.0 }, { key: "squatDepth", value: 100.0 }] },
+      { title: "窄站距", is_baseline: false, values: [{ key: "stanceWidth", value: 0.8 }, { key: "toeAngle", value: 10.0 }, { key: "squatDepth", value: 100.0 }] },
+      { title: "标准", is_baseline: true, values: [{ key: "stanceWidth", value: 1.2 }, { key: "toeAngle", value: 20.0 }, { key: "squatDepth", value: 100.0 }] },
+      { title: "宽站距", is_baseline: false, values: [{ key: "stanceWidth", value: 1.8 }, { key: "toeAngle", value: 30.0 }, { key: "squatDepth", value: 100.0 }] },
     ],
   },
   {
