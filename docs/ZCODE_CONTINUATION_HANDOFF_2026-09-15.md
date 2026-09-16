@@ -183,6 +183,10 @@ http://127.0.0.1:4174/?view=full-body
 
 此前 `start()` 只在有参数提示或本地中文解析出参数时展开 `<details>动作调整`，模型建议的宽距俯卧撑不满足两者，面板保持折叠——用户看不到预设已生效，这也是此前“参数面板从 ARIA 快照消失、DOM 却在”的真正原因。修复：`start()` 改为“有提示 或 `motionParameterComparison(...).isBaseline === false`”即展开（`assets/runtime/full-muscle-root-adapter.js`），`test/visual-lab.test.mjs` 增加源级断言。页面实测：发送前 `open=false`，AI 播放宽距俯卧撑后 `open=true`、“宽距”预设按下、比较状态行可见。已提交范围之外的新改动，未提交。
 
+### 2026-09-16 更新：生成注册表改为完整中文名
+
+`scripts/build-human-atlas-full.mjs` 原 `localizedName` 只翻左右侧别，`src/anatomy/full-muscle-registry.mjs` 与 `assets/anatomy/human-atlas/full-muscles.manifest.json` 里 401 条 `displayNameZh` 是“左侧 inferior oblique”式半英文。改为 `structureNameZh(part.name, 'muscle')` 后用系统临时目录里的 Human Atlas 源缓存离线完整重建：冻结 `full-muscles.glb` 字节不变（SHA-256 仍为 `03F01F82…`），清单差异恰好 802 行且全部是 `displayNameZh`，`--from-committed` 校验通过；`test/full-muscle-atlas.test.mjs` 新增“注册表与清单名称纯中文、带侧别、二者一致”断言。
+
 ## 本地启动与验收命令
 
 先检查而不改动工作区：

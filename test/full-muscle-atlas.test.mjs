@@ -24,6 +24,12 @@ test('ships every included Human Atlas muscular mesh while excluding configured 
   assert.equal(hash(glb), manifest.outputSha256);
   assert.ok(manifest.entries.every((entry) => !fullMuscleExclusionReason(entry.canonicalName)));
   assert.deepEqual(fullMuscleRegistry.map((entry) => entry.structureId), manifest.entries.map((entry) => entry.structureId));
+  for (const entry of fullMuscleRegistry) {
+    assert.doesNotMatch(entry.displayNameZh, /[A-Za-z]/, entry.canonicalName);
+    if (entry.side === 'left') assert.match(entry.displayNameZh, /^左侧/, entry.canonicalName);
+    if (entry.side === 'right') assert.match(entry.displayNameZh, /^右侧/, entry.canonicalName);
+  }
+  assert.deepEqual(manifest.entries.map((entry) => entry.displayNameZh), fullMuscleRegistry.map((entry) => entry.displayNameZh));
   const document = await new NodeIO().readBinary(glb);
   assert.deepEqual(document.getRoot().listNodes().map((node) => node.getName()).sort(), manifest.entries.map((entry) => entry.structureId).sort());
   assert.equal(document.getRoot().listSkins().length, 0);

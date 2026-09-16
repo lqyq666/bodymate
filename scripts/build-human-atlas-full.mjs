@@ -4,6 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { attributionUrl, fetchVerifiedHumanAtlasSource, fullMuscleSourceFiles, humanAtlasCommit, humanAtlasRepository, rawBaseUrl, sha256 } from './human-atlas-source.mjs';
 import { bodymateMuscleId, fullMuscleExclusionReason, fullMuscleExclusionTerms, includesFullBodyMuscle } from '../src/anatomy/full-muscle-policy.mjs';
+import { structureNameZh } from '../src/full-muscle/anatomy-name-zh.mjs';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const defaultOutputDir = join(root, 'assets/anatomy/human-atlas');
@@ -21,12 +22,11 @@ function boundsFor(positions) {
   return { min, max };
 }
 function sideFor(name) { return /^left\b/i.test(name) ? 'left' : /^right\b/i.test(name) ? 'right' : 'midline'; }
-function localizedName(name) { return name.replace(/^Left\b/i, '左侧').replace(/^Right\b/i, '右侧'); }
 function registryEntry(part) {
   return Object.freeze({
     presentationId: `atlas_${part.id.toLocaleLowerCase()}`,
     structureId: bodymateMuscleId(part),
-    displayNameZh: localizedName(part.name),
+    displayNameZh: structureNameZh(part.name, 'muscle'),
     canonicalName: part.name,
     side: sideFor(part.name),
     sourceProvider: 'Human Atlas / BodyParts3D 4.0',
