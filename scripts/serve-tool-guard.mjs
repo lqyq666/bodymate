@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { loadMoonBitCore } from './load-moonbit-core.mjs';
 import { allowlistWire, fieldsWire, explainCommand } from '../src/ai/agent-guard.mjs';
-import { aiConfig, configuredEnvironment } from './serve-bodymate-ai.mjs';
+import { aiConfig, readEncryptedProviderEnvironment, parseLocalEnv } from './serve-bodymate-ai.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 
@@ -54,8 +54,9 @@ export function guardToolCalls(response, tools, policy) {
         fn.arguments = JSON.stringify(action.parameters);
       } else {
         // Unknown tool: strip the call to a no-op with a reason payload.
+        const originalName = fn.name;
         fn.name = 'guard_rejected';
-        fn.arguments = JSON.stringify({ rejected_tool: fn.name, reasons });
+        fn.arguments = JSON.stringify({ rejected_tool: originalName, reasons });
       }
     }
   }
@@ -130,7 +131,13 @@ export function createToolGuardServer({
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   await loadMoonBitCore({ probe: 'bodymate_agent_explain_command_v1' });
-  const config = aiConfig(await configuredEnvironment());
+  async function loadConfig(root) {
+      const encrypted = await readEncryptedProviderEnvironment({});
+      let local = {};
+      try { local = parseLocalEnv(await import("node:fs/promises").then(m => m.readFile(root + "/.env.local", "utf8"))); } catch {}
+      return aiConfig({ ...encrypted, ...local, ...process.env });
+    }
+    const config = await loadConfig(root);
   const { server, port, host } = createToolGuardServer({ upstreamConfig: config });
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, host, resolve); });
   console.log(`Tool guard gateway: http://${host}:${port}/v1/chat/completions`);
