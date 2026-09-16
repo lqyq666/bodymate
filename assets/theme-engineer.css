@@ -48,3 +48,7 @@ body.theme-engineer .anatomy-muscle-legend span::before{filter:saturate(1.2)}
 /* Less consumer-app roundness */
 body.theme-engineer :is(.anatomy-examples button,.anatomy-presets button,.anatomy-phase-steps button,.anatomy-toolbar button,.anatomy-playback button,.anatomy-transport select,.anatomy-dialogue,.anatomy-adjustments,.anatomy-phase-guide){border-radius:6px!important}
 body.theme-engineer :is(.lab-search,.lab-domain-tabs,.lab-domain-tabs button,#chat-form,#chat-form button,#close-help,.icon-button,.view-tabs button){border-radius:8px!important}
+
+/* Link from the replay view to the console workbench */
+body.theme-engineer .console-link{text-decoration:none;color:var(--lab-ink);background:var(--eng-raised);border:1px solid var(--lab-line);border-radius:8px;padding:10px 14px;font-size:13px;white-space:nowrap}
+body.theme-engineer .console-link:hover{background:var(--eng-hover)}
