@@ -4,7 +4,7 @@
 
 `lqyq666/bodymate` 是一组无依赖、可单独 `moon add` 的 MoonBit 库，外加一个使用它们的离线三维参照骨架应用（MoonRig Console）。库是主体，应用是证明：同一份 MoonBit 代码同时驱动浏览器页面、本地 AI 代理和纯命令行示例。
 
-![MoonRig Console：宽距俯卧撑停在最低点，胸大肌与肱三头肌以定性颜色高亮](docs/media/full-body-lab.png)
+![MoonRig Console（工程主题）：宽距俯卧撑停在最低点关键帧，胸大肌与肱三头肌按定性参与映射高亮，右侧为参数契约与指令面板](docs/media/full-body-lab.png)
 
 ```sh
 moon add lqyq666/bodymate

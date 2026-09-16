@@ -7,6 +7,7 @@
   document.body.classList.remove('exercise-demo-active'); document.body.classList.add('full-muscle-demo-active');
   const stylesheet = document.createElement('link'); stylesheet.rel = 'stylesheet'; stylesheet.href = 'assets/full-muscle.css'; document.head.append(stylesheet);
   if (document.body.classList.contains('visual-lab-active')) { const skin = document.createElement('link'); skin.rel = 'stylesheet'; skin.href = 'assets/visual-full-body.css?v=20260913-reference-ui'; document.head.append(skin); }
+  if (document.body.classList.contains('theme-engineer')) { const theme = document.createElement('link'); theme.rel = 'stylesheet'; theme.href = 'assets/theme-engineer.css?v=20260916-engineer'; document.head.append(theme); }
   const canvas = document.createElement('canvas'); canvas.id = 'full-muscle-canvas';
   canvas.setAttribute('aria-label', '参照骨架三维视图：拖动旋转，滚轮缩放'); detail.append(canvas);
   const loading = document.createElement('div'); loading.className = 'anatomy-loading'; loading.textContent = '正在加载参照骨架…'; detail.append(loading);
