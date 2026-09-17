@@ -49,14 +49,14 @@ GUARD_UPSTREAM_URL='https://open.bigmodel.cn/api/coding/paas/v4' npm run guard:s
 ## 3. 完整复现
 
 ```sh
-npm run check                 # MoonBit 79 项 + Node 149 项 + 生成物/资产/卫生/规模检查
+npm run check                 # MoonBit 79 项 + Node 151 项 + 生成物/资产/卫生/规模检查
 npm run moonbit:examples      # 四个纯 MoonBit 示例，均输出 PASS
 npm run moonbit:package-check # 真实发布 ZIP 在隔离目录 check/build/test/run
 npm run moonbit:install-check # 从 mooncakes.io 真实 moon add 并运行（需网络）
-npm run test -- test/tool-guard.test.mjs  # 6 项网关确定性测试
+npm run test -- test/tool-guard.test.mjs  # 8 项网关确定性测试
 ```
 
-`main` 受保护，每个 PR 由 GitHub Actions 跑同一套 `check`；18+ 笔 PR 全部通过后合入。
+`main` 受保护，每个 PR 由 GitHub Actions 跑同一套 `check`；30 笔 PR 全部通过后合入。
 
 ## 4. 在线参考应用
 
