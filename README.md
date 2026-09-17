@@ -74,12 +74,13 @@ client = OpenAI(base_url="http://127.0.0.1:4175/v1", api_key="your-key")
 
 Guardrails AI 社区明确在要工具调用校验（issue #1601），NeMo 的实现需要整个 Colang 状态机框架；mooncakes.io 全注册表扫描没有任何同类包。
 
-## 验证
+## 验证与性能
 
-- MoonBit 79 项测试 · Node 149 项测试 · CI 每个 PR 全绿
+- MoonBit 79 项测试 · Node 151 项测试 · CI 每个 PR 全绿
 - `npm run moonbit:package-check`：真实发布 ZIP 在隔离目录 check/build/test/run
 - `npm run moonbit:install-check`：从 mooncakes.io 真实 `moon add lqyq666/bodymate@0.4.0` 并运行四个包
 - `node scripts/demo-guard-interception.mjs --mock`：完整拦截链路演示（无需 API Key）
+- `node scripts/benchmark-guard.mjs`：单次护栏校验 **76 µs**（13,234 ops/sec），5 个工具调用批次 **364 µs**，幻觉工具名即时拒绝 **72 µs**——对 LLM 推理延迟（秒级）完全不可感知
 
 ## 参考应用：MoonRig Console
 
