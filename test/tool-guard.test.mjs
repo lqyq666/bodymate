@@ -106,3 +106,111 @@ test('gateway serves /v1/chat/completions and stamps verdicts into headers', asy
     assert.ok(verdicts[0].reasons.some((r) => r.startsWith('clamped:brightness:300->100')));
   } finally { await new Promise((resolve) => server.close(resolve)); }
 });
+
+// --- Streaming tests ---
+
+function makeSSEStream(chunks) {
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({
+    start(controller) {
+      for (const chunk of chunks) controller.enqueue(encoder.encode(chunk));
+      controller.close();
+    },
+  });
+  return stream;
+}
+
+function sse(obj) { return `data: ${JSON.stringify(obj)}\n\n`; }
+const DONE = 'data: [DONE]\n\n';
+
+test('streaming: content passes through, tool_calls are buffered and guarded', async () => {
+  const upstreamChunks = [
+    sse({ id: '1', object: 'chat.completion.chunk', choices: [{ index: 0, delta: { role: 'assistant' }, finish_reason: null }] }),
+    sse({ id: '1', object: 'chat.completion.chunk', choices: [{ index: 0, delta: { content: 'Setting lights ' }, finish_reason: null }] }),
+    sse({ id: '1', object: 'chat.completion.chunk', choices: [{ index: 0, delta: { content: 'now.' }, finish_reason: null }] }),
+    sse({ id: '1', object: 'chat.completion.chunk', choices: [{ index: 0, delta: { tool_calls: [{ index: 0, id: 'call_1', type: 'function', function: { name: 'set_light', arguments: '{"bright' } }] }, finish_reason: null }] }),
+    sse({ id: '1', object: 'chat.completion.chunk', choices: [{ index: 0, delta: { tool_calls: [{ index: 0, function: { arguments: 'ness":200,"mode":"disco"}' } }] }, finish_reason: null }] }),
+    sse({ id: '1', object: 'chat.completion.chunk', choices: [{ index: 0, delta: { tool_calls: [{ index: 1, id: 'call_2', type: 'function', function: { name: 'delete_database', arguments: '{}' } }] }, finish_reason: null }] }),
+    sse({ id: '1', object: 'chat.completion.chunk', choices: [{ index: 0, delta: {}, finish_reason: 'tool_calls' }] }),
+    DONE,
+  ];
+  const fakeUpstream = async () => ({
+    ok: true, status: 200,
+    json: async () => ({}),
+    body: makeSSEStream(upstreamChunks),
+  });
+  const { server } = createToolGuardServer({
+    upstreamConfig: { endpoint: 'https://fake.test/v1', apiKey: 'x', model: 'm' },
+    fetchImpl: fakeUpstream,
+  });
+  await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+  try {
+    const port = server.address().port;
+    const response = await fetch(`http://127.0.0.1:${port}/v1/chat/completions`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'm', messages: [], tools, stream: true }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get('content-type'), /text\/event-stream/);
+    const text = await response.text();
+    const events = text.split('\n\n').filter((line) => line.startsWith('data: ') && line !== 'data: [DONE]').map((line) => JSON.parse(line.slice(6)));
+
+    // Content chunks pass through
+    const contentChunks = events.filter((e) => e.choices?.[0]?.delta?.content);
+    assert.equal(contentChunks.length, 2, `expected 2 content chunks, got ${contentChunks.length}`);
+    assert.equal(contentChunks[0].choices[0].delta.content, 'Setting lights ');
+
+    // Guarded tool_calls: set_light clamped + delete_database rejected
+    const toolCallChunks = events.filter((e) => e.choices?.[0]?.delta?.tool_calls);
+    assert.equal(toolCallChunks.length, 2, `expected 2 tool_call chunks, got ${toolCallChunks.length}`);
+    const lightCall = toolCallChunks.find((e) => e.choices[0].delta.tool_calls[0].function.name === 'set_light');
+    assert.ok(lightCall, 'set_light should be present');
+    const lightArgs = JSON.parse(lightCall.choices[0].delta.tool_calls[0].function.arguments);
+    assert.equal(lightArgs.brightness, 100, 'brightness should be clamped to 100');
+    assert.equal(lightArgs.mode, undefined, 'mode disco should be dropped');
+    const rejectedCall = toolCallChunks.find((e) => e.choices[0].delta.tool_calls[0].function.name === 'guard_rejected');
+    assert.ok(rejectedCall, 'delete_database should be guard_rejected');
+
+    // Finish event
+    const finishEvents = events.filter((e) => e.choices?.[0]?.finish_reason === 'tool_calls');
+    assert.equal(finishEvents.length, 1);
+
+    // [DONE] marker
+    assert.ok(text.includes('[DONE]'));
+  } finally { await new Promise((resolve) => server.close(resolve)); }
+});
+
+test('streaming: text-only response passes through without buffering', async () => {
+  const upstreamChunks = [
+    sse({ id: '1', choices: [{ index: 0, delta: { role: 'assistant' }, finish_reason: null }] }),
+    sse({ id: '1', choices: [{ index: 0, delta: { content: 'Hello' }, finish_reason: null }] }),
+    sse({ id: '1', choices: [{ index: 0, delta: { content: ' world' }, finish_reason: null }] }),
+    sse({ id: '1', choices: [{ index: 0, delta: {}, finish_reason: 'stop' }] }),
+    DONE,
+  ];
+  const fakeUpstream = async () => ({
+    ok: true, status: 200,
+    json: async () => ({}),
+    body: makeSSEStream(upstreamChunks),
+  });
+  const { server } = createToolGuardServer({
+    upstreamConfig: { endpoint: 'https://fake.test/v1', apiKey: 'x', model: 'm' },
+    fetchImpl: fakeUpstream,
+  });
+  await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+  try {
+    const port = server.address().port;
+    const response = await fetch(`http://127.0.0.1:${port}/v1/chat/completions`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'm', messages: [], tools, stream: true }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    const text = await response.text();
+    const events = text.split('\n\n').filter((line) => line.startsWith('data: ') && line !== 'data: [DONE]').map((line) => JSON.parse(line.slice(6)));
+    const contentChunks = events.filter((e) => e.choices?.[0]?.delta?.content);
+    assert.equal(contentChunks.length, 2);
+    const finishEvents = events.filter((e) => e.choices?.[0]?.finish_reason === 'stop');
+    assert.equal(finishEvents.length, 1);
+  } finally { await new Promise((resolve) => server.close(resolve)); }
+});

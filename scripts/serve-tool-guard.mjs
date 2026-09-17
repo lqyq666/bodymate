@@ -32,6 +32,20 @@ export function allowlistFromTools(tools) {
   return commands;
 }
 
+// Guards one assembled tool call; returns the sanitized call plus verdict.
+function guardOneCall(name, args, commands, policy) {
+  const { action, reasons } = explainCommand(name, args, commands, policy);
+  const verdict = { id: name, verdict: action ? 'kept' : 'rejected', reasons };
+  if (action) {
+    return { call: { type: 'function', function: { name: action.id, arguments: JSON.stringify(action.parameters) } }, verdict, reasons };
+  }
+  const originalName = name;
+  return {
+    call: { type: 'function', function: { name: 'guard_rejected', arguments: JSON.stringify({ rejected_tool: originalName, reasons }) } },
+    verdict, reasons,
+  };
+}
+
 export function guardToolCalls(response, tools, policy) {
   const commands = allowlistFromTools(tools);
   if (!commands.length) return { response, verdicts: [] };
@@ -46,24 +60,111 @@ export function guardToolCalls(response, tools, policy) {
     if (!fn) continue;
     let arguments_ = {};
     try { arguments_ = JSON.parse(fn.arguments || '{}'); } catch { arguments_ = {}; }
-    const { action, reasons } = explainCommand(fn.name, arguments_, commands, policy);
-    verdicts.push({ id: fn.name, verdict: action ? 'kept' : 'rejected', reasons });
+    const { call: guarded, verdict, reasons } = guardOneCall(fn.name, arguments_, commands, policy);
+    verdicts.push(verdict);
     if (reasons.length > 0) {
       modified = true;
-      if (action) {
-        fn.arguments = JSON.stringify(action.parameters);
-      } else {
-        // Unknown tool: strip the call to a no-op with a reason payload.
-        const originalName = fn.name;
-        fn.name = 'guard_rejected';
-        fn.arguments = JSON.stringify({ rejected_tool: originalName, reasons });
-      }
+      fn.name = guarded.function.name;
+      fn.arguments = guarded.function.arguments;
     }
   }
   if (modified && Array.isArray(response.choices)) {
     response.choices[0].message.tool_calls = calls;
   }
   return { response, verdicts };
+}
+
+// Parses an SSE stream, forwards content chunks immediately, buffers tool_call
+// fragments, and at stream end guards the assembled calls and emits them.
+// The client sees: streamed text → [stream pauses] → guarded tool_calls → finish.
+export async function guardStreamingResponse(upstreamBody, tools, policy, clientResponse, setCors) {
+  const commands = allowlistFromTools(tools);
+  const reader = upstreamBody.getReader();
+  const decoder = new TextDecoder();
+  let sseBuffer = '';
+  const toolCallAccumulator = new Map();
+  const verdicts = [];
+  let hasToolCalls = false;
+
+  setCors();
+  clientResponse.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+  const writeSSE = (obj) => clientResponse.write(`data: ${JSON.stringify(obj)}\n\n`);
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    sseBuffer += decoder.decode(value, { stream: true });
+
+    const events = sseBuffer.split('\n\n');
+    sseBuffer = events.pop() || '';
+
+    for (const event of events) {
+      const dataLine = event.trim();
+      if (!dataLine.startsWith('data: ')) continue;
+      const data = dataLine.slice(6);
+      if (data === '[DONE]') continue;
+
+      let chunk;
+      try { chunk = JSON.parse(data); } catch { continue; }
+      const delta = chunk.choices?.[0]?.delta;
+      const finish = chunk.choices?.[0]?.finish_reason;
+
+      if (delta?.tool_calls) {
+        hasToolCalls = true;
+        for (const tc of delta.tool_calls) {
+          const existing = toolCallAccumulator.get(tc.index) || { id: '', name: '', args: '' };
+          if (tc.id) existing.id = tc.id;
+          if (tc.function?.name) existing.name += tc.function.name;
+          if (tc.function?.arguments) existing.args += tc.function.arguments;
+          toolCallAccumulator.set(tc.index, existing);
+        }
+        // Don't forward tool_call fragments — we'll send guarded versions after the stream.
+      } else if (delta?.content !== undefined && delta?.content !== null && delta.content !== '') {
+        // Forward content chunks immediately so the user sees text streaming.
+        writeSSE(chunk);
+      } else if (finish && finish !== 'tool_calls') {
+        // Forward finish events for non-tool-call endings.
+        writeSSE(chunk);
+      }
+    }
+  }
+
+  if (hasToolCalls && toolCallAccumulator.size > 0) {
+    let index = 0;
+    for (const [, tc] of [...toolCallAccumulator.entries()].sort((a, b) => a[0] - b[0])) {
+      let args = {};
+      try { args = JSON.parse(tc.args || '{}'); } catch {}
+      const { call, verdict } = guardOneCall(tc.name, args, commands, policy);
+      verdicts.push(verdict);
+
+      // Emit the guarded tool call as a complete SSE chunk.
+      writeSSE({
+        id: `guard-${index}`,
+        object: 'chat.completion.chunk',
+        choices: [{
+          index: 0,
+          delta: { tool_calls: [{ index, id: tc.id || `call_${index}`, type: 'function', function: { name: call.function.name, arguments: call.function.arguments } }] },
+          finish_reason: null,
+        }],
+      });
+      index++;
+    }
+
+    // Emit the finish event.
+    writeSSE({
+      id: 'guard-finish',
+      object: 'chat.completion.chunk',
+      choices: [{ index: 0, delta: {}, finish_reason: 'tool_calls' }],
+    });
+  }
+
+  // Verdicts are embedded in the guarded tool_calls; headers can't be set after writeHead.
+  clientResponse.write('data: [DONE]\n\n');
+  clientResponse.end();
 }
 
 export function createToolGuardServer({
@@ -81,7 +182,7 @@ export function createToolGuardServer({
       if (url.pathname === '/health' && request.method === 'GET') {
         setCors();
         response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-        response.end(JSON.stringify({ upstream: config ? config.endpoint : null, model: config?.model ?? null, policy }));
+        response.end(JSON.stringify({ upstream: config ? config.endpoint : null, model: config?.model ?? null, policy, streaming: true }));
         return;
       }
       if (url.pathname !== '/v1/chat/completions' || request.method !== 'POST') {
@@ -105,14 +206,23 @@ export function createToolGuardServer({
         headers: { Authorization: `Bearer ${config.apiKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      const payload = await upstreamResponse.json();
+
       if (!upstreamResponse.ok) {
+        const payload = await upstreamResponse.json();
         setCors();
         response.writeHead(upstreamResponse.status, { 'Content-Type': 'application/json; charset=utf-8' });
         response.end(JSON.stringify(payload));
         return;
       }
 
+      // Streaming: content passes through, tool_calls are buffered and guarded.
+      if (body.stream && upstreamResponse.body) {
+        await guardStreamingResponse(upstreamResponse.body, body.tools, policy, response, setCors);
+        return;
+      }
+
+      // Non-streaming: current behavior.
+      const payload = await upstreamResponse.json();
       const { response: guarded, verdicts } = guardToolCalls(payload, body.tools, policy);
       setCors();
       response.writeHead(200, {
@@ -136,7 +246,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       let local = {};
       try { local = parseLocalEnv(await import("node:fs/promises").then(m => m.readFile(root + "/.env.local", "utf8"))); } catch {}
       const config = aiConfig({ ...encrypted, ...local, ...process.env });
-      // GUARD_UPSTREAM_URL overrides the DPAI base URL (e.g. Coding Plan endpoint).
+      // GUARD_UPSTREAM_URL overrides the DPAPI base URL (e.g. Coding Plan endpoint).
       if (config && process.env.GUARD_UPSTREAM_URL) {
         const base = process.env.GUARD_UPSTREAM_URL.replace(/\/+$/, '');
         return { ...config, endpoint: base + '/chat/completions' };
@@ -148,5 +258,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, host, resolve); });
   console.log(`Tool guard gateway: http://${host}:${port}/v1/chat/completions`);
   console.log(`Upstream: ${config ? config.endpoint : 'NOT CONFIGURED'} (model ${config?.model ?? '—'})`);
+  console.log('Streaming supported: content passes through, tool_calls are guarded.');
   console.log('Point any OpenAI SDK base_url here; tool_calls are guarded automatically.');
 }
