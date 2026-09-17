@@ -12,7 +12,7 @@
 
 **参考应用：** MoonRig Console（在线 [库工作台](https://lqyq666.github.io/bodymate/console.html) + [3D 回放视图](https://lqyq666.github.io/bodymate/?view=full-body)），证明同一份 MoonBit 代码驱动浏览器、本地代理和命令行。
 
-**验证：** MoonBit 79 项 + Node 149 项测试全绿；真实发布 ZIP 隔离 check/build/test/run；从 mooncakes.io 真实 `moon add` 安装验证；6 项网关确定性测试；受保护 `main` 上 18+ 笔 PR 全部 CI 通过；`GUARD_UPSTREAM_URL` 接 Coding Plan 免费额度端到端 200。
+**验证：** MoonBit 79 项 + Node 151 项测试全绿；真实发布 ZIP 隔离 check/build/test/run；从 mooncakes.io 真实 `moon add` 安装验证；8 项网关确定性测试；受保护 `main` 上 30 笔 PR 全部 CI 通过；`GUARD_UPSTREAM_URL` 接 Coding Plan 免费额度端到端 200。
 
 **规模：** MoonBit 生产 3522 行（可复用库 1623 行）、测试 1144 行。首提交 2026-09-11，无旧工作量。
 
