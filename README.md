@@ -58,6 +58,8 @@ client = OpenAI(base_url="http://127.0.0.1:4175/v1", api_key="your-key")
 
 四个包都不依赖 DOM、Three.js、GLB、网络或 npm；`agent` 与 `zhnum` 与人体领域无关。
 
+**独立消费者**：[lqyq666/tool-call-auditor](https://github.com/lqyq666/tool-call-auditor) — 一个完全独立的仓库，只做 `moon add lqyq666/bodymate` 就能用护栏审计 LLM 工具调用，与本仓库零共享代码。
+
 ## 生态空缺与竞品
 
 截至 2026-09-16 的调研：
