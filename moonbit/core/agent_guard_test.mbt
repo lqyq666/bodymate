@@ -37,19 +37,3 @@ test "agent guard wire bounds lookups" {
   assert_eq(agent_guard_lookup_v1("   ", 80), "ok|agent-guard-v1|none")
   assert_eq(agent_guard_lookup_v1("abcdefghij", 4), "ok|agent-guard-v1|lookup|abcd")
 }
-
-test "agent guard wire keeps enumerated options and drops unknown ones" {
-  let allowlist = "set_light^brightness:0:100,mode?warm?cool"
-  assert_eq(
-    agent_guard_command_v1("set_light", "brightness=200,mode~disco", allowlist),
-    "ok|agent-guard-v1|command|set_light|brightness=100",
-  )
-  assert_eq(
-    agent_guard_command_v1("set_light", "mode~warm", allowlist),
-    "ok|agent-guard-v1|command|set_light|mode~warm",
-  )
-  assert_eq(
-    agent_explain_command_v1("set_light", "brightness=200,mode~disco,invented=1", allowlist, "clamp"),
-    "ok|agent-explain-v1|command|set_light|brightness=100|clamped:brightness:200->100;unknown_option:mode:disco;unknown_field:invented",
-  )
-}

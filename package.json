@@ -5,7 +5,7 @@
   "description": "MoonBit motion library and offline full-body anatomy laboratory",
   "scripts": {
     "build": "node scripts/build-moonbit.mjs && node scripts/build-moonbit-registry.mjs && node scripts/build-anatomy-registry-runtime.mjs && node scripts/build-coach-query-runtime.mjs && node scripts/build-root-scm-runtime.mjs && node scripts/build-human-atlas-full.mjs --from-committed && node scripts/build-rigged-body.mjs --from-committed && node scripts/build-full-muscle-runtime.mjs",
-    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/motion-domain-boundary.test.mjs test/environment-domain-boundary.test.mjs test/environment-assets.test.mjs test/lab-environment.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/public-scm-asset.test.mjs test/moonbit-ci-install.test.mjs test/root-scm-integration.test.mjs test/anatomy-registry.test.mjs test/neck-presentation.test.mjs test/coach-c-spatial.test.mjs test/coach-c-structure-finder.test.mjs test/full-muscle-atlas.test.mjs test/full-body-rig.test.mjs test/motion-parameters.test.mjs test/ai-chat-protocol.test.mjs test/start-bodymate.test.mjs test/tool-guard.test.mjs test/server-smoke.test.mjs test/visual-lab.test.mjs test/head-surface.test.mjs test/full-muscle-localization.test.mjs test/ui-feedback.test.mjs",
+    "verify": "node scripts/run-moon.mjs check --target js && node scripts/run-moon.mjs test --target js && node --test test/bodymate.contract.test.mjs test/moonbit-integration.test.mjs test/motion-domain-boundary.test.mjs test/environment-domain-boundary.test.mjs test/environment-assets.test.mjs test/lab-environment.test.mjs test/real-neck-spike.test.mjs test/anatomy-asset-decision.test.mjs test/public-scm-asset.test.mjs test/moonbit-ci-install.test.mjs test/root-scm-integration.test.mjs test/anatomy-registry.test.mjs test/neck-presentation.test.mjs test/coach-c-spatial.test.mjs test/coach-c-structure-finder.test.mjs test/full-muscle-atlas.test.mjs test/full-body-rig.test.mjs test/motion-parameters.test.mjs test/ai-chat-protocol.test.mjs test/start-bodymate.test.mjs test/server-smoke.test.mjs test/visual-lab.test.mjs test/head-surface.test.mjs test/full-muscle-localization.test.mjs test/ui-feedback.test.mjs",
     "check": "npm run verify && node scripts/check-generated.mjs && node scripts/audit-repository-hygiene.mjs && node scripts/moonbit-stats.mjs --check",
     "moonbit:stats": "node scripts/moonbit-stats.mjs",
     "spike:verify-local": "node scripts/verify-local-neck-asset.mjs",
@@ -23,7 +23,6 @@
     "anatomy:test-rig": "node --test test/full-body-rig.test.mjs test/motion-parameters.test.mjs",
     "anatomy:test-parameters": "node --test test/motion-parameters.test.mjs",
     "ai:serve": "node scripts/serve-bodymate-ai.mjs",
-    "guard:serve": "node scripts/serve-tool-guard.mjs",
     "start": "node scripts/start-bodymate.mjs",
     "ai:configure-glm": "powershell.exe -NoProfile -NonInteractive -File scripts/save-bodymate-glm-from-clipboard.ps1",
     "moonbit:examples": "node scripts/run-moonbit-examples.mjs",

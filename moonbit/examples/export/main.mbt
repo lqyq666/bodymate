@@ -11,7 +11,7 @@ fn main raise {
   let allowed = @agent.parse_allowlist(
     "push_up^handWidth,elbowAngle~squat^stanceWidth,toeAngle,squatDepth~curl^",
   )
-  let accepted = @agent.guard_command("push_up", [("handWidth", @agent.FieldValue::Num(1.5)), ("invented", @agent.FieldValue::Num(7.0))], allowed)
+  let accepted = @agent.guard_command("push_up", [("handWidth", 1.5), ("invented", 7.0)], allowed)
   assert_eq(@agent.action_wire(accepted), "command|push_up|handWidth=1.5")
   assert_eq(@agent.action_wire(@agent.guard_command("run_marathon", [], allowed)), "none")
   assert_eq(@anatomy.structure_name_zh("Left femur", @anatomy.kind_from_string("bone")), "左侧股骨")

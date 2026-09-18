@@ -1,4 +1,4 @@
-# lqyq666/bodymate MoonBit 库套件
+# BodyMate MoonBit 库套件
 
 > **English.** Four dependency-free MoonBit packages under `lqyq666/bodymate` (js target): `agent` — guard untrusted LLM proposals down to allowlisted commands with bounded numeric fields or bounded lookups, with explainable reasons; `zhnum` — parse and format Chinese numerals and normalize numbers inside Chinese text; `anatomy` — 376 bilingual Human Atlas / BodyParts3D terms with laterality handling and muscle-first search; `motion` — parameterized teaching-motion sessions with Chinese command parsing and deterministic pose intents. Each section below documents one package in Chinese; the code samples are language-neutral.
 
@@ -9,9 +9,9 @@
 | `lqyq666/bodymate/agent` | LLM 提议的执行护栏：白名单命令与数值字段，其余一律丢弃 |
 | `lqyq666/bodymate/zhnum` | 中文数字与数量表达解析、文本内数字归一化 |
 | `lqyq666/bodymate/anatomy` | Human Atlas / BodyParts3D 376 条双语术语、侧别处理与检索 |
-| `lqyq666/bodymate/motion` | 三条样例动作的参数规则、中文指令解析、独立播放会话、阶段讲解与确定性姿态标量 |
+| `lqyq666/bodymate/motion` | 三个教学动作的参数规则、中文指令解析、独立播放会话、阶段讲解与确定性姿态标量 |
 
-它们都不依赖 DOM、Three.js、GLB、网络、账号或 npm 包；调用方负责渲染与 I/O。`agent` 与 `zhnum` 与人体领域无关。`motion` 不是通用骨骼求解器，姿态标量使用 BodyMate 的固定参照骨架尺寸；整套库不提供生物力学、肌电、诊断或训练处方。下文先介绍 `motion`，其余三个包在后半部分各有独立章节。
+它们都不依赖 DOM、Three.js、GLB、网络、账号或 npm 包；调用方负责渲染与 I/O。`agent` 与 `zhnum` 与人体领域无关。`motion` 不是通用骨骼求解器，姿态标量使用 BodyMate 的固定教学骨架尺寸；整套库不提供生物力学、肌电、诊断或训练处方。下文先介绍 `motion`，其余三个包在后半部分各有独立章节。
 
 ## 本地运行
 
@@ -26,7 +26,7 @@ moon run moonbit/examples/sampling --target js
 moon run moonbit/examples/export --target js > frames.csv
 ```
 
-示例包含断言，错误会以非零退出码失败。参数示例输出规范化结果；会话示例证明两个消费者互不干扰；采样示例不加载渲染器即可输出五个姿态帧；导出示例把四个库串起来——中文指令解析（zhnum）→ 模型提议护栏（agent）→ 双语结构名（anatomy）→ 全部动作的确定性姿态帧 CSV，可直接作为标注卡片数据或回归基线。
+示例包含断言，错误会以非零退出码失败。参数示例输出规范化结果；会话示例证明两个消费者互不干扰；采样示例不加载渲染器即可输出五个姿态帧；导出示例把四个库串起来——中文指令解析（zhnum）→ 模型提议护栏（agent）→ 双语结构名（anatomy）→ 全部动作的确定性姿态帧 CSV，可直接作为教学卡片数据或回归基线。
 
 ## 调用方式
 
@@ -61,7 +61,7 @@ fn main raise {
 | `normalize(id, values)` | 限幅、步进取整、非有限值回默认；规范化后的再次输入不产生调整提示 |
 | `parse_query(id, query, base)` | 类型化值、识别标志和提示；保留单位要求，说明未支持参数 |
 | `profile(id, values)` | 定性的肌群参与、局限说明和依据链接；权重仅用于视觉强调 |
-| `phase_guides(id)` | 四个可暂停比较的关键阶段；说明固定参照姿态，不是训练指令或实测数据 |
+| `phase_guides(id)` | 四个可暂停比较的关键阶段；说明固定教学姿态，不是训练指令或实测数据 |
 | `pose_intent(id, phase, values)` | 同输入同输出；phase 限在 `[0,1]`，非有限值回 `0` |
 | `Session::new()` | 创建独立会话，无库级全局单例 |
 | `play` / `stop` / `reset` | 切换动作重置相位；同动作可显式保留；stop 保留速度，reset 恢复速度 1 |

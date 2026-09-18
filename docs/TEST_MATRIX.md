@@ -8,10 +8,10 @@
 | `zhnum` 库黑盒 | `moonbit/zhnum/zhnum_test.mbt` | 中文数字解析（大写、两、负、一万亿）、畸形输入拒绝、文本归一化（全角、百分之）、单位前取数、**0–10999 全量与大数/负数 format→parse 往返** |
 | `anatomy` 库黑盒 | `moonbit/anatomy/anatomy_test.mbt` | 归一化与侧别、肌肉/骨骼/结缔回退、检索排序、术语表唯一且纯中文 |
 | `motion` 库黑盒 | `moonbit/motion/motion_test.mbt` | 参数边界/幂等、双会话隔离、拒绝不变、暂停与参数保持、极值时间、确定性姿态、中文单位、**中文数字指令** |
-| 浏览器 wire 导出 | `moonbit/core/{agent_guard,anatomy_names,zhnum_wire,full_body_motion,motion_session}_test.mbt` | 抽库后线协议不兼容、护栏/命名/检索/中文数量的 wire 编码错误 |
+| 浏览器 wire 导出 | `moonbit/core/{agent_guard,anatomy_names,full_body_motion,motion_session}_test.mbt` | 抽库后线协议不兼容、护栏/命名/检索的 wire 编码错误 |
 | 跨语言边界 | `test/motion-domain-boundary.test.mjs`、`motion-parameters.test.mjs`、`full-muscle-localization.test.mjs` | JS 复制规则、线协议错误；**全部 697 个清单结构经 MoonBit 得到纯中文带侧别名称**；中英文检索 |
 | AI 协议与护栏 | `test/ai-chat-protocol.test.mjs` | 请求裁剪、未知动作/字段/非有限值丢弃、越界截断并记录原因、429/1113/1305/502 文案、配置热重载、health 不泄露密钥 |
-| 本地服务 | `test/server-smoke.test.mjs`、`test/start-bodymate.test.mjs` | 首页与全部引用资源、`console.html` 及其样式/脚本、工程主题表、清单、HEAD、未配置态、点文件 403、404/405、一键启动与端口复用 |
+| 本地服务 | `test/server-smoke.test.mjs`、`test/start-bodymate.test.mjs` | 首页与全部引用资源、清单、HEAD、未配置态、点文件 403、404/405、一键启动与端口复用 |
 | 全身几何 | `test/full-body-rig.test.mjs` | 人体漂移、支撑接触、参数极值及骨架稳定性 |
 | 环境 / UI 策略 | MoonBit 环境与 ui_feedback 测试及对应 Node 测试 | reduced-motion、方位/质量/距离、指针非法值 |
 | 页面结构 | `test/visual-lab.test.mjs`、head-surface 测试 | 旧入口复活、护栏接入、面板展开规则、材质/布局结构回退 |
