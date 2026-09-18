@@ -7,7 +7,7 @@
     history.replaceState(null, '', url);
   }
   const search = document.createElement('form'); search.className = 'lab-search'; search.setAttribute('role', 'search');
-  search.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input aria-label="搜索结构或动作" placeholder="搜索结构、动作样例…">';
+  search.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input aria-label="搜索动作或肌肉" placeholder="搜索肌肉、动作…">';
   document.querySelector('.header-right').prepend(search);
   search.addEventListener('submit', event => {
     event.preventDefault();
@@ -15,16 +15,16 @@
     question.value = input.value; document.querySelector('#chat-form').requestSubmit(); input.value = '';
   });
   const status = document.querySelector('.progress-mini');
-  status.innerHTML = '<div class="lab-model-status"><h2 class="lab-status-title">参照骨架</h2><div class="lab-status-body"><div class="lab-status-ring"><strong>—</strong><span>正在加载</span></div><p><strong>完整人体</strong>参照骨架加载中</p></div></div>';
-  const tabs = document.createElement('div'); tabs.className = 'lab-domain-tabs'; tabs.setAttribute('role', 'group'); tabs.setAttribute('aria-label', '工作模式');
-  tabs.innerHTML = '<button data-lab-mode="structure" class="active" aria-pressed="true">骨架</button><button data-lab-mode="movement" aria-pressed="false">回放</button>';
+  status.innerHTML = '<div class="lab-model-status"><h2 class="lab-status-title">人体模型</h2><div class="lab-status-body"><div class="lab-status-ring"><strong>—</strong><span>正在加载</span></div><p><strong>完整人体</strong>准备肌肉与骨骼结构</p></div></div>';
+  const tabs = document.createElement('div'); tabs.className = 'lab-domain-tabs'; tabs.setAttribute('role', 'group'); tabs.setAttribute('aria-label', '人体观察方式');
+  tabs.innerHTML = '<button data-lab-mode="structure" class="active" aria-pressed="true">全身</button><button data-lab-mode="movement" aria-pressed="false">动作</button>';
   document.querySelector('.current-card').prepend(tabs);
   tabs.addEventListener('click', event => {
     const button = event.target.closest('button'); if (!button) return;
     if (button.dataset.labMode === 'structure') document.querySelector('#anatomy-reset')?.click();
     else if (button.dataset.labMode === 'movement') document.querySelector('.anatomy-examples button')?.click();
   });
-  const title = document.createElement('h2'); title.className = 'lab-query-title'; title.textContent = '指令与检索';
+  const title = document.createElement('h2'); title.className = 'lab-query-title'; title.textContent = '动作与肌肉';
   document.querySelector('.composer').prepend(title);
   const help = document.querySelector('#help-dialog');
   document.querySelector('#help').onclick = () => help.showModal();

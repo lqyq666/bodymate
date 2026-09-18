@@ -238,26 +238,6 @@ http://127.0.0.1:4174/?view=full-body
 - GitHub Release **v0.3.0**：tag 指向 `3831e3c`（PR #28 合并提交，即发布到 Mooncakes 的 0.3.0 内容），说明含 `moon add` 与在线演示链接。
 - 用户仅剩动作不变：9 月 24 日 24:00 前重提飞书表单（申报书已含在线演示、0.3.0、安装验证）。
 
-### 2026-09-16 更新：产品调性重塑（MoonRig Console）
-
-用户反馈“产品整体调性仍像教学类”，按 改名换词 → 工程视觉 → 开发者控制台 → 回归验证元素 的顺序完成：
-
-- **PR #34 改名与换词**：应用更名 MoonRig Console（模块名 `lqyq666/bodymate` 不变）。页面标题/口号/模式标签（骨架/回放）/状态卡/提示/帮助与全部运行时消息改为参照骨架、参数契约（面板显示 `key ∈ [min, max]`）、关键帧标注、回放、定性参与映射；MoonBit `phase.mbt` 关键帧文本与 `parameters.mbt` 范围提示同步；AI 系统提示与对话标签跟随；文档同词表。页面“教学/实验室/示范”出现 0 次。契约测试禁止外壳出现“结构</button>”（旧颈肩遗留），故模式标签用“骨架”。
-- **PR #35 工程主题**：`assets/theme-engineer.css`（石墨底 + 网格、琥珀信号色、等宽表格数字、平角、画布后暗色舞台），由适配器在皮肤之后加载，`<body class="theme-engineer">` 默认启用；README 首屏图重拍。
-- **PR #36 库工作台**：`console.html` + `assets/console.css` + `assets/runtime/console.js`，不含 Three.js，直接调用 `moonbit-core.js`：agent 面板（提议 JSON → 白名单/策略 → 裁决与原因码）、zhnum 面板（归一化、parse、format，联动 `motion.parse_query`）、motion 面板（参数 → 九相位姿态帧表、CSV 导出、"回放此帧"深链接）、wire 调用记录。core 新增 `bodymate_zhnum_{normalize,parse,format}_v1`（MoonBit 77 项测试）。3D 页支持 `?motion=&params=&phase=` 深链接并在页头加“库工作台”入口。Pages 工作流与服务烟测覆盖新文件。
-- **发布**：0.3.1 已发布（motion 文案变更），`npm run moonbit:install-check 0.3.1` 通过。在线：控制台 https://lqyq666.github.io/bodymate/console.html ，3D 回放 https://lqyq666.github.io/bodymate/?view=full-body ，均实测正常。
-- 自动化注意：在 bash 双引号里写含反引号的 node -e 会触发命令替换，改用临时 .mjs 脚本文件做批量替换；CRLF 文件匹配时需把 \n 转成 \r\n。
-- 用户仅剩动作：9 月 24 日 24:00 前重提飞书表单（申报书已含控制台与 3D 两个在线链接、0.3.1）。
-
-### 2026-09-16 更新：方向调整——从“教学类产品”转向“LLM 工具调用护栏”
-
-用户明确反馈“开发出来也没有什么用，重新想方向”。新定位：**MoonBit 上第一个面向 LLM 工具调用（function calling）的执行护栏**——“模型输出不是执行权限”。痛点：任何用大模型做工具调用的应用都怕幻觉工具名/幻觉参数/越界数值/非法枚举。这与 mooncakes.io 生态空缺（无同类原语）和赛事口径（基础库、可复用、可验证）同构。
-
-- **PR #38（0.4.0 核心）**：`agent` 的字段值改为 `FieldValue::Num | Str`（真实工具参数大多是字符串/枚举，不只是数值）；`FieldSpec::one_of` 枚举选项（wire `key?opt1?opt2`）、候选 `key~text`、原因码新增 `non_number` / `non_text` / `unknown_option`。破坏性 API 变更（Command 元组类型），仓库内消费方全部更新；MoonBit 79 / Node 143 全绿。
-- **发布**：0.4.0 已发布（`moon.mod` 20c72c5，PR #39），`npm run moonbit:install-check 0.4.0` 通过——消费者一次调用同时验证数值截断、枚举保留、未知字段丢弃；Release v0.4.0 已建。
-- 3D 人体与术语库降级为“参考应用之一”，不再是叙事中心；README/申报书/评委文档的叙事重心切换为护栏。
-- **尚未做**（下一步优先级）：① 网关（OpenAI 兼容代理，拦截 tool_calls 并逐条过护栏，应用只改 base_url）；② 真实模型工具调用演示（让 GLM 幻觉一次，当场拦截）；③ README/申报书/评委文档按新方向改写。
-
 ## 本地启动与验收命令
 
 先检查而不改动工作区：

@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="MoonRig Console：lqyq666/bodymate MoonBit 库套件的参照骨架回放与结构检索视图。">
-  <title>MoonRig Console｜lqyq666/bodymate</title>
+  <meta name="description" content="BodyMate 人体动作实验室：观察完整人体、肌肉与骨骼的动作协同。">
+  <title>BodyMate｜人体动作实验室</title>
   <link rel="stylesheet" href="assets/visual-lab.css?v=20260913-reference-ui">
 </head>
-<body class="visual-lab-active full-muscle-demo-active theme-engineer">
+<body class="visual-lab-active full-muscle-demo-active">
 <div id="app">
   <header class="header">
     <div class="brand">
       <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="6" r="3"/><path d="m7 14 6-3h6l6 3M13 11l-1 9-3 9m10-18 1 9 3 9m-11-10h8"/></svg></div>
-      <div><h1>MoonRig Console <span>lqyq666/bodymate</span></h1><p>MoonBit 契约驱动的动作回放与结构检索。</p></div>
+      <div><h1>身体研究所 <span>BodyMate</span></h1><p>看清每个动作，观察肌肉如何协同。</p></div>
     </div>
-    <div class="header-right"><a class="console-link" href="console.html">库工作台</a><button id="help" class="icon-button" aria-label="使用说明">?</button></div>
+    <div class="header-right"><button id="help" class="icon-button" aria-label="使用说明">?</button></div>
   </header>
   <main class="workspace">
     <section class="navigator" aria-label="完整人体参照">
-      <p class="navigator-caption">参照骨架<span>独立视角</span></p>
+      <p class="navigator-caption">全身参照<span>独立视角</span></p>
       <div id="nav-view" class="nav-view"></div>
       <div class="view-tabs" role="group" aria-label="完整人体朝向">
         <button data-nav="front" aria-pressed="true" class="active">前视</button>
@@ -27,22 +27,22 @@
       </div>
     </section>
     <section id="detail-panel" class="detail-panel" aria-label="全身肌肉与骨骼">
-      <div class="detail-heading"><div><h2>参照骨架回放<span class="lab-title-dot" aria-hidden="true">.</span></h2><p>显示模式、参数与关键帧均来自 MoonBit 会话。</p></div><span class="lab-interaction-hint">拖动旋转 <span>·</span> 滚轮缩放</span></div>
+      <div class="detail-heading"><div><h2>人体动作实验室<span class="lab-title-dot" aria-hidden="true">.</span></h2><p>转动视角，探索每一次肌肉协同。</p></div><span class="lab-interaction-hint">拖动旋转 <span>·</span> 滚轮缩放</span></div>
       <div id="detail-view" class="detail-view"></div>
     </section>
     <aside class="sidebar" aria-label="动作与肌肉提问">
       <section class="progress-mini" aria-label="人体模型状态"></section>
       <section class="current-card" aria-label="动作与肌肉提问">
         <div class="composer">
-          <div class="chat-context">当前：<strong id="chat-context">参照骨架</strong></div>
-          <form id="chat-form"><textarea id="chat-input" rows="2" aria-label="输入指令或结构名" placeholder="如：push_up 宽距，夹角六十度"></textarea><button type="submit" aria-label="发送问题"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-8-7 18-3-7-8-3zm8 3 10-11"/></svg></button></form>
-          <div class="composer-bottom"><small id="chat-scope">本地 MoonBit 引擎处理指令与检索，不提供医学或拉伸建议。</small></div>
+          <div class="chat-context">当前：<strong id="chat-context">全身人体</strong></div>
+          <form id="chat-form"><textarea id="chat-input" rows="2" aria-label="输入动作或肌肉名称" placeholder="如：窄距俯卧撑，夹角45度"></textarea><button type="submit" aria-label="发送问题"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-8-7 18-3-7-8-3zm8 3 10-11"/></svg></button></form>
+          <div class="composer-bottom"><small id="chat-scope">本地动作与肌肉查询，不提供医学或拉伸建议。</small></div>
         </div>
       </section>
     </aside>
   </main>
 </div>
-<dialog id="help-dialog" aria-labelledby="help-title"><h2 id="help-title">使用 MoonRig Console</h2><p>左侧是独立视角的参照骨架，可切换前视、后视、侧视。</p><p>中间拖动旋转、滚轮缩放，可切换肌肉、骨骼、透视显示；选择一条动作样例开始回放，参数、关键帧与参与映射全部由 MoonBit 会话计算。</p><p>右侧输入结构名、动作样例或中文参数指令（如“手距一点五倍肩宽”）；回放中可暂停、切换预设或复位。</p><p>人体资产：Human Atlas（CC BY 4.0）。本地运行，未连接在线 AI，不提供医学或拉伸建议。</p><button id="close-help">开始</button></dialog>
+<dialog id="help-dialog" aria-labelledby="help-title"><h2 id="help-title">观察人体与动作</h2><p>左侧保留完整人体参照，可切换前视、后视、侧视。</p><p>中间拖动旋转、滚轮缩放，可切换肌肉、骨骼、透视。选择俯卧撑、深蹲或弯举开始动作演示。</p><p>右侧输入动作或肌肉名称，动作播放时可暂停、调整姿势或恢复站立。</p><p>人体资产：Human Atlas（CC BY 4.0）。本地教学演示，未连接在线 AI，不提供医学或拉伸建议。</p><button id="close-help">开始查看</button></dialog>
 <!-- MOONBIT_CORE_START -->
 <script src="assets/runtime/moonbit-core.js"></script>
 <!-- MOONBIT_CORE_END -->

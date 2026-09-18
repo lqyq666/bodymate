@@ -29,12 +29,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _site
-          cp index.html console.html _site/
+          cp index.html _site/
           rsync -a --exclude 'environment/source/' assets/ _site/assets/
           touch _site/.nojekyll
           du -sh _site
           test -f _site/assets/runtime/moonbit-core.js
-          test -f _site/assets/runtime/console.js
           test -f _site/assets/anatomy/human-atlas/rigged-body.glb
       - uses: actions/upload-pages-artifact@v3
         with:

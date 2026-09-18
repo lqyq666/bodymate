@@ -26,8 +26,8 @@
 - `parameters.mbt`：有限值处理、限幅与步进取整；重复规范化幂等。
 - `query.mbt`：有界中英文动作别名、中文参数和单位识别、未支持语义提示。
 - `profile.mbt`：作者定义的定性肌群参与及参考依据，权重只用于视觉强调。
-- `phase.mbt`：当前三种动作的四个关键阶段、暂停目标和关键帧说明；浏览器不自行推断阶段语义。
-- `pose.mbt`：固定参照骨架的姿态目标标量，同输入同输出。
+- `phase.mbt`：当前三种动作的四个关键阶段、暂停目标和教学说明；浏览器不自行推断阶段语义。
+- `pose.mbt`：固定教学骨架的姿态目标标量，同输入同输出。
 - `session.mbt`：私有实例状态、typed Result、暂停/速度/相位/参数；快照与内部数组隔离。
 
 `Session` 没有库级单例，支持多个独立消费者。浏览器 `moonbit/core/motion_session.mbt` 为当前主视图持有一个实例，保留原有 `bodymate_motion_session_*` 接口，现有页面无需自行维护第二套状态。
@@ -39,8 +39,6 @@
 `moonbit/anatomy` 是第二个可复用库：376 条归一化拉丁名 → 中文术语（206 条肌肉、170 条骨/椎间盘/肋/牙/软骨/筋膜），`normalize_name` 去除左右侧别词，`structure_name_zh(name, kind)` 按结构类别回退，`search_structures` 同时匹配中文与拉丁名并把肌肉排在前面；词典本身通过 `muscle_terms()` / `structure_terms()` 公开。`moonbit/core/anatomy_names.mbt` 以 `bodymate_anatomy_name_v1` / `bodymate_anatomy_has_name_v1` / `bodymate_anatomy_search_v1` 三个无状态 wire 导出给浏览器；`src/full-muscle/anatomy-name-zh.mjs` 只编解码字符串，Node 侧（测试、注册表生成）通过 `scripts/load-moonbit-core.mjs` 加载同一份生成 bundle，因此 JS 中不再保存第二份术语表。
 
 `moonbit/agent` 是第三个可复用库，也是“AI 输出不是执行权限”这条规则的唯一实现：`GuardedAction` 只能是 `None`、`Command(id, 有限数值字段)` 或 `Lookup(有界文本)`；`parse_allowlist` 校验命令 id（`^[a-z][a-z0-9_]*$`）与字段键（`^[A-Za-z][A-Za-z0-9_]*$`），`guard_command` 只保留白名单内的 id 及其声明字段中的有限数值，`guard_lookup` 只接受修剪、截断后仍非空的文本。`moonbit/core/agent_guard.mbt` 以 `bodymate_agent_guard_command_v1` / `bodymate_agent_guard_lookup_v1` 导出；`src/ai/agent-guard.mjs` 是唯一的 JS 编解码器，被本地代理（服务端，经 `load-moonbit-core.mjs`）和浏览器适配器（`applyAiAction`）共同调用，因此模型建议在服务端和页面端接受的是同一份 MoonBit 规则。库本身与动作、肌肉无关，任何 MoonBit Agent 应用都可以用它约束 LLM 提议。
-
-`console.html` + `assets/runtime/console.js` 是不含 Three.js 的第二个浏览器消费者：直接调用 `moonbit-core.js` 的 wire 导出（agent explain、zhnum normalize/parse/format、motion registry/parameters/pose_intent）渲染三个工作台并记录每次调用；3D 页通过 `?motion=&params=&phase=` 深链接接收它的帧。`moonbit/core/zhnum_wire.mbt` 为此提供 `bodymate_zhnum_{normalize,parse,format}_v1`。
 
 `moonbit/zhnum` 是第四个可复用库：中文数字（零〇一…九、壹…玖、两、十百千万亿、`点` 小数、`半`）解析、文本内数字归一化（全角数字、`百分之X`→`X%`）以及“单位前取数”。`motion.parse_query` 在匹配有界正则前先调用 `normalize_numerals`，所以中文数字指令与阿拉伯数字指令等价，而正则本身零改动。
 
@@ -66,4 +64,4 @@ JS 负责线协议解析、NFKC 文本规范化、DOM、事件适配和资源生
 
 移除 MoonBit 后，现有产品会失去动作定义、参数校验、参与提示、会话推进、姿态目标及环境/指针策略，需要重新实现这些规则才能恢复行为。绘制一个静态模型的能力仍在 Three.js 中。
 
-当前只有三种预设样例动作；没有通用动作捕捉、任意 rig 重定向、软组织、实测肌电/受力、诊断、康复或训练建议。颜色是定性参与提示。库使用者可复用参数、解析和会话契约；采用姿态输出时需要适配当前固定骨架坐标约定。
+当前只有三种预设教学动作；没有通用动作捕捉、任意 rig 重定向、软组织、实测肌电/受力、诊断、康复或训练建议。颜色是教学提示。库使用者可复用参数、解析和会话契约；采用姿态输出时需要适配当前固定骨架坐标约定。

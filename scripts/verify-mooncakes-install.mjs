@@ -15,7 +15,7 @@ verifyMoonVersion({ cwd: root });
 
 const workspace = await mkdtemp(join(tmpdir(), 'bodymate-install-'));
 const project = join(workspace, 'consumer');
-const expected = 'install-check|command|push_up|handWidth=1.8,mode~wide|夹角60度|左侧股骨|1';
+const expected = 'install-check|command|push_up|handWidth=1.8|夹角60度|左侧股骨|1';
 try {
   const created = runMoon(['new', project, '--user', 'installcheck', '--name', 'consumer'], { cwd: workspace, capture: true });
   if (created.status !== 0) throw Error(`moon new failed: ${created.stderr || created.stdout}`);
@@ -24,8 +24,8 @@ try {
   await writeFile(join(project, 'cmd/main/moon.pkg'), `import {\n  "${module}/agent",\n  "${module}/zhnum",\n  "${module}/anatomy",\n  "${module}/motion",\n}\npkgtype(kind: "executable")\n`);
   await writeFile(join(project, 'cmd/main/main.mbt'), [
     'fn main {',
-    '  let allowed = @agent.parse_allowlist("push_up^handWidth:0.8:1.8,mode?wide?narrow")',
-    '  let guarded = @agent.action_wire(@agent.guard_command("push_up", [("handWidth", @agent.FieldValue::Num(2.5)), ("mode", @agent.FieldValue::Str("wide")), ("invented", @agent.FieldValue::Num(7.0))], allowed))',
+    '  let allowed = @agent.parse_allowlist("push_up^handWidth,elbowAngle")',
+    '  let guarded = @agent.action_wire(@agent.guard_command("push_up", [("handWidth", 1.8), ("invented", 7.0)], allowed))',
     '  let zh = @zhnum.normalize_numerals("夹角六十度")',
     '  let bone = @anatomy.structure_name_zh("Left femur", @anatomy.kind_from_string("bone"))',
     '  let pose = @motion.pose_intent("squat", 0.5, []).unwrap()',

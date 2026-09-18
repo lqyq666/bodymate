@@ -18,17 +18,12 @@ function payload(wire, version) {
 
 const finite = (value) => typeof value === 'number' && Number.isFinite(value);
 
-// A field is either a key string, { key, min?, max? } or { key, options };
-// bounds travel as `key:min:max` (one-sided leaves the other side empty),
-// enum options travel as `key?opt1?opt2` so MoonBit can clamp, reject or match.
+// A field is either a key string or { key, min?, max? }; bounds travel as `key:min:max`
+// (one-sided bounds leave the other side empty) so MoonBit can clamp or reject.
 function fieldWire(field) {
   const spec = typeof field === 'string' ? { key: field } : field || {};
   const key = String(spec.key ?? '');
   if (!key || WIRE_UNSAFE.test(key)) return '';
-  if (Array.isArray(spec.options) && spec.options.length > 0) {
-    const options = spec.options.map(String).filter((option) => !WIRE_UNSAFE.test(option));
-    return options.length > 0 ? `${key}?${options.join('?')}` : '';
-  }
   const min = finite(spec.min) ? String(spec.min) : '';
   const max = finite(spec.max) ? String(spec.max) : '';
   return min || max ? `${key}:${min}:${max}` : key;
@@ -43,12 +38,12 @@ export function allowlistWire(commands) {
     .join('~');
 }
 
-// { key: number | string } -> "key=value,key~text"; other types never reach MoonBit.
+// { key: number } -> "key=value,key=value"; non-numbers never reach MoonBit.
 export function fieldsWire(parameters) {
   if (!parameters || typeof parameters !== 'object' || Array.isArray(parameters)) return '';
   return Object.entries(parameters)
-    .filter(([key, value]) => (typeof value === 'number' || typeof value === 'string') && key && !WIRE_UNSAFE.test(key))
-    .map(([key, value]) => (typeof value === 'number' ? `${key}=${String(value)}` : `${key}~${value}`))
+    .filter(([key, value]) => typeof value === 'number' && key && !WIRE_UNSAFE.test(key))
+    .map(([key, value]) => `${key}=${String(value)}`)
     .join(',');
 }
 
@@ -58,12 +53,8 @@ function decodeAction(body) {
     const parameters = {};
     for (const pair of (rest[1] || '').split(',')) {
       if (!pair) continue;
-      const eq = pair.indexOf('='), tilde = pair.indexOf('~');
-      if (tilde >= 0 && (eq < 0 || tilde < eq)) {
-        parameters[pair.slice(0, tilde)] = pair.slice(tilde + 1);
-      } else if (eq >= 0) {
-        parameters[pair.slice(0, eq)] = Number(pair.slice(eq + 1));
-      }
+      const index = pair.indexOf('=');
+      parameters[pair.slice(0, index)] = Number(pair.slice(index + 1));
     }
     return { kind, id: rest[0], parameters };
   }

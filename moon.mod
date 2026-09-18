@@ -1,5 +1,5 @@
 name = "lqyq666/bodymate"
-version = "0.4.0"
+version = "0.3.0"
 repository = "https://github.com/lqyq666/bodymate"
 license = "MIT"
 description = "Dependency-free MoonBit libraries: a guard for LLM-proposed actions, Chinese numeral parsing, bilingual anatomy terminology, and parameterized motion sessions with deterministic pose intents; with a full-body reference application"
