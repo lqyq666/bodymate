@@ -7,9 +7,6 @@ import { environmentAssetPaths } from '../src/full-muscle/lab-environment.mjs';
 const root = new URL('../', import.meta.url);
 const processedPaths = {
   platform: 'assets/environment/processed/bm-env-observation-platform-web-v001.glb',
-  ceilingRing: 'assets/environment/processed/bm-env-ceiling-ring-web-v001.glb',
-  rearPortal: 'assets/environment/processed/bm-env-rear-portal-web-v001.glb',
-  wallBay: 'assets/environment/processed/bm-env-curved-wall-bay-web-v001.glb',
 };
 
 function sha256(bytes) {
@@ -71,7 +68,9 @@ test('processed environment assets are runtime-identical, parseable and within t
   }
   assert.ok(totalBytes <= 15_000_000, `environment runtime exceeds 15 MB: ${totalBytes}`);
   assert.ok(totalTriangles <= 400_000, `environment geometry exceeds 400k triangles: ${totalTriangles}`);
-  assert.ok(totalTriangles >= 300_000, `environment geometry unexpectedly sparse: ${totalTriangles}`);
+  // Environment subtraction (2026-09): only the observation platform remains;
+  // measured at 154,475 triangles on its own.
+  assert.ok(totalTriangles >= 140_000, `environment geometry unexpectedly sparse: ${totalTriangles}`);
 });
 
 test('frozen anatomy assets retain their accepted hashes', async () => {
