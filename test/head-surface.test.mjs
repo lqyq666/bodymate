@@ -45,7 +45,7 @@ test('sculpture finish changes only presentation material and preserves the exac
     const original = normal.group.children[index], styled = sculpture.group.children[index];
     assert.deepEqual(styled.geometry.attributes.position.array, original.geometry.attributes.position.array);
     assert.deepEqual(styled.geometry.attributes.normal.array, original.geometry.attributes.normal.array);
-    assert.equal(styled.material.color.getHexString(), 'f5f3ef');
+    assert.equal(styled.material.color.getHexString(), 'd8d3ca');
     assert.equal(styled.material.transparent, false);
   }
   sculpture.setView('bone'); assert.equal(sculpture.group.visible, false);

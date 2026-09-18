@@ -16,7 +16,7 @@ export function attachHeadSurface(model, { sculpture = false } = {}) {
     geometry.setAttribute('normal',new THREE.BufferAttribute(decode(part.normals),3));
     geometry.applyMatrix4(inverseRest);
     const material=new THREE.MeshStandardMaterial({color:'#E7EDF1',roughness:.64,metalness:0,side:THREE.DoubleSide});
-    if (sculpture) applySculptureFinish(material);
+    if (sculpture) applySculptureFinish(material, 'surface');
     const mesh=new THREE.Mesh(geometry,material);mesh.name='display-'+part.sourceMeshId;
     mesh.userData={presentationOnly:true,sourceMeshId:part.sourceMeshId,canonicalName:part.canonicalName};
     mesh.castShadow=true; group.add(mesh);
