@@ -14,13 +14,27 @@ export function applySculptureFinish(material, kind = 'muscle') {
   material.name = 'BodyMate / tissue-toned anatomical sculpture';
   if (kind === 'bone') {
     material.color.set(boneTone);
-    material.roughness = .58;
+    material.roughness = .55;
   } else if (kind === 'surface') {
     material.color.set(surfaceTone);
     material.roughness = .6;
   } else {
     material.color.set(muscleTone);
-    material.roughness = .46;
+    material.roughness = .38;
+    // Cheap subsurface approximation: deep-red translucency on grazing angles
+    // reads as light passing through wet tissue. Injection point follows the
+    // same emissive-payload pattern as the lab environment materials.
+    material.onBeforeCompile = (shader) => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <emissivemap_fragment>',
+        `#include <emissivemap_fragment>
+         {
+           float muscleFacing = saturate(dot(normal, normalize(vViewPosition)));
+           float muscleRim = pow(1.0 - muscleFacing, 3.0);
+           totalEmissiveRadiance += vec3(0.62, 0.11, 0.08) * muscleRim * 0.55;
+         }`);
+    };
+    material.customProgramCacheKey = () => 'bodymate-muscle-translucency-v1';
   }
   material.metalness = 0;
   material.side = THREE.DoubleSide;
