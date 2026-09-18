@@ -10,7 +10,7 @@ import { attachHeadSurface } from './head-surface.mjs';
 import { searchStructures, structureNameZh } from './anatomy-name-zh.mjs';
 import { environmentDomain } from './environment-domain.mjs';
 import { alignBodyToPlatform, createLabEnvironment } from './lab-environment.mjs';
-import { applySculptureFinish, sculptureWhite } from './sculpture-material.mjs';
+import { applySculptureFinish, muscleTone } from './sculpture-material.mjs';
 
 let riggedAssetPromise;
 const loadRiggedAsset = () => riggedAssetPromise ||= (async () => {
@@ -54,7 +54,7 @@ export function mount({ canvas, onPick = () => {}, onReady = () => {}, onError =
   const muscleWeights = new Map();
   const meshes = new Map(), entries = [], clips = new Map(), rest = new Map();
   const cameraGoal = new THREE.Vector3(), targetGoal = new THREE.Vector3();
-  const cold = new THREE.Color(labStyle ? sculptureWhite : '#E7EDF1'), hot = new THREE.Color('#F02D33'), selectionBlue = new THREE.Color('#2388F7');
+  const cold = new THREE.Color(labStyle ? muscleTone : '#E7EDF1'), hot = new THREE.Color('#F02D33'), selectionBlue = new THREE.Color('#2388F7');
   const environment = labStyle ? createLabEnvironment({ scene, camera, renderer }) : null;
   let environmentFrame = null;
   if (environment) {
