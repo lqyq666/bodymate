@@ -41,23 +41,23 @@ test('environment GLBs load once per stable path with no procedural fallback geo
     loadAsset: async (url) => { calls.push(url); return fakeAsset(); },
   });
   await environment.ready;
-  assert.equal(new Set(calls).size, 4);
-  assert.equal(calls.length, 4);
+  assert.equal(new Set(calls).size, 1);
+  assert.equal(calls.length, 1);
   const root = scene.getObjectByName('bodymate-lab-environment');
-  for (const name of ['lab-observation-platform', 'lab-ceiling-ring', 'lab-rear-portal', 'lab-curved-wall-bays']) {
+  for (const name of ['lab-observation-platform']) {
     assert.equal(root.getObjectsByProperty('name', name).length, 1);
     assert.equal(root.getObjectByName(name).userData.assetState, 'loaded');
     assert.equal(root.getObjectByName(`${name}-fallback`), undefined);
   }
-  assert.equal(root.getObjectByName('lab-curved-wall-bays').children.length, 10);
+  // Environment subtraction: the ceiling ring, rear portal, wall bays and the
+  // reflective floor are intentionally gone.
+  for (const removed of ['lab-ceiling-ring', 'lab-rear-portal', 'lab-curved-wall-bays', 'lab-floor-from-platform-glb']) {
+    assert.equal(root.getObjectByName(removed), undefined, `${removed} must stay removed`);
+  }
   const installedPlatform = root.getObjectByName('lab-observation-platform').children[0];
   const installedMesh = installedPlatform.children.find((child) => child.isMesh);
   assert.equal(installedMesh.material.isMeshPhysicalMaterial, true);
   assert.equal(installedMesh.material.map, null);
-  const floor = root.getObjectByName('lab-floor-from-platform-glb');
-  assert.ok(floor);
-  assert.notEqual(floor.geometry, installedMesh.geometry);
-  assert.equal(floor.geometry.attributes.position.count, installedMesh.geometry.attributes.position.count);
   assert.equal(installedMesh.material.aoMap, null);
   assert.equal(installedMesh.material.metalnessMap, null);
   const platformBounds = new THREE.Box3().setFromObject(installedPlatform);
@@ -83,7 +83,7 @@ test('failed or late environment loads stay empty and cannot revive a disposed s
     onAssetError: (error, url) => errors.push([error.message, url]),
   });
   await failed.ready;
-  assert.equal(errors.length, 4);
+  assert.equal(errors.length, 1);
   assert.equal(failedScene.getObjectByName('lab-observation-platform').children.length, 0);
   assert.equal(failedScene.getObjectByName('lab-observation-platform').userData.assetState, 'failed');
   failed.dispose();

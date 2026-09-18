@@ -5,20 +5,13 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { Reflector } from 'three/addons/objects/Reflector.js';
 
 const environmentFinishes = Object.freeze({
   platform: { roughness: .3, metalness: .15, clearcoat: .45, envMapIntensity: 1.05, platform: true },
-  ceilingRing: { roughness: .26, metalness: .28, clearcoat: .45, envMapIntensity: 1.1, ceiling: true },
-  rearPortal: { roughness: .3, metalness: .16, clearcoat: .4, envMapIntensity: 1.05 },
-  wallBay: { roughness: .42, metalness: .04, clearcoat: .2, envMapIntensity: .9, wall: true },
 });
 
 export const environmentAssetPaths = Object.freeze({
   platform: 'assets/environment/runtime/observation-platform.glb',
-  ceilingRing: 'assets/environment/runtime/ceiling-ring.glb',
-  rearPortal: 'assets/environment/runtime/rear-portal.glb',
-  wallBay: 'assets/environment/runtime/curved-wall-bay.glb',
 });
 
 // Center the planted support footprint, not the moving torso. This keeps feet
@@ -124,49 +117,10 @@ function configureAsset(root, finish, environmentTexture, lightGain, anisotropy)
   return root;
 }
 
-// Reuse the platform GLB's surface as the room floor, with no legacy primitives.
-function reflectiveFloor(asset, renderer) {
-  let source;
-  asset.updateMatrixWorld(true);
-  asset.traverse(node => { if (node.isMesh && !source) source = node; });
-  if (!source) return null;
-  const geometry = source.geometry.clone().applyMatrix4(source.matrixWorld);
-  const positions = geometry.attributes.position;
-  for (let index = 0; index < positions.count; index += 1) positions.setY(index, 0);
-  geometry.rotateX(Math.PI / 2);
-  geometry.computeVertexNormals();
-  const floor = renderer.isWebGLRenderer ? new Reflector(geometry, {
-    textureWidth: 768, textureHeight: 768, multisample: 0, clipBias: .003,
-    color: 0xdce4ef,
-  }) : new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0xdce4ef }));
-  floor.name = 'lab-floor-from-platform-glb';
-  floor.userData.sourceAsset = environmentAssetPaths.platform;
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -.115;
-  floor.scale.setScalar(9.15);
-  if (floor.isReflector) {
-    floor.material.fragmentShader = floor.material.fragmentShader.replace(
-      'vec4 base = texture2DProj( tDiffuse, vUv );', `
-      vec2 uv = vUv.xy / vUv.w;
-      vec2 texel = vec2(1.0 / 768.0);
-      vec4 base = texture2D(tDiffuse, uv) * 0.36;
-      base += texture2D(tDiffuse, uv + texel * vec2(1.5, 0.0)) * 0.16;
-      base += texture2D(tDiffuse, uv - texel * vec2(1.5, 0.0)) * 0.16;
-      base += texture2D(tDiffuse, uv + texel * vec2(0.0, 2.0)) * 0.16;
-      base += texture2D(tDiffuse, uv - texel * vec2(0.0, 2.0)) * 0.16;
-    `).replace('vec4( blendOverlay( base.rgb, color ), 1.0 )', 'vec4(mix(color, base.rgb, 0.42), 1.0)');
-    const updateReflection = floor.onBeforeRender;
-    let nextUpdate = 0;
-    floor.onBeforeRender = function (...args) {
-      const now = performance.now();
-      if (now < nextUpdate) return;
-      nextUpdate = now + 65;
-      updateReflection.apply(this, args);
-    };
-  }
-  return floor;
-}
-
+// Environment subtraction (mobile-first): only the observation platform under
+// the figure remains; ceiling ring, rear portal, wall bays and the reflective
+// floor were removed on purpose. Parallax groups stay so the MoonBit
+// environment frame contract is unchanged.
 function assetInstance(scene, { position, rotation = [0, 0, 0], scale }) {
   const instance = scene.clone(true);
   instance.position.set(...position);
@@ -216,7 +170,6 @@ export function createLabEnvironment({ scene, camera, renderer, loadAsset = load
   let environmentTexture = null, environmentTarget = null;
   const lightGain = { value: 1 };
   const anisotropy = Math.min(8, renderer.capabilities?.getMaxAnisotropy?.() || 1);
-  let floor = null;
   if (renderer.isWebGLRenderer) {
     const studio = new RoomEnvironment();
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -231,10 +184,10 @@ export function createLabEnvironment({ scene, camera, renderer, loadAsset = load
   far.name = 'lab-far-assets'; mid.name = 'lab-mid-assets';
   root.add(far, mid);
   scene.add(root);
-  const platformRoot = new THREE.Group(), ceilingRoot = new THREE.Group(), portalRoot = new THREE.Group(), wallRoot = new THREE.Group();
-  platformRoot.name = 'lab-observation-platform'; ceilingRoot.name = 'lab-ceiling-ring'; portalRoot.name = 'lab-rear-portal'; wallRoot.name = 'lab-curved-wall-bays';
+  const platformRoot = new THREE.Group();
+  platformRoot.name = 'lab-observation-platform';
   // The contact surface must share the body's fixed world origin, not parallax.
-  root.add(platformRoot); mid.add(portalRoot); far.add(ceilingRoot, wallRoot);
+  root.add(platformRoot);
 
   let disposed = false;
   const assetCache = new Map();
@@ -263,8 +216,6 @@ export function createLabEnvironment({ scene, camera, renderer, loadAsset = load
   };
   const pendingAssets = [
     install(environmentAssetPaths.platform, platformRoot, environmentFinishes.platform, (asset) => {
-      floor = reflectiveFloor(asset, renderer);
-      if (floor) far.add(floor);
       const platform = assetInstance(asset, { position: [0, 0, 0], scale: [3.27, 1.44, 3.27] });
       const bounds = new THREE.Box3().setFromObject(platform);
       if (!bounds.isEmpty()) {
@@ -273,12 +224,6 @@ export function createLabEnvironment({ scene, camera, renderer, loadAsset = load
       }
       return [platform];
     }),
-    install(environmentAssetPaths.ceilingRing, ceilingRoot, environmentFinishes.ceilingRing, (asset) => [assetInstance(asset, { position: [0, 2.3, 0], scale: [8.4, .86, 8.4] })]),
-    install(environmentAssetPaths.rearPortal, portalRoot, environmentFinishes.rearPortal, (asset) => [assetInstance(asset, { position: [0, -.08, -3.85], rotation: [0, Math.PI, 0], scale: [2.35, 2.2, 1.25] })]),
-    install(environmentAssetPaths.wallBay, wallRoot, environmentFinishes.wallBay, (asset) => [0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((degrees) => {
-      const angle = THREE.MathUtils.degToRad(degrees);
-      return assetInstance(asset, { position: [Math.sin(angle) * 4.12, -.1, Math.cos(angle) * 4.12], rotation: [0, angle + Math.PI, 0], scale: [3.11, 3.3, 1.01] });
-    })),
   ];
   let assetsReady = false, firstCompleteFrameRecorded = false;
   const ready = Promise.allSettled(pendingAssets).then((results) => { assetsReady = true; return results; });
@@ -339,7 +284,6 @@ export function createLabEnvironment({ scene, camera, renderer, loadAsset = load
       scene.remove(root, hemisphere, key, fill, rim);
       scene.background = previousBackground;
       environmentTarget?.dispose();
-      floor?.getRenderTarget?.().dispose();
       const geometries = new Set(), assetMaterials = new Set();
       root.traverse((node) => {
         if (node.geometry && !geometries.has(node.geometry)) { geometries.add(node.geometry); node.geometry.dispose(); }
